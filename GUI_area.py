@@ -103,12 +103,14 @@ class Area_Win(QtWidgets.QWidget):
 		in2u_Label = QtWidgets.QLabel("in\u00B2")
 		ft2u_Label = QtWidgets.QLabel("ft\u00B2")
 
-		input_grid.addWidget(blanklabel, 0, 0)
-		input_grid.addWidget(self.m2i_LinEd,  1, 0)
-		input_grid.addWidget(self.cm2i_LinEd, 2, 0)
-		input_grid.addWidget(self.mm2i_LinEd, 3, 0)
-		input_grid.addWidget(self.ai_LinEd,   4, 0)
-		input_grid.addWidget(self.hai_LinEd,  5, 0)
+		input_grid.setColumnMinimumWidth(0, 130)
+
+		input_grid.addWidget(blanklabel,       0, 0)
+		input_grid.addWidget(self.m2i_LinEd,   1, 0)
+		input_grid.addWidget(self.cm2i_LinEd,  2, 0)
+		input_grid.addWidget(self.mm2i_LinEd,  3, 0)
+		input_grid.addWidget(self.ai_LinEd,    4, 0)
+		input_grid.addWidget(self.hai_LinEd,   5, 0)
 		input_grid.addWidget(self.in2i_LinEd,  6, 0)
 		input_grid.addWidget(self.ft2i_LinEd,  7, 0)
 
