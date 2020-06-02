@@ -2,7 +2,7 @@
 # contact: domcapkovic@gmail.com; https://www.linkedin.com/in/dominik-čapkovič-b0ab8575/
 # GitHub: https://github.com/kilimetr
 
-from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5 import QtWidgets, QtGui
 import sys
 
 
@@ -31,8 +31,8 @@ class MainWindow(QtWidgets.QWidget):
 		self.length_pb      = QtWidgets.QPushButton("Length",                            self)
 		self.magind_pb      = QtWidgets.QPushButton("Magnetic Induction",                self)
 		self.magint_pb      = QtWidgets.QPushButton("Magnetic Intensity",                self)
+		self.mass_pb        = QtWidgets.QPushButton("Mass",                              self)
 		self.massflow_pb    = QtWidgets.QPushButton("Mass Flow Rate",                    self)
-		self.massfrac_pb    = QtWidgets.QPushButton("Mass Fraction",                     self)
 
 		vbox1 = QtWidgets.QVBoxLayout()
 		vbox1.addWidget(self.area_pb)
@@ -48,8 +48,8 @@ class MainWindow(QtWidgets.QWidget):
 		vbox1.addWidget(self.length_pb)
 		vbox1.addWidget(self.magind_pb)
 		vbox1.addWidget(self.magint_pb)
+		vbox1.addWidget(self.mass_pb)
 		vbox1.addWidget(self.massflow_pb)
-		vbox1.addWidget(self.massfrac_pb)
 		vbox1.addStretch()
 		groupBox_1.setLayout(vbox1)
 
@@ -66,14 +66,16 @@ class MainWindow(QtWidgets.QWidget):
 		self.length_pb.clicked.connect(self.length_win)
 		self.magind_pb.clicked.connect(self.magind_win)
 		self.magint_pb.clicked.connect(self.magint_win)
+		self.mass_pb.clicked.connect(self.mass_win)
 		self.massflow_pb.clicked.connect(self.massflow_win)
-		self.massfrac_pb.clicked.connect(self.massfrac_win)
+
 
 		return groupBox_1
 
 	def createGroup_2(self):
 		groupBox_2 = QtWidgets.QGroupBox()
 
+		self.massfrac_pb    = QtWidgets.QPushButton("Mass Fraction",                     self)
 		self.powheatfl_pb   = QtWidgets.QPushButton("Power & Heat Flow Rate",            self)
 		self.pressstres_pb  = QtWidgets.QPushButton("Pressure & Stress",                 self)
 		self.pressabsg_pb   = QtWidgets.QPushButton("Pressure Conversion abs-gauge",     self)
@@ -90,6 +92,7 @@ class MainWindow(QtWidgets.QWidget):
 		self.weight_pb      = QtWidgets.QPushButton("Weight",                            self)
 
 		vbox2 = QtWidgets.QVBoxLayout()
+		vbox2.addWidget(self.massfrac_pb)
 		vbox2.addWidget(self.powheatfl_pb)
 		vbox2.addWidget(self.pressstres_pb)
 		vbox2.addWidget(self.pressabsg_pb)
@@ -107,6 +110,7 @@ class MainWindow(QtWidgets.QWidget):
 		vbox2.addStretch()
 		groupBox_2.setLayout(vbox2)
 
+		self.massfrac_pb.clicked.connect(self.massfrac_win)
 		self.powheatfl_pb.clicked.connect(self.powheatfl_win)
 		self.pressstres_pb.clicked.connect(self.pressstres_win)
 		self.pressabsg_pb.clicked.connect(self.pressabsg_win)
@@ -182,6 +186,10 @@ class MainWindow(QtWidgets.QWidget):
 	def magint_win(self):
 		self.magint_win2 = Magint_Win()
 		self.magint_win2.show()
+
+	def mass_win(self):
+		self.mass_win2 = Mass_Win()
+		self.mass_win2.show()
 
 	def massflow_win(self):
 		self.massflow_win2 = Massflow_Win()
@@ -1117,7 +1125,562 @@ class Energy_Win(QtWidgets.QWidget):
 		self.main_window()
 
 	def createGroup_input(self):
-		
+		input_group = QtWidgets.QGroupBox("Input", self)
+		input_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+
+		input_grid = QtWidgets.QGridLayout()
+		input_grid.setColumnMinimumWidth(0, 130)
+
+		blanklabel          = QtWidgets.QLabel()
+		self.Ji_LinEd       = QtWidgets.QLineEdit()
+		self.kJi_LinEd      = QtWidgets.QLineEdit()
+		self.kWhi_LinEd     = QtWidgets.QLineEdit()
+		self.BTUITi_LinEd   = QtWidgets.QLineEdit()
+		self.BTUmeani_LinEd = QtWidgets.QLineEdit()
+		self.calITi_LinEd   = QtWidgets.QLineEdit()
+		self.calTHi_LinEd   = QtWidgets.QLineEdit()
+		self.hphri_LinEd    = QtWidgets.QLineEdit()
+		self.ftlbfi_LinEd   = QtWidgets.QLineEdit()
+		self.ftpdli_LinEd   = QtWidgets.QLineEdit()
+
+		Ju_Label       = QtWidgets.QLabel("J")
+		kJu_Label      = QtWidgets.QLabel("kJ")
+		kWhu_Label     = QtWidgets.QLabel("kWh")
+		BTUITu_Label   = QtWidgets.QLabel("BTU<sub>internat</sub>")
+		BTUmeanu_Label = QtWidgets.QLabel("BTU<sub>mean</sub>")
+		calITu_Label   = QtWidgets.QLabel("cal<sub>internat</sub>")
+		calTHu_Label   = QtWidgets.QLabel("cal<sub>thermal</sub>")
+		hphru_Label    = QtWidgets.QLabel("hp-hr")
+		ftlbfu_Label   = QtWidgets.QLabel("ft-lbf")
+		ftpdlu_Label   = QtWidgets.QLabel("ft-pdl")
+
+		input_grid.addWidget(blanklabel,           0, 0)
+		input_grid.addWidget(self.Ji_LinEd,        1, 0)
+		input_grid.addWidget(self.kJi_LinEd,       2, 0)
+		input_grid.addWidget(self.kWhi_LinEd,      3, 0)
+		input_grid.addWidget(self.BTUITi_LinEd,    4, 0)
+		input_grid.addWidget(self.BTUmeani_LinEd,  5, 0)
+		input_grid.addWidget(self.calITi_LinEd,    6, 0)
+		input_grid.addWidget(self.calTHi_LinEd,    7, 0)
+		input_grid.addWidget(self.hphri_LinEd,     8, 0)
+		input_grid.addWidget(self.ftlbfi_LinEd,    9, 0)
+		input_grid.addWidget(self.ftpdli_LinEd,   10, 0)
+
+		input_grid.addWidget(Ju_Label,        1, 1)
+		input_grid.addWidget(kJu_Label,       2, 1)
+		input_grid.addWidget(kWhu_Label,      3, 1)
+		input_grid.addWidget(BTUITu_Label,    4, 1)
+		input_grid.addWidget(BTUmeanu_Label,  5, 1)
+		input_grid.addWidget(calITu_Label,    6, 1)
+		input_grid.addWidget(calTHu_Label,    7, 1)
+		input_grid.addWidget(hphru_Label,     8, 1)
+		input_grid.addWidget(ftlbfu_Label,    9, 1)
+		input_grid.addWidget(ftpdlu_Label,   10, 1)
+
+		input_group.setLayout(input_grid)
+
+		self.Ji_LinEd.returnPressed.connect(self.JTO_fun)
+		self.kJi_LinEd.returnPressed.connect(self.kJTO_fun)
+		self.kWhi_LinEd.returnPressed.connect(self.kWhTO_fun)
+		self.BTUITi_LinEd.returnPressed.connect(self.BTUITTO_fun)
+		self.BTUmeani_LinEd.returnPressed.connect(self.BTUmeanTO_fun)
+		self.calITi_LinEd.returnPressed.connect(self.calITTO_fun)
+		self.calTHi_LinEd.returnPressed.connect(self.calTHTO_fun)
+		self.hphri_LinEd.returnPressed.connect(self.hphrTO_fun)
+		self.ftlbfi_LinEd.returnPressed.connect(self.ftlbfTO_fun)
+		self.ftpdli_LinEd.returnPressed.connect(self.ftpdlTO_fun)
+
+		return input_group
+
+	def createGroup_output(self):
+		output_group = QtWidgets.QGroupBox("Output", self)
+		output_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+
+		output_grid = QtWidgets.QGridLayout()
+
+		J_Label       = QtWidgets.QLabel("J")
+		kJ_Label      = QtWidgets.QLabel("kJ")
+		kWh_Label     = QtWidgets.QLabel("kWh")
+		BTUIT_Label   = QtWidgets.QLabel("BTU<sub>internat</sub>")
+		BTUmean_Label = QtWidgets.QLabel("BTU<sub>mean</sub>")
+		calIT_Label   = QtWidgets.QLabel("cal<sub>internat</sub>")
+		calTH_Label   = QtWidgets.QLabel("cal<sub>thermal</sub>")
+		hphr_Label    = QtWidgets.QLabel("hp-hr")
+		ftlbf_Label   = QtWidgets.QLabel("ft-lbf")
+		ftpdl_Label   = QtWidgets.QLabel("ft-pdl")
+
+		self.JTOJ_res       = QtWidgets.QLabel("0", self)
+		self.JTOkJ_res      = QtWidgets.QLabel("0", self)
+		self.JTOkWh_res     = QtWidgets.QLabel("0", self)
+		self.JTOBTUIT_res   = QtWidgets.QLabel("0", self)
+		self.JTOBTUmean_res = QtWidgets.QLabel("0", self)
+		self.JTOcalIT_res   = QtWidgets.QLabel("0", self)
+		self.JTOcalTH_res   = QtWidgets.QLabel("0", self)
+		self.JTOhphr_res    = QtWidgets.QLabel("0", self)
+		self.JTOftlbf_res   = QtWidgets.QLabel("0", self)
+		self.JTOftpdl_res   = QtWidgets.QLabel("0", self)
+
+		self.kJTOJ_res       = QtWidgets.QLabel("0", self)
+		self.kJTOkJ_res      = QtWidgets.QLabel("0", self)
+		self.kJTOkWh_res     = QtWidgets.QLabel("0", self)
+		self.kJTOBTUIT_res   = QtWidgets.QLabel("0", self)
+		self.kJTOBTUmean_res = QtWidgets.QLabel("0", self)
+		self.kJTOcalIT_res   = QtWidgets.QLabel("0", self)
+		self.kJTOcalTH_res   = QtWidgets.QLabel("0", self)
+		self.kJTOhphr_res    = QtWidgets.QLabel("0", self)
+		self.kJTOftlbf_res   = QtWidgets.QLabel("0", self)
+		self.kJTOftpdl_res   = QtWidgets.QLabel("0", self)
+
+		self.kWhTOJ_res       = QtWidgets.QLabel("0", self)
+		self.kWhTOkJ_res      = QtWidgets.QLabel("0", self)
+		self.kWhTOkWh_res     = QtWidgets.QLabel("0", self)
+		self.kWhTOBTUIT_res   = QtWidgets.QLabel("0", self)
+		self.kWhTOBTUmean_res = QtWidgets.QLabel("0", self)
+		self.kWhTOcalIT_res   = QtWidgets.QLabel("0", self)
+		self.kWhTOcalTH_res   = QtWidgets.QLabel("0", self)
+		self.kWhTOhphr_res    = QtWidgets.QLabel("0", self)
+		self.kWhTOftlbf_res   = QtWidgets.QLabel("0", self)
+		self.kWhTOftpdl_res   = QtWidgets.QLabel("0", self)
+
+		self.BTUITTOJ_res       = QtWidgets.QLabel("0", self)
+		self.BTUITTOkJ_res      = QtWidgets.QLabel("0", self)
+		self.BTUITTOkWh_res     = QtWidgets.QLabel("0", self)
+		self.BTUITTOBTUIT_res   = QtWidgets.QLabel("0", self)
+		self.BTUITTOBTUmean_res = QtWidgets.QLabel("0", self)
+		self.BTUITTOcalIT_res   = QtWidgets.QLabel("0", self)
+		self.BTUITTOcalTH_res   = QtWidgets.QLabel("0", self)
+		self.BTUITTOhphr_res    = QtWidgets.QLabel("0", self)
+		self.BTUITTOftlbf_res   = QtWidgets.QLabel("0", self)
+		self.BTUITTOftpdl_res   = QtWidgets.QLabel("0", self)
+
+		self.BTUmeanTOJ_res       = QtWidgets.QLabel("0", self)
+		self.BTUmeanTOkJ_res      = QtWidgets.QLabel("0", self)
+		self.BTUmeanTOkWh_res     = QtWidgets.QLabel("0", self)
+		self.BTUmeanTOBTUIT_res   = QtWidgets.QLabel("0", self)
+		self.BTUmeanTOBTUmean_res = QtWidgets.QLabel("0", self)
+		self.BTUmeanTOcalIT_res   = QtWidgets.QLabel("0", self)
+		self.BTUmeanTOcalTH_res   = QtWidgets.QLabel("0", self)
+		self.BTUmeanTOhphr_res    = QtWidgets.QLabel("0", self)
+		self.BTUmeanTOftlbf_res   = QtWidgets.QLabel("0", self)
+		self.BTUmeanTOftpdl_res   = QtWidgets.QLabel("0", self)
+
+		self.calITTOJ_res       = QtWidgets.QLabel("0", self)
+		self.calITTOkJ_res      = QtWidgets.QLabel("0", self)
+		self.calITTOkWh_res     = QtWidgets.QLabel("0", self)
+		self.calITTOBTUIT_res   = QtWidgets.QLabel("0", self)
+		self.calITTOBTUmean_res = QtWidgets.QLabel("0", self)
+		self.calITTOcalIT_res   = QtWidgets.QLabel("0", self)
+		self.calITTOcalTH_res   = QtWidgets.QLabel("0", self)
+		self.calITTOhphr_res    = QtWidgets.QLabel("0", self)
+		self.calITTOftlbf_res   = QtWidgets.QLabel("0", self)
+		self.calITTOftpdl_res   = QtWidgets.QLabel("0", self)
+
+		self.calTHTOJ_res       = QtWidgets.QLabel("0", self)
+		self.calTHTOkJ_res      = QtWidgets.QLabel("0", self)
+		self.calTHTOkWh_res     = QtWidgets.QLabel("0", self)
+		self.calTHTOBTUIT_res   = QtWidgets.QLabel("0", self)
+		self.calTHTOBTUmean_res = QtWidgets.QLabel("0", self)
+		self.calTHTOcalIT_res   = QtWidgets.QLabel("0", self)
+		self.calTHTOcalTH_res   = QtWidgets.QLabel("0", self)
+		self.calTHTOhphr_res    = QtWidgets.QLabel("0", self)
+		self.calTHTOftlbf_res   = QtWidgets.QLabel("0", self)
+		self.calTHTOftpdl_res   = QtWidgets.QLabel("0", self)
+
+		self.hphrTOJ_res       = QtWidgets.QLabel("0", self)
+		self.hphrTOkJ_res      = QtWidgets.QLabel("0", self)
+		self.hphrTOkWh_res     = QtWidgets.QLabel("0", self)
+		self.hphrTOBTUIT_res   = QtWidgets.QLabel("0", self)
+		self.hphrTOBTUmean_res = QtWidgets.QLabel("0", self)
+		self.hphrTOcalIT_res   = QtWidgets.QLabel("0", self)
+		self.hphrTOcalTH_res   = QtWidgets.QLabel("0", self)
+		self.hphrTOhphr_res    = QtWidgets.QLabel("0", self)
+		self.hphrTOftlbf_res   = QtWidgets.QLabel("0", self)
+		self.hphrTOftpdl_res   = QtWidgets.QLabel("0", self)
+
+		self.ftlbfTOJ_res       = QtWidgets.QLabel("0", self)
+		self.ftlbfTOkJ_res      = QtWidgets.QLabel("0", self)
+		self.ftlbfTOkWh_res     = QtWidgets.QLabel("0", self)
+		self.ftlbfTOBTUIT_res   = QtWidgets.QLabel("0", self)
+		self.ftlbfTOBTUmean_res = QtWidgets.QLabel("0", self)
+		self.ftlbfTOcalIT_res   = QtWidgets.QLabel("0", self)
+		self.ftlbfTOcalTH_res   = QtWidgets.QLabel("0", self)
+		self.ftlbfTOhphr_res    = QtWidgets.QLabel("0", self)
+		self.ftlbfTOftlbf_res   = QtWidgets.QLabel("0", self)
+		self.ftlbfTOftpdl_res   = QtWidgets.QLabel("0", self)
+
+		self.ftpdlTOJ_res       = QtWidgets.QLabel("0", self)
+		self.ftpdlTOkJ_res      = QtWidgets.QLabel("0", self)
+		self.ftpdlTOkWh_res     = QtWidgets.QLabel("0", self)
+		self.ftpdlTOBTUIT_res   = QtWidgets.QLabel("0", self)
+		self.ftpdlTOBTUmean_res = QtWidgets.QLabel("0", self)
+		self.ftpdlTOcalIT_res   = QtWidgets.QLabel("0", self)
+		self.ftpdlTOcalTH_res   = QtWidgets.QLabel("0", self)
+		self.ftpdlTOhphr_res    = QtWidgets.QLabel("0", self)
+		self.ftpdlTOftlbf_res   = QtWidgets.QLabel("0", self)
+		self.ftpdlTOftpdl_res   = QtWidgets.QLabel("0", self)
+
+		output_grid.addWidget(J_Label,       0, 0)
+		output_grid.addWidget(kJ_Label,      0, 1)
+		output_grid.addWidget(kWh_Label,     0, 2)
+		output_grid.addWidget(BTUIT_Label,   0, 3)
+		output_grid.addWidget(BTUmean_Label, 0, 4)
+		output_grid.addWidget(calIT_Label,   0, 5)
+		output_grid.addWidget(calTH_Label,   0, 6)
+		output_grid.addWidget(hphr_Label,    0, 7)
+		output_grid.addWidget(ftlbf_Label,   0, 8)
+		output_grid.addWidget(ftpdl_Label,   0, 9)
+
+		output_grid.addWidget(self.JTOJ_res,       1, 0)
+		output_grid.addWidget(self.JTOkJ_res,      1, 1)
+		output_grid.addWidget(self.JTOkWh_res,     1, 2)
+		output_grid.addWidget(self.JTOBTUIT_res,   1, 3)
+		output_grid.addWidget(self.JTOBTUmean_res, 1, 4)
+		output_grid.addWidget(self.JTOcalIT_res,   1, 5)
+		output_grid.addWidget(self.JTOcalTH_res,   1, 6)
+		output_grid.addWidget(self.JTOhphr_res,    1, 7)
+		output_grid.addWidget(self.JTOftlbf_res,   1, 8)
+		output_grid.addWidget(self.JTOftpdl_res,   1, 9)
+
+		output_grid.addWidget(self.kJTOJ_res,       2, 0)
+		output_grid.addWidget(self.kJTOkJ_res,      2, 1)
+		output_grid.addWidget(self.kJTOkWh_res,     2, 2)
+		output_grid.addWidget(self.kJTOBTUIT_res,   2, 3)
+		output_grid.addWidget(self.kJTOBTUmean_res, 2, 4)
+		output_grid.addWidget(self.kJTOcalIT_res,   2, 5)
+		output_grid.addWidget(self.kJTOcalTH_res,   2, 6)
+		output_grid.addWidget(self.kJTOhphr_res,    2, 7)
+		output_grid.addWidget(self.kJTOftlbf_res,   2, 8)
+		output_grid.addWidget(self.kJTOftpdl_res,   2, 9)
+
+		output_grid.addWidget(self.kWhTOJ_res,       3, 0)
+		output_grid.addWidget(self.kWhTOkJ_res,      3, 1)
+		output_grid.addWidget(self.kWhTOkWh_res,     3, 2)
+		output_grid.addWidget(self.kWhTOBTUIT_res,   3, 3)
+		output_grid.addWidget(self.kWhTOBTUmean_res, 3, 4)
+		output_grid.addWidget(self.kWhTOcalIT_res,   3, 5)
+		output_grid.addWidget(self.kWhTOcalTH_res,   3, 6)
+		output_grid.addWidget(self.kWhTOhphr_res,    3, 7)
+		output_grid.addWidget(self.kWhTOftlbf_res,   3, 8)
+		output_grid.addWidget(self.kWhTOftpdl_res,   3, 9)
+
+		output_grid.addWidget(self.BTUITTOJ_res,       4, 0)
+		output_grid.addWidget(self.BTUITTOkJ_res,      4, 1)
+		output_grid.addWidget(self.BTUITTOkWh_res,     4, 2)
+		output_grid.addWidget(self.BTUITTOBTUIT_res,   4, 3)
+		output_grid.addWidget(self.BTUITTOBTUmean_res, 4, 4)
+		output_grid.addWidget(self.BTUITTOcalIT_res,   4, 5)
+		output_grid.addWidget(self.BTUITTOcalTH_res,   4, 6)
+		output_grid.addWidget(self.BTUITTOhphr_res,    4, 7)
+		output_grid.addWidget(self.BTUITTOftlbf_res,   4, 8)
+		output_grid.addWidget(self.BTUITTOftpdl_res,   4, 9)
+
+		output_grid.addWidget(self.BTUmeanTOJ_res,       5, 0)
+		output_grid.addWidget(self.BTUmeanTOkJ_res,      5, 1)
+		output_grid.addWidget(self.BTUmeanTOkWh_res,     5, 2)
+		output_grid.addWidget(self.BTUmeanTOBTUIT_res,   5, 3)
+		output_grid.addWidget(self.BTUmeanTOBTUmean_res, 5, 4)
+		output_grid.addWidget(self.BTUmeanTOcalIT_res,   5, 5)
+		output_grid.addWidget(self.BTUmeanTOcalTH_res,   5, 6)
+		output_grid.addWidget(self.BTUmeanTOhphr_res,    5, 7)
+		output_grid.addWidget(self.BTUmeanTOftlbf_res,   5, 8)
+		output_grid.addWidget(self.BTUmeanTOftpdl_res,   5, 9)
+
+		output_grid.addWidget(self.calITTOJ_res,       6, 0)
+		output_grid.addWidget(self.calITTOkJ_res,      6, 1)
+		output_grid.addWidget(self.calITTOkWh_res,     6, 2)
+		output_grid.addWidget(self.calITTOBTUIT_res,   6, 3)
+		output_grid.addWidget(self.calITTOBTUmean_res, 6, 4)
+		output_grid.addWidget(self.calITTOcalIT_res,   6, 5)
+		output_grid.addWidget(self.calITTOcalTH_res,   6, 6)
+		output_grid.addWidget(self.calITTOhphr_res,    6, 7)
+		output_grid.addWidget(self.calITTOftlbf_res,   6, 8)
+		output_grid.addWidget(self.calITTOftpdl_res,   6, 9)
+
+		output_grid.addWidget(self.calTHTOJ_res,       7, 0)
+		output_grid.addWidget(self.calTHTOkJ_res,      7, 1)
+		output_grid.addWidget(self.calTHTOkWh_res,     7, 2)
+		output_grid.addWidget(self.calTHTOBTUIT_res,   7, 3)
+		output_grid.addWidget(self.calTHTOBTUmean_res, 7, 4)
+		output_grid.addWidget(self.calTHTOcalIT_res,   7, 5)
+		output_grid.addWidget(self.calTHTOcalTH_res,   7, 6)
+		output_grid.addWidget(self.calTHTOhphr_res,    7, 7)
+		output_grid.addWidget(self.calTHTOftlbf_res,   7, 8)
+		output_grid.addWidget(self.calTHTOftpdl_res,   7, 9)
+
+		output_grid.addWidget(self.hphrTOJ_res,       8, 0)
+		output_grid.addWidget(self.hphrTOkJ_res,      8, 1)
+		output_grid.addWidget(self.hphrTOkWh_res,     8, 2)
+		output_grid.addWidget(self.hphrTOBTUIT_res,   8, 3)
+		output_grid.addWidget(self.hphrTOBTUmean_res, 8, 4)
+		output_grid.addWidget(self.hphrTOcalIT_res,   8, 5)
+		output_grid.addWidget(self.hphrTOcalTH_res,   8, 6)
+		output_grid.addWidget(self.hphrTOhphr_res,    8, 7)
+		output_grid.addWidget(self.hphrTOftlbf_res,   8, 8)
+		output_grid.addWidget(self.hphrTOftpdl_res,   8, 9)
+
+		output_grid.addWidget(self.ftlbfTOJ_res,       9, 0)
+		output_grid.addWidget(self.ftlbfTOkJ_res,      9, 1)
+		output_grid.addWidget(self.ftlbfTOkWh_res,     9, 2)
+		output_grid.addWidget(self.ftlbfTOBTUIT_res,   9, 3)
+		output_grid.addWidget(self.ftlbfTOBTUmean_res, 9, 4)
+		output_grid.addWidget(self.ftlbfTOcalIT_res,   9, 5)
+		output_grid.addWidget(self.ftlbfTOcalTH_res,   9, 6)
+		output_grid.addWidget(self.ftlbfTOhphr_res,    9, 7)
+		output_grid.addWidget(self.ftlbfTOftlbf_res,   9, 8)
+		output_grid.addWidget(self.ftlbfTOftpdl_res,   9, 9)
+
+		output_grid.addWidget(self.ftpdlTOJ_res,       10, 0)
+		output_grid.addWidget(self.ftpdlTOkJ_res,      10, 1)
+		output_grid.addWidget(self.ftpdlTOkWh_res,     10, 2)
+		output_grid.addWidget(self.ftpdlTOBTUIT_res,   10, 3)
+		output_grid.addWidget(self.ftpdlTOBTUmean_res, 10, 4)
+		output_grid.addWidget(self.ftpdlTOcalIT_res,   10, 5)
+		output_grid.addWidget(self.ftpdlTOcalTH_res,   10, 6)
+		output_grid.addWidget(self.ftpdlTOhphr_res,    10, 7)
+		output_grid.addWidget(self.ftpdlTOftlbf_res,   10, 8)
+		output_grid.addWidget(self.ftpdlTOftpdl_res,   10, 9)
+
+		output_group.setLayout(output_grid)
+
+		return output_group
+
+	def JTO_fun(self):
+		JTOJ_proc       = float(self.Ji_LinEd.text()) * 1
+		JTOkJ_proc      = float(self.Ji_LinEd.text()) * 1e-03
+		JTOkWh_proc     = float(self.Ji_LinEd.text()) * 2.777778e-07
+		JTOBTUIT_proc   = float(self.Ji_LinEd.text()) * 9.478171e-04
+		JTOBTUmean_proc = float(self.Ji_LinEd.text()) * 9.470860e-04
+		JTOcalIT_proc   = float(self.Ji_LinEd.text()) * 2.388459e-01
+		JTOcalTH_proc   = float(self.Ji_LinEd.text()) * 2.390060e-01
+		JTOhphr_proc    = float(self.Ji_LinEd.text()) * 3.725061e-07
+		JTOftlbf_proc   = float(self.Ji_LinEd.text()) * 7.375621e-01
+		JTOftpdl_proc   = float(self.Ji_LinEd.text()) * 2.373035e+01
+
+		self.JTOJ_res.setText(str(round(JTOJ_proc,             8)))
+		self.JTOkJ_res.setText(str(round(JTOkJ_proc,           8)))
+		self.JTOkWh_res.setText(str(round(JTOkWh_proc,         8)))
+		self.JTOBTUIT_res.setText(str(round(JTOBTUIT_proc,     8)))
+		self.JTOBTUmean_res.setText(str(round(JTOBTUmean_proc, 8)))
+		self.JTOcalIT_res.setText(str(round(JTOcalIT_proc,     8)))
+		self.JTOcalTH_res.setText(str(round(JTOcalTH_proc,     8)))
+		self.JTOhphr_res.setText(str(round(JTOhphr_proc,       8)))
+		self.JTOftlbf_res.setText(str(round(JTOftlbf_proc,     8)))
+		self.JTOftpdl_res.setText(str(round(JTOftpdl_proc,     8)))
+
+	def kJTO_fun(self):
+		kJTOJ_proc       = float(self.kJi_LinEd.text()) * 1e+03
+		kJTOkJ_proc      = float(self.kJi_LinEd.text()) * 1
+		kJTOkWh_proc     = float(self.kJi_LinEd.text()) * 2.777778e-04
+		kJTOBTUIT_proc   = float(self.kJi_LinEd.text()) * 9.478171e-01
+		kJTOBTUmean_proc = float(self.kJi_LinEd.text()) * 9.470860e-01
+		kJTOcalIT_proc   = float(self.kJi_LinEd.text()) * 2.388459e+02
+		kJTOcalTH_proc   = float(self.kJi_LinEd.text()) * 2.390060e+02
+		kJTOhphr_proc    = float(self.kJi_LinEd.text()) * 3.725061e-04
+		kJTOftlbf_proc   = float(self.kJi_LinEd.text()) * 7.375621e+02
+		kJTOftpdl_proc   = float(self.kJi_LinEd.text()) * 2.373035e+04
+
+		self.kJTOJ_res.setText(str(round(kJTOJ_proc,             8)))
+		self.kJTOkJ_res.setText(str(round(kJTOkJ_proc,           8)))
+		self.kJTOkWh_res.setText(str(round(kJTOkWh_proc,         8)))
+		self.kJTOBTUIT_res.setText(str(round(kJTOBTUIT_proc,     8)))
+		self.kJTOBTUmean_res.setText(str(round(kJTOBTUmean_proc, 8)))
+		self.kJTOcalIT_res.setText(str(round(kJTOcalIT_proc,     8)))
+		self.kJTOcalTH_res.setText(str(round(kJTOcalTH_proc,     8)))
+		self.kJTOhphr_res.setText(str(round(kJTOhphr_proc,       8)))
+		self.kJTOftlbf_res.setText(str(round(kJTOftlbf_proc,     8)))
+		self.kJTOftpdl_res.setText(str(round(kJTOftpdl_proc,     8)))
+
+	def kWhTO_fun(self):
+		kWhTOJ_proc       = float(self.kWhi_LinEd.text()) * 3.6e+6
+		kWhTOkJ_proc      = float(self.kWhi_LinEd.text()) * 3.6e+03
+		kWhTOkWh_proc     = float(self.kWhi_LinEd.text()) * 1
+		kWhTOBTUIT_proc   = float(self.kWhi_LinEd.text()) * 3.412142e+03
+		kWhTOBTUmean_proc = float(self.kWhi_LinEd.text()) * 3.409511e+03
+		kWhTOcalIT_proc   = float(self.kWhi_LinEd.text()) * 8.598452e+5
+		kWhTOcalTH_proc   = float(self.kWhi_LinEd.text()) * 8.598452e+5 * 1.0006692160611856
+		kWhTOhphr_proc    = float(self.kWhi_LinEd.text()) * 1.341022
+		kWhTOftlbf_proc   = float(self.kWhi_LinEd.text()) * 2.65522373748e+06
+		kWhTOftpdl_proc   = float(self.kWhi_LinEd.text()) * 8.542929764555995e+07
+
+		self.kWhTOJ_res.setText(str(round(kWhTOJ_proc,             8)))
+		self.kWhTOkJ_res.setText(str(round(kWhTOkJ_proc,           8)))
+		self.kWhTOkWh_res.setText(str(round(kWhTOkWh_proc,         8)))
+		self.kWhTOBTUIT_res.setText(str(round(kWhTOBTUIT_proc,     8)))
+		self.kWhTOBTUmean_res.setText(str(round(kWhTOBTUmean_proc, 8)))
+		self.kWhTOcalIT_res.setText(str(round(kWhTOcalIT_proc,     8)))
+		self.kWhTOcalTH_res.setText(str(round(kWhTOcalTH_proc,     8)))
+		self.kWhTOhphr_res.setText(str(round(kWhTOhphr_proc,       8)))
+		self.kWhTOftlbf_res.setText(str(round(kWhTOftlbf_proc,     8)))
+		self.kWhTOftpdl_res.setText(str(round(kWhTOftpdl_proc,     8)))
+
+	def BTUITTO_fun(self):
+		BTUITTOJ_proc       = float(self.BTUITi_LinEd.text()) * 1.055056e+03
+		BTUITTOkJ_proc      = float(self.BTUITi_LinEd.text()) * 1.055056
+		BTUITTOkWh_proc     = float(self.BTUITi_LinEd.text()) * 2.930711e-04
+		BTUITTOBTUIT_proc   = float(self.BTUITi_LinEd.text()) * 1
+		BTUITTOBTUmean_proc = float(self.BTUITi_LinEd.text()) * 0.999229072
+		BTUITTOcalIT_proc   = float(self.BTUITi_LinEd.text()) * 2.519958e+02
+		BTUITTOcalTH_proc   = float(self.BTUITi_LinEd.text()) * 2.519958e+02 * 1.0006692160611856
+		BTUITTOhphr_proc    = float(self.BTUITi_LinEd.text()) * 3.930148e-04
+		BTUITTOftlbf_proc   = float(self.BTUITi_LinEd.text()) * 7.781692e+02
+		BTUITTOftpdl_proc   = float(self.BTUITi_LinEd.text()) * 2.5036855685e+04
+
+		self.BTUITTOJ_res.setText(str(round(BTUITTOJ_proc,             8)))
+		self.BTUITTOkJ_res.setText(str(round(BTUITTOkJ_proc,           8)))
+		self.BTUITTOkWh_res.setText(str(round(BTUITTOkWh_proc,         8)))
+		self.BTUITTOBTUIT_res.setText(str(round(BTUITTOBTUIT_proc,     8)))
+		self.BTUITTOBTUmean_res.setText(str(round(BTUITTOBTUmean_proc, 8)))
+		self.BTUITTOcalIT_res.setText(str(round(BTUITTOcalIT_proc,     8)))
+		self.BTUITTOcalTH_res.setText(str(round(BTUITTOcalTH_proc,     8)))
+		self.BTUITTOhphr_res.setText(str(round(BTUITTOhphr_proc,       8)))
+		self.BTUITTOftlbf_res.setText(str(round(BTUITTOftlbf_proc,     8)))
+		self.BTUITTOftpdl_res.setText(str(round(BTUITTOftpdl_proc,     8)))
+
+	def BTUmeanTO_fun(self):
+		BTUmeanTOJ_proc       = float(self.BTUmeani_LinEd.text()) * 1.05587e+03
+		BTUmeanTOkJ_proc      = float(self.BTUmeani_LinEd.text()) * 1.05587
+		BTUmeanTOkWh_proc     = float(self.BTUmeani_LinEd.text()) * 1055.87 / 3600000
+		BTUmeanTOBTUIT_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 1005.056
+		BTUmeanTOBTUmean_proc = float(self.BTUmeani_LinEd.text()) * 1
+		BTUmeanTOcalIT_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 4.1868
+		BTUmeanTOcalTH_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 4.184
+		BTUmeanTOhphr_proc    = float(self.BTUmeani_LinEd.text()) * 1055.87 / (745.6999*3600)
+		BTUmeanTOftlbf_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 1005.056 * 7.781692e+02
+		BTUmeanTOftpdl_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 1005.056 * 2.5036855685e+04
+
+		self.BTUmeanTOJ_res.setText(str(round(BTUmeanTOJ_proc,             8)))
+		self.BTUmeanTOkJ_res.setText(str(round(BTUmeanTOkJ_proc,           8)))
+		self.BTUmeanTOkWh_res.setText(str(round(BTUmeanTOkWh_proc,         8)))
+		self.BTUmeanTOBTUIT_res.setText(str(round(BTUmeanTOBTUIT_proc,     8)))
+		self.BTUmeanTOBTUmean_res.setText(str(round(BTUmeanTOBTUmean_proc, 8)))
+		self.BTUmeanTOcalIT_res.setText(str(round(BTUmeanTOcalIT_proc,     8)))
+		self.BTUmeanTOcalTH_res.setText(str(round(BTUmeanTOcalTH_proc,     8)))
+		self.BTUmeanTOhphr_res.setText(str(round(BTUmeanTOhphr_proc,       8)))
+		self.BTUmeanTOftlbf_res.setText(str(round(BTUmeanTOftlbf_proc,     8)))
+		self.BTUmeanTOftpdl_res.setText(str(round(BTUmeanTOftpdl_proc,     8)))
+
+	def calITTO_fun(self):
+		calITTOJ_proc       = float(self.calITi_LinEd.text()) * 4.1868
+		calITTOkJ_proc      = float(self.calITi_LinEd.text()) * 4.1868e-03
+		calITTOkWh_proc     = float(self.calITi_LinEd.text()) * 1.163e-06
+		calITTOBTUIT_proc   = float(self.calITi_LinEd.text()) * 3.968321e-03
+		calITTOBTUmean_proc = float(self.calITi_LinEd.text()) * 1055.87 / 4.1868
+		calITTOcalIT_proc   = float(self.calITi_LinEd.text()) * 1
+		calITTOcalTH_proc   = float(self.calITi_LinEd.text()) * 1.0006692160611856
+		calITTOhphr_proc    = float(self.calITi_LinEd.text()) * 1.559609e-06
+		calITTOftlbf_proc   = float(self.calITi_LinEd.text()) * 3.0880252066892404
+		calITTOftpdl_proc   = float(self.calITi_LinEd.text()) * 99.35427316178622
+
+		self.calITTOJ_res.setText(str(round(calITTOJ_proc,             8)))
+		self.calITTOkJ_res.setText(str(round(calITTOkJ_proc,           8)))
+		self.calITTOkWh_res.setText(str(round(calITTOkWh_proc,         8)))
+		self.calITTOBTUIT_res.setText(str(round(calITTOBTUIT_proc,     8)))
+		self.calITTOBTUmean_res.setText(str(round(calITTOBTUmean_proc, 8)))
+		self.calITTOcalIT_res.setText(str(round(calITTOcalIT_proc,     8)))
+		self.calITTOcalTH_res.setText(str(round(calITTOcalTH_proc,     8)))
+		self.calITTOhphr_res.setText(str(round(calITTOhphr_proc,       8)))
+		self.calITTOftlbf_res.setText(str(round(calITTOftlbf_proc,     8)))
+		self.calITTOftpdl_res.setText(str(round(calITTOftpdl_proc,     8)))
+
+	def calTHTO_fun(self):
+		calTHTOJ_proc       = float(self.calTHi_LinEd.text()) * 4.184
+		calTHTOkJ_proc      = float(self.calTHi_LinEd.text()) * 4.184e-03
+		calTHTOkWh_proc     = float(self.calTHi_LinEd.text()) * 0.0000011622222222
+		calTHTOBTUIT_proc   = float(self.calTHi_LinEd.text()) * 0.0039656668313
+		calTHTOBTUmean_proc = float(self.calTHi_LinEd.text()) * 4.184 / 1055.87
+		calTHTOcalIT_proc   = float(self.calTHi_LinEd.text()) * 0.9993312314894429
+		calTHTOcalTH_proc   = float(self.calTHi_LinEd.text()) * 1
+		calTHTOhphr_proc    = float(self.calTHi_LinEd.text()) * 0.0000015585656734888427
+		calTHTOftlbf_proc   = float(self.calTHi_LinEd.text()) * 3.0859600326712
+		calTHTOftpdl_proc   = float(self.calTHi_LinEd.text()) * 99.28782815250634
+
+		self.calTHTOJ_res.setText(str(round(calTHTOJ_proc,             8)))
+		self.calTHTOkJ_res.setText(str(round(calTHTOkJ_proc,           8)))
+		self.calTHTOkWh_res.setText(str(round(calTHTOkWh_proc,         8)))
+		self.calTHTOBTUIT_res.setText(str(round(calTHTOBTUIT_proc,     8)))
+		self.calTHTOBTUmean_res.setText(str(round(calTHTOBTUmean_proc, 8)))
+		self.calTHTOcalIT_res.setText(str(round(calTHTOcalIT_proc,     8)))
+		self.calTHTOcalTH_res.setText(str(round(calTHTOcalTH_proc,     8)))
+		self.calTHTOhphr_res.setText(str(round(calTHTOhphr_proc,       8)))
+		self.calTHTOftlbf_res.setText(str(round(calTHTOftlbf_proc,     8)))
+		self.calTHTOftpdl_res.setText(str(round(calTHTOftpdl_proc,     8)))
+
+	def hphrTO_fun(self):
+		hphrTOJ_proc       = float(self.hphri_LinEd.text()) * 2.68452e+06
+		hphrTOkJ_proc      = float(self.hphri_LinEd.text()) * 2.68452e+03
+		hphrTOkWh_proc     = float(self.hphri_LinEd.text()) * 0.7456999
+		hphrTOBTUIT_proc   = float(self.hphri_LinEd.text()) * 2.544434e+03
+		hphrTOBTUmean_proc = float(self.hphri_LinEd.text()) * 745.6999 * 3600 / 1055.87
+		hphrTOcalIT_proc   = float(self.hphri_LinEd.text()) * 6.411865e+05
+		hphrTOcalTH_proc   = float(self.hphri_LinEd.text()) * 6.416155680892831e+05
+		hphrTOhphr_proc    = float(self.hphri_LinEd.text()) * 1
+		hphrTOftlbf_proc   = float(self.hphri_LinEd.text()) * 1.9799999994631547e+06
+		hphrTOftpdl_proc   = float(self.hphri_LinEd.text()) * 6.3704616264e+07
+
+		self.hphrTOJ_res.setText(str(round(hphrTOJ_proc,             8)))
+		self.hphrTOkJ_res.setText(str(round(hphrTOkJ_proc,           8)))
+		self.hphrTOkWh_res.setText(str(round(hphrTOkWh_proc,         8)))
+		self.hphrTOBTUIT_res.setText(str(round(hphrTOBTUIT_proc,     8)))
+		self.hphrTOBTUmean_res.setText(str(round(hphrTOBTUmean_proc, 8)))
+		self.hphrTOcalIT_res.setText(str(round(hphrTOcalIT_proc,     8)))
+		self.hphrTOcalTH_res.setText(str(round(hphrTOcalTH_proc,     8)))
+		self.hphrTOhphr_res.setText(str(round(hphrTOhphr_proc,       8)))
+		self.hphrTOftlbf_res.setText(str(round(hphrTOftlbf_proc,     8)))
+		self.hphrTOftpdl_res.setText(str(round(hphrTOftpdl_proc,     8)))
+
+	def ftlbfTO_fun(self):
+		ftlbfTOJ_proc       = float(self.ftlbfi_LinEd.text()) * 1.355818
+		ftlbfTOkJ_proc      = float(self.ftlbfi_LinEd.text()) * 1.355818e-03
+		ftlbfTOkWh_proc     = float(self.ftlbfi_LinEd.text()) * 3.766161e-07
+		ftlbfTOBTUIT_proc   = float(self.ftlbfi_LinEd.text()) * 1.285068e-03
+		ftlbfTOBTUmean_proc = float(self.ftlbfi_LinEd.text()) * 0.3048 * 4.448222 / 1055.87
+		ftlbfTOcalIT_proc   = float(self.ftlbfi_LinEd.text()) * 3.238316e-01
+		ftlbfTOcalTH_proc   = float(self.ftlbfi_LinEd.text()) * 0.3240482667996196
+		ftlbfTOhphr_proc    = float(self.ftlbfi_LinEd.text()) * 5.050505e-07
+		ftlbfTOftlbf_proc   = float(self.ftlbfi_LinEd.text()) * 1
+		ftlbfTOftpdl_proc   = float(self.ftlbfi_LinEd.text()) * 32.174048627
+
+		self.ftlbfTOJ_res.setText(str(round(ftlbfTOJ_proc,             8)))
+		self.ftlbfTOkJ_res.setText(str(round(ftlbfTOkJ_proc,           8)))
+		self.ftlbfTOkWh_res.setText(str(round(ftlbfTOkWh_proc,         8)))
+		self.ftlbfTOBTUIT_res.setText(str(round(ftlbfTOBTUIT_proc,     8)))
+		self.ftlbfTOBTUmean_res.setText(str(round(ftlbfTOBTUmean_proc, 8)))
+		self.ftlbfTOcalIT_res.setText(str(round(ftlbfTOcalIT_proc,     8)))
+		self.ftlbfTOcalTH_res.setText(str(round(ftlbfTOcalTH_proc,     8)))
+		self.ftlbfTOhphr_res.setText(str(round(ftlbfTOhphr_proc,       8)))
+		self.ftlbfTOftlbf_res.setText(str(round(ftlbfTOftlbf_proc,     8)))
+		self.ftlbfTOftpdl_res.setText(str(round(ftlbfTOftpdl_proc,     8)))
+
+	def ftpdlTO_fun(self):
+		ftpdlTOJ_proc       = float(self.ftpdli_LinEd.text()) * 0.0421401099999223
+		ftpdlTOkJ_proc      = float(self.ftpdli_LinEd.text()) * 0.0421401099999223e+03
+		ftpdlTOkWh_proc     = float(self.ftpdli_LinEd.text()) * 1.1705586111e-08
+		ftpdlTOBTUIT_proc   = float(self.ftpdli_LinEd.text()) * 3.9941117709812745e-05
+		ftpdlTOBTUmean_proc = float(self.ftpdli_LinEd.text()) * 0.3048 * 0.138255 / 1055.87
+		ftpdlTOcalIT_proc   = float(self.ftpdli_LinEd.text()) * 1.0064992356912751e-02
+		ftpdlTOcalTH_proc   = float(self.ftpdli_LinEd.text()) * 1.0071728011e-02
+		ftpdlTOhphr_proc    = float(self.ftpdli_LinEd.text()) * 1.5697449551e-08
+		ftpdlTOftlbf_proc   = float(self.ftpdli_LinEd.text()) * 3.1080950103e-02
+		ftpdlTOftpdl_proc   = float(self.ftpdli_LinEd.text()) * 1
+
+		self.ftpdlTOJ_res.setText(str(round(ftpdlTOJ_proc,             8)))
+		self.ftpdlTOkJ_res.setText(str(round(ftpdlTOkJ_proc,           8)))
+		self.ftpdlTOkWh_res.setText(str(round(ftpdlTOkWh_proc,         8)))
+		self.ftpdlTOBTUIT_res.setText(str(round(ftpdlTOBTUIT_proc,     8)))
+		self.ftpdlTOBTUmean_res.setText(str(round(ftpdlTOBTUmean_proc, 8)))
+		self.ftpdlTOcalIT_res.setText(str(round(ftpdlTOcalIT_proc,     8)))
+		self.ftpdlTOcalTH_res.setText(str(round(ftpdlTOcalTH_proc,     8)))
+		self.ftpdlTOhphr_res.setText(str(round(ftpdlTOhphr_proc,       8)))
+		self.ftpdlTOftlbf_res.setText(str(round(ftpdlTOftlbf_proc,     8)))
+		self.ftpdlTOftpdl_res.setText(str(round(ftpdlTOftpdl_proc,     8)))
+
+	def main_window(self):
+		main_layout = QtWidgets.QHBoxLayout()
+		main_layout.addWidget(self.createGroup_input())
+		main_layout.addWidget(self.createGroup_output())
+
+		self.setLayout(main_layout)
+		self.show()
 
 
 
@@ -1924,11 +2487,6 @@ class Length_Win(QtWidgets.QWidget):
 
 
 
-
-
-
-
-
 class Magind_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
 		super().__init__()
@@ -1939,10 +2497,932 @@ class Magint_Win(QtWidgets.QWidget):
 		super().__init__()
 		self.setWindowTitle("Magint_Win")
 
+class Mass_Win(QtWidgets.QWidget):
+	def __init__(self, parent = None):
+		super().__init__()
+
+		self.setWindowTitle("Mass Converter")
+		self.main_window()
+
+	def createGroup_input(self):
+		input_group = QtWidgets.QGroupBox("Input", self)
+		input_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+
+		input_grid = QtWidgets.QGridLayout()
+		input_grid.setColumnMinimumWidth(0, 130)
+
+		blanklabel          = QtWidgets.QLabel()
+		self.kgi_LinEd      = QtWidgets.QLineEdit()
+		self.mtoni_LinEd    = QtWidgets.QLineEdit()
+		self.ouncei_LinEd   = QtWidgets.QLineEdit()
+		self.poundi_LinEd   = QtWidgets.QLineEdit()
+		self.shorttoni_LinEd = QtWidgets.QLineEdit()
+		self.longtoni_LinEd = QtWidgets.QLineEdit()
+
+		kgu_Label       = QtWidgets.QLabel("kg")
+		mtonu_Label     = QtWidgets.QLabel("metric ton")
+		ounceu_Label    = QtWidgets.QLabel("ounce")
+		poundu_Label    = QtWidgets.QLabel("pound")
+		shorttonu_Label = QtWidgets.QLabel("short ton")
+		longtonu_Label  = QtWidgets.QLabel("long ton")
+
+		input_grid.addWidget(blanklabel,           0, 0)
+		input_grid.addWidget(self.kgi_LinEd,       1, 0)
+		input_grid.addWidget(self.mtoni_LinEd,     2, 0)
+		input_grid.addWidget(self.ouncei_LinEd,    3, 0)
+		input_grid.addWidget(self.poundi_LinEd,    4, 0)
+		input_grid.addWidget(self.shorttoni_LinEd, 5, 0)
+		input_grid.addWidget(self.longtoni_LinEd,  6, 0)
+
+		input_grid.addWidget(kgu_Label,       1, 1)
+		input_grid.addWidget(mtonu_Label,     2, 1)
+		input_grid.addWidget(ounceu_Label,    3, 1)
+		input_grid.addWidget(poundu_Label,    4, 1)
+		input_grid.addWidget(shorttonu_Label, 5, 1)
+		input_grid.addWidget(longtonu_Label,  6, 1)
+
+		input_group.setLayout(input_grid)
+
+		self.kgi_LinEd.returnPressed.connect(self.kgTO_fun)
+		self.mtoni_LinEd.returnPressed.connect(self.mtonTO_fun)
+		self.ouncei_LinEd.returnPressed.connect(self.ounceTO_fun)
+		self.poundi_LinEd.returnPressed.connect(self.poundTO_fun)
+		self.shorttoni_LinEd.returnPressed.connect(self.shorttonTO_fun)
+		self.longtoni_LinEd.returnPressed.connect(self.longtonTO_fun)
+
+		return input_group
+
+	def createGroup_output(self):
+		output_group = QtWidgets.QGroupBox("Output", self)
+		output_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+
+		output_grid = QtWidgets.QGridLayout()
+
+		kg_Label       = QtWidgets.QLabel("kg")
+		mton_Label     = QtWidgets.QLabel("metric ton")
+		ounce_Label    = QtWidgets.QLabel("ounce")
+		pound_Label    = QtWidgets.QLabel("pound")
+		shortton_Label = QtWidgets.QLabel("short ton")
+		longton_Label  = QtWidgets.QLabel("long ton")
+
+		self.kgTOkg_res       = QtWidgets.QLabel("0", self)
+		self.kgTOmton_res     = QtWidgets.QLabel("0", self)
+		self.kgTOounce_res    = QtWidgets.QLabel("0", self)
+		self.kgTOpound_res    = QtWidgets.QLabel("0", self)
+		self.kgTOshortton_res = QtWidgets.QLabel("0", self)
+		self.kgTOlongton_res  = QtWidgets.QLabel("0", self)
+
+		self.mtonTOkg_res       = QtWidgets.QLabel("0", self)
+		self.mtonTOmton_res     = QtWidgets.QLabel("0", self)
+		self.mtonTOounce_res    = QtWidgets.QLabel("0", self)
+		self.mtonTOpound_res    = QtWidgets.QLabel("0", self)
+		self.mtonTOshortton_res = QtWidgets.QLabel("0", self)
+		self.mtonTOlongton_res  = QtWidgets.QLabel("0", self)
+
+		self.ounceTOkg_res       = QtWidgets.QLabel("0", self)
+		self.ounceTOmton_res     = QtWidgets.QLabel("0", self)
+		self.ounceTOounce_res    = QtWidgets.QLabel("0", self)
+		self.ounceTOpound_res    = QtWidgets.QLabel("0", self)
+		self.ounceTOshortton_res = QtWidgets.QLabel("0", self)
+		self.ounceTOlongton_res  = QtWidgets.QLabel("0", self)
+
+		self.poundTOkg_res       = QtWidgets.QLabel("0", self)
+		self.poundTOmton_res     = QtWidgets.QLabel("0", self)
+		self.poundTOounce_res    = QtWidgets.QLabel("0", self)
+		self.poundTOpound_res    = QtWidgets.QLabel("0", self)
+		self.poundTOshortton_res = QtWidgets.QLabel("0", self)
+		self.poundTOlongton_res  = QtWidgets.QLabel("0", self)
+
+		self.shorttonTOkg_res       = QtWidgets.QLabel("0", self)
+		self.shorttonTOmton_res     = QtWidgets.QLabel("0", self)
+		self.shorttonTOounce_res    = QtWidgets.QLabel("0", self)
+		self.shorttonTOpound_res    = QtWidgets.QLabel("0", self)
+		self.shorttonTOshortton_res = QtWidgets.QLabel("0", self)
+		self.shorttonTOlongton_res  = QtWidgets.QLabel("0", self)
+
+		self.longtonTOkg_res       = QtWidgets.QLabel("0", self)
+		self.longtonTOmton_res     = QtWidgets.QLabel("0", self)
+		self.longtonTOounce_res    = QtWidgets.QLabel("0", self)
+		self.longtonTOpound_res    = QtWidgets.QLabel("0", self)
+		self.longtonTOshortton_res = QtWidgets.QLabel("0", self)
+		self.longtonTOlongton_res  = QtWidgets.QLabel("0", self)
+
+		output_grid.addWidget(kg_Label,       0, 0)
+		output_grid.addWidget(mton_Label,     0, 1)
+		output_grid.addWidget(ounce_Label,    0, 2)
+		output_grid.addWidget(pound_Label,    0, 3)
+		output_grid.addWidget(shortton_Label, 0, 4)
+		output_grid.addWidget(longton_Label,  0, 5)
+
+		output_grid.addWidget(self.kgTOkg_res,       1, 0)
+		output_grid.addWidget(self.kgTOmton_res,     1, 1)
+		output_grid.addWidget(self.kgTOounce_res,    1, 2)
+		output_grid.addWidget(self.kgTOpound_res,    1, 3)
+		output_grid.addWidget(self.kgTOshortton_res, 1, 4)
+		output_grid.addWidget(self.kgTOlongton_res,  1, 5)
+
+		output_grid.addWidget(self.mtonTOkg_res,       2, 0)
+		output_grid.addWidget(self.mtonTOmton_res,     2, 1)
+		output_grid.addWidget(self.mtonTOounce_res,    2, 2)
+		output_grid.addWidget(self.mtonTOpound_res,    2, 3)
+		output_grid.addWidget(self.mtonTOshortton_res, 2, 4)
+		output_grid.addWidget(self.mtonTOlongton_res,  2, 5)
+
+		output_grid.addWidget(self.ounceTOkg_res,       3, 0)
+		output_grid.addWidget(self.ounceTOmton_res,     3, 1)
+		output_grid.addWidget(self.ounceTOounce_res,    3, 2)
+		output_grid.addWidget(self.ounceTOpound_res,    3, 3)
+		output_grid.addWidget(self.ounceTOshortton_res, 3, 4)
+		output_grid.addWidget(self.ounceTOlongton_res,  3, 5)
+
+		output_grid.addWidget(self.poundTOkg_res,       4, 0)
+		output_grid.addWidget(self.poundTOmton_res,     4, 1)
+		output_grid.addWidget(self.poundTOounce_res,    4, 2)
+		output_grid.addWidget(self.poundTOpound_res,    4, 3)
+		output_grid.addWidget(self.poundTOshortton_res, 4, 4)
+		output_grid.addWidget(self.poundTOlongton_res,  4, 5)
+
+		output_grid.addWidget(self.shorttonTOkg_res,       5, 0)
+		output_grid.addWidget(self.shorttonTOmton_res,     5, 1)
+		output_grid.addWidget(self.shorttonTOounce_res,    5, 2)
+		output_grid.addWidget(self.shorttonTOpound_res,    5, 3)
+		output_grid.addWidget(self.shorttonTOshortton_res, 5, 4)
+		output_grid.addWidget(self.shorttonTOlongton_res,  5, 5)
+
+		output_grid.addWidget(self.longtonTOkg_res,       6, 0)
+		output_grid.addWidget(self.longtonTOmton_res,     6, 1)
+		output_grid.addWidget(self.longtonTOounce_res,    6, 2)
+		output_grid.addWidget(self.longtonTOpound_res,    6, 3)
+		output_grid.addWidget(self.longtonTOshortton_res, 6, 4)
+		output_grid.addWidget(self.longtonTOlongton_res,  6, 5)
+
+		output_group.setLayout(output_grid)
+
+		return output_group
+
+	def kgTO_fun(self):
+		kgTOkg_proc       = float(self.kgi_LinEd.text()) * 1
+		kgTOmton_proc     = float(self.kgi_LinEd.text()) * 1e-03
+		kgTOounce_proc    = float(self.kgi_LinEd.text()) * 35.27396
+		kgTOpound_proc    = float(self.kgi_LinEd.text()) * 2.204623
+		kgTOshortton_proc = float(self.kgi_LinEd.text()) * 1.102311e-03
+		kgTOlongton_proc  = float(self.kgi_LinEd.text()) * 9.842065e-04
+
+		self.kgTOkg_res.setText(str(round(kgTOkg_proc,             8)))
+		self.kgTOmton_res.setText(str(round(kgTOmton_proc,         8)))
+		self.kgTOounce_res.setText(str(round(kgTOounce_proc,       8)))
+		self.kgTOpound_res.setText(str(round(kgTOpound_proc,       8)))
+		self.kgTOshortton_res.setText(str(round(kgTOshortton_proc, 8)))
+		self.kgTOlongton_res.setText(str(round(kgTOlongton_proc,   8)))
+
+	def mtonTO_fun(self):
+		mtonTOkg_proc       = float(self.mtoni_LinEd.text()) * 1e+03
+		mtonTOmton_proc     = float(self.mtoni_LinEd.text()) * 1
+		mtonTOounce_proc    = float(self.mtoni_LinEd.text()) * 3.527396e+04
+		mtonTOpound_proc    = float(self.mtoni_LinEd.text()) * 2.204623e+03
+		mtonTOshortton_proc = float(self.mtoni_LinEd.text()) * 1.102311
+		mtonTOlongton_proc  = float(self.mtoni_LinEd.text()) * 0.9842065
+
+		self.mtonTOkg_res.setText(str(round(mtonTOkg_proc,             8)))
+		self.mtonTOmton_res.setText(str(round(mtonTOmton_proc,         8)))
+		self.mtonTOounce_res.setText(str(round(mtonTOounce_proc,       8)))
+		self.mtonTOpound_res.setText(str(round(mtonTOpound_proc,       8)))
+		self.mtonTOshortton_res.setText(str(round(mtonTOshortton_proc, 8)))
+		self.mtonTOlongton_res.setText(str(round(mtonTOlongton_proc,   8)))
+
+	def ounceTO_fun(self):
+		ounceTOkg_proc       = float(self.ouncei_LinEd.text()) * 2.834952e-02
+		ounceTOmton_proc     = float(self.ouncei_LinEd.text()) * 2.834950e-05
+		ounceTOounce_proc    = float(self.ouncei_LinEd.text()) * 1
+		ounceTOpound_proc    = float(self.ouncei_LinEd.text()) * 6.25e-02
+		ounceTOshortton_proc = float(self.ouncei_LinEd.text()) * 3.125e-05
+		ounceTOlongton_proc  = float(self.ouncei_LinEd.text()) * 2.790179e-05
+
+		self.ounceTOkg_res.setText(str(round(ounceTOkg_proc,             8)))
+		self.ounceTOmton_res.setText(str(round(ounceTOmton_proc,         8)))
+		self.ounceTOounce_res.setText(str(round(ounceTOounce_proc,       8)))
+		self.ounceTOpound_res.setText(str(round(ounceTOpound_proc,       8)))
+		self.ounceTOshortton_res.setText(str(round(ounceTOshortton_proc, 8)))
+		self.ounceTOlongton_res.setText(str(round(ounceTOlongton_proc,   8)))
+
+	def poundTO_fun(self):
+		poundTOkg_proc       = float(self.poundi_LinEd.text()) * 0.4535924
+		poundTOmton_proc     = float(self.poundi_LinEd.text()) * 4.535924e-04
+		poundTOounce_proc    = float(self.poundi_LinEd.text()) * 16
+		poundTOpound_proc    = float(self.poundi_LinEd.text()) * 1
+		poundTOshortton_proc = float(self.poundi_LinEd.text()) * 5e-04
+		poundTOlongton_proc  = float(self.poundi_LinEd.text()) * 4.464286e-04
+
+		self.poundTOkg_res.setText(str(round(poundTOkg_proc,             8)))
+		self.poundTOmton_res.setText(str(round(poundTOmton_proc,         8)))
+		self.poundTOounce_res.setText(str(round(poundTOounce_proc,       8)))
+		self.poundTOpound_res.setText(str(round(poundTOpound_proc,       8)))
+		self.poundTOshortton_res.setText(str(round(poundTOshortton_proc, 8)))
+		self.poundTOlongton_res.setText(str(round(poundTOlongton_proc,   8)))
+
+	def shorttonTO_fun(self):
+		shorttonTOkg_proc       = float(self.shorttoni_LinEd.text()) * 9.071847e+02
+		shorttonTOmton_proc     = float(self.shorttoni_LinEd.text()) * 0.9071847
+		shorttonTOounce_proc    = float(self.shorttoni_LinEd.text()) * 3.2e+04
+		shorttonTOpound_proc    = float(self.shorttoni_LinEd.text()) * 2e+03
+		shorttonTOshortton_proc = float(self.shorttoni_LinEd.text()) * 1
+		shorttonTOlongton_proc  = float(self.shorttoni_LinEd.text()) * 0.8928571
+
+		self.shorttonTOkg_res.setText(str(round(shorttonTOkg_proc,             8)))
+		self.shorttonTOmton_res.setText(str(round(shorttonTOmton_proc,         8)))
+		self.shorttonTOounce_res.setText(str(round(shorttonTOounce_proc,       8)))
+		self.shorttonTOpound_res.setText(str(round(shorttonTOpound_proc,       8)))
+		self.shorttonTOshortton_res.setText(str(round(shorttonTOshortton_proc, 8)))
+		self.shorttonTOlongton_res.setText(str(round(shorttonTOlongton_proc,   8)))
+
+	def longtonTO_fun(self):
+		longtonTOkg_proc       = float(self.longtoni_LinEd.text()) * 1.016047e+03
+		longtonTOmton_proc     = float(self.longtoni_LinEd.text()) * 1.016047
+		longtonTOounce_proc    = float(self.longtoni_LinEd.text()) * 3.584e+04
+		longtonTOpound_proc    = float(self.longtoni_LinEd.text()) * 2.24e+03
+		longtonTOshortton_proc = float(self.longtoni_LinEd.text()) * 1.12
+		longtonTOlongton_proc  = float(self.longtoni_LinEd.text()) * 1
+
+		self.longtonTOkg_res.setText(str(round(longtonTOkg_proc,             8)))
+		self.longtonTOmton_res.setText(str(round(longtonTOmton_proc,         8)))
+		self.longtonTOounce_res.setText(str(round(longtonTOounce_proc,       8)))
+		self.longtonTOpound_res.setText(str(round(longtonTOpound_proc,       8)))
+		self.longtonTOshortton_res.setText(str(round(longtonTOshortton_proc, 8)))
+		self.longtonTOlongton_res.setText(str(round(longtonTOlongton_proc,   8)))
+
+	def main_window(self):
+		main_layout = QtWidgets.QHBoxLayout()
+		main_layout.addWidget(self.createGroup_input())
+		main_layout.addWidget(self.createGroup_output())
+
+		self.setLayout(main_layout)
+		self.show()
+
+
+
 class Massflow_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
 		super().__init__()
-		self.setWindowTitle("Massflow_Win")
+
+		self.setWindowTitle("Mass Flow Rate Converter")
+		self.main_window()
+
+	def createGroup_input(self):
+		input_group = QtWidgets.QGroupBox("Input", self)
+		input_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+
+		input_grid = QtWidgets.QGridLayout()
+		input_grid.setColumnMinimumWidth(0, 130)
+
+		blanklabel       = QtWidgets.QLabel()
+		self.gsi_LinEd   = QtWidgets.QLineEdit()
+		self.gmini_LinEd = QtWidgets.QLineEdit()
+		self.kgsi_LinEd  = QtWidgets.QLineEdit()
+		self.kghi_LinEd  = QtWidgets.QLineEdit()
+		self.kgdi_LinEd  = QtWidgets.QLineEdit()
+		self.tonsi_LinEd = QtWidgets.QLineEdit()
+		self.tonhi_LinEd = QtWidgets.QLineEdit()
+		self.tondi_LinEd = QtWidgets.QLineEdit()
+		self.lbsi_LinEd  = QtWidgets.QLineEdit()
+		self.lbhi_LinEd  = QtWidgets.QLineEdit()
+		self.lbdi_LinEd  = QtWidgets.QLineEdit()
+
+		gsu_Label   = QtWidgets.QLabel("g/sec")
+		gminu_Label = QtWidgets.QLabel("g/min")
+		kgsu_Label  = QtWidgets.QLabel("kg/sec")
+		kghu_Label  = QtWidgets.QLabel("kg/hour")
+		kgdu_Label  = QtWidgets.QLabel("kg/day")
+		tonsu_Label = QtWidgets.QLabel("ton/sec")
+		tonhu_Label = QtWidgets.QLabel("ton/hour")
+		tondu_Label = QtWidgets.QLabel("ton/day")
+		lbsu_Label  = QtWidgets.QLabel("lb/sec")
+		lbhu_Label  = QtWidgets.QLabel("lb/hour")
+		lbdu_Label  = QtWidgets.QLabel("lb/day")
+
+		input_grid.addWidget(blanklabel,   0, 0)
+		input_grid.addWidget(self.gsi_LinEd,    1, 0)
+		input_grid.addWidget(self.gmini_LinEd,  2, 0)
+		input_grid.addWidget(self.kgsi_LinEd,   3, 0)
+		input_grid.addWidget(self.kghi_LinEd,   4, 0)
+		input_grid.addWidget(self.kgdi_LinEd,   5, 0)
+		input_grid.addWidget(self.tonsi_LinEd,  6, 0)
+		input_grid.addWidget(self.tonhi_LinEd,  7, 0)
+		input_grid.addWidget(self.tondi_LinEd,  8, 0)
+		input_grid.addWidget(self.lbsi_LinEd,   9, 0)
+		input_grid.addWidget(self.lbhi_LinEd,  10, 0)
+		input_grid.addWidget(self.lbdi_LinEd,  11, 0)
+
+		input_grid.addWidget(gsu_Label,    1, 1)
+		input_grid.addWidget(gminu_Label,  2, 1)
+		input_grid.addWidget(kgsu_Label,   3, 1)
+		input_grid.addWidget(kghu_Label,   4, 1)
+		input_grid.addWidget(kgdu_Label,   5, 1)
+		input_grid.addWidget(tonsu_Label,  6, 1)
+		input_grid.addWidget(tonhu_Label,  7, 1)
+		input_grid.addWidget(tondu_Label,  8, 1)
+		input_grid.addWidget(lbsu_Label,   9, 1)
+		input_grid.addWidget(lbhu_Label,  10, 1)
+		input_grid.addWidget(lbdu_Label,  11, 1)
+
+		input_group.setLayout(input_grid)
+
+		self.gsi_LinEd.returnPressed.connect(self.gsTO_fun)
+		self.gmini_LinEd.returnPressed.connect(self.gminTO_fun)
+		self.kgsi_LinEd.returnPressed.connect(self.kgsTO_fun)
+		self.kghi_LinEd.returnPressed.connect(self.kghTO_fun)
+		self.kgdi_LinEd.returnPressed.connect(self.kgdTO_fun)
+		self.tonsi_LinEd.returnPressed.connect(self.tonsTO_fun)
+		self.tonhi_LinEd.returnPressed.connect(self.tonhTO_fun)
+		self.tondi_LinEd.returnPressed.connect(self.tondTO_fun)
+		self.lbsi_LinEd.returnPressed.connect(self.lbsTO_fun)
+		self.lbhi_LinEd.returnPressed.connect(self.lbhTO_fun)
+		self.lbdi_LinEd.returnPressed.connect(self.lbdTO_fun)
+
+		return input_group
+
+	def createGroup_output(self):
+		output_group = QtWidgets.QGroupBox("Output", self)
+		output_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+
+		output_grid = QtWidgets.QGridLayout()
+
+		gs_Label   = QtWidgets.QLabel("g/sec")
+		gmin_Label = QtWidgets.QLabel("g/min")
+		kgs_Label  = QtWidgets.QLabel("kg/sec")
+		kgh_Label  = QtWidgets.QLabel("kg/hour")
+		kgd_Label  = QtWidgets.QLabel("kg/day")
+		tons_Label = QtWidgets.QLabel("ton/sec")
+		tonh_Label = QtWidgets.QLabel("ton/hour")
+		tond_Label = QtWidgets.QLabel("ton/day")
+		lbs_Label  = QtWidgets.QLabel("lb/sec")
+		lbh_Label  = QtWidgets.QLabel("lb/hour")
+		lbd_Label  = QtWidgets.QLabel("lb/day")
+
+		self.gsTOgs_res   = QtWidgets.QLabel("0", self)
+		self.gsTOgmin_res = QtWidgets.QLabel("0", self)
+		self.gsTOkgs_res  = QtWidgets.QLabel("0", self)
+		self.gsTOkgh_res  = QtWidgets.QLabel("0", self)
+		self.gsTOkgd_res  = QtWidgets.QLabel("0", self)
+		self.gsTOtons_res = QtWidgets.QLabel("0", self)
+		self.gsTOtonh_res = QtWidgets.QLabel("0", self)
+		self.gsTOtond_res = QtWidgets.QLabel("0", self)
+		self.gsTOlbs_res  = QtWidgets.QLabel("0", self)
+		self.gsTOlbh_res  = QtWidgets.QLabel("0", self)
+		self.gsTOlbd_res  = QtWidgets.QLabel("0", self)
+
+		self.gminTOgs_res   = QtWidgets.QLabel("0", self)
+		self.gminTOgmin_res = QtWidgets.QLabel("0", self)
+		self.gminTOkgs_res  = QtWidgets.QLabel("0", self)
+		self.gminTOkgh_res  = QtWidgets.QLabel("0", self)
+		self.gminTOkgd_res  = QtWidgets.QLabel("0", self)
+		self.gminTOtons_res = QtWidgets.QLabel("0", self)
+		self.gminTOtonh_res = QtWidgets.QLabel("0", self)
+		self.gminTOtond_res = QtWidgets.QLabel("0", self)
+		self.gminTOlbs_res  = QtWidgets.QLabel("0", self)
+		self.gminTOlbh_res  = QtWidgets.QLabel("0", self)
+		self.gminTOlbd_res  = QtWidgets.QLabel("0", self)
+
+		self.kgsTOgs_res   = QtWidgets.QLabel("0", self)
+		self.kgsTOgmin_res = QtWidgets.QLabel("0", self)
+		self.kgsTOkgs_res  = QtWidgets.QLabel("0", self)
+		self.kgsTOkgh_res  = QtWidgets.QLabel("0", self)
+		self.kgsTOkgd_res  = QtWidgets.QLabel("0", self)
+		self.kgsTOtons_res = QtWidgets.QLabel("0", self)
+		self.kgsTOtonh_res = QtWidgets.QLabel("0", self)
+		self.kgsTOtond_res = QtWidgets.QLabel("0", self)
+		self.kgsTOlbs_res  = QtWidgets.QLabel("0", self)
+		self.kgsTOlbh_res  = QtWidgets.QLabel("0", self)
+		self.kgsTOlbd_res  = QtWidgets.QLabel("0", self)
+
+		self.kghTOgs_res   = QtWidgets.QLabel("0", self)
+		self.kghTOgmin_res = QtWidgets.QLabel("0", self)
+		self.kghTOkgs_res  = QtWidgets.QLabel("0", self)
+		self.kghTOkgh_res  = QtWidgets.QLabel("0", self)
+		self.kghTOkgd_res  = QtWidgets.QLabel("0", self)
+		self.kghTOtons_res = QtWidgets.QLabel("0", self)
+		self.kghTOtonh_res = QtWidgets.QLabel("0", self)
+		self.kghTOtond_res = QtWidgets.QLabel("0", self)
+		self.kghTOlbs_res  = QtWidgets.QLabel("0", self)
+		self.kghTOlbh_res  = QtWidgets.QLabel("0", self)
+		self.kghTOlbd_res  = QtWidgets.QLabel("0", self)
+
+		self.kgdTOgs_res   = QtWidgets.QLabel("0", self)
+		self.kgdTOgmin_res = QtWidgets.QLabel("0", self)
+		self.kgdTOkgs_res  = QtWidgets.QLabel("0", self)
+		self.kgdTOkgh_res  = QtWidgets.QLabel("0", self)
+		self.kgdTOkgd_res  = QtWidgets.QLabel("0", self)
+		self.kgdTOtons_res = QtWidgets.QLabel("0", self)
+		self.kgdTOtonh_res = QtWidgets.QLabel("0", self)
+		self.kgdTOtond_res = QtWidgets.QLabel("0", self)
+		self.kgdTOlbs_res  = QtWidgets.QLabel("0", self)
+		self.kgdTOlbh_res  = QtWidgets.QLabel("0", self)
+		self.kgdTOlbd_res  = QtWidgets.QLabel("0", self)
+
+		self.tonsTOgs_res   = QtWidgets.QLabel("0", self)
+		self.tonsTOgmin_res = QtWidgets.QLabel("0", self)
+		self.tonsTOkgs_res  = QtWidgets.QLabel("0", self)
+		self.tonsTOkgh_res  = QtWidgets.QLabel("0", self)
+		self.tonsTOkgd_res  = QtWidgets.QLabel("0", self)
+		self.tonsTOtons_res = QtWidgets.QLabel("0", self)
+		self.tonsTOtonh_res = QtWidgets.QLabel("0", self)
+		self.tonsTOtond_res = QtWidgets.QLabel("0", self)
+		self.tonsTOlbs_res  = QtWidgets.QLabel("0", self)
+		self.tonsTOlbh_res  = QtWidgets.QLabel("0", self)
+		self.tonsTOlbd_res  = QtWidgets.QLabel("0", self)
+
+		self.tonhTOgs_res   = QtWidgets.QLabel("0", self)
+		self.tonhTOgmin_res = QtWidgets.QLabel("0", self)
+		self.tonhTOkgs_res  = QtWidgets.QLabel("0", self)
+		self.tonhTOkgh_res  = QtWidgets.QLabel("0", self)
+		self.tonhTOkgd_res  = QtWidgets.QLabel("0", self)
+		self.tonhTOtons_res = QtWidgets.QLabel("0", self)
+		self.tonhTOtonh_res = QtWidgets.QLabel("0", self)
+		self.tonhTOtond_res = QtWidgets.QLabel("0", self)
+		self.tonhTOlbs_res  = QtWidgets.QLabel("0", self)
+		self.tonhTOlbh_res  = QtWidgets.QLabel("0", self)
+		self.tonhTOlbd_res  = QtWidgets.QLabel("0", self)
+
+		self.tondTOgs_res   = QtWidgets.QLabel("0", self)
+		self.tondTOgmin_res = QtWidgets.QLabel("0", self)
+		self.tondTOkgs_res  = QtWidgets.QLabel("0", self)
+		self.tondTOkgh_res  = QtWidgets.QLabel("0", self)
+		self.tondTOkgd_res  = QtWidgets.QLabel("0", self)
+		self.tondTOtons_res = QtWidgets.QLabel("0", self)
+		self.tondTOtonh_res = QtWidgets.QLabel("0", self)
+		self.tondTOtond_res = QtWidgets.QLabel("0", self)
+		self.tondTOlbs_res  = QtWidgets.QLabel("0", self)
+		self.tondTOlbh_res  = QtWidgets.QLabel("0", self)
+		self.tondTOlbd_res  = QtWidgets.QLabel("0", self)
+
+		self.lbsTOgs_res   = QtWidgets.QLabel("0", self)
+		self.lbsTOgmin_res = QtWidgets.QLabel("0", self)
+		self.lbsTOkgs_res  = QtWidgets.QLabel("0", self)
+		self.lbsTOkgh_res  = QtWidgets.QLabel("0", self)
+		self.lbsTOkgd_res  = QtWidgets.QLabel("0", self)
+		self.lbsTOtons_res = QtWidgets.QLabel("0", self)
+		self.lbsTOtonh_res = QtWidgets.QLabel("0", self)
+		self.lbsTOtond_res = QtWidgets.QLabel("0", self)
+		self.lbsTOlbs_res  = QtWidgets.QLabel("0", self)
+		self.lbsTOlbh_res  = QtWidgets.QLabel("0", self)
+		self.lbsTOlbd_res  = QtWidgets.QLabel("0", self)
+
+		self.lbhTOgs_res   = QtWidgets.QLabel("0", self)
+		self.lbhTOgmin_res = QtWidgets.QLabel("0", self)
+		self.lbhTOkgs_res  = QtWidgets.QLabel("0", self)
+		self.lbhTOkgh_res  = QtWidgets.QLabel("0", self)
+		self.lbhTOkgd_res  = QtWidgets.QLabel("0", self)
+		self.lbhTOtons_res = QtWidgets.QLabel("0", self)
+		self.lbhTOtonh_res = QtWidgets.QLabel("0", self)
+		self.lbhTOtond_res = QtWidgets.QLabel("0", self)
+		self.lbhTOlbs_res  = QtWidgets.QLabel("0", self)
+		self.lbhTOlbh_res  = QtWidgets.QLabel("0", self)
+		self.lbhTOlbd_res  = QtWidgets.QLabel("0", self)
+
+		self.lbdTOgs_res   = QtWidgets.QLabel("0", self)
+		self.lbdTOgmin_res = QtWidgets.QLabel("0", self)
+		self.lbdTOkgs_res  = QtWidgets.QLabel("0", self)
+		self.lbdTOkgh_res  = QtWidgets.QLabel("0", self)
+		self.lbdTOkgd_res  = QtWidgets.QLabel("0", self)
+		self.lbdTOtons_res = QtWidgets.QLabel("0", self)
+		self.lbdTOtonh_res = QtWidgets.QLabel("0", self)
+		self.lbdTOtond_res = QtWidgets.QLabel("0", self)
+		self.lbdTOlbs_res  = QtWidgets.QLabel("0", self)
+		self.lbdTOlbh_res  = QtWidgets.QLabel("0", self)
+		self.lbdTOlbd_res  = QtWidgets.QLabel("0", self)
+
+		output_grid.addWidget(gs_Label,   0, 0)
+		output_grid.addWidget(gmin_Label, 0, 1)
+		output_grid.addWidget(kgs_Label,  0, 2)
+		output_grid.addWidget(kgh_Label,  0, 3)
+		output_grid.addWidget(kgd_Label,  0, 4)
+		output_grid.addWidget(tons_Label, 0, 5)
+		output_grid.addWidget(tonh_Label, 0, 6)
+		output_grid.addWidget(tond_Label, 0, 7)
+		output_grid.addWidget(lbs_Label,  0, 8)
+		output_grid.addWidget(lbh_Label,  0, 9)
+		output_grid.addWidget(lbd_Label,  0, 10)
+
+		output_grid.addWidget(self.gsTOgs_res,   1, 0)
+		output_grid.addWidget(self.gsTOgmin_res, 1, 1)
+		output_grid.addWidget(self.gsTOkgs_res,  1, 2)
+		output_grid.addWidget(self.gsTOkgh_res,  1, 3)
+		output_grid.addWidget(self.gsTOkgd_res,  1, 4)
+		output_grid.addWidget(self.gsTOtons_res, 1, 5)
+		output_grid.addWidget(self.gsTOtonh_res, 1, 6)
+		output_grid.addWidget(self.gsTOtond_res, 1, 7)
+		output_grid.addWidget(self.gsTOlbs_res,  1, 8)
+		output_grid.addWidget(self.gsTOlbh_res,  1, 9)
+		output_grid.addWidget(self.gsTOlbd_res,  1, 10)
+
+		output_grid.addWidget(self.gminTOgs_res,   2, 0)
+		output_grid.addWidget(self.gminTOgmin_res, 2, 1)
+		output_grid.addWidget(self.gminTOkgs_res,  2, 2)
+		output_grid.addWidget(self.gminTOkgh_res,  2, 3)
+		output_grid.addWidget(self.gminTOkgd_res,  2, 4)
+		output_grid.addWidget(self.gminTOtons_res, 2, 5)
+		output_grid.addWidget(self.gminTOtonh_res, 2, 6)
+		output_grid.addWidget(self.gminTOtond_res, 2, 7)
+		output_grid.addWidget(self.gminTOlbs_res,  2, 8)
+		output_grid.addWidget(self.gminTOlbh_res,  2, 9)
+		output_grid.addWidget(self.gminTOlbd_res,  2, 10)
+
+		output_grid.addWidget(self.kgsTOgs_res,   3, 0)
+		output_grid.addWidget(self.kgsTOgmin_res, 3, 1)
+		output_grid.addWidget(self.kgsTOkgs_res,  3, 2)
+		output_grid.addWidget(self.kgsTOkgh_res,  3, 3)
+		output_grid.addWidget(self.kgsTOkgd_res,  3, 4)
+		output_grid.addWidget(self.kgsTOtons_res, 3, 5)
+		output_grid.addWidget(self.kgsTOtonh_res, 3, 6)
+		output_grid.addWidget(self.kgsTOtond_res, 3, 7)
+		output_grid.addWidget(self.kgsTOlbs_res,  3, 8)
+		output_grid.addWidget(self.kgsTOlbh_res,  3, 9)
+		output_grid.addWidget(self.kgsTOlbd_res,  3, 10)
+
+		output_grid.addWidget(self.kghTOgs_res,   4, 0)
+		output_grid.addWidget(self.kghTOgmin_res, 4, 1)
+		output_grid.addWidget(self.kghTOkgs_res,  4, 2)
+		output_grid.addWidget(self.kghTOkgh_res,  4, 3)
+		output_grid.addWidget(self.kghTOkgd_res,  4, 4)
+		output_grid.addWidget(self.kghTOtons_res, 4, 5)
+		output_grid.addWidget(self.kghTOtonh_res, 4, 6)
+		output_grid.addWidget(self.kghTOtond_res, 4, 7)
+		output_grid.addWidget(self.kghTOlbs_res,  4, 8)
+		output_grid.addWidget(self.kghTOlbh_res,  4, 9)
+		output_grid.addWidget(self.kghTOlbd_res,  4, 10)
+
+		output_grid.addWidget(self.kgdTOgs_res,   5, 0)
+		output_grid.addWidget(self.kgdTOgmin_res, 5, 1)
+		output_grid.addWidget(self.kgdTOkgs_res,  5, 2)
+		output_grid.addWidget(self.kgdTOkgh_res,  5, 3)
+		output_grid.addWidget(self.kgdTOkgd_res,  5, 4)
+		output_grid.addWidget(self.kgdTOtons_res, 5, 5)
+		output_grid.addWidget(self.kgdTOtonh_res, 5, 6)
+		output_grid.addWidget(self.kgdTOtond_res, 5, 7)
+		output_grid.addWidget(self.kgdTOlbs_res,  5, 8)
+		output_grid.addWidget(self.kgdTOlbh_res,  5, 9)
+		output_grid.addWidget(self.kgdTOlbd_res,  5, 10)
+
+		output_grid.addWidget(self.tonsTOgs_res,   6, 0)
+		output_grid.addWidget(self.tonsTOgmin_res, 6, 1)
+		output_grid.addWidget(self.tonsTOkgs_res,  6, 2)
+		output_grid.addWidget(self.tonsTOkgh_res,  6, 3)
+		output_grid.addWidget(self.tonsTOkgd_res,  6, 4)
+		output_grid.addWidget(self.tonsTOtons_res, 6, 5)
+		output_grid.addWidget(self.tonsTOtonh_res, 6, 6)
+		output_grid.addWidget(self.tonsTOtond_res, 6, 7)
+		output_grid.addWidget(self.tonsTOlbs_res,  6, 8)
+		output_grid.addWidget(self.tonsTOlbh_res,  6, 9)
+		output_grid.addWidget(self.tonsTOlbd_res,  6, 10)
+
+		output_grid.addWidget(self.tonhTOgs_res,   7, 0)
+		output_grid.addWidget(self.tonhTOgmin_res, 7, 1)
+		output_grid.addWidget(self.tonhTOkgs_res,  7, 2)
+		output_grid.addWidget(self.tonhTOkgh_res,  7, 3)
+		output_grid.addWidget(self.tonhTOkgd_res,  7, 4)
+		output_grid.addWidget(self.tonhTOtons_res, 7, 5)
+		output_grid.addWidget(self.tonhTOtonh_res, 7, 6)
+		output_grid.addWidget(self.tonhTOtond_res, 7, 7)
+		output_grid.addWidget(self.tonhTOlbs_res,  7, 8)
+		output_grid.addWidget(self.tonhTOlbh_res,  7, 9)
+		output_grid.addWidget(self.tonhTOlbd_res,  7, 10)
+
+		output_grid.addWidget(self.tondTOgs_res,   8, 0)
+		output_grid.addWidget(self.tondTOgmin_res, 8, 1)
+		output_grid.addWidget(self.tondTOkgs_res,  8, 2)
+		output_grid.addWidget(self.tondTOkgh_res,  8, 3)
+		output_grid.addWidget(self.tondTOkgd_res,  8, 4)
+		output_grid.addWidget(self.tondTOtons_res, 8, 5)
+		output_grid.addWidget(self.tondTOtonh_res, 8, 6)
+		output_grid.addWidget(self.tondTOtond_res, 8, 7)
+		output_grid.addWidget(self.tondTOlbs_res,  8, 8)
+		output_grid.addWidget(self.tondTOlbh_res,  8, 9)
+		output_grid.addWidget(self.tondTOlbd_res,  8, 10)
+
+		output_grid.addWidget(self.lbsTOgs_res,   9, 0)
+		output_grid.addWidget(self.lbsTOgmin_res, 9, 1)
+		output_grid.addWidget(self.lbsTOkgs_res,  9, 2)
+		output_grid.addWidget(self.lbsTOkgh_res,  9, 3)
+		output_grid.addWidget(self.lbsTOkgd_res,  9, 4)
+		output_grid.addWidget(self.lbsTOtons_res, 9, 5)
+		output_grid.addWidget(self.lbsTOtonh_res, 9, 6)
+		output_grid.addWidget(self.lbsTOtond_res, 9, 7)
+		output_grid.addWidget(self.lbsTOlbs_res,  9, 8)
+		output_grid.addWidget(self.lbsTOlbh_res,  9, 9)
+		output_grid.addWidget(self.lbsTOlbd_res,  9, 10)
+
+		output_grid.addWidget(self.lbhTOgs_res,   10, 0)
+		output_grid.addWidget(self.lbhTOgmin_res, 10, 1)
+		output_grid.addWidget(self.lbhTOkgs_res,  10, 2)
+		output_grid.addWidget(self.lbhTOkgh_res,  10, 3)
+		output_grid.addWidget(self.lbhTOkgd_res,  10, 4)
+		output_grid.addWidget(self.lbhTOtons_res, 10, 5)
+		output_grid.addWidget(self.lbhTOtonh_res, 10, 6)
+		output_grid.addWidget(self.lbhTOtond_res, 10, 7)
+		output_grid.addWidget(self.lbhTOlbs_res,  10, 8)
+		output_grid.addWidget(self.lbhTOlbh_res,  10, 9)
+		output_grid.addWidget(self.lbhTOlbd_res,  10, 10)
+
+		output_grid.addWidget(self.lbdTOgs_res,   11, 0)
+		output_grid.addWidget(self.lbdTOgmin_res, 11, 1)
+		output_grid.addWidget(self.lbdTOkgs_res,  11, 2)
+		output_grid.addWidget(self.lbdTOkgh_res,  11, 3)
+		output_grid.addWidget(self.lbdTOkgd_res,  11, 4)
+		output_grid.addWidget(self.lbdTOtons_res, 11, 5)
+		output_grid.addWidget(self.lbdTOtonh_res, 11, 6)
+		output_grid.addWidget(self.lbdTOtond_res, 11, 7)
+		output_grid.addWidget(self.lbdTOlbs_res,  11, 8)
+		output_grid.addWidget(self.lbdTOlbh_res,  11, 9)
+		output_grid.addWidget(self.lbdTOlbd_res,  11, 10)
+
+		output_group.setLayout(output_grid)
+
+		return output_group
+
+	def gsTO_fun(self):
+		gsTOgs_proc   = float(self.gsi_LinEd.text()) * 1
+		gsTOgmin_proc = float(self.gsi_LinEd.text()) * 60
+		gsTOkgs_proc  = float(self.gsi_LinEd.text()) * 1e-03
+		gsTOkgh_proc  = float(self.gsi_LinEd.text()) * 1e-03 * 3600
+		gsTOkgd_proc  = float(self.gsi_LinEd.text()) * 1e-03 * 3600 * 24
+		gsTOtons_proc = float(self.gsi_LinEd.text()) * 1e-06
+		gsTOtonh_proc = float(self.gsi_LinEd.text()) * 1e-06 * 3600
+		gsTOtond_proc = float(self.gsi_LinEd.text()) * 1e-06 * 3600 * 24
+		gsTOlbs_proc  = float(self.gsi_LinEd.text()) * 2.2046226217e-03
+		gsTOlbh_proc  = float(self.gsi_LinEd.text()) * 2.2046226217e-03 * 3600
+		gsTOlbd_proc  = float(self.gsi_LinEd.text()) * 2.2046226217e-03 * 3600 * 24
+
+		self.gsTOgs_res.setText(str(round(gsTOgs_proc,     8)))
+		self.gsTOgmin_res.setText(str(round(gsTOgmin_proc, 8)))
+		self.gsTOkgs_res.setText(str(round(gsTOkgs_proc,   8)))
+		self.gsTOkgh_res.setText(str(round(gsTOkgh_proc,   8)))
+		self.gsTOkgd_res.setText(str(round(gsTOkgd_proc,   8)))
+		self.gsTOtons_res.setText(str(round(gsTOtons_proc, 8)))
+		self.gsTOtonh_res.setText(str(round(gsTOtonh_proc, 8)))
+		self.gsTOtond_res.setText(str(round(gsTOtond_proc, 8)))
+		self.gsTOlbs_res.setText(str(round(gsTOlbs_proc,   8)))
+		self.gsTOlbh_res.setText(str(round(gsTOlbh_proc,   8)))
+		self.gsTOlbd_res.setText(str(round(gsTOlbd_proc,   8)))
+
+	def gminTO_fun(self):
+		gminTOgs_proc   = float(self.gmini_LinEd.text()) * 1     / 60
+		gminTOgmin_proc = float(self.gmini_LinEd.text()) * 1
+		gminTOkgs_proc  = float(self.gmini_LinEd.text()) * 1e-03 / 60
+		gminTOkgh_proc  = float(self.gmini_LinEd.text()) * 1e-03 * 60
+		gminTOkgd_proc  = float(self.gmini_LinEd.text()) * 1e-03 * 60 * 24
+		gminTOtons_proc = float(self.gmini_LinEd.text()) * 1e-06 / 60
+		gminTOtonh_proc = float(self.gmini_LinEd.text()) * 1e-06 * 60
+		gminTOtond_proc = float(self.gmini_LinEd.text()) * 1e-06 * 60 * 24
+		gminTOlbs_proc  = float(self.gmini_LinEd.text()) * 2.2046226217e-03 / 60
+		gminTOlbh_proc  = float(self.gmini_LinEd.text()) * 2.2046226217e-03 * 60
+		gminTOlbd_proc  = float(self.gmini_LinEd.text()) * 2.2046226217e-03 * 60 * 24
+
+		self.gminTOgs_res.setText(str(round(gminTOgs_proc,     8)))
+		self.gminTOgmin_res.setText(str(round(gminTOgmin_proc, 8)))
+		self.gminTOkgs_res.setText(str(round(gminTOkgs_proc,   8)))
+		self.gminTOkgh_res.setText(str(round(gminTOkgh_proc,   8)))
+		self.gminTOkgd_res.setText(str(round(gminTOkgd_proc,   8)))
+		self.gminTOtons_res.setText(str(round(gminTOtons_proc, 8)))
+		self.gminTOtonh_res.setText(str(round(gminTOtonh_proc, 8)))
+		self.gminTOtond_res.setText(str(round(gminTOtond_proc, 8)))
+		self.gminTOlbs_res.setText(str(round(gminTOlbs_proc,   8)))
+		self.gminTOlbh_res.setText(str(round(gminTOlbh_proc,   8)))
+		self.gminTOlbd_res.setText(str(round(gminTOlbd_proc,   8)))
+
+	def kgsTO_fun(self):
+		kgsTOgs_proc   = float(self.kgsi_LinEd.text()) * 1e+03
+		kgsTOgmin_proc = float(self.kgsi_LinEd.text()) * 1e+03 * 60
+		kgsTOkgs_proc  = float(self.kgsi_LinEd.text()) * 1
+		kgsTOkgh_proc  = float(self.kgsi_LinEd.text()) * 1 * 3600
+		kgsTOkgd_proc  = float(self.kgsi_LinEd.text()) * 1 * 3600 * 24
+		kgsTOtons_proc = float(self.kgsi_LinEd.text()) * 1e-03
+		kgsTOtonh_proc = float(self.kgsi_LinEd.text()) * 1e-03 * 3600
+		kgsTOtond_proc = float(self.kgsi_LinEd.text()) * 1e-03 * 3600 * 24
+		kgsTOlbs_proc  = float(self.kgsi_LinEd.text()) * 2.2046226217
+		kgsTOlbh_proc  = float(self.kgsi_LinEd.text()) * 2.2046226217 * 3600
+		kgsTOlbd_proc  = float(self.kgsi_LinEd.text()) * 2.2046226217 * 3600 * 24
+
+		self.kgsTOgs_res.setText(str(round(kgsTOgs_proc,     8)))
+		self.kgsTOgmin_res.setText(str(round(kgsTOgmin_proc, 8)))
+		self.kgsTOkgs_res.setText(str(round(kgsTOkgs_proc,   8)))
+		self.kgsTOkgh_res.setText(str(round(kgsTOkgh_proc,   8)))
+		self.kgsTOkgd_res.setText(str(round(kgsTOkgd_proc,   8)))
+		self.kgsTOtons_res.setText(str(round(kgsTOtons_proc, 8)))
+		self.kgsTOtonh_res.setText(str(round(kgsTOtonh_proc, 8)))
+		self.kgsTOtond_res.setText(str(round(kgsTOtond_proc, 8)))
+		self.kgsTOlbs_res.setText(str(round(kgsTOlbs_proc,   8)))
+		self.kgsTOlbh_res.setText(str(round(kgsTOlbh_proc,   8)))
+		self.kgsTOlbd_res.setText("-")
+
+	def kghTO_fun(self):
+		kghTOgs_proc   = float(self.kghi_LinEd.text()) * 1e+03 / 3600
+		kghTOgmin_proc = float(self.kghi_LinEd.text()) * 1e+03 / 60
+		kghTOkgs_proc  = float(self.kghi_LinEd.text()) * 1     / 3600
+		kghTOkgh_proc  = float(self.kghi_LinEd.text()) * 1
+		kghTOkgd_proc  = float(self.kghi_LinEd.text()) * 1     * 24
+		kghTOtons_proc = float(self.kghi_LinEd.text()) * 1e-03 / 3600
+		kghTOtonh_proc = float(self.kghi_LinEd.text()) * 1e-03
+		kghTOtond_proc = float(self.kghi_LinEd.text()) * 1e-03 * 24
+		kghTOlbs_proc  = float(self.kghi_LinEd.text()) * 2.2046226217 / 3600
+		kghTOlbh_proc  = float(self.kghi_LinEd.text()) * 2.2046226217
+		kghTOlbd_proc  = float(self.kghi_LinEd.text()) * 2.2046226217 * 24
+
+		self.kghTOgs_res.setText(str(round(kghTOgs_proc,     8)))
+		self.kghTOgmin_res.setText(str(round(kghTOgmin_proc, 8)))
+		self.kghTOkgs_res.setText(str(round(kghTOkgs_proc,   8)))
+		self.kghTOkgh_res.setText(str(round(kghTOkgh_proc,   8)))
+		self.kghTOkgd_res.setText(str(round(kghTOkgd_proc,   8)))
+		self.kghTOtons_res.setText(str(round(kghTOtons_proc, 8)))
+		self.kghTOtonh_res.setText(str(round(kghTOtonh_proc, 8)))
+		self.kghTOtond_res.setText(str(round(kghTOtond_proc, 8)))
+		self.kghTOlbs_res.setText(str(round(kghTOlbs_proc,   8)))
+		self.kghTOlbh_res.setText(str(round(kghTOlbh_proc,   8)))
+		self.kghTOlbd_res.setText(str(round(kghTOlbd_proc,   8)))
+
+	def kgdTO_fun(self):
+		kgdTOgs_proc   = float(self.kgdi_LinEd.text()) * 1e+03 / 24 / 3600
+		kgdTOgmin_proc = float(self.kgdi_LinEd.text()) * 1e+03 / 24 / 60
+		kgdTOkgs_proc  = float(self.kgdi_LinEd.text()) * 1     / 24 / 3600
+		kgdTOkgh_proc  = float(self.kgdi_LinEd.text()) * 1     / 24
+		kgdTOkgd_proc  = float(self.kgdi_LinEd.text()) * 1
+		kgdTOtons_proc = float(self.kgdi_LinEd.text()) * 1e-03 / 24 / 3600
+		kgdTOtonh_proc = float(self.kgdi_LinEd.text()) * 1e-03 / 24
+		kgdTOtond_proc = float(self.kgdi_LinEd.text()) * 1e-03
+		kgdTOlbs_proc  = float(self.kgdi_LinEd.text()) * 2.2046226217 / 24 / 3600
+		kgdTOlbh_proc  = float(self.kgdi_LinEd.text()) * 2.2046226217 / 24
+		kgdTOlbd_proc  = float(self.kgdi_LinEd.text()) * 2.2046226217
+
+		self.kgdTOgs_res.setText(str(round(kgdTOgs_proc,     8)))
+		self.kgdTOgmin_res.setText(str(round(kgdTOgmin_proc, 8)))
+		self.kgdTOkgs_res.setText(str(round(kgdTOkgs_proc,   8)))
+		self.kgdTOkgh_res.setText(str(round(kgdTOkgh_proc,   8)))
+		self.kgdTOkgd_res.setText(str(round(kgdTOkgd_proc,   8)))
+		self.kgdTOtons_res.setText(str(round(kgdTOtons_proc, 8)))
+		self.kgdTOtonh_res.setText(str(round(kgdTOtonh_proc, 8)))
+		self.kgdTOtond_res.setText(str(round(kgdTOtond_proc, 8)))
+		self.kgdTOlbs_res.setText(str(round(kgdTOlbs_proc,   8)))
+		self.kgdTOlbh_res.setText(str(round(kgdTOlbh_proc,   8)))
+		self.kgdTOlbd_res.setText(str(round(kgdTOlbd_proc,   8)))
+
+	def tonsTO_fun(self):
+		tonsTOgs_proc   = float(self.tonsi_LinEd.text()) * 1e+06
+		tonsTOgmin_proc = float(self.tonsi_LinEd.text()) * 1e+06 * 60
+		tonsTOkgs_proc  = float(self.tonsi_LinEd.text()) * 1e+03
+		tonsTOkgh_proc  = float(self.tonsi_LinEd.text()) * 1e+03 * 3600
+		tonsTOkgd_proc  = float(self.tonsi_LinEd.text()) * 1e+03 * 3600 * 24
+		tonsTOtons_proc = float(self.tonsi_LinEd.text()) * 1
+		tonsTOtonh_proc = float(self.tonsi_LinEd.text()) * 1 * 3600
+		tonsTOtond_proc = float(self.tonsi_LinEd.text()) * 1 * 3600 * 24
+		tonsTOlbs_proc  = float(self.tonsi_LinEd.text()) * 2.2046226217e+03
+		tonsTOlbh_proc  = float(self.tonsi_LinEd.text()) * 2.2046226217e+03 * 3600
+		tonsTOlbd_proc  = float(self.tonsi_LinEd.text()) * 2.2046226217e+03 * 3600 * 24
+
+		self.tonsTOgs_res.setText("-")
+		self.tonsTOgmin_res.setText("-")
+		self.tonsTOkgs_res.setText(str(round(tonsTOkgs_proc,   8)))
+		self.tonsTOkgh_res.setText("-")
+		self.tonsTOkgd_res.setText("-")
+		self.tonsTOtons_res.setText(str(round(tonsTOtons_proc, 8)))
+		self.tonsTOtonh_res.setText(str(round(tonsTOtonh_proc, 8)))
+		self.tonsTOtond_res.setText(str(round(tonsTOtond_proc, 8)))
+		self.tonsTOlbs_res.setText(str(round(tonsTOlbs_proc,   8)))
+		self.tonsTOlbh_res.setText("-")
+		self.tonsTOlbd_res.setText("-")
+
+	def tonhTO_fun(self):
+		tonhTOgs_proc   = float(self.tonhi_LinEd.text()) * 1e+06 / 3600
+		tonhTOgmin_proc = float(self.tonhi_LinEd.text()) * 1e+06 / 60
+		tonhTOkgs_proc  = float(self.tonhi_LinEd.text()) * 1e+03 / 3600
+		tonhTOkgh_proc  = float(self.tonhi_LinEd.text()) * 1e+03
+		tonhTOkgd_proc  = float(self.tonhi_LinEd.text()) * 1e+03 * 24
+		tonhTOtons_proc = float(self.tonhi_LinEd.text()) * 1 / 3600
+		tonhTOtonh_proc = float(self.tonhi_LinEd.text()) * 1
+		tonhTOtond_proc = float(self.tonhi_LinEd.text()) * 1 * 24
+		tonhTOlbs_proc  = float(self.tonhi_LinEd.text()) * 2.2046226217e+03 / 3600
+		tonhTOlbh_proc  = float(self.tonhi_LinEd.text()) * 2.2046226217e+03
+		tonhTOlbd_proc  = float(self.tonhi_LinEd.text()) * 2.2046226217e+03 * 24
+
+		self.tonhTOgs_res.setText(str(round(tonhTOgs_proc,     8)))
+		self.tonhTOgmin_res.setText(str(round(tonhTOgmin_proc, 8)))
+		self.tonhTOkgs_res.setText(str(round(tonhTOkgs_proc,   8)))
+		self.tonhTOkgh_res.setText(str(round(tonhTOkgh_proc,   8)))
+		self.tonhTOkgd_res.setText(str(round(tonhTOkgd_proc,   8)))
+		self.tonhTOtons_res.setText(str(round(tonhTOtons_proc, 8)))
+		self.tonhTOtonh_res.setText(str(round(tonhTOtonh_proc, 8)))
+		self.tonhTOtond_res.setText(str(round(tonhTOtond_proc, 8)))
+		self.tonhTOlbs_res.setText(str(round(tonhTOlbs_proc,   8)))
+		self.tonhTOlbh_res.setText(str(round(tonhTOlbh_proc,   8)))
+		self.tonhTOlbd_res.setText(str(round(tonhTOlbd_proc,   8)))
+
+	def tondTO_fun(self):
+		tondTOgs_proc   = float(self.tondi_LinEd.text()) * 1e+06 / 24 / 3600
+		tondTOgmin_proc = float(self.tondi_LinEd.text()) * 1e+06 / 24 / 60
+		tondTOkgs_proc  = float(self.tondi_LinEd.text()) * 1e+03 / 24 / 3600
+		tondTOkgh_proc  = float(self.tondi_LinEd.text()) * 1e+03 / 24
+		tondTOkgd_proc  = float(self.tondi_LinEd.text()) * 1e+03
+		tondTOtons_proc = float(self.tondi_LinEd.text()) * 1 / 24 / 2600
+		tondTOtonh_proc = float(self.tondi_LinEd.text()) * 1 / 24
+		tondTOtond_proc = float(self.tondi_LinEd.text()) * 1
+		tondTOlbs_proc  = float(self.tondi_LinEd.text()) * 2.2046226217e+03 / 24 / 3600
+		tondTOlbh_proc  = float(self.tondi_LinEd.text()) * 2.2046226217e+03 / 24
+		tondTOlbd_proc  = float(self.tondi_LinEd.text()) * 2.2046226217e+03
+
+		self.tondTOgs_res.setText(str(round(tondTOgs_proc,     8)))
+		self.tondTOgmin_res.setText(str(round(tondTOgmin_proc, 8)))
+		self.tondTOkgs_res.setText(str(round(tondTOkgs_proc,   8)))
+		self.tondTOkgh_res.setText(str(round(tondTOkgh_proc,   8)))
+		self.tondTOkgd_res.setText(str(round(tondTOkgd_proc,   8)))
+		self.tondTOtons_res.setText(str(round(tondTOtons_proc, 8)))
+		self.tondTOtonh_res.setText(str(round(tondTOtonh_proc, 8)))
+		self.tondTOtond_res.setText(str(round(tondTOtond_proc, 8)))
+		self.tondTOlbs_res.setText(str(round(tondTOlbs_proc,   8)))
+		self.tondTOlbh_res.setText(str(round(tondTOlbh_proc,   8)))
+		self.tondTOlbd_res.setText(str(round(tondTOlbd_proc,   8)))
+
+	def lbsTO_fun(self):
+		lbsTOgs_proc   = float(self.lbsi_LinEd.text()) * 453.59237002
+		lbsTOgmin_proc = float(self.lbsi_LinEd.text()) * 453.59237002 * 60
+		lbsTOkgs_proc  = float(self.lbsi_LinEd.text()) * 453.59237002e-03
+		lbsTOkgh_proc  = float(self.lbsi_LinEd.text()) * 453.59237002e-03 * 3600
+		lbsTOkgd_proc  = float(self.lbsi_LinEd.text()) * 453.59237002e-03 * 3600 * 24
+		lbsTOtons_proc = float(self.lbsi_LinEd.text()) * 453.59237002e-06
+		lbsTOtonh_proc = float(self.lbsi_LinEd.text()) * 453.59237002e-06 * 3600
+		lbsTOtond_proc = float(self.lbsi_LinEd.text()) * 453.59237002e-06 * 3600 * 24
+		lbsTOlbs_proc  = float(self.lbsi_LinEd.text()) * 1
+		lbsTOlbh_proc  = float(self.lbsi_LinEd.text()) * 1 * 3600
+		lbsTOlbd_proc  = float(self.lbsi_LinEd.text()) * 1 * 3600 * 24
+
+		self.lbsTOgs_res.setText(str(round(lbsTOgs_proc,     8)))
+		self.lbsTOgmin_res.setText(str(round(lbsTOgmin_proc, 8)))
+		self.lbsTOkgs_res.setText(str(round(lbsTOkgs_proc,   8)))
+		self.lbsTOkgh_res.setText(str(round(lbsTOkgh_proc,   8)))
+		self.lbsTOkgd_res.setText(str(round(lbsTOkgd_proc,   8)))
+		self.lbsTOtons_res.setText(str(round(lbsTOtons_proc, 8)))
+		self.lbsTOtonh_res.setText(str(round(lbsTOtonh_proc, 8)))
+		self.lbsTOtond_res.setText(str(round(lbsTOtond_proc, 8)))
+		self.lbsTOlbs_res.setText(str(round(lbsTOlbs_proc,   8)))
+		self.lbsTOlbh_res.setText(str(round(lbsTOlbh_proc,   8)))
+		self.lbsTOlbd_res.setText(str(round(lbsTOlbd_proc,   8)))
+
+	def lbhTO_fun(self):
+		lbhTOgs_proc   = float(self.lbhi_LinEd.text()) * 453.59237002 / 3600
+		lbhTOgmin_proc = float(self.lbhi_LinEd.text()) * 453.59237002 / 60
+		lbhTOkgs_proc  = float(self.lbhi_LinEd.text()) * 453.59237002e-03 / 3600
+		lbhTOkgh_proc  = float(self.lbhi_LinEd.text()) * 453.59237002e-03
+		lbhTOkgd_proc  = float(self.lbhi_LinEd.text()) * 453.59237002e-03 * 24
+		lbhTOtons_proc = float(self.lbhi_LinEd.text()) * 453.59237002e-06 / 3600
+		lbhTOtonh_proc = float(self.lbhi_LinEd.text()) * 453.59237002e-06
+		lbhTOtond_proc = float(self.lbhi_LinEd.text()) * 453.59237002e-06 * 24
+		lbhTOlbs_proc  = float(self.lbhi_LinEd.text()) / 3600
+		lbhTOlbh_proc  = float(self.lbhi_LinEd.text()) * 1
+		lbhTOlbd_proc  = float(self.lbhi_LinEd.text()) * 24
+
+		self.lbhTOgs_res.setText(str(round(lbhTOgs_proc,     8)))
+		self.lbhTOgmin_res.setText(str(round(lbhTOgmin_proc, 8)))
+		self.lbhTOkgs_res.setText(str(round(lbhTOkgs_proc,   8)))
+		self.lbhTOkgh_res.setText(str(round(lbhTOkgh_proc,   8)))
+		self.lbhTOkgd_res.setText(str(round(lbhTOkgd_proc,   8)))
+		self.lbhTOtons_res.setText(str(round(lbhTOtons_proc, 8)))
+		self.lbhTOtonh_res.setText(str(round(lbhTOtonh_proc, 8)))
+		self.lbhTOtond_res.setText(str(round(lbhTOtond_proc, 8)))
+		self.lbhTOlbs_res.setText(str(round(lbhTOlbs_proc,   8)))
+		self.lbhTOlbh_res.setText(str(round(lbhTOlbh_proc,   8)))
+		self.lbhTOlbd_res.setText(str(round(lbhTOlbd_proc,   8)))
+
+
+	def lbdTO_fun(self):
+		lbdTOgs_proc   = float(self.lbdi_LinEd.text()) * 453.59237002     / 24 / 3600
+		lbdTOgmin_proc = float(self.lbdi_LinEd.text()) * 453.59237002     / 24 / 60
+		lbdTOkgs_proc  = float(self.lbdi_LinEd.text()) * 453.59237002e-03 / 24 / 3600
+		lbdTOkgh_proc  = float(self.lbdi_LinEd.text()) * 453.59237002e-03 / 24
+		lbdTOkgd_proc  = float(self.lbdi_LinEd.text()) * 453.59237002e-03
+		lbdTOtons_proc = float(self.lbdi_LinEd.text()) * 453.59237002e-06 / 24 / 3600
+		lbdTOtonh_proc = float(self.lbdi_LinEd.text()) * 453.59237002e-06 / 24
+		lbdTOtond_proc = float(self.lbdi_LinEd.text()) * 453.59237002e-06
+		lbdTOlbs_proc  = float(self.lbdi_LinEd.text()) / 24 / 3600
+		lbdTOlbh_proc  = float(self.lbdi_LinEd.text()) * 24
+		lbdTOlbd_proc  = float(self.lbdi_LinEd.text()) * 1
+
+		self.lbdTOgs_res.setText("-")
+		self.lbdTOgmin_res.setText("-")
+		self.lbdTOkgs_res.setText(str(round(lbdTOkgs_proc,   8)))
+		self.lbdTOkgh_res.setText(str(round(lbdTOkgh_proc,   8)))
+		self.lbdTOkgd_res.setText(str(round(lbdTOkgd_proc,   8)))
+		self.lbdTOtons_res.setText(str(round(lbdTOtons_proc, 8)))
+		self.lbdTOtonh_res.setText(str(round(lbdTOtonh_proc, 8)))
+		self.lbdTOtond_res.setText(str(round(lbdTOtond_proc, 8)))
+		self.lbdTOlbs_res.setText(str(round(lbdTOlbs_proc,   8)))
+		self.lbdTOlbh_res.setText(str(round(lbdTOlbh_proc,   8)))
+		self.lbdTOlbd_res.setText(str(round(lbdTOlbd_proc,   8)))
+
+
+	def main_window(self):
+		main_layout = QtWidgets.QHBoxLayout()
+		main_layout.addWidget(self.createGroup_input())
+		main_layout.addWidget(self.createGroup_output())
+
+		self.setLayout(main_layout)
+		self.show()
+
 
 class Massfrac_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
@@ -1999,6 +3479,8 @@ class Kinvis_Win(QtWidgets.QWidget):
 		super().__init__()
 		self.setWindowTitle("Kinvis_Win")
 
+
+
 class Veloc_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
 		super().__init__()
@@ -2030,7 +3512,7 @@ class Veloc_Win(QtWidgets.QWidget):
 		ftminu_Label  = QtWidgets.QLabel("ft/min")
 		miSThu_Label  = QtWidgets.QLabel("mile<sub>statute</sub>/hour")
 		knotUKu_Label = QtWidgets.QLabel("knot<sub>English</sub>")
-		knotITu_Label = QtWidgets.QLabel("knot<sub>internat.</sub>")
+		knotITu_Label = QtWidgets.QLabel("knot<sub>internat</sub>")
 
 		input_grid.addWidget(blanklabel,         0, 0)
 		input_grid.addWidget(self.msi_LinEd,     1, 0)
