@@ -283,16 +283,13 @@ class Area_Win(QtWidgets.QWidget):
 		self.acri_LinEd   = QtWidgets.QLineEdit()
 		self.mi2STi_LinEd = QtWidgets.QLineEdit()
 
-		m2u_Label    = QtWidgets.QLabel("m\u00B2")
-		cm2u_Label   = QtWidgets.QLabel("cm\u00B2")
-		mm2u_Label   = QtWidgets.QLabel("mm\u00B2")
-		au_Label     = QtWidgets.QLabel("a")
-		hau_Label    = QtWidgets.QLabel("ha")
-		in2u_Label   = QtWidgets.QLabel("in\u00B2")
-		ft2u_Label   = QtWidgets.QLabel("ft\u00B2")
-		yd2u_Label   = QtWidgets.QLabel("yard\u00B2")
-		acru_Label   = QtWidgets.QLabel("acr")
-		mi2STu_Label = QtWidgets.QLabel("mile\u00B2<sub>statute</sub>")
+		Label_list = ["m\u00B2", "cm\u00B2", "mm\u00B2", "a", "ha", "in\u00B2", "ft\u00B2", "yard\u00B2", "acr", "mile\u00B2<sub>statute</sub>"]
+		i = 1
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			input_grid.addWidget(Label_name, i, 1)
+			i = i + 1
 
 		input_grid.addWidget(blanklabel,         0, 0)
 		input_grid.addWidget(self.m2i_LinEd,     1, 0)
@@ -305,17 +302,6 @@ class Area_Win(QtWidgets.QWidget):
 		input_grid.addWidget(self.yd2i_LinEd,    8, 0)
 		input_grid.addWidget(self.acri_LinEd,    9, 0)
 		input_grid.addWidget(self.mi2STi_LinEd, 10, 0)
-
-		input_grid.addWidget(m2u_Label,     1, 1)
-		input_grid.addWidget(cm2u_Label,    2, 1)
-		input_grid.addWidget(mm2u_Label,    3, 1)
-		input_grid.addWidget(au_Label,      4, 1)
-		input_grid.addWidget(hau_Label,     5, 1)
-		input_grid.addWidget(in2u_Label,    6, 1)
-		input_grid.addWidget(ft2u_Label,    7, 1)
-		input_grid.addWidget(yd2u_Label,    8, 1)
-		input_grid.addWidget(acru_Label,    9, 1)
-		input_grid.addWidget(mi2STu_Label, 10, 1)
 
 		input_group.setLayout(input_grid)
 
@@ -338,16 +324,13 @@ class Area_Win(QtWidgets.QWidget):
 
 		output_grid = QtWidgets.QGridLayout()
 
-		m2_Label    = QtWidgets.QLabel("m\u00B2")
-		cm2_Label   = QtWidgets.QLabel("cm\u00B2")
-		mm2_Label   = QtWidgets.QLabel("mm\u00B2")
-		a_Label     = QtWidgets.QLabel("a")
-		ha_Label    = QtWidgets.QLabel("ha")
-		in2_Label   = QtWidgets.QLabel("in\u00B2")
-		ft2_Label   = QtWidgets.QLabel("ft\u00B2")
-		yd2_Label   = QtWidgets.QLabel("yard\u00B2")
-		acr_Label   = QtWidgets.QLabel("acr")
-		mi2ST_Label = QtWidgets.QLabel("mile\u00B2<sub>statute</sub>")
+		Label_list = ["m\u00B2", "cm\u00B2", "mm\u00B2", "a", "ha", "in\u00B2", "ft\u00B2", "yard\u00B2", "acr", "mile\u00B2<sub>statute</sub>"]
+		i = 0
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			output_grid.addWidget(Label_name, 0, i)
+			i = i + 1
 
 		self.m2TOm2_res    = QtWidgets.QLabel("0", self)
 		self.m2TOcm2_res   = QtWidgets.QLabel("0", self)
@@ -464,17 +447,6 @@ class Area_Win(QtWidgets.QWidget):
 		# self.widget = widget("", *args, **kw)
 		# if widget == QtWidgets.QLabel():
 			# self.widget.setTextInteractionFlags(Qt.TextSelectableByMouse)
-
-		output_grid.addWidget(m2_Label,    0, 0)
-		output_grid.addWidget(cm2_Label,   0, 1)
-		output_grid.addWidget(mm2_Label,   0, 2)
-		output_grid.addWidget(a_Label,     0, 3)
-		output_grid.addWidget(ha_Label,    0, 4)
-		output_grid.addWidget(in2_Label,   0, 5)
-		output_grid.addWidget(ft2_Label,   0, 6)
-		output_grid.addWidget(yd2_Label,   0, 7)
-		output_grid.addWidget(acr_Label,   0, 8)
-		output_grid.addWidget(mi2ST_Label, 0, 9)
 
 		output_grid.addWidget(self.m2TOm2_res,    1, 0)
 		output_grid.addWidget(self.m2TOcm2_res,   1, 1)
@@ -857,27 +829,22 @@ class Heatval_Win(QtWidgets.QWidget):
 		self.kWhm3i_LinEd	    = QtWidgets.QLineEdit()
 		self.MJm3_kJdm3i_LinEd	= QtWidgets.QLineEdit()
 
-		BTUft3u_Label  = QtWidgets.QLabel("BTU/ft\u00B3")
-		BTUgalUKu_Label = QtWidgets.QLabel("BTU/gal<sub>UK</sub>")
-		BTUgalUSu_Label = QtWidgets.QLabel("BTU/gal<sub>US</sub>")
-		kJm3u_Label   = QtWidgets.QLabel("kJ/m\u00B3")
-		kWhm3u_Label  = QtWidgets.QLabel("kWh/m\u00B3")
-		MJm3_kJdm3u_Label = QtWidgets.QLabel("MJ/m\u00B3 & kJ/dm\u00B3")
+		Label_list = ["BTU/ft\u00B3", "BTU/gal<sub>UK</sub>", "BTU/gal<sub>US</sub>", "kJ/m\u00B3", "kWh/m\u00B3", "MJ/m\u00B3 & kJ/dm\u00B3"]
+		i = 1
 
-		input_grid.addWidget(blanklabel, 0, 0)
-		input_grid.addWidget(self.BTUft3i_LinEd,  1, 0)
-		input_grid.addWidget(self.BTUgalUKi_LinEd, 2, 0)
-		input_grid.addWidget(self.BTUgalUSi_LinEd, 3, 0)
-		input_grid.addWidget(self.kJm3i_LinEd,   4, 0)
-		input_grid.addWidget(self.kWhm3i_LinEd,  5, 0)
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			input_grid.addWidget(Label_name, i, 1)
+			i = i + 1
+
+		input_grid.addWidget(blanklabel,              0, 0)
+		input_grid.addWidget(self.BTUft3i_LinEd,      1, 0)
+		input_grid.addWidget(self.BTUgalUKi_LinEd,    2, 0)
+		input_grid.addWidget(self.BTUgalUSi_LinEd,    3, 0)
+		input_grid.addWidget(self.kJm3i_LinEd,        4, 0)
+		input_grid.addWidget(self.kWhm3i_LinEd,       5, 0)
 		input_grid.addWidget(self.MJm3_kJdm3i_LinEd,  6, 0)
 
-		input_grid.addWidget(BTUft3u_Label,  1, 1)
-		input_grid.addWidget(BTUgalUKu_Label, 2, 1)
-		input_grid.addWidget(BTUgalUSu_Label, 3, 1)
-		input_grid.addWidget(kJm3u_Label,   4, 1)
-		input_grid.addWidget(kWhm3u_Label,  5, 1)
-		input_grid.addWidget(MJm3_kJdm3u_Label, 6, 1)
 
 		input_group.setLayout(input_grid)
 
@@ -896,12 +863,13 @@ class Heatval_Win(QtWidgets.QWidget):
 
 		output_grid = QtWidgets.QGridLayout()
 
-		BTUft3_Label  = QtWidgets.QLabel("BTU/ft\u00B3")
-		BTUgalUK_Label = QtWidgets.QLabel("BTU/gal<sub>UK</sub>")
-		BTUgalUS_Label = QtWidgets.QLabel("BTU/gal<sub>US</sub>")
-		kJm3_Label   = QtWidgets.QLabel("kJ/m\u00B3")
-		kWhm3_Label  = QtWidgets.QLabel("kWh/m\u00B3")
-		MJm3_kJdm3_Label = QtWidgets.QLabel("MJ/m\u00B3 & kJ/dm\u00B3")
+		Label_list = ["BTU/ft\u00B3", "BTU/gal<sub>UK</sub>", "BTU/gal<sub>US</sub>", "kJ/m\u00B3", "kWh/m\u00B3", "MJ/m\u00B3 & kJ/dm\u00B3"]
+		i = 0
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			output_grid.addWidget(Label_name, 0, i)
+			i = i + 1
 
 		self.BTUft3TOBTUft3_res      = QtWidgets.QLabel("0", self)
 		self.BTUft3TOBTUgalUK_res    = QtWidgets.QLabel("0", self)
@@ -944,13 +912,6 @@ class Heatval_Win(QtWidgets.QWidget):
 		self.MJm3_kJdm3TOkJm3_res       = QtWidgets.QLabel("0", self)
 		self.MJm3_kJdm3TOkWhm3_res      = QtWidgets.QLabel("0", self)
 		self.MJm3_kJdm3TOMJm3_kJdm3_res = QtWidgets.QLabel("0", self)
-
-		output_grid.addWidget(BTUft3_Label,     0, 0)
-		output_grid.addWidget(BTUgalUK_Label,   0, 1)
-		output_grid.addWidget(BTUgalUS_Label,   0, 2)
-		output_grid.addWidget(kJm3_Label,       0, 3)
-		output_grid.addWidget(kWhm3_Label,      0, 4)
-		output_grid.addWidget(MJm3_kJdm3_Label, 0, 5)
 
 		output_grid.addWidget(self.BTUft3TOBTUft3_res,     1, 0)
 		output_grid.addWidget(self.BTUft3TOBTUgalUK_res,   1, 1)
@@ -1143,16 +1104,13 @@ class Energy_Win(QtWidgets.QWidget):
 		self.ftlbfi_LinEd   = QtWidgets.QLineEdit()
 		self.ftpdli_LinEd   = QtWidgets.QLineEdit()
 
-		Ju_Label       = QtWidgets.QLabel("J")
-		kJu_Label      = QtWidgets.QLabel("kJ")
-		kWhu_Label     = QtWidgets.QLabel("kWh")
-		BTUITu_Label   = QtWidgets.QLabel("BTU<sub>internat</sub>")
-		BTUmeanu_Label = QtWidgets.QLabel("BTU<sub>mean</sub>")
-		calITu_Label   = QtWidgets.QLabel("cal<sub>internat</sub>")
-		calTHu_Label   = QtWidgets.QLabel("cal<sub>thermal</sub>")
-		hphru_Label    = QtWidgets.QLabel("hp-hr")
-		ftlbfu_Label   = QtWidgets.QLabel("ft-lbf")
-		ftpdlu_Label   = QtWidgets.QLabel("ft-pdl")
+		Label_list = ["J", "kJ", "kWh", "BTU<sub>internat</sub>", "BTU<sub>mean</sub>", "cal<sub>internat</sub>", "cal<sub>thermal</sub>", "hp-hr", "ft-lbf", "ft-pdl"]
+		i = 1
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			input_grid.addWidget(Label_name, i, 1)
+			i = i + 1
 
 		input_grid.addWidget(blanklabel,           0, 0)
 		input_grid.addWidget(self.Ji_LinEd,        1, 0)
@@ -1165,17 +1123,6 @@ class Energy_Win(QtWidgets.QWidget):
 		input_grid.addWidget(self.hphri_LinEd,     8, 0)
 		input_grid.addWidget(self.ftlbfi_LinEd,    9, 0)
 		input_grid.addWidget(self.ftpdli_LinEd,   10, 0)
-
-		input_grid.addWidget(Ju_Label,        1, 1)
-		input_grid.addWidget(kJu_Label,       2, 1)
-		input_grid.addWidget(kWhu_Label,      3, 1)
-		input_grid.addWidget(BTUITu_Label,    4, 1)
-		input_grid.addWidget(BTUmeanu_Label,  5, 1)
-		input_grid.addWidget(calITu_Label,    6, 1)
-		input_grid.addWidget(calTHu_Label,    7, 1)
-		input_grid.addWidget(hphru_Label,     8, 1)
-		input_grid.addWidget(ftlbfu_Label,    9, 1)
-		input_grid.addWidget(ftpdlu_Label,   10, 1)
 
 		input_group.setLayout(input_grid)
 
@@ -1198,16 +1145,13 @@ class Energy_Win(QtWidgets.QWidget):
 
 		output_grid = QtWidgets.QGridLayout()
 
-		J_Label       = QtWidgets.QLabel("J")
-		kJ_Label      = QtWidgets.QLabel("kJ")
-		kWh_Label     = QtWidgets.QLabel("kWh")
-		BTUIT_Label   = QtWidgets.QLabel("BTU<sub>internat</sub>")
-		BTUmean_Label = QtWidgets.QLabel("BTU<sub>mean</sub>")
-		calIT_Label   = QtWidgets.QLabel("cal<sub>internat</sub>")
-		calTH_Label   = QtWidgets.QLabel("cal<sub>thermal</sub>")
-		hphr_Label    = QtWidgets.QLabel("hp-hr")
-		ftlbf_Label   = QtWidgets.QLabel("ft-lbf")
-		ftpdl_Label   = QtWidgets.QLabel("ft-pdl")
+		Label_list = ["J", "kJ", "kWh", "BTU<sub>internat</sub>", "BTU<sub>mean</sub>", "cal<sub>internat</sub>", "cal<sub>thermal</sub>", "hp-hr", "ft-lbf", "ft-pdl"]
+		i = 0
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			output_grid.addWidget(Label_name, 0, i)
+			i = i + 1
 
 		self.JTOJ_res       = QtWidgets.QLabel("0", self)
 		self.JTOkJ_res      = QtWidgets.QLabel("0", self)
@@ -1318,17 +1262,6 @@ class Energy_Win(QtWidgets.QWidget):
 		self.ftpdlTOhphr_res    = QtWidgets.QLabel("0", self)
 		self.ftpdlTOftlbf_res   = QtWidgets.QLabel("0", self)
 		self.ftpdlTOftpdl_res   = QtWidgets.QLabel("0", self)
-
-		output_grid.addWidget(J_Label,       0, 0)
-		output_grid.addWidget(kJ_Label,      0, 1)
-		output_grid.addWidget(kWh_Label,     0, 2)
-		output_grid.addWidget(BTUIT_Label,   0, 3)
-		output_grid.addWidget(BTUmean_Label, 0, 4)
-		output_grid.addWidget(calIT_Label,   0, 5)
-		output_grid.addWidget(calTH_Label,   0, 6)
-		output_grid.addWidget(hphr_Label,    0, 7)
-		output_grid.addWidget(ftlbf_Label,   0, 8)
-		output_grid.addWidget(ftpdl_Label,   0, 9)
 
 		output_grid.addWidget(self.JTOJ_res,       1, 0)
 		output_grid.addWidget(self.JTOkJ_res,      1, 1)
@@ -1740,18 +1673,13 @@ class Length_Win(QtWidgets.QWidget):
 		self.miSTi_LinEd = QtWidgets.QLineEdit()
 		self.miNVi_LinEd = QtWidgets.QLineEdit()
 
-		mu_Label    = QtWidgets.QLabel("m")
-		cmu_Label   = QtWidgets.QLabel("cm")
-		mmu_Label   = QtWidgets.QLabel("mm")
-		umu_Label   = QtWidgets.QLabel("\u03BCm & micron")
-		angsu_Label = QtWidgets.QLabel("Å")
-		nmu_Label   = QtWidgets.QLabel("nm")
-		kmu_Label   = QtWidgets.QLabel("km")
-		inu_Label   = QtWidgets.QLabel("in")
-		ftu_Label   = QtWidgets.QLabel("ft")
-		ydu_Label   = QtWidgets.QLabel("yard")
-		miSTu_Label = QtWidgets.QLabel("mile<sub>statute</sub>")
-		miNVu_Label = QtWidgets.QLabel("mile<sub>navy</sub>")
+		Label_list = ["m", "cm", "mm", "\u03BCm & micron", "Å", "nm", "km", "in", "ft", "yard", "mile<sub>statute</sub>", "mile<sub>navy</sub>"]
+		i = 1
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			input_grid.addWidget(Label_name, i, 1)
+			i = i + 1
 
 		input_grid.addWidget(blanklabel,        0, 0)
 		input_grid.addWidget(self.mi_LinEd,     1, 0)
@@ -1766,19 +1694,6 @@ class Length_Win(QtWidgets.QWidget):
 		input_grid.addWidget(self.ydi_LinEd,   10, 0)
 		input_grid.addWidget(self.miSTi_LinEd, 11, 0)
 		input_grid.addWidget(self.miNVi_LinEd, 12, 0)
-
-		input_grid.addWidget(mu_Label,     1, 1)
-		input_grid.addWidget(cmu_Label,    2, 1)
-		input_grid.addWidget(mmu_Label,    3, 1)
-		input_grid.addWidget(umu_Label,    4, 1)
-		input_grid.addWidget(angsu_Label,  5, 1)
-		input_grid.addWidget(nmu_Label,    6, 1)
-		input_grid.addWidget(kmu_Label,    7, 1)
-		input_grid.addWidget(inu_Label,    8, 1)
-		input_grid.addWidget(ftu_Label,    9, 1)
-		input_grid.addWidget(ydu_Label,   10, 1)
-		input_grid.addWidget(miSTu_Label, 11, 1)
-		input_grid.addWidget(miNVu_Label, 12, 1)
 
 		input_group.setLayout(input_grid)
 
@@ -1802,19 +1717,14 @@ class Length_Win(QtWidgets.QWidget):
 		output_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
 
 		output_grid = QtWidgets.QGridLayout()
+		
+		Label_list = ["m", "cm", "mm", "\u03BCm & micron", "Å", "nm", "km", "in", "ft", "yard", "mile<sub>statute</sub>", "mile<sub>navy</sub>"]
+		i = 0
 
-		m_Label    = QtWidgets.QLabel("m")
-		cm_Label   = QtWidgets.QLabel("cm")
-		mm_Label   = QtWidgets.QLabel("mm")
-		um_Label   = QtWidgets.QLabel("\u03BCm & micron")
-		angs_Label = QtWidgets.QLabel("Å")
-		nm_Label   = QtWidgets.QLabel("nm")
-		km_Label   = QtWidgets.QLabel("km")
-		in_Label   = QtWidgets.QLabel("in")
-		ft_Label   = QtWidgets.QLabel("ft")
-		yd_Label   = QtWidgets.QLabel("yard")
-		miST_Label = QtWidgets.QLabel("mile<sub>statute</sub>")
-		miNV_Label = QtWidgets.QLabel("mile<sub>navy</sub>")
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			output_grid.addWidget(Label_name, 0, i)
+			i = i + 1
 
 		self.mTOm_res    = QtWidgets.QLabel("0", self)
 		self.mTOcm_res   = QtWidgets.QLabel("0", self)
@@ -1971,19 +1881,6 @@ class Length_Win(QtWidgets.QWidget):
 		self.miNVTOyd_res   = QtWidgets.QLabel("0", self)
 		self.miNVTOmiST_res = QtWidgets.QLabel("0", self)
 		self.miNVTOmiNV_res = QtWidgets.QLabel("0", self)
-
-		output_grid.addWidget(m_Label,    0,  0)
-		output_grid.addWidget(cm_Label,   0,  1)
-		output_grid.addWidget(mm_Label,   0,  2)
-		output_grid.addWidget(um_Label,   0,  3)
-		output_grid.addWidget(angs_Label, 0,  4)
-		output_grid.addWidget(nm_Label,   0,  5)
-		output_grid.addWidget(km_Label,   0,  6)
-		output_grid.addWidget(in_Label,   0,  7)
-		output_grid.addWidget(ft_Label,   0,  8)
-		output_grid.addWidget(yd_Label,   0,  9)
-		output_grid.addWidget(miST_Label, 0, 10)
-		output_grid.addWidget(miNV_Label, 0, 11)
 
 		output_grid.addWidget(self.mTOm_res,    1,  0)
 		output_grid.addWidget(self.mTOcm_res,   1,  1)
@@ -2497,6 +2394,7 @@ class Magint_Win(QtWidgets.QWidget):
 		super().__init__()
 		self.setWindowTitle("Magint_Win")
 
+
 class Mass_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
 		super().__init__()
@@ -2519,12 +2417,13 @@ class Mass_Win(QtWidgets.QWidget):
 		self.shorttoni_LinEd = QtWidgets.QLineEdit()
 		self.longtoni_LinEd = QtWidgets.QLineEdit()
 
-		kgu_Label       = QtWidgets.QLabel("kg")
-		mtonu_Label     = QtWidgets.QLabel("metric ton")
-		ounceu_Label    = QtWidgets.QLabel("ounce")
-		poundu_Label    = QtWidgets.QLabel("pound")
-		shorttonu_Label = QtWidgets.QLabel("short ton")
-		longtonu_Label  = QtWidgets.QLabel("long ton")
+		Label_list = ["kg", "metric ton", "ounce", "pound", "short ton", "long ton"]
+		i = 1
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			input_grid.addWidget(Label_name, i, 1)
+			i = i + 1
 
 		input_grid.addWidget(blanklabel,           0, 0)
 		input_grid.addWidget(self.kgi_LinEd,       1, 0)
@@ -2533,13 +2432,6 @@ class Mass_Win(QtWidgets.QWidget):
 		input_grid.addWidget(self.poundi_LinEd,    4, 0)
 		input_grid.addWidget(self.shorttoni_LinEd, 5, 0)
 		input_grid.addWidget(self.longtoni_LinEd,  6, 0)
-
-		input_grid.addWidget(kgu_Label,       1, 1)
-		input_grid.addWidget(mtonu_Label,     2, 1)
-		input_grid.addWidget(ounceu_Label,    3, 1)
-		input_grid.addWidget(poundu_Label,    4, 1)
-		input_grid.addWidget(shorttonu_Label, 5, 1)
-		input_grid.addWidget(longtonu_Label,  6, 1)
 
 		input_group.setLayout(input_grid)
 
@@ -2558,12 +2450,13 @@ class Mass_Win(QtWidgets.QWidget):
 
 		output_grid = QtWidgets.QGridLayout()
 
-		kg_Label       = QtWidgets.QLabel("kg")
-		mton_Label     = QtWidgets.QLabel("metric ton")
-		ounce_Label    = QtWidgets.QLabel("ounce")
-		pound_Label    = QtWidgets.QLabel("pound")
-		shortton_Label = QtWidgets.QLabel("short ton")
-		longton_Label  = QtWidgets.QLabel("long ton")
+		Label_list = ["kg", "metric ton", "ounce", "pound", "short ton", "long ton"]
+		i = 0
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			output_grid.addWidget(Label_name, 0, i)
+			i = i + 1
 
 		self.kgTOkg_res       = QtWidgets.QLabel("0", self)
 		self.kgTOmton_res     = QtWidgets.QLabel("0", self)
@@ -2606,13 +2499,6 @@ class Mass_Win(QtWidgets.QWidget):
 		self.longtonTOpound_res    = QtWidgets.QLabel("0", self)
 		self.longtonTOshortton_res = QtWidgets.QLabel("0", self)
 		self.longtonTOlongton_res  = QtWidgets.QLabel("0", self)
-
-		output_grid.addWidget(kg_Label,       0, 0)
-		output_grid.addWidget(mton_Label,     0, 1)
-		output_grid.addWidget(ounce_Label,    0, 2)
-		output_grid.addWidget(pound_Label,    0, 3)
-		output_grid.addWidget(shortton_Label, 0, 4)
-		output_grid.addWidget(longton_Label,  0, 5)
 
 		output_grid.addWidget(self.kgTOkg_res,       1, 0)
 		output_grid.addWidget(self.kgTOmton_res,     1, 1)
@@ -2774,6 +2660,14 @@ class Massflow_Win(QtWidgets.QWidget):
 		input_grid = QtWidgets.QGridLayout()
 		input_grid.setColumnMinimumWidth(0, 130)
 
+		Label_list = ["g/sec", "g/min", "kg/sec", "kg/hour", "kg/day", "ton/sec", "ton/hour", "ton/day", "lb/sec", "lb/hour", "lb/day"]
+		i = 1
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			input_grid.addWidget(Label_name, i, 1)
+			i = i + 1
+
 		blanklabel       = QtWidgets.QLabel()
 		self.gsi_LinEd   = QtWidgets.QLineEdit()
 		self.gmini_LinEd = QtWidgets.QLineEdit()
@@ -2787,18 +2681,6 @@ class Massflow_Win(QtWidgets.QWidget):
 		self.lbhi_LinEd  = QtWidgets.QLineEdit()
 		self.lbdi_LinEd  = QtWidgets.QLineEdit()
 
-		gsu_Label   = QtWidgets.QLabel("g/sec")
-		gminu_Label = QtWidgets.QLabel("g/min")
-		kgsu_Label  = QtWidgets.QLabel("kg/sec")
-		kghu_Label  = QtWidgets.QLabel("kg/hour")
-		kgdu_Label  = QtWidgets.QLabel("kg/day")
-		tonsu_Label = QtWidgets.QLabel("ton/sec")
-		tonhu_Label = QtWidgets.QLabel("ton/hour")
-		tondu_Label = QtWidgets.QLabel("ton/day")
-		lbsu_Label  = QtWidgets.QLabel("lb/sec")
-		lbhu_Label  = QtWidgets.QLabel("lb/hour")
-		lbdu_Label  = QtWidgets.QLabel("lb/day")
-
 		input_grid.addWidget(blanklabel,   0, 0)
 		input_grid.addWidget(self.gsi_LinEd,    1, 0)
 		input_grid.addWidget(self.gmini_LinEd,  2, 0)
@@ -2811,18 +2693,6 @@ class Massflow_Win(QtWidgets.QWidget):
 		input_grid.addWidget(self.lbsi_LinEd,   9, 0)
 		input_grid.addWidget(self.lbhi_LinEd,  10, 0)
 		input_grid.addWidget(self.lbdi_LinEd,  11, 0)
-
-		input_grid.addWidget(gsu_Label,    1, 1)
-		input_grid.addWidget(gminu_Label,  2, 1)
-		input_grid.addWidget(kgsu_Label,   3, 1)
-		input_grid.addWidget(kghu_Label,   4, 1)
-		input_grid.addWidget(kgdu_Label,   5, 1)
-		input_grid.addWidget(tonsu_Label,  6, 1)
-		input_grid.addWidget(tonhu_Label,  7, 1)
-		input_grid.addWidget(tondu_Label,  8, 1)
-		input_grid.addWidget(lbsu_Label,   9, 1)
-		input_grid.addWidget(lbhu_Label,  10, 1)
-		input_grid.addWidget(lbdu_Label,  11, 1)
 
 		input_group.setLayout(input_grid)
 
@@ -2846,17 +2716,13 @@ class Massflow_Win(QtWidgets.QWidget):
 
 		output_grid = QtWidgets.QGridLayout()
 
-		gs_Label   = QtWidgets.QLabel("g/sec")
-		gmin_Label = QtWidgets.QLabel("g/min")
-		kgs_Label  = QtWidgets.QLabel("kg/sec")
-		kgh_Label  = QtWidgets.QLabel("kg/hour")
-		kgd_Label  = QtWidgets.QLabel("kg/day")
-		tons_Label = QtWidgets.QLabel("ton/sec")
-		tonh_Label = QtWidgets.QLabel("ton/hour")
-		tond_Label = QtWidgets.QLabel("ton/day")
-		lbs_Label  = QtWidgets.QLabel("lb/sec")
-		lbh_Label  = QtWidgets.QLabel("lb/hour")
-		lbd_Label  = QtWidgets.QLabel("lb/day")
+		Label_list = ["g/sec", "g/min", "kg/sec", "kg/hour", "kg/day", "ton/sec", "ton/hour", "ton/day", "lb/sec", "lb/hour", "lb/day"]
+		i = 0
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			output_grid.addWidget(Label_name, 0, i)
+			i = i + 1
 
 		self.gsTOgs_res   = QtWidgets.QLabel("0", self)
 		self.gsTOgmin_res = QtWidgets.QLabel("0", self)
@@ -2989,18 +2855,6 @@ class Massflow_Win(QtWidgets.QWidget):
 		self.lbdTOlbs_res  = QtWidgets.QLabel("0", self)
 		self.lbdTOlbh_res  = QtWidgets.QLabel("0", self)
 		self.lbdTOlbd_res  = QtWidgets.QLabel("0", self)
-
-		output_grid.addWidget(gs_Label,   0, 0)
-		output_grid.addWidget(gmin_Label, 0, 1)
-		output_grid.addWidget(kgs_Label,  0, 2)
-		output_grid.addWidget(kgh_Label,  0, 3)
-		output_grid.addWidget(kgd_Label,  0, 4)
-		output_grid.addWidget(tons_Label, 0, 5)
-		output_grid.addWidget(tonh_Label, 0, 6)
-		output_grid.addWidget(tond_Label, 0, 7)
-		output_grid.addWidget(lbs_Label,  0, 8)
-		output_grid.addWidget(lbh_Label,  0, 9)
-		output_grid.addWidget(lbd_Label,  0, 10)
 
 		output_grid.addWidget(self.gsTOgs_res,   1, 0)
 		output_grid.addWidget(self.gsTOgmin_res, 1, 1)
@@ -3424,6 +3278,7 @@ class Massflow_Win(QtWidgets.QWidget):
 		self.show()
 
 
+
 class Massfrac_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
 		super().__init__()
@@ -3445,11 +3300,13 @@ class Massfrac_Win(QtWidgets.QWidget):
 		self.ppmi_LinEd     = QtWidgets.QLineEdit()
 		self.ppbi_LinEd     = QtWidgets.QLineEdit()
 
-		decimal_Label = QtWidgets.QLabel("decimal (1)")
-		percent_Label = QtWidgets.QLabel("%")
-		promile_Label = QtWidgets.QLabel("‰")
-		ppm_Label     = QtWidgets.QLabel("ppm")
-		ppb_Label     = QtWidgets.QLabel("ppb")
+		Label_list = ["decimal (1)", "%", "‰", "ppm", "ppb"]
+		i = 1
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			input_grid.addWidget(Label_name, i, 1)
+			i = i + 1
 
 		input_grid.addWidget(blanklabel,          0, 0)
 		input_grid.addWidget(self.decimali_LinEd, 1, 0)
@@ -3457,12 +3314,6 @@ class Massfrac_Win(QtWidgets.QWidget):
 		input_grid.addWidget(self.promilei_LinEd, 3, 0)
 		input_grid.addWidget(self.ppmi_LinEd,     4, 0)
 		input_grid.addWidget(self.ppbi_LinEd,     5, 0)
-
-		input_grid.addWidget(decimal_Label, 1, 1)
-		input_grid.addWidget(percent_Label, 2, 1)
-		input_grid.addWidget(promile_Label, 3, 1)
-		input_grid.addWidget(ppm_Label,     4, 1)
-		input_grid.addWidget(ppb_Label,     5, 1)
 
 		input_group.setLayout(input_grid)
 
@@ -3475,13 +3326,14 @@ class Massfrac_Win(QtWidgets.QWidget):
 		output_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
 
 		output_grid = QtWidgets.QGridLayout()
-		output_grid.setColumnMinimumWidth(0, 130)
 
-		decimal_Label = QtWidgets.QLabel("decimal (1)")
-		percent_Label = QtWidgets.QLabel("%")
-		promile_Label = QtWidgets.QLabel("‰")
-		ppm_Label     = QtWidgets.QLabel("ppm")
-		ppb_Label     = QtWidgets.QLabel("ppb")
+		Label_list = ["decimal (1)", "%", "‰", "ppm", "ppb"]
+		i = 0
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			output_grid.addWidget(Label_name, 0, i)
+			i = i + 1
 
 		self.decimalTOdecimal_res = QtWidgets.QLabel("0", self)
 		self.decimalTOpercent_res = QtWidgets.QLabel("0", self)
@@ -3512,12 +3364,6 @@ class Massfrac_Win(QtWidgets.QWidget):
 		self.ppbTOpromile_res = QtWidgets.QLabel("0", self)
 		self.ppbTOppm_res     = QtWidgets.QLabel("0", self)
 		self.ppbTOppb_res     = QtWidgets.QLabel("0", self)
-
-		output_grid.addWidget(decimal_Label, 0, 0)
-		output_grid.addWidget(percent_Label, 0, 1)
-		output_grid.addWidget(promile_Label, 0, 2)
-		output_grid.addWidget(ppm_Label,     0, 3)
-		output_grid.addWidget(ppb_Label,     0, 4)
 
 		output_grid.addWidget(self.decimalTOdecimal_res, 1, 0)
 		output_grid.addWidget(self.decimalTOpercent_res, 1, 1)
@@ -3569,7 +3415,7 @@ class Massfrac_Win(QtWidgets.QWidget):
 		self.decimalTOdecimal_res.setText(str(round(decimalTOdecimal_proc, 8)))
 		self.decimalTOpercent_res.setText(str(round(decimalTOpercent_proc, 8)))
 		self.decimalTOpromile_res.setText(str(round(decimalTOpromile_proc, 8)))
-		self.decimalTOppm_res.setText(str(round(decimalTOppm_proc,         8)))
+		self.decimalTOppm_res.setText(str(decimalTOppm_proc                  ))
 		self.decimalTOppb_res.setText(str(decimalTOppb_proc                  ))
 
 	def percentTO_fun(self):
@@ -3582,8 +3428,8 @@ class Massfrac_Win(QtWidgets.QWidget):
 		self.percentTOdecimal_res.setText(str(round(percentTOdecimal_proc, 8)))
 		self.percentTOpercent_res.setText(str(round(percentTOpercent_proc, 8)))
 		self.percentTOpromile_res.setText(str(round(percentTOpromile_proc, 8)))
-		self.percentTOppm_res.setText(str(round(percentTOppm_proc,         8)))
-		self.percentTOppb_res.setText(str(round(percentTOppb_proc,         8)))
+		self.percentTOppm_res.setText(str(percentTOppm_proc                  ))
+		self.percentTOppb_res.setText(str(percentTOppb_proc                  ))
 
 	def promileTO_fun(self):
 		promileTOdecimal_proc = float(self.promilei_LinEd.text()) * 1e+03
@@ -3641,7 +3487,101 @@ class Powheatfl_Win(QtWidgets.QWidget):
 class Pressstres_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
 		super().__init__()
-		self.setWindowTitle("Pressstres_Win")
+
+		self.setWindowTitle("Pressure Converter")
+		self.main_window()
+
+	def createGroup_input(self):
+		input_group = QtWidgets.QGroupBox("Input", self)
+		input_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+
+		input_grid = QtWidgets.QGridLayout()
+		input_grid.setColumnMinimumWidth(0, 130)
+
+		blanklabel          = QtWidgets.QLabel()
+		self.Pai_LinEd      = QtWidgets.QLineEdit()
+		self.kPai_LinEd     = QtWidgets.QLineEdit()
+		self.MPai_LinEd     = QtWidgets.QLineEdit()
+		self.mbari_LinEd    = QtWidgets.QLineEdit()
+		self.bari_LinEd     = QtWidgets.QLineEdit()
+		self.atmi_LinEd     = QtWidgets.QLineEdit()
+		self.psii_LinEd     = QtWidgets.QLineEdit()
+		self.kgcm2i_LinEd   = QtWidgets.QLineEdit()
+		self.kgm2i_LinEd    = QtWidgets.QLineEdit()
+		self.Nm2i_LinEd     = QtWidgets.QLineEdit()
+		self.lbin2i_LinEd   = QtWidgets.QLineEdit()
+		self.lbft2i_LinEd   = QtWidgets.QLineEdit()
+		self.Torri_LinEd    = QtWidgets.QLineEdit()
+		self.dynecm2i_LinEd = QtWidgets.QLineEdit()
+		self.mmH2Oi_LinEd   = QtWidgets.QLineEdit()
+		self.mmHgi_LinEd    = QtWidgets.QLineEdit()
+		self.inH2Oi_LinEd   = QtWidgets.QLineEdit()
+		self.inHgi_LinEd    = QtWidgets.QLineEdit()
+
+		Label_list = ["Pa", "kPa", "MPa", "mbar", "bar", "atm", "psi", "kg/cm\u00B2", "kg/m\u00B2", "N/m\u00B2", "lb/in\u00B2", "lb/ft\u00B2", "Torr", "dyne/cm\u00B2",
+					  "mm H<sub>2</sub>O", "mm Hg", "in H<sub>2</sub>O", "in Hg"]
+		i = 1
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			input_grid.addWidget(Label_name, i, 1)
+			i = i + 1
+
+		input_grid.addWidget(blanklabel,           0, 0)
+		input_grid.addWidget(self.Pai_LinEd,       1, 0)
+		input_grid.addWidget(self.kPai_LinEd,      2, 0)
+		input_grid.addWidget(self.MPai_LinEd,      3, 0)
+		input_grid.addWidget(self.mbari_LinEd,     4, 0)
+		input_grid.addWidget(self.bari_LinEd,      5, 0)
+		input_grid.addWidget(self.atmi_LinEd,      6, 0)
+		input_grid.addWidget(self.psii_LinEd,      7, 0)
+		input_grid.addWidget(self.kgcm2i_LinEd,    8, 0)
+		input_grid.addWidget(self.kgm2i_LinEd,     9, 0)
+		input_grid.addWidget(self.Nm2i_LinEd,     10, 0)
+		input_grid.addWidget(self.lbin2i_LinEd,   11, 0)
+		input_grid.addWidget(self.lbft2i_LinEd,   12, 0)
+		input_grid.addWidget(self.Torri_LinEd,    13, 0)
+		input_grid.addWidget(self.dynecm2i_LinEd, 14, 0)
+		input_grid.addWidget(self.mmH2Oi_LinEd,   15, 0)
+		input_grid.addWidget(self.mmHgi_LinEd,    16, 0)
+		input_grid.addWidget(self.inH2Oi_LinEd,   17, 0)
+		input_grid.addWidget(self.inHgi_LinEd,    18, 0)
+
+		input_group.setLayout(input_grid)
+
+		self.Pai_LinEd.returnPressed.connect(self.PaTO_fun)
+
+		return input_group
+
+	def PaTO_fun(self):
+		pass
+
+	def createGroup_output(self):
+		output_group = QtWidgets.QGroupBox("Output", self)
+		output_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+
+		output_grid = QtWidgets.QGridLayout()
+
+		Label_list = ["Pa", "kPa", "MPa", "mbar", "bar", "atm", "psi", "kg/cm\u00B2", "kg/m\u00B2", "N/m\u00B2", "lb/in\u00B2", "lb/ft\u00B2", "Torr", "dyne/cm\u00B2",
+					  "mm H<sub>2</sub>O", "mm Hg", "in H<sub>2</sub>O", "in Hg"]
+		i = 0
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			output_grid.addWidget(Label_name, 0, i)
+			i = i + 1
+
+		output_group.setLayout(output_grid)
+
+		return output_group
+
+	def main_window(self):
+		main_layout = QtWidgets.QHBoxLayout()
+		main_layout.addWidget(self.createGroup_input())
+		main_layout.addWidget(self.createGroup_output())
+
+		self.setLayout(main_layout)
+		self.show()
 
 class Pressabsg_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
@@ -3709,14 +3649,13 @@ class Veloc_Win(QtWidgets.QWidget):
 		self.knotUKi_LinEd = QtWidgets.QLineEdit()
 		self.knotITi_LinEd = QtWidgets.QLineEdit()
 
-		msu_Label     = QtWidgets.QLabel("m/sec")
-		mminu_Label   = QtWidgets.QLabel("m/min")
-		kmhu_Label    = QtWidgets.QLabel("km/hour")
-		ftsu_Label    = QtWidgets.QLabel("ft/sec")
-		ftminu_Label  = QtWidgets.QLabel("ft/min")
-		miSThu_Label  = QtWidgets.QLabel("mile<sub>statute</sub>/hour")
-		knotUKu_Label = QtWidgets.QLabel("knot<sub>English</sub>")
-		knotITu_Label = QtWidgets.QLabel("knot<sub>internat</sub>")
+		Label_list = ["m/sec", "m/min", "km/hour", "ft/sec", "ft/min", "mile<sub>statute</sub>/hour", "knot<sub>English</sub>", "knot<sub>internat</sub>"]
+		i = 1
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			input_grid.addWidget(Label_name, i, 1)
+			i = i + 1
 
 		input_grid.addWidget(blanklabel,         0, 0)
 		input_grid.addWidget(self.msi_LinEd,     1, 0)
@@ -3727,15 +3666,6 @@ class Veloc_Win(QtWidgets.QWidget):
 		input_grid.addWidget(self.miSThi_LinEd,  6, 0)
 		input_grid.addWidget(self.knotUKi_LinEd, 7, 0)
 		input_grid.addWidget(self.knotITi_LinEd, 8, 0)
-
-		input_grid.addWidget(msu_Label,     1, 1)
-		input_grid.addWidget(mminu_Label,   2, 1)
-		input_grid.addWidget(kmhu_Label,    3, 1)
-		input_grid.addWidget(ftsu_Label,    4, 1)
-		input_grid.addWidget(ftminu_Label,  5, 1)
-		input_grid.addWidget(miSThu_Label,  6, 1)
-		input_grid.addWidget(knotUKu_Label, 7, 1)
-		input_grid.addWidget(knotITu_Label, 8, 1)
 
 		input_group.setLayout(input_grid)
 
@@ -3756,14 +3686,13 @@ class Veloc_Win(QtWidgets.QWidget):
 
 		output_grid = QtWidgets.QGridLayout()
 
-		ms_Label     = QtWidgets.QLabel("m/sec")
-		mmin_Label   = QtWidgets.QLabel("m/min")
-		kmh_Label    = QtWidgets.QLabel("km/hour")
-		fts_Label    = QtWidgets.QLabel("ft/sec")
-		ftmin_Label  = QtWidgets.QLabel("ft/min")
-		miST_Label   = QtWidgets.QLabel("mile<sub>statute</sub>")
-		knotUK_Label = QtWidgets.QLabel("knot<sub>English</sub>")
-		knotIT_Label = QtWidgets.QLabel("knot<sub>internat</sub>")
+		Label_list = ["m/sec", "m/min", "km/hour", "ft/sec", "ft/min", "mile<sub>statute</sub>/hour", "knot<sub>English</sub>", "knot<sub>internat</sub>"]
+		i = 0
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			output_grid.addWidget(Label_name, 0, i)
+			i = i + 1
 
 		self.msTOms_res     = QtWidgets.QLabel("0", self)
 		self.msTOmmin_res   = QtWidgets.QLabel("0", self)
@@ -3836,15 +3765,6 @@ class Veloc_Win(QtWidgets.QWidget):
 		self.knotITTOmiSTh_res  = QtWidgets.QLabel("0", self)
 		self.knotITTOknotUK_res = QtWidgets.QLabel("0", self)
 		self.knotITTOknotIT_res = QtWidgets.QLabel("0", self)
-
-		output_grid.addWidget(ms_Label,     0, 0)
-		output_grid.addWidget(mmin_Label,   0, 1)
-		output_grid.addWidget(kmh_Label,    0, 2)
-		output_grid.addWidget(fts_Label,    0, 3)
-		output_grid.addWidget(ftmin_Label,  0, 4)
-		output_grid.addWidget(miSThu_Label, 0, 5)
-		output_grid.addWidget(knotUK_Label, 0, 6)
-		output_grid.addWidget(knotIT_Label, 0, 7)
 
 		output_grid.addWidget(self.msTOms_res,     1, 0)
 		output_grid.addWidget(self.msTOmmin_res,   1, 1)
@@ -4109,15 +4029,13 @@ class Vol_Win(QtWidgets.QWidget):
 		self.galUKi_LinEd = QtWidgets.QLineEdit()
 		self.barri_LinEd  = QtWidgets.QLineEdit()
 
-		m3u_Label    = QtWidgets.QLabel("m\u00B3")
-		dm3u_Label   = QtWidgets.QLabel("dm\u00B3 & l")
-		cm3u_Label   = QtWidgets.QLabel("cm\u00B3 & ml")
-		in3u_Label   = QtWidgets.QLabel("in\u00B3")
-		ft3u_Label   = QtWidgets.QLabel("ft\u00B3")
-		yd3u_Label   = QtWidgets.QLabel("yard\u00B3")
-		galUSu_Label = QtWidgets.QLabel("gal<sub>US</sub>")
-		galUKu_Label = QtWidgets.QLabel("gal<sub>UK</sub>")
-		barru_Label  = QtWidgets.QLabel("barrel<sub>oil, US</sub>")
+		Label_list = ["m\u00B3", "dm\u00B3 & l", "cm\u00B3 & ml", "in\u00B3", "ft\u00B3", "yard\u00B3", "gal<sub>US</sub>", "gal<sub>UK</sub>", "barrel<sub>oil, US</sub>"]
+		i = 1
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			input_grid.addWidget(Label_name, i, 1)
+			i = i + 1
 
 		input_grid.addWidget(blanklabel,        0, 0)
 		input_grid.addWidget(self.m3i_LinEd,    1, 0)
@@ -4129,16 +4047,6 @@ class Vol_Win(QtWidgets.QWidget):
 		input_grid.addWidget(self.galUSi_LinEd, 7, 0)
 		input_grid.addWidget(self.galUKi_LinEd, 8, 0)
 		input_grid.addWidget(self.barri_LinEd,  9, 0)
-
-		input_grid.addWidget(m3u_Label,    1, 1)
-		input_grid.addWidget(dm3u_Label,   2, 1)
-		input_grid.addWidget(cm3u_Label,   3, 1)
-		input_grid.addWidget(in3u_Label,   4, 1)
-		input_grid.addWidget(ft3u_Label,   5, 1)
-		input_grid.addWidget(yd3u_Label,   6, 1)
-		input_grid.addWidget(galUSu_Label, 7, 1)
-		input_grid.addWidget(galUKu_Label, 8, 1)
-		input_grid.addWidget(barru_Label,  9, 1)
 
 		input_group.setLayout(input_grid)
 
@@ -4161,15 +4069,13 @@ class Vol_Win(QtWidgets.QWidget):
 
 		output_grid = QtWidgets.QGridLayout()
 
-		m3_Label    = QtWidgets.QLabel("m\u00B3")
-		dm3_Label   = QtWidgets.QLabel("dm\u00B3 & l")
-		cm3_Label   = QtWidgets.QLabel("cm\u00B3 & ml")
-		in3_Label   = QtWidgets.QLabel("in\u00B3")
-		ft3_Label   = QtWidgets.QLabel("ft\u00B3")
-		yd3_Label   = QtWidgets.QLabel("yard\u00B3")
-		galUS_Label = QtWidgets.QLabel("gal<sub>US</sub>")
-		galUK_Label = QtWidgets.QLabel("gal<sub>UK</sub>")
-		barr_Label = QtWidgets.QLabel("barrel<sub>oil, US</sub>")
+		Label_list = ["m\u00B3", "dm\u00B3 & l", "cm\u00B3 & ml", "in\u00B3", "ft\u00B3", "yard\u00B3", "gal<sub>US</sub>", "gal<sub>UK</sub>", "barrel<sub>oil, US</sub>"]
+		i = 0
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			output_grid.addWidget(Label_name, 0, i)
+			i = i + 1
 
 		self.m3TOm3_res    = QtWidgets.QLabel("0", self)
 		self.m3TOdm3_res   = QtWidgets.QLabel("0", self)
@@ -4260,16 +4166,6 @@ class Vol_Win(QtWidgets.QWidget):
 		self.barrTOgalUS_res = QtWidgets.QLabel("0", self)
 		self.barrTOgalUK_res = QtWidgets.QLabel("0", self)
 		self.barrTObarr_res  = QtWidgets.QLabel("0", self)
-
-		output_grid.addWidget(m3_Label,    0, 0)
-		output_grid.addWidget(dm3_Label,   0, 1)
-		output_grid.addWidget(cm3_Label,   0, 2)
-		output_grid.addWidget(in3_Label,   0, 3)
-		output_grid.addWidget(ft3_Label,   0, 4)
-		output_grid.addWidget(yd3_Label,   0, 5)
-		output_grid.addWidget(galUS_Label, 0, 6)
-		output_grid.addWidget(galUK_Label, 0, 7)
-		output_grid.addWidget(barr_Label,  0, 8)
 
 		output_grid.addWidget(self.m3TOm3_res,    1, 0)
 		output_grid.addWidget(self.m3TOdm3_res,   1, 1)
