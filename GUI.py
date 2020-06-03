@@ -2,7 +2,7 @@
 # contact: domcapkovic@gmail.com; https://www.linkedin.com/in/dominik-čapkovič-b0ab8575/
 # GitHub: https://github.com/kilimetr
 
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
 import sys
 
 
@@ -283,25 +283,23 @@ class Area_Win(QtWidgets.QWidget):
 		self.acri_LinEd   = QtWidgets.QLineEdit()
 		self.mi2STi_LinEd = QtWidgets.QLineEdit()
 
+		LinEd_list = [self.m2i_LinEd, self.cm2i_LinEd, self.mm2i_LinEd, self.ai_LinEd, self.hai_LinEd, self.in2i_LinEd, self.ft2i_LinEd, self.yd2i_LinEd,
+					  self.acri_LinEd, self.mi2STi_LinEd]
+		
 		Label_list = ["m\u00B2", "cm\u00B2", "mm\u00B2", "a", "ha", "in\u00B2", "ft\u00B2", "yard\u00B2", "acr", "mile\u00B2<sub>statute</sub>"]
-		i = 1
 
+		input_grid.addWidget(blanklabel,         0, 0)
+
+		i = 1
+		for item in LinEd_list:
+			input_grid.addWidget(item, i, 0)
+			i = i + 1
+
+		i = 1
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			input_grid.addWidget(Label_name, i, 1)
 			i = i + 1
-
-		input_grid.addWidget(blanklabel,         0, 0)
-		input_grid.addWidget(self.m2i_LinEd,     1, 0)
-		input_grid.addWidget(self.cm2i_LinEd,    2, 0)
-		input_grid.addWidget(self.mm2i_LinEd,    3, 0)
-		input_grid.addWidget(self.ai_LinEd,      4, 0)
-		input_grid.addWidget(self.hai_LinEd,     5, 0)
-		input_grid.addWidget(self.in2i_LinEd,    6, 0)
-		input_grid.addWidget(self.ft2i_LinEd,    7, 0)
-		input_grid.addWidget(self.yd2i_LinEd,    8, 0)
-		input_grid.addWidget(self.acri_LinEd,    9, 0)
-		input_grid.addWidget(self.mi2STi_LinEd, 10, 0)
 
 		input_group.setLayout(input_grid)
 
@@ -342,8 +340,6 @@ class Area_Win(QtWidgets.QWidget):
 		self.m2TOyd2_res   = QtWidgets.QLabel("0", self)
 		self.m2TOacr_res   = QtWidgets.QLabel("0", self)
 		self.m2TOmi2ST_res = QtWidgets.QLabel("0", self)
-
-		# self.m2TOm2_res.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 
 		self.cm2TOm2_res    = QtWidgets.QLabel("0", self)
 		self.cm2TOcm2_res   = QtWidgets.QLabel("0", self)
@@ -444,119 +440,86 @@ class Area_Win(QtWidgets.QWidget):
 		self.mi2STTOacr_res   = QtWidgets.QLabel("0", self)
 		self.mi2STTOmi2ST_res = QtWidgets.QLabel("0", self)
 
-		# self.widget = widget("", *args, **kw)
-		# if widget == QtWidgets.QLabel():
-			# self.widget.setTextInteractionFlags(Qt.TextSelectableByMouse)
+		self.m2TO_Label = [self.m2TOm2_res, self.m2TOcm2_res, self.m2TOmm2_res, self.m2TOa_res, self.m2TOha_res, self.m2TOin2_res, self.m2TOft2_res, self.m2TOyd2_res,
+					  self.m2TOacr_res, self.m2TOmi2ST_res]
+		i = 0
+		for item in self.m2TO_Label:
+			output_grid.addWidget(item, 1, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
-		output_grid.addWidget(self.m2TOm2_res,    1, 0)
-		output_grid.addWidget(self.m2TOcm2_res,   1, 1)
-		output_grid.addWidget(self.m2TOmm2_res,   1, 2)
-		output_grid.addWidget(self.m2TOa_res,     1, 3)
-		output_grid.addWidget(self.m2TOha_res,    1, 4)
-		output_grid.addWidget(self.m2TOin2_res,   1, 5)
-		output_grid.addWidget(self.m2TOft2_res,   1, 6)
-		output_grid.addWidget(self.m2TOyd2_res,   1, 7)
-		output_grid.addWidget(self.m2TOacr_res,   1, 8)
-		output_grid.addWidget(self.m2TOmi2ST_res, 1, 9)
+		cm2TO_Label = [self.cm2TOm2_res, self.cm2TOcm2_res, self.cm2TOmm2_res, self.cm2TOa_res, self.cm2TOha_res, self.cm2TOin2_res, self.cm2TOft2_res, self.cm2TOyd2_res,
+					   self.cm2TOacr_res, self.cm2TOmi2ST_res]
+		i = 0
+		for item in cm2TO_Label:
+			output_grid.addWidget(item, 2, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
-		output_grid.addWidget(self.cm2TOm2_res,    2, 0)
-		output_grid.addWidget(self.cm2TOcm2_res,   2, 1)
-		output_grid.addWidget(self.cm2TOmm2_res,   2, 2)
-		output_grid.addWidget(self.cm2TOa_res,     2, 3)
-		output_grid.addWidget(self.cm2TOha_res,    2, 4)
-		output_grid.addWidget(self.cm2TOin2_res,   2, 5)
-		output_grid.addWidget(self.cm2TOft2_res,   2, 6)
-		output_grid.addWidget(self.cm2TOyd2_res,   2, 7)
-		output_grid.addWidget(self.cm2TOacr_res,   2, 8)
-		output_grid.addWidget(self.cm2TOmi2ST_res, 2, 9)
+		mm2TO_Label = [self.mm2TOm2_res, self.mm2TOcm2_res, self.mm2TOmm2_res, self.mm2TOa_res, self.mm2TOha_res, self.mm2TOin2_res, self.mm2TOft2_res, self.mm2TOyd2_res,
+					   self.mm2TOacr_res, self.mm2TOmi2ST_res]
+		i = 0
+		for item in mm2TO_Label:
+			output_grid.addWidget(item, 3, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
-		output_grid.addWidget(self.mm2TOm2_res,    3, 0)
-		output_grid.addWidget(self.mm2TOcm2_res,   3, 1)
-		output_grid.addWidget(self.mm2TOmm2_res,   3, 2)
-		output_grid.addWidget(self.mm2TOa_res,     3, 3)
-		output_grid.addWidget(self.mm2TOha_res,    3, 4)
-		output_grid.addWidget(self.mm2TOin2_res,   3, 5)
-		output_grid.addWidget(self.mm2TOft2_res,   3, 6)
-		output_grid.addWidget(self.mm2TOyd2_res,   3, 7)
-		output_grid.addWidget(self.mm2TOacr_res,   3, 8)
-		output_grid.addWidget(self.mm2TOmi2ST_res, 3, 9)
+		aTO_Label = [self.aTOm2_res, self.aTOcm2_res, self.aTOmm2_res, self.aTOa_res, self.aTOha_res, self.aTOin2_res, self.aTOft2_res, self.aTOyd2_res,
+					   self.aTOacr_res, self.aTOmi2ST_res]
+		i = 0
+		for item in aTO_Label:
+			output_grid.addWidget(item, 4, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
-		output_grid.addWidget(self.aTOm2_res,    4, 0)
-		output_grid.addWidget(self.aTOcm2_res,   4, 1)
-		output_grid.addWidget(self.aTOmm2_res,   4, 2)
-		output_grid.addWidget(self.aTOa_res,     4, 3)
-		output_grid.addWidget(self.aTOha_res,    4, 4)
-		output_grid.addWidget(self.aTOin2_res,   4, 5)
-		output_grid.addWidget(self.aTOft2_res,   4, 6)
-		output_grid.addWidget(self.aTOyd2_res,   4, 7)
-		output_grid.addWidget(self.aTOacr_res,   4, 8)
-		output_grid.addWidget(self.aTOmi2ST_res, 4, 9)
+		haTO_Label = [self.haTOm2_res, self.haTOcm2_res, self.haTOmm2_res, self.haTOa_res, self.haTOha_res, self.haTOin2_res, self.haTOft2_res, self.haTOyd2_res,
+					  self.haTOacr_res, self.haTOmi2ST_res]
+		i = 0
+		for item in haTO_Label:
+			output_grid.addWidget(item, 5, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
-		output_grid.addWidget(self.haTOm2_res,    5, 0)
-		output_grid.addWidget(self.haTOcm2_res,   5, 1)
-		output_grid.addWidget(self.haTOmm2_res,   5, 2)
-		output_grid.addWidget(self.haTOa_res,     5, 3)
-		output_grid.addWidget(self.haTOha_res,    5, 4)
-		output_grid.addWidget(self.haTOin2_res,   5, 5)
-		output_grid.addWidget(self.haTOft2_res,   5, 6)
-		output_grid.addWidget(self.haTOyd2_res,   5, 7)
-		output_grid.addWidget(self.haTOacr_res,   5, 8)
-		output_grid.addWidget(self.haTOmi2ST_res, 5, 9)
+		in2TO_Label = [self.in2TOm2_res, self.in2TOcm2_res, self.in2TOmm2_res, self.in2TOa_res, self.in2TOha_res, self.in2TOin2_res, self.in2TOft2_res, self.in2TOyd2_res,
+					   self.in2TOacr_res, self.in2TOmi2ST_res]
+		i = 0
+		for item in in2TO_Label:
+			output_grid.addWidget(item, 6, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
-		output_grid.addWidget(self.in2TOm2_res,    6, 0)
-		output_grid.addWidget(self.in2TOcm2_res,   6, 1)
-		output_grid.addWidget(self.in2TOmm2_res,   6, 2)
-		output_grid.addWidget(self.in2TOa_res,     6, 3)
-		output_grid.addWidget(self.in2TOha_res,    6, 4)
-		output_grid.addWidget(self.in2TOin2_res,   6, 5)
-		output_grid.addWidget(self.in2TOft2_res,   6, 6)
-		output_grid.addWidget(self.in2TOyd2_res,   6, 7)
-		output_grid.addWidget(self.in2TOacr_res,   6, 8)
-		output_grid.addWidget(self.in2TOmi2ST_res, 6, 9)
+		ft2TO_Label = [self.ft2TOm2_res, self.ft2TOcm2_res, self.ft2TOmm2_res, self.ft2TOa_res, self.ft2TOha_res, self.ft2TOin2_res, self.ft2TOft2_res, self.ft2TOyd2_res,
+					   self.ft2TOacr_res, self.ft2TOmi2ST_res]
+		i = 0
+		for item in ft2TO_Label:
+			output_grid.addWidget(item, 7, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
-		output_grid.addWidget(self.ft2TOm2_res,    7, 0)
-		output_grid.addWidget(self.ft2TOcm2_res,   7, 1)
-		output_grid.addWidget(self.ft2TOmm2_res,   7, 2)
-		output_grid.addWidget(self.ft2TOa_res,     7, 3)
-		output_grid.addWidget(self.ft2TOha_res,    7, 4)
-		output_grid.addWidget(self.ft2TOin2_res,   7, 5)
-		output_grid.addWidget(self.ft2TOft2_res,   7, 6)
-		output_grid.addWidget(self.ft2TOyd2_res,   7, 7)
-		output_grid.addWidget(self.ft2TOacr_res,   7, 8)
-		output_grid.addWidget(self.ft2TOmi2ST_res, 7, 9)
+		yd2TO_Label = [self.yd2TOm2_res, self.yd2TOcm2_res, self.yd2TOmm2_res, self.yd2TOa_res, self.yd2TOha_res, self.yd2TOin2_res, self.yd2TOft2_res, self.yd2TOyd2_res,
+					   self.yd2TOacr_res, self.yd2TOmi2ST_res]
+		i = 0
+		for item in yd2TO_Label:
+			output_grid.addWidget(item, 8, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
-		output_grid.addWidget(self.yd2TOm2_res,    8, 0)
-		output_grid.addWidget(self.yd2TOcm2_res,   8, 1)
-		output_grid.addWidget(self.yd2TOmm2_res,   8, 2)
-		output_grid.addWidget(self.yd2TOa_res,     8, 3)
-		output_grid.addWidget(self.yd2TOha_res,    8, 4)
-		output_grid.addWidget(self.yd2TOin2_res,   8, 5)
-		output_grid.addWidget(self.yd2TOft2_res,   8, 6)
-		output_grid.addWidget(self.yd2TOyd2_res,   8, 7)
-		output_grid.addWidget(self.yd2TOacr_res,   8, 8)
-		output_grid.addWidget(self.yd2TOmi2ST_res, 8, 9)
+		acrTO_Label = [self.acrTOm2_res, self.acrTOcm2_res, self.acrTOmm2_res, self.acrTOa_res, self.acrTOha_res, self.acrTOin2_res, self.acrTOft2_res, self.acrTOyd2_res,
+					   self.acrTOacr_res, self.acrTOmi2ST_res]
+		i = 0
+		for item in acrTO_Label:
+			output_grid.addWidget(item, 9, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
-		output_grid.addWidget(self.acrTOm2_res,    9, 0)
-		output_grid.addWidget(self.acrTOcm2_res,   9, 1)
-		output_grid.addWidget(self.acrTOmm2_res,   9, 2)
-		output_grid.addWidget(self.acrTOa_res,     9, 3)
-		output_grid.addWidget(self.acrTOha_res,    9, 4)
-		output_grid.addWidget(self.acrTOin2_res,   9, 5)
-		output_grid.addWidget(self.acrTOft2_res,   9, 6)
-		output_grid.addWidget(self.acrTOyd2_res,   9, 7)
-		output_grid.addWidget(self.acrTOacr_res,   9, 8)
-		output_grid.addWidget(self.acrTOmi2ST_res, 9, 9)
+		mi2STTO_Label = [self.mi2STTOm2_res, self.mi2STTOcm2_res, self.mi2STTOmm2_res, self.mi2STTOa_res, self.mi2STTOha_res, self.mi2STTOin2_res, self.mi2STTOft2_res, 
+						 self.mi2STTOyd2_res, self.mi2STTOacr_res, self.mi2STTOmi2ST_res]
+		i = 0
+		for item in mi2STTO_Label:
+			output_grid.addWidget(item, 10, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
-		output_grid.addWidget(self.mi2STTOm2_res,    10, 0)
-		output_grid.addWidget(self.mi2STTOcm2_res,   10, 1)
-		output_grid.addWidget(self.mi2STTOmm2_res,   10, 2)
-		output_grid.addWidget(self.mi2STTOa_res,     10, 3)
-		output_grid.addWidget(self.mi2STTOha_res,    10, 4)
-		output_grid.addWidget(self.mi2STTOin2_res,   10, 5)
-		output_grid.addWidget(self.mi2STTOft2_res,   10, 6)
-		output_grid.addWidget(self.mi2STTOyd2_res,   10, 7)
-		output_grid.addWidget(self.mi2STTOacr_res,   10, 8)
-		output_grid.addWidget(self.mi2STTOmi2ST_res, 10, 9)
 
 		output_group.setLayout(output_grid)
 
@@ -574,6 +537,8 @@ class Area_Win(QtWidgets.QWidget):
 		m2TOacr_proc   = float(self.m2i_LinEd.text()) * 2.471054e-04
 		m2TOmi2ST_proc = float(self.m2i_LinEd.text()) * 3.861022e-07
 
+		# for item in self.m2TO_Label:
+		# 	item.setText(str(m2TOm2_proc))
 		self.m2TOm2_res.setText(str(round(m2TOm2_proc,       8)))
 		self.m2TOcm2_res.setText(str(round(m2TOcm2_proc,     8)))
 		self.m2TOmm2_res.setText(str(round(m2TOmm2_proc,     8)))
@@ -830,21 +795,20 @@ class Heatval_Win(QtWidgets.QWidget):
 		self.MJm3_kJdm3i_LinEd	= QtWidgets.QLineEdit()
 
 		Label_list = ["BTU/ft\u00B3", "BTU/gal<sub>UK</sub>", "BTU/gal<sub>US</sub>", "kJ/m\u00B3", "kWh/m\u00B3", "MJ/m\u00B3 & kJ/dm\u00B3"]
+		
 		i = 1
-
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			input_grid.addWidget(Label_name, i, 1)
 			i = i + 1
 
-		input_grid.addWidget(blanklabel,              0, 0)
-		input_grid.addWidget(self.BTUft3i_LinEd,      1, 0)
-		input_grid.addWidget(self.BTUgalUKi_LinEd,    2, 0)
-		input_grid.addWidget(self.BTUgalUSi_LinEd,    3, 0)
-		input_grid.addWidget(self.kJm3i_LinEd,        4, 0)
-		input_grid.addWidget(self.kWhm3i_LinEd,       5, 0)
-		input_grid.addWidget(self.MJm3_kJdm3i_LinEd,  6, 0)
-
+		LinEd_list = [self.BTUft3i_LinEd, self.BTUgalUKi_LinEd, self.BTUgalUSi_LinEd, self.kJm3i_LinEd, self.kWhm3i_LinEd, self.MJm3_kJdm3i_LinEd]
+		
+		i = 1
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			input_grid.addWidget(Label_name, i, 0)
+			i = i + 1
 
 		input_group.setLayout(input_grid)
 
@@ -864,8 +828,8 @@ class Heatval_Win(QtWidgets.QWidget):
 		output_grid = QtWidgets.QGridLayout()
 
 		Label_list = ["BTU/ft\u00B3", "BTU/gal<sub>UK</sub>", "BTU/gal<sub>US</sub>", "kJ/m\u00B3", "kWh/m\u00B3", "MJ/m\u00B3 & kJ/dm\u00B3"]
+		
 		i = 0
-
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			output_grid.addWidget(Label_name, 0, i)
@@ -913,47 +877,54 @@ class Heatval_Win(QtWidgets.QWidget):
 		self.MJm3_kJdm3TOkWhm3_res      = QtWidgets.QLabel("0", self)
 		self.MJm3_kJdm3TOMJm3_kJdm3_res = QtWidgets.QLabel("0", self)
 
-		output_grid.addWidget(self.BTUft3TOBTUft3_res,     1, 0)
-		output_grid.addWidget(self.BTUft3TOBTUgalUK_res,   1, 1)
-		output_grid.addWidget(self.BTUft3TOBTUgalUS_res,   1, 2)
-		output_grid.addWidget(self.BTUft3TOkJm3_res,       1, 3)
-		output_grid.addWidget(self.BTUft3TOkWhm3_res,      1, 4)
-		output_grid.addWidget(self.BTUft3TOMJm3_kJdm3_res, 1, 5)
+		self.BTUft3TO_Label = [self.BTUft3TOBTUft3_res, self.BTUft3TOBTUfalUK_res, self.BTUft3TOBTUgalUS_res, self.BTUft3TOkJm3_res, self.BTUft3TOkWhm3_res, 
+							   self.BTUft3TOMJm3_kJdm3_res]
+		i = 0
+		for item in self.BTUft3TO_Label:
+			output_grid.addWidget(item, 1, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
-		output_grid.addWidget(self.BTUgalUKTOBTUft3_res,     2, 0)
-		output_grid.addWidget(self.BTUgalUKTOBTUgalUK_res,   2, 1)
-		output_grid.addWidget(self.BTUgalUKTOBTUgalUS_res,   2, 2)
-		output_grid.addWidget(self.BTUgalUKTOkJm3_res,       2, 3)
-		output_grid.addWidget(self.BTUgalUKTOkWhm3_res,      2, 4)
-		output_grid.addWidget(self.BTUgalUKTOMJm3_kJdm3_res, 2, 5)
+		self.BTUgalUKTO_Label = [self.BTUgalUKTOBTUft3_res, self.BTUgalUKTOBTUfalUK_res, self.BTUgalUKTOBTUgalUS_res, self.BTUgalUKTOkJm3_res, self.BTUgalUKTOkWhm3_res, 
+							   self.BTUgalUKTOMJm3_kJdm3_res]
+		i = 0
+		for item in self.BTgalUKTO_Label:
+			output_grid.addWidget(item, 2, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
-		output_grid.addWidget(self.BTUgalUSTOBTUft3_res,     3, 0)
-		output_grid.addWidget(self.BTUgalUSTOBTUgalUK_res,   3, 1)
-		output_grid.addWidget(self.BTUgalUSTOBTUgalUS_res,   3, 2)
-		output_grid.addWidget(self.BTUgalUSTOkJm3_res,       3, 3)
-		output_grid.addWidget(self.BTUgalUSTOkWhm3_res,      3, 4)
-		output_grid.addWidget(self.BTUgalUSTOMJm3_kJdm3_res, 3, 5)
+		self.BTUgalUSTO_Label = [self.BTUgalUSTOBTUft3_res, self.BTUgalUSTOBTUfalUK_res, self.BTUgalUUSOBTUgalUS_res, self.BTUgalUUSOkJm3_res, self.BTUgalUSTOkWhm3_res, 
+							   self.BTUgalUSTOMJm3_kJdm3_res]
+		i = 0
+		for item in self.BTgalUSTO_Label:
+			output_grid.addWidget(item, 3, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
-		output_grid.addWidget(self.kJm3TOBTUft3_res,     4, 0)
-		output_grid.addWidget(self.kJm3TOBTUgalUK_res,   4, 1)
-		output_grid.addWidget(self.kJm3TOBTUgalUS_res,   4, 2)
-		output_grid.addWidget(self.kJm3TOkJm3_res,       4, 3)
-		output_grid.addWidget(self.kJm3TOkWhm3_res,      4, 4)
-		output_grid.addWidget(self.kJm3TOMJm3_kJdm3_res, 4, 5)
+		self.kJm3KTO_Label = [self.BkJm3TOBTUft3_res, self.BTkJm3TOBTUfalUK_res, self.BkJm3TOBTUgalUS_res, self.BkJm3TOkJm3_res, self.BkJm3TOkWhm3_res, 
+							   self.BkJm3TOMJm3_kJdm3_res]
+		i = 0
+		for item in self.kJm3TO_Label:
+			output_grid.addWidget(item, 4, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
-		output_grid.addWidget(self.kWhm3TOBTUft3_res,     5, 0)
-		output_grid.addWidget(self.kWhm3TOBTUgalUK_res,   5, 1)
-		output_grid.addWidget(self.kWhm3TOBTUgalUS_res,   5, 2)
-		output_grid.addWidget(self.kWhm3TOkJm3_res,       5, 3)
-		output_grid.addWidget(self.kWhm3TOkWhm3_res,      5, 4)
-		output_grid.addWidget(self.kWhm3TOMJm3_kJdm3_res, 5, 5)
 
-		output_grid.addWidget(self.MJm3_kJdm3TOBTUft3_res,     6, 0)
-		output_grid.addWidget(self.MJm3_kJdm3TOBTUgalUK_res,   6, 1)
-		output_grid.addWidget(self.MJm3_kJdm3TOBTUgalUS_res,   6, 2)
-		output_grid.addWidget(self.MJm3_kJdm3TOkJm3_res,       6, 3)
-		output_grid.addWidget(self.MJm3_kJdm3TOkWhm3_res,      6, 4)
-		output_grid.addWidget(self.MJm3_kJdm3TOMJm3_kJdm3_res, 6, 5)
+		self.kWhm3TO_Label = [self.kWhm3TOBTUft3_res, self.kWhm3TOBTUfalUK_res, self.kWhm3TOBTUgalUS_res, self.kWhm3TOkJm3_res, self.kWhm3TOkWhm3_res, 
+							   self.kWhm3TOMJm3_kJdm3_res]
+		i = 0
+		for item in self.kWhm3TO_Label:
+			output_grid.addWidget(item, 5, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		self.MJm3_kJdm3TO_Label = [self.MJm3_kJdm3TOBTUft3_res, self.MJm3_kJdm3TOBTUfalUK_res, self.MJm3_kJdm3TOBTUgalUS_res, self.MJm3_kJdm3TOkJm3_res, 
+								   self.MJm3_kJdm3TOkWhm3_res, self.MJm3_kJdm3TOMJm3_kJdm3_res]
+		i = 0
+		for item in self.MJm3_kJdm3TO_Label:
+			output_grid.addWidget(item, 6, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
 		output_group.setLayout(output_grid)
 
