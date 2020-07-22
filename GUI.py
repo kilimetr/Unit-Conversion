@@ -6,7 +6,6 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 import sys
 
 
-
 class MainWindow(QtWidgets.QWidget):
 
 	def __init__(self, parent = None):
@@ -286,16 +285,14 @@ class Area_Win(QtWidgets.QWidget):
 		LinEd_list = [self.m2i_LinEd, self.cm2i_LinEd, self.mm2i_LinEd, self.ai_LinEd, self.hai_LinEd, self.in2i_LinEd, self.ft2i_LinEd, self.yd2i_LinEd,
 					  self.acri_LinEd, self.mi2STi_LinEd]
 		
-		Label_list = ["m\u00B2", "cm\u00B2", "mm\u00B2", "a", "ha", "in\u00B2", "ft\u00B2", "yard\u00B2", "acr", "mile\u00B2<sub>statute</sub>"]
-
-		input_grid.addWidget(blanklabel,         0, 0)
+		Label_list = [blanklabel, "m\u00B2", "cm\u00B2", "mm\u00B2", "a", "ha", "in\u00B2", "ft\u00B2", "yard\u00B2", "acr", "mile\u00B2<sub>statute</sub>"]
 
 		i = 1
 		for item in LinEd_list:
 			input_grid.addWidget(item, i, 0)
 			i = i + 1
 
-		i = 1
+		i = 0
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			input_grid.addWidget(Label_name, i, 1)
@@ -785,8 +782,9 @@ class Heatval_Win(QtWidgets.QWidget):
 		input_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
 		
 		input_grid = QtWidgets.QGridLayout()
+		input_grid.setColumnMinimumWidth(0, 130)
 		
-		blanklabel              = QtWidgets.QLabel(self)
+		blanklabel              = QtWidgets.QLabel()
 		self.BTUft3i_LinEd      = QtWidgets.QLineEdit()
 		self.BTUgalUKi_LinEd    = QtWidgets.QLineEdit()
 		self.BTUgalUSi_LinEd    = QtWidgets.QLineEdit()
@@ -794,9 +792,9 @@ class Heatval_Win(QtWidgets.QWidget):
 		self.kWhm3i_LinEd	    = QtWidgets.QLineEdit()
 		self.MJm3_kJdm3i_LinEd	= QtWidgets.QLineEdit()
 
-		Label_list = ["BTU/ft\u00B3", "BTU/gal<sub>UK</sub>", "BTU/gal<sub>US</sub>", "kJ/m\u00B3", "kWh/m\u00B3", "MJ/m\u00B3 & kJ/dm\u00B3"]
+		Label_list = [blanklabel, "BTU/ft\u00B3", "BTU/gal<sub>UK</sub>", "BTU/gal<sub>US</sub>", "kJ/m\u00B3", "kWh/m\u00B3", "MJ/m\u00B3 & kJ/dm\u00B3"]
 		
-		i = 1
+		i = 0
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			input_grid.addWidget(Label_name, i, 1)
@@ -805,9 +803,8 @@ class Heatval_Win(QtWidgets.QWidget):
 		LinEd_list = [self.BTUft3i_LinEd, self.BTUgalUKi_LinEd, self.BTUgalUSi_LinEd, self.kJm3i_LinEd, self.kWhm3i_LinEd, self.MJm3_kJdm3i_LinEd]
 		
 		i = 1
-		for item in Label_list:
-			Label_name = QtWidgets.QLabel(item)
-			input_grid.addWidget(Label_name, i, 0)
+		for item in LinEd_list:
+			input_grid.addWidget(item, i, 0)
 			i = i + 1
 
 		input_group.setLayout(input_grid)
@@ -877,7 +874,7 @@ class Heatval_Win(QtWidgets.QWidget):
 		self.MJm3_kJdm3TOkWhm3_res      = QtWidgets.QLabel("0", self)
 		self.MJm3_kJdm3TOMJm3_kJdm3_res = QtWidgets.QLabel("0", self)
 
-		self.BTUft3TO_Label = [self.BTUft3TOBTUft3_res, self.BTUft3TOBTUfalUK_res, self.BTUft3TOBTUgalUS_res, self.BTUft3TOkJm3_res, self.BTUft3TOkWhm3_res, 
+		self.BTUft3TO_Label = [self.BTUft3TOBTUft3_res, self.BTUft3TOBTUgalUK_res, self.BTUft3TOBTUgalUS_res, self.BTUft3TOkJm3_res, self.BTUft3TOkWhm3_res, 
 							   self.BTUft3TOMJm3_kJdm3_res]
 		i = 0
 		for item in self.BTUft3TO_Label:
@@ -885,24 +882,24 @@ class Heatval_Win(QtWidgets.QWidget):
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		self.BTUgalUKTO_Label = [self.BTUgalUKTOBTUft3_res, self.BTUgalUKTOBTUfalUK_res, self.BTUgalUKTOBTUgalUS_res, self.BTUgalUKTOkJm3_res, self.BTUgalUKTOkWhm3_res, 
+		self.BTUgalUKTO_Label = [self.BTUgalUKTOBTUft3_res, self.BTUgalUKTOBTUgalUK_res, self.BTUgalUKTOBTUgalUS_res, self.BTUgalUKTOkJm3_res, self.BTUgalUKTOkWhm3_res, 
 							   self.BTUgalUKTOMJm3_kJdm3_res]
 		i = 0
-		for item in self.BTgalUKTO_Label:
+		for item in self.BTUgalUKTO_Label:
 			output_grid.addWidget(item, 2, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		self.BTUgalUSTO_Label = [self.BTUgalUSTOBTUft3_res, self.BTUgalUSTOBTUfalUK_res, self.BTUgalUUSOBTUgalUS_res, self.BTUgalUUSOkJm3_res, self.BTUgalUSTOkWhm3_res, 
+		self.BTUgalUSTO_Label = [self.BTUgalUSTOBTUft3_res, self.BTUgalUSTOBTUgalUK_res, self.BTUgalUSTOBTUgalUS_res, self.BTUgalUSTOkJm3_res, self.BTUgalUSTOkWhm3_res, 
 							   self.BTUgalUSTOMJm3_kJdm3_res]
 		i = 0
-		for item in self.BTgalUSTO_Label:
+		for item in self.BTUgalUSTO_Label:
 			output_grid.addWidget(item, 3, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		self.kJm3KTO_Label = [self.BkJm3TOBTUft3_res, self.BTkJm3TOBTUfalUK_res, self.BkJm3TOBTUgalUS_res, self.BkJm3TOkJm3_res, self.BkJm3TOkWhm3_res, 
-							   self.BkJm3TOMJm3_kJdm3_res]
+		self.kJm3TO_Label = [self.kJm3TOBTUft3_res, self.kJm3TOBTUgalUK_res, self.kJm3TOBTUgalUS_res, self.kJm3TOkJm3_res, self.kJm3TOkWhm3_res, 
+							  self.kJm3TOMJm3_kJdm3_res]
 		i = 0
 		for item in self.kJm3TO_Label:
 			output_grid.addWidget(item, 4, i)
@@ -910,7 +907,7 @@ class Heatval_Win(QtWidgets.QWidget):
 			i = i + 1
 
 
-		self.kWhm3TO_Label = [self.kWhm3TOBTUft3_res, self.kWhm3TOBTUfalUK_res, self.kWhm3TOBTUgalUS_res, self.kWhm3TOkJm3_res, self.kWhm3TOkWhm3_res, 
+		self.kWhm3TO_Label = [self.kWhm3TOBTUft3_res, self.kWhm3TOBTUgalUK_res, self.kWhm3TOBTUgalUS_res, self.kWhm3TOkJm3_res, self.kWhm3TOkWhm3_res, 
 							   self.kWhm3TOMJm3_kJdm3_res]
 		i = 0
 		for item in self.kWhm3TO_Label:
@@ -918,7 +915,7 @@ class Heatval_Win(QtWidgets.QWidget):
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		self.MJm3_kJdm3TO_Label = [self.MJm3_kJdm3TOBTUft3_res, self.MJm3_kJdm3TOBTUfalUK_res, self.MJm3_kJdm3TOBTUgalUS_res, self.MJm3_kJdm3TOkJm3_res, 
+		self.MJm3_kJdm3TO_Label = [self.MJm3_kJdm3TOBTUft3_res, self.MJm3_kJdm3TOBTUgalUK_res, self.MJm3_kJdm3TOBTUgalUS_res, self.MJm3_kJdm3TOkJm3_res, 
 								   self.MJm3_kJdm3TOkWhm3_res, self.MJm3_kJdm3TOMJm3_kJdm3_res]
 		i = 0
 		for item in self.MJm3_kJdm3TO_Label:
@@ -1075,25 +1072,22 @@ class Energy_Win(QtWidgets.QWidget):
 		self.ftlbfi_LinEd   = QtWidgets.QLineEdit()
 		self.ftpdli_LinEd   = QtWidgets.QLineEdit()
 
-		Label_list = ["J", "kJ", "kWh", "BTU<sub>internat</sub>", "BTU<sub>mean</sub>", "cal<sub>internat</sub>", "cal<sub>thermal</sub>", "hp-hr", "ft-lbf", "ft-pdl"]
-		i = 1
+		Label_list = [blanklabel, "J", "kJ", "kWh", "BTU<sub>internat</sub>", "BTU<sub>mean</sub>", "cal<sub>internat</sub>", "cal<sub>thermal</sub>", "hp-hr", 
+					  "ft-lbf", "ft-pdl"]
 
+		LinEd_list = [self.Ji_LinEd, self.kJi_LinEd, self.kWhi_LinEd, self.BTUITi_LinEd, self.BTUmeani_LinEd, self.calITi_LinEd, self.calTHi_LinEd, self.hphri_LinEd,
+					  self.ftlbfi_LinEd, self.ftpdli_LinEd]
+
+		i = 1
+		for item in LinEd_list:
+			input_grid.addWidget(item, i, 0)
+			i = i + 1
+
+		i = 0
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			input_grid.addWidget(Label_name, i, 1)
 			i = i + 1
-
-		input_grid.addWidget(blanklabel,           0, 0)
-		input_grid.addWidget(self.Ji_LinEd,        1, 0)
-		input_grid.addWidget(self.kJi_LinEd,       2, 0)
-		input_grid.addWidget(self.kWhi_LinEd,      3, 0)
-		input_grid.addWidget(self.BTUITi_LinEd,    4, 0)
-		input_grid.addWidget(self.BTUmeani_LinEd,  5, 0)
-		input_grid.addWidget(self.calITi_LinEd,    6, 0)
-		input_grid.addWidget(self.calTHi_LinEd,    7, 0)
-		input_grid.addWidget(self.hphri_LinEd,     8, 0)
-		input_grid.addWidget(self.ftlbfi_LinEd,    9, 0)
-		input_grid.addWidget(self.ftpdli_LinEd,   10, 0)
 
 		input_group.setLayout(input_grid)
 
@@ -1234,115 +1228,95 @@ class Energy_Win(QtWidgets.QWidget):
 		self.ftpdlTOftlbf_res   = QtWidgets.QLabel("0", self)
 		self.ftpdlTOftpdl_res   = QtWidgets.QLabel("0", self)
 
-		output_grid.addWidget(self.JTOJ_res,       1, 0)
-		output_grid.addWidget(self.JTOkJ_res,      1, 1)
-		output_grid.addWidget(self.JTOkWh_res,     1, 2)
-		output_grid.addWidget(self.JTOBTUIT_res,   1, 3)
-		output_grid.addWidget(self.JTOBTUmean_res, 1, 4)
-		output_grid.addWidget(self.JTOcalIT_res,   1, 5)
-		output_grid.addWidget(self.JTOcalTH_res,   1, 6)
-		output_grid.addWidget(self.JTOhphr_res,    1, 7)
-		output_grid.addWidget(self.JTOftlbf_res,   1, 8)
-		output_grid.addWidget(self.JTOftpdl_res,   1, 9)
+		self.JTO_Label = [self.JTOJ_res, self.JTOkJ_res, self.JTOkWh_res, self.JTOBTUIT_res, self.JTOBTUmean_res, self.JTOcalIT_res, self.JTOcalTH_res,
+						  self.JTOhphr_res, self.JTOftlbf_res, self.JTOftpdl_res]
 
-		output_grid.addWidget(self.kJTOJ_res,       2, 0)
-		output_grid.addWidget(self.kJTOkJ_res,      2, 1)
-		output_grid.addWidget(self.kJTOkWh_res,     2, 2)
-		output_grid.addWidget(self.kJTOBTUIT_res,   2, 3)
-		output_grid.addWidget(self.kJTOBTUmean_res, 2, 4)
-		output_grid.addWidget(self.kJTOcalIT_res,   2, 5)
-		output_grid.addWidget(self.kJTOcalTH_res,   2, 6)
-		output_grid.addWidget(self.kJTOhphr_res,    2, 7)
-		output_grid.addWidget(self.kJTOftlbf_res,   2, 8)
-		output_grid.addWidget(self.kJTOftpdl_res,   2, 9)
+		self.kJTO_Label = [self.kJTOJ_res, self.kJTOkJ_res, self.kJTOkWh_res, self.kJTOBTUIT_res, self.kJTOBTUmean_res, self.kJTOcalIT_res, self.kJTOcalTH_res,
+						   self.kJTOhphr_res, self.kJTOftlbf_res, self.kJTOftpdl_res]
 
-		output_grid.addWidget(self.kWhTOJ_res,       3, 0)
-		output_grid.addWidget(self.kWhTOkJ_res,      3, 1)
-		output_grid.addWidget(self.kWhTOkWh_res,     3, 2)
-		output_grid.addWidget(self.kWhTOBTUIT_res,   3, 3)
-		output_grid.addWidget(self.kWhTOBTUmean_res, 3, 4)
-		output_grid.addWidget(self.kWhTOcalIT_res,   3, 5)
-		output_grid.addWidget(self.kWhTOcalTH_res,   3, 6)
-		output_grid.addWidget(self.kWhTOhphr_res,    3, 7)
-		output_grid.addWidget(self.kWhTOftlbf_res,   3, 8)
-		output_grid.addWidget(self.kWhTOftpdl_res,   3, 9)
+		self.kWhTO_Label = [self.kWhTOJ_res, self.kWhTOkJ_res, self.kWhTOkWh_res, self.kWhTOBTUIT_res, self.kWhTOBTUmean_res, self.kWhTOcalIT_res, self.kWhTOcalTH_res,
+						    self.kWhTOhphr_res, self.kWhTOftlbf_res, self.kWhTOftpdl_res]
 
-		output_grid.addWidget(self.BTUITTOJ_res,       4, 0)
-		output_grid.addWidget(self.BTUITTOkJ_res,      4, 1)
-		output_grid.addWidget(self.BTUITTOkWh_res,     4, 2)
-		output_grid.addWidget(self.BTUITTOBTUIT_res,   4, 3)
-		output_grid.addWidget(self.BTUITTOBTUmean_res, 4, 4)
-		output_grid.addWidget(self.BTUITTOcalIT_res,   4, 5)
-		output_grid.addWidget(self.BTUITTOcalTH_res,   4, 6)
-		output_grid.addWidget(self.BTUITTOhphr_res,    4, 7)
-		output_grid.addWidget(self.BTUITTOftlbf_res,   4, 8)
-		output_grid.addWidget(self.BTUITTOftpdl_res,   4, 9)
+		self.BTUITTO_Label = [self.BTUITTOJ_res, self.BTUITTOkJ_res, self.BTUITTOkWh_res, self.BTUITTOBTUIT_res, self.BTUITTOBTUmean_res, self.BTUITTOcalIT_res, 
+							  self.BTUITTOcalTH_res, self.BTUITTOhphr_res, self.BTUITTOftlbf_res, self.BTUITTOftpdl_res]
 
-		output_grid.addWidget(self.BTUmeanTOJ_res,       5, 0)
-		output_grid.addWidget(self.BTUmeanTOkJ_res,      5, 1)
-		output_grid.addWidget(self.BTUmeanTOkWh_res,     5, 2)
-		output_grid.addWidget(self.BTUmeanTOBTUIT_res,   5, 3)
-		output_grid.addWidget(self.BTUmeanTOBTUmean_res, 5, 4)
-		output_grid.addWidget(self.BTUmeanTOcalIT_res,   5, 5)
-		output_grid.addWidget(self.BTUmeanTOcalTH_res,   5, 6)
-		output_grid.addWidget(self.BTUmeanTOhphr_res,    5, 7)
-		output_grid.addWidget(self.BTUmeanTOftlbf_res,   5, 8)
-		output_grid.addWidget(self.BTUmeanTOftpdl_res,   5, 9)
+		self.BTUmeanTO_Label = [self.BTUmeanTOJ_res, self.BTUmeanTOkJ_res, self.BTUmeanTOkWh_res, self.BTUmeanTOBTUIT_res, self.BTUmeanTOBTUmean_res, 
+								self.BTUmeanTOcalIT_res, self.BTUmeanTOcalTH_res, self.BTUmeanTOhphr_res, self.BTUmeanTOftlbf_res, self.BTUmeanTOftpdl_res]
 
-		output_grid.addWidget(self.calITTOJ_res,       6, 0)
-		output_grid.addWidget(self.calITTOkJ_res,      6, 1)
-		output_grid.addWidget(self.calITTOkWh_res,     6, 2)
-		output_grid.addWidget(self.calITTOBTUIT_res,   6, 3)
-		output_grid.addWidget(self.calITTOBTUmean_res, 6, 4)
-		output_grid.addWidget(self.calITTOcalIT_res,   6, 5)
-		output_grid.addWidget(self.calITTOcalTH_res,   6, 6)
-		output_grid.addWidget(self.calITTOhphr_res,    6, 7)
-		output_grid.addWidget(self.calITTOftlbf_res,   6, 8)
-		output_grid.addWidget(self.calITTOftpdl_res,   6, 9)
+		self.calITTO_Label = [self.calITTOJ_res, self.calITTOkJ_res, self.calITTOkWh_res, self.calITTOBTUIT_res, self.calITTOBTUmean_res, self.calITTOcalIT_res, 
+							  self.calITTOcalTH_res, self.calITTOhphr_res, self.calITTOftlbf_res, self.calITTOftpdl_res]
 
-		output_grid.addWidget(self.calTHTOJ_res,       7, 0)
-		output_grid.addWidget(self.calTHTOkJ_res,      7, 1)
-		output_grid.addWidget(self.calTHTOkWh_res,     7, 2)
-		output_grid.addWidget(self.calTHTOBTUIT_res,   7, 3)
-		output_grid.addWidget(self.calTHTOBTUmean_res, 7, 4)
-		output_grid.addWidget(self.calTHTOcalIT_res,   7, 5)
-		output_grid.addWidget(self.calTHTOcalTH_res,   7, 6)
-		output_grid.addWidget(self.calTHTOhphr_res,    7, 7)
-		output_grid.addWidget(self.calTHTOftlbf_res,   7, 8)
-		output_grid.addWidget(self.calTHTOftpdl_res,   7, 9)
+		self.calTHTO_Label = [self.calTHTOJ_res, self.calTHTOkJ_res, self.calTHTOkWh_res, self.calTHTOBTUIT_res, self.calTHTOBTUmean_res, self.calTHTOcalIT_res, 
+							  self.calTHTOcalTH_res, self.calTHTOhphr_res, self.calTHTOftlbf_res, self.calTHTOftpdl_res]
 
-		output_grid.addWidget(self.hphrTOJ_res,       8, 0)
-		output_grid.addWidget(self.hphrTOkJ_res,      8, 1)
-		output_grid.addWidget(self.hphrTOkWh_res,     8, 2)
-		output_grid.addWidget(self.hphrTOBTUIT_res,   8, 3)
-		output_grid.addWidget(self.hphrTOBTUmean_res, 8, 4)
-		output_grid.addWidget(self.hphrTOcalIT_res,   8, 5)
-		output_grid.addWidget(self.hphrTOcalTH_res,   8, 6)
-		output_grid.addWidget(self.hphrTOhphr_res,    8, 7)
-		output_grid.addWidget(self.hphrTOftlbf_res,   8, 8)
-		output_grid.addWidget(self.hphrTOftpdl_res,   8, 9)
+		self.hphrTO_Label = [self.hphrTOJ_res, self.hphrTOkJ_res, self.hphrTOkWh_res, self.hphrTOBTUIT_res, self.hphrTOBTUmean_res, self.hphrTOcalIT_res, 
+							 self.hphrTOcalTH_res, self.hphrTOhphr_res, self.hphrTOftlbf_res, self.hphrTOftpdl_res]
 
-		output_grid.addWidget(self.ftlbfTOJ_res,       9, 0)
-		output_grid.addWidget(self.ftlbfTOkJ_res,      9, 1)
-		output_grid.addWidget(self.ftlbfTOkWh_res,     9, 2)
-		output_grid.addWidget(self.ftlbfTOBTUIT_res,   9, 3)
-		output_grid.addWidget(self.ftlbfTOBTUmean_res, 9, 4)
-		output_grid.addWidget(self.ftlbfTOcalIT_res,   9, 5)
-		output_grid.addWidget(self.ftlbfTOcalTH_res,   9, 6)
-		output_grid.addWidget(self.ftlbfTOhphr_res,    9, 7)
-		output_grid.addWidget(self.ftlbfTOftlbf_res,   9, 8)
-		output_grid.addWidget(self.ftlbfTOftpdl_res,   9, 9)
+		self.ftlbfTO_Label = [self.ftlbfTOJ_res, self.ftlbfTOkJ_res, self.ftlbfTOkWh_res, self.ftlbfTOBTUIT_res, self.ftlbfTOBTUmean_res, self.ftlbfTOcalIT_res, 
+							  self.ftlbfTOcalTH_res, self.ftlbfTOhphr_res, self.ftlbfTOftlbf_res, self.ftlbfTOftpdl_res]
 
-		output_grid.addWidget(self.ftpdlTOJ_res,       10, 0)
-		output_grid.addWidget(self.ftpdlTOkJ_res,      10, 1)
-		output_grid.addWidget(self.ftpdlTOkWh_res,     10, 2)
-		output_grid.addWidget(self.ftpdlTOBTUIT_res,   10, 3)
-		output_grid.addWidget(self.ftpdlTOBTUmean_res, 10, 4)
-		output_grid.addWidget(self.ftpdlTOcalIT_res,   10, 5)
-		output_grid.addWidget(self.ftpdlTOcalTH_res,   10, 6)
-		output_grid.addWidget(self.ftpdlTOhphr_res,    10, 7)
-		output_grid.addWidget(self.ftpdlTOftlbf_res,   10, 8)
-		output_grid.addWidget(self.ftpdlTOftpdl_res,   10, 9)
+		self.ftpdlTO_Label = [self.ftpdlTOJ_res, self.ftpdlTOkJ_res, self.ftpdlTOkWh_res, self.ftpdlTOBTUIT_res, self.ftpdlTOBTUmean_res, self.ftpdlTOcalIT_res, 
+							  self.ftpdlTOcalTH_res, self.ftpdlTOhphr_res, self.ftpdlTOftlbf_res, self.ftpdlTOftpdl_res]
+
+		i = 0
+		for item in self.JTO_Label:
+			output_grid.addWidget(item, 1, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.kJTO_Label:
+			output_grid.addWidget(item, 2, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.kWhTO_Label:
+			output_grid.addWidget(item, 3, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.BTUITTO_Label:
+			output_grid.addWidget(item, 4, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.BTUmeanTO_Label:
+			output_grid.addWidget(item, 5, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.calITTO_Label:
+			output_grid.addWidget(item, 6, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.calTHTO_Label:
+			output_grid.addWidget(item, 7, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.hphrTO_Label:
+			output_grid.addWidget(item, 8, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.ftlbfTO_Label:
+			output_grid.addWidget(item, 9, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.ftpdlTO_Label:
+			output_grid.addWidget(item, 10, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
 		output_group.setLayout(output_grid)
 
@@ -1630,7 +1604,7 @@ class Length_Win(QtWidgets.QWidget):
 		input_grid = QtWidgets.QGridLayout()
 		input_grid.setColumnMinimumWidth(0, 130)
 
-		blanklabel        = QtWidgets.QLabel()
+		blanklabel       = QtWidgets.QLabel()
 		self.mi_LinEd    = QtWidgets.QLineEdit()
 		self.cmi_LinEd   = QtWidgets.QLineEdit()
 		self.mmi_LinEd   = QtWidgets.QLineEdit()
@@ -1644,27 +1618,21 @@ class Length_Win(QtWidgets.QWidget):
 		self.miSTi_LinEd = QtWidgets.QLineEdit()
 		self.miNVi_LinEd = QtWidgets.QLineEdit()
 
-		Label_list = ["m", "cm", "mm", "\u03BCm & micron", "Å", "nm", "km", "in", "ft", "yard", "mile<sub>statute</sub>", "mile<sub>navy</sub>"]
-		i = 1
+		LinEd_list = [self.mi_LinEd, self.cmi_LinEd, self.mmi_LinEd, self.umi_LinEd, self.angsi_LinEd, self.nmi_LinEd, self.kmi_LinEd, self.ini_LinEd, self.fti_LinEd,
+					  self.ydi_LinEd, self.miSTi_LinEd, self.miNVi_LinEd]
 
+		Label_list = [blanklabel, "m", "cm", "mm", "\u03BCm & micron", "Å", "nm", "km", "in", "ft", "yard", "mile<sub>statute</sub>", "mile<sub>navy</sub>"]
+
+		i = 0
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			input_grid.addWidget(Label_name, i, 1)
 			i = i + 1
 
-		input_grid.addWidget(blanklabel,        0, 0)
-		input_grid.addWidget(self.mi_LinEd,     1, 0)
-		input_grid.addWidget(self.cmi_LinEd,    2, 0)
-		input_grid.addWidget(self.mmi_LinEd,    3, 0)
-		input_grid.addWidget(self.umi_LinEd,    4, 0)
-		input_grid.addWidget(self.angsi_LinEd,  5, 0)
-		input_grid.addWidget(self.nmi_LinEd,    6, 0)
-		input_grid.addWidget(self.kmi_LinEd,    7, 0)
-		input_grid.addWidget(self.ini_LinEd,    8, 0)
-		input_grid.addWidget(self.fti_LinEd,    9, 0)
-		input_grid.addWidget(self.ydi_LinEd,   10, 0)
-		input_grid.addWidget(self.miSTi_LinEd, 11, 0)
-		input_grid.addWidget(self.miNVi_LinEd, 12, 0)
+		i = 1
+		for item in LinEd_list:
+			input_grid.addWidget(item, i, 0)
+			i = i + 1
 
 		input_group.setLayout(input_grid)
 
@@ -1853,161 +1821,113 @@ class Length_Win(QtWidgets.QWidget):
 		self.miNVTOmiST_res = QtWidgets.QLabel("0", self)
 		self.miNVTOmiNV_res = QtWidgets.QLabel("0", self)
 
-		output_grid.addWidget(self.mTOm_res,    1,  0)
-		output_grid.addWidget(self.mTOcm_res,   1,  1)
-		output_grid.addWidget(self.mTOmm_res,   1,  2)
-		output_grid.addWidget(self.mTOum_res,   1,  3)
-		output_grid.addWidget(self.mTOangs_res, 1,  4)
-		output_grid.addWidget(self.mTOnm_res,   1,  5)
-		output_grid.addWidget(self.mTOkm_res,   1,  6)
-		output_grid.addWidget(self.mTOin_res,   1,  7)
-		output_grid.addWidget(self.mTOft_res,   1,  8)
-		output_grid.addWidget(self.mTOyd_res,   1,  9)
-		output_grid.addWidget(self.mTOmiST_res, 1, 10)
-		output_grid.addWidget(self.mTOmiNV_res, 1, 11)
+		self.mTO_Label = [self.mTOm_res, self.mTOcm_res, self.mTOmm_res, self.mTOum_res, self.mTOangs_res, self.mTOnm_res, self.mTOkm_res, self.mTOin_res, self.mTOft_res,
+						  self.mTOyd_res, self.mTOmiST_res, self.mTOmiNV_res]
 
-		output_grid.addWidget(self.cmTOm_res,    2,  0)
-		output_grid.addWidget(self.cmTOcm_res,   2,  1)
-		output_grid.addWidget(self.cmTOmm_res,   2,  2)
-		output_grid.addWidget(self.cmTOum_res,   2,  3)
-		output_grid.addWidget(self.cmTOangs_res, 2,  4)
-		output_grid.addWidget(self.cmTOnm_res,   2,  5)
-		output_grid.addWidget(self.cmTOkm_res,   2,  6)
-		output_grid.addWidget(self.cmTOin_res,   2,  7)
-		output_grid.addWidget(self.cmTOft_res,   2,  8)
-		output_grid.addWidget(self.cmTOyd_res,   2,  9)
-		output_grid.addWidget(self.cmTOmiST_res, 2, 10)
-		output_grid.addWidget(self.cmTOmiNV_res, 2, 11)
+		self.cmTO_Label = [self.cmTOm_res, self.cmTOcm_res, self.cmTOmm_res, self.cmTOum_res, self.cmTOangs_res, self.cmTOnm_res, self.cmTOkm_res, self.cmTOin_res, 
+						   self.cmTOft_res, self.cmTOyd_res, self.cmTOmiST_res, self.cmTOmiNV_res]
 
-		output_grid.addWidget(self.mmTOm_res,    3,  0)
-		output_grid.addWidget(self.mmTOcm_res,   3,  1)
-		output_grid.addWidget(self.mmTOmm_res,   3,  2)
-		output_grid.addWidget(self.mmTOum_res,   3,  3)
-		output_grid.addWidget(self.mmTOangs_res, 3,  4)
-		output_grid.addWidget(self.mmTOnm_res,   3,  5)
-		output_grid.addWidget(self.mmTOkm_res,   3,  6)
-		output_grid.addWidget(self.mmTOin_res,   3,  7)
-		output_grid.addWidget(self.mmTOft_res,   3,  8)
-		output_grid.addWidget(self.mmTOyd_res,   3,  9)
-		output_grid.addWidget(self.mmTOmiST_res, 3, 10)
-		output_grid.addWidget(self.mmTOmiNV_res, 3, 11)
+		self.mmTO_Label = [self.mmTOm_res, self.mmTOcm_res, self.mmTOmm_res, self.mmTOum_res, self.mmTOangs_res, self.mmTOnm_res, self.mmTOkm_res, self.mmTOin_res, 
+						   self.mmTOft_res, self.mmTOyd_res, self.mmTOmiST_res, self.mmTOmiNV_res]
 
-		output_grid.addWidget(self.umTOm_res,    4,  0)
-		output_grid.addWidget(self.umTOcm_res,   4,  1)
-		output_grid.addWidget(self.umTOmm_res,   4,  2)
-		output_grid.addWidget(self.umTOum_res,   4,  3)
-		output_grid.addWidget(self.umTOangs_res, 4,  4)
-		output_grid.addWidget(self.umTOnm_res,   4,  5)
-		output_grid.addWidget(self.umTOkm_res,   4,  6)
-		output_grid.addWidget(self.umTOin_res,   4,  7)
-		output_grid.addWidget(self.umTOft_res,   4,  8)
-		output_grid.addWidget(self.umTOyd_res,   4,  9)
-		output_grid.addWidget(self.umTOmiST_res, 4, 10)
-		output_grid.addWidget(self.umTOmiNV_res, 4, 11)
+		self.umTO_Label = [self.umTOm_res, self.umTOcm_res, self.umTOmm_res, self.umTOum_res, self.umTOangs_res, self.umTOnm_res, self.umTOkm_res, self.umTOin_res, 
+						   self.umTOft_res, self.umTOyd_res, self.umTOmiST_res, self.umTOmiNV_res]
 
-		output_grid.addWidget(self.angsTOm_res,    5,  0)
-		output_grid.addWidget(self.angsTOcm_res,   5,  1)
-		output_grid.addWidget(self.angsTOmm_res,   5,  2)
-		output_grid.addWidget(self.angsTOum_res,   5,  3)
-		output_grid.addWidget(self.angsTOangs_res, 5,  4)
-		output_grid.addWidget(self.angsTOnm_res,   5,  5)
-		output_grid.addWidget(self.angsTOkm_res,   5,  6)
-		output_grid.addWidget(self.angsTOin_res,   5,  7)
-		output_grid.addWidget(self.angsTOft_res,   5,  8)
-		output_grid.addWidget(self.angsTOyd_res,   5,  9)
-		output_grid.addWidget(self.angsTOmiST_res, 5, 10)
-		output_grid.addWidget(self.angsTOmiNV_res, 5, 11)
+		self.angsTO_Label = [self.angsTOm_res, self.angsTOcm_res, self.angsTOmm_res, self.angsTOum_res, self.angsTOangs_res, self.angsTOnm_res, self.angsTOkm_res, 
+							 self.angsTOin_res, self.angsTOft_res, self.angsTOyd_res, self.angsTOmiST_res, self.angsTOmiNV_res]
 
-		output_grid.addWidget(self.nmTOm_res,    6,  0)
-		output_grid.addWidget(self.nmTOcm_res,   6,  1)
-		output_grid.addWidget(self.nmTOmm_res,   6,  2)
-		output_grid.addWidget(self.nmTOum_res,   6,  3)
-		output_grid.addWidget(self.nmTOangs_res, 6,  4)
-		output_grid.addWidget(self.nmTOnm_res,   6,  5)
-		output_grid.addWidget(self.nmTOkm_res,   6,  6)
-		output_grid.addWidget(self.nmTOin_res,   6,  7)
-		output_grid.addWidget(self.nmTOft_res,   6,  8)
-		output_grid.addWidget(self.nmTOyd_res,   6,  9)
-		output_grid.addWidget(self.nmTOmiST_res, 6, 10)
-		output_grid.addWidget(self.nmTOmiNV_res, 6, 11)
+		self.nmTO_Label = [self.nmTOm_res, self.nmTOcm_res, self.nmTOmm_res, self.nmTOum_res, self.nmTOangs_res, self.nmTOnm_res, self.nmTOkm_res, self.nmTOin_res, 
+						   self.nmTOft_res, self.nmTOyd_res, self.nmTOmiST_res, self.nmTOmiNV_res]
 
-		output_grid.addWidget(self.kmTOm_res,    7,  0)
-		output_grid.addWidget(self.kmTOcm_res,   7,  1)
-		output_grid.addWidget(self.kmTOmm_res,   7,  2)
-		output_grid.addWidget(self.kmTOum_res,   7,  3)
-		output_grid.addWidget(self.kmTOangs_res, 7,  4)
-		output_grid.addWidget(self.kmTOnm_res,   7,  5)
-		output_grid.addWidget(self.kmTOkm_res,   7,  6)
-		output_grid.addWidget(self.kmTOin_res,   7,  7)
-		output_grid.addWidget(self.kmTOft_res,   7,  8)
-		output_grid.addWidget(self.kmTOyd_res,   7,  9)
-		output_grid.addWidget(self.kmTOmiST_res, 7, 10)
-		output_grid.addWidget(self.kmTOmiNV_res, 7, 11)
+		self.kmTO_Label = [self.kmTOm_res, self.kmTOcm_res, self.kmTOmm_res, self.kmTOum_res, self.kmTOangs_res, self.kmTOnm_res, self.kmTOkm_res, self.kmTOin_res, 
+						   self.kmTOft_res, self.kmTOyd_res, self.kmTOmiST_res, self.kmTOmiNV_res]
 
-		output_grid.addWidget(self.inTOm_res,    8,  0)
-		output_grid.addWidget(self.inTOcm_res,   8,  1)
-		output_grid.addWidget(self.inTOmm_res,   8,  2)
-		output_grid.addWidget(self.inTOum_res,   8,  3)
-		output_grid.addWidget(self.inTOangs_res, 8,  4)
-		output_grid.addWidget(self.inTOnm_res,   8,  5)
-		output_grid.addWidget(self.inTOkm_res,   8,  6)
-		output_grid.addWidget(self.inTOin_res,   8,  7)
-		output_grid.addWidget(self.inTOft_res,   8,  8)
-		output_grid.addWidget(self.inTOyd_res,   8,  9)
-		output_grid.addWidget(self.inTOmiST_res, 8, 10)
-		output_grid.addWidget(self.inTOmiNV_res, 8, 11)
+		self.inTO_Label = [self.inTOm_res, self.inTOcm_res, self.inTOmm_res, self.inTOum_res, self.inTOangs_res, self.inTOnm_res, self.inTOkm_res, self.inTOin_res, 
+						   self.inTOft_res, self.inTOyd_res, self.inTOmiST_res, self.inTOmiNV_res]
 
-		output_grid.addWidget(self.ftTOm_res,    9,  0)
-		output_grid.addWidget(self.ftTOcm_res,   9,  1)
-		output_grid.addWidget(self.ftTOmm_res,   9,  2)
-		output_grid.addWidget(self.ftTOum_res,   9,  3)
-		output_grid.addWidget(self.ftTOangs_res, 9,  4)
-		output_grid.addWidget(self.ftTOnm_res,   9,  5)
-		output_grid.addWidget(self.ftTOkm_res,   9,  6)
-		output_grid.addWidget(self.ftTOin_res,   9,  7)
-		output_grid.addWidget(self.ftTOft_res,   9,  8)
-		output_grid.addWidget(self.ftTOyd_res,   9,  9)
-		output_grid.addWidget(self.ftTOmiST_res, 9, 10)
-		output_grid.addWidget(self.ftTOmiNV_res, 9, 11)
+		self.ftTO_Label = [self.ftTOm_res, self.ftTOcm_res, self.ftTOmm_res, self.ftTOum_res, self.ftTOangs_res, self.ftTOnm_res, self.ftTOkm_res, self.ftTOin_res, 
+						   self.ftTOft_res, self.ftTOyd_res, self.ftTOmiST_res, self.ftTOmiNV_res]
 
-		output_grid.addWidget(self.ydTOm_res,    10,  0)
-		output_grid.addWidget(self.ydTOcm_res,   10,  1)
-		output_grid.addWidget(self.ydTOmm_res,   10,  2)
-		output_grid.addWidget(self.ydTOum_res,   10,  3)
-		output_grid.addWidget(self.ydTOangs_res, 10,  4)
-		output_grid.addWidget(self.ydTOnm_res,   10,  5)
-		output_grid.addWidget(self.ydTOkm_res,   10,  6)
-		output_grid.addWidget(self.ydTOin_res,   10,  7)
-		output_grid.addWidget(self.ydTOft_res,   10,  8)
-		output_grid.addWidget(self.ydTOyd_res,   10,  9)
-		output_grid.addWidget(self.ydTOmiST_res, 10, 10)
-		output_grid.addWidget(self.ydTOmiNV_res, 10, 11)
+		self.ydTO_Label = [self.ydTOm_res, self.ydTOcm_res, self.ydTOmm_res, self.ydTOum_res, self.ydTOangs_res, self.ydTOnm_res, self.ydTOkm_res, self.ydTOin_res, 
+						   self.ydTOft_res, self.ydTOyd_res, self.ydTOmiST_res, self.ydTOmiNV_res]
 
-		output_grid.addWidget(self.miSTTOm_res,    11,  0)
-		output_grid.addWidget(self.miSTTOcm_res,   11,  1)
-		output_grid.addWidget(self.miSTTOmm_res,   11,  2)
-		output_grid.addWidget(self.miSTTOum_res,   11,  3)
-		output_grid.addWidget(self.miSTTOangs_res, 11,  4)
-		output_grid.addWidget(self.miSTTOnm_res,   11,  5)
-		output_grid.addWidget(self.miSTTOkm_res,   11,  6)
-		output_grid.addWidget(self.miSTTOin_res,   11,  7)
-		output_grid.addWidget(self.miSTTOft_res,   11,  8)
-		output_grid.addWidget(self.miSTTOyd_res,   11,  9)
-		output_grid.addWidget(self.miSTTOmiST_res, 11, 10)
-		output_grid.addWidget(self.miSTTOmiNV_res, 11, 11)
+		self.miSTTO_Label = [self.miSTTOm_res, self.miSTTOcm_res, self.miSTTOmm_res, self.miSTTOum_res, self.miSTTOangs_res, self.miSTTOnm_res, self.miSTTOkm_res, 
+							 self.miSTTOin_res, self.miSTTOft_res, self.miSTTOyd_res, self.miSTTOmiST_res, self.miSTTOmiNV_res]
 
-		output_grid.addWidget(self.miNVTOm_res,    12,  0)
-		output_grid.addWidget(self.miNVTOcm_res,   12,  1)
-		output_grid.addWidget(self.miNVTOmm_res,   12,  2)
-		output_grid.addWidget(self.miNVTOum_res,   12,  3)
-		output_grid.addWidget(self.miNVTOangs_res, 12,  4)
-		output_grid.addWidget(self.miNVTOnm_res,   12,  5)
-		output_grid.addWidget(self.miNVTOkm_res,   12,  6)
-		output_grid.addWidget(self.miNVTOin_res,   12,  7)
-		output_grid.addWidget(self.miNVTOft_res,   12,  8)
-		output_grid.addWidget(self.miNVTOyd_res,   12,  9)
-		output_grid.addWidget(self.miNVTOmiST_res, 12, 10)
-		output_grid.addWidget(self.miNVTOmiNV_res, 12, 11)
+		self.miNVTO_Label = [self.miNVTOm_res, self.miNVTOcm_res, self.miNVTOmm_res, self.miNVTOum_res, self.miNVTOangs_res, self.miNVTOnm_res, self.miNVTOkm_res, 
+							 self.miNVTOin_res, self.miNVTOft_res, self.miNVTOyd_res, self.miNVTOmiST_res, self.miNVTOmiNV_res]
+
+		i = 0
+		for item in self.mTO_Label:
+			output_grid.addWidget(item, 1, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.cmTO_Label:
+			output_grid.addWidget(item, 2, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.mmTO_Label:
+			output_grid.addWidget(item, 3, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.umTO_Label:
+			output_grid.addWidget(item, 4, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.angsTO_Label:
+			output_grid.addWidget(item, 5, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.nmTO_Label:
+			output_grid.addWidget(item, 6, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.kmTO_Label:
+			output_grid.addWidget(item, 7, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.inTO_Label:
+			output_grid.addWidget(item, 8, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.ftTO_Label:
+			output_grid.addWidget(item, 9, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.ydTO_Label:
+			output_grid.addWidget(item, 10, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.miSTTO_Label:
+			output_grid.addWidget(item, 11, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.miNVTO_Label:
+			output_grid.addWidget(item, 12, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
 		output_group.setLayout(output_grid)
 
@@ -2380,29 +2300,28 @@ class Mass_Win(QtWidgets.QWidget):
 		input_grid = QtWidgets.QGridLayout()
 		input_grid.setColumnMinimumWidth(0, 130)
 
-		blanklabel          = QtWidgets.QLabel()
-		self.kgi_LinEd      = QtWidgets.QLineEdit()
-		self.mtoni_LinEd    = QtWidgets.QLineEdit()
-		self.ouncei_LinEd   = QtWidgets.QLineEdit()
-		self.poundi_LinEd   = QtWidgets.QLineEdit()
+		blanklabel           = QtWidgets.QLabel()
+		self.kgi_LinEd       = QtWidgets.QLineEdit()
+		self.mtoni_LinEd     = QtWidgets.QLineEdit()
+		self.ouncei_LinEd    = QtWidgets.QLineEdit()
+		self.poundi_LinEd    = QtWidgets.QLineEdit()
 		self.shorttoni_LinEd = QtWidgets.QLineEdit()
-		self.longtoni_LinEd = QtWidgets.QLineEdit()
+		self.longtoni_LinEd  = QtWidgets.QLineEdit()
 
-		Label_list = ["kg", "metric ton", "ounce", "pound", "short ton", "long ton"]
-		i = 1
+		LinEd_list = [self.kgi_LinEd, self.mtoni_LinEd, self.ouncei_LinEd, self.poundi_LinEd, self.shorttoni_LinEd, self.longtoni_LinEd]
 
+		Label_list = [blanklabel, "kg", "metric ton", "ounce", "pound", "short ton", "long ton"]
+		
+		i = 0
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			input_grid.addWidget(Label_name, i, 1)
 			i = i + 1
 
-		input_grid.addWidget(blanklabel,           0, 0)
-		input_grid.addWidget(self.kgi_LinEd,       1, 0)
-		input_grid.addWidget(self.mtoni_LinEd,     2, 0)
-		input_grid.addWidget(self.ouncei_LinEd,    3, 0)
-		input_grid.addWidget(self.poundi_LinEd,    4, 0)
-		input_grid.addWidget(self.shorttoni_LinEd, 5, 0)
-		input_grid.addWidget(self.longtoni_LinEd,  6, 0)
+		i = 1
+		for item in LinEd_list:
+			input_grid.addWidget(item, i, 0)
+			i = i + 1
 
 		input_group.setLayout(input_grid)
 
@@ -2422,8 +2341,8 @@ class Mass_Win(QtWidgets.QWidget):
 		output_grid = QtWidgets.QGridLayout()
 
 		Label_list = ["kg", "metric ton", "ounce", "pound", "short ton", "long ton"]
+		
 		i = 0
-
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			output_grid.addWidget(Label_name, 0, i)
@@ -2471,47 +2390,55 @@ class Mass_Win(QtWidgets.QWidget):
 		self.longtonTOshortton_res = QtWidgets.QLabel("0", self)
 		self.longtonTOlongton_res  = QtWidgets.QLabel("0", self)
 
-		output_grid.addWidget(self.kgTOkg_res,       1, 0)
-		output_grid.addWidget(self.kgTOmton_res,     1, 1)
-		output_grid.addWidget(self.kgTOounce_res,    1, 2)
-		output_grid.addWidget(self.kgTOpound_res,    1, 3)
-		output_grid.addWidget(self.kgTOshortton_res, 1, 4)
-		output_grid.addWidget(self.kgTOlongton_res,  1, 5)
+		self.kgTO_Label       = [self.kgTOkg_res, self.kgTOmton_res, self.kgTOounce_res, self.kgTOpound_res, self.kgTOshortton_res, self.kgTOlongton_res]
 
-		output_grid.addWidget(self.mtonTOkg_res,       2, 0)
-		output_grid.addWidget(self.mtonTOmton_res,     2, 1)
-		output_grid.addWidget(self.mtonTOounce_res,    2, 2)
-		output_grid.addWidget(self.mtonTOpound_res,    2, 3)
-		output_grid.addWidget(self.mtonTOshortton_res, 2, 4)
-		output_grid.addWidget(self.mtonTOlongton_res,  2, 5)
+		self.mtonTO_Label     = [self.mtonTOkg_res, self.mtonTOmton_res, self.mtonTOounce_res, self.mtonTOpound_res, self.mtonTOshortton_res, self.mtonTOlongton_res]
 
-		output_grid.addWidget(self.ounceTOkg_res,       3, 0)
-		output_grid.addWidget(self.ounceTOmton_res,     3, 1)
-		output_grid.addWidget(self.ounceTOounce_res,    3, 2)
-		output_grid.addWidget(self.ounceTOpound_res,    3, 3)
-		output_grid.addWidget(self.ounceTOshortton_res, 3, 4)
-		output_grid.addWidget(self.ounceTOlongton_res,  3, 5)
+		self.ounceTO_Label    = [self.ounceTOkg_res, self.ounceTOmton_res, self.ounceTOounce_res, self.ounceTOpound_res, self.ounceTOshortton_res, self.ounceTOlongton_res]
 
-		output_grid.addWidget(self.poundTOkg_res,       4, 0)
-		output_grid.addWidget(self.poundTOmton_res,     4, 1)
-		output_grid.addWidget(self.poundTOounce_res,    4, 2)
-		output_grid.addWidget(self.poundTOpound_res,    4, 3)
-		output_grid.addWidget(self.poundTOshortton_res, 4, 4)
-		output_grid.addWidget(self.poundTOlongton_res,  4, 5)
+		self.poundTO_Label    = [self.poundTOkg_res, self.poundTOmton_res, self.poundTOounce_res, self.poundTOpound_res, self.poundTOshortton_res, self.poundTOlongton_res]
 
-		output_grid.addWidget(self.shorttonTOkg_res,       5, 0)
-		output_grid.addWidget(self.shorttonTOmton_res,     5, 1)
-		output_grid.addWidget(self.shorttonTOounce_res,    5, 2)
-		output_grid.addWidget(self.shorttonTOpound_res,    5, 3)
-		output_grid.addWidget(self.shorttonTOshortton_res, 5, 4)
-		output_grid.addWidget(self.shorttonTOlongton_res,  5, 5)
+		self.shorttonTO_Label = [self.shorttonTOkg_res, self.shorttonTOmton_res, self.shorttonTOounce_res, self.shorttonTOpound_res, self.shorttonTOshortton_res, 
+								 self.shorttonTOlongton_res]
 
-		output_grid.addWidget(self.longtonTOkg_res,       6, 0)
-		output_grid.addWidget(self.longtonTOmton_res,     6, 1)
-		output_grid.addWidget(self.longtonTOounce_res,    6, 2)
-		output_grid.addWidget(self.longtonTOpound_res,    6, 3)
-		output_grid.addWidget(self.longtonTOshortton_res, 6, 4)
-		output_grid.addWidget(self.longtonTOlongton_res,  6, 5)
+		self.longtonTO_Label  = [self.longtonTOkg_res, self.longtonTOmton_res, self.longtonTOounce_res, self.longtonTOpound_res, self.longtonTOshortton_res, 
+							 	 self.longtonTOlongton_res]
+
+		i = 0
+		for item in self.kgTO_Label:
+			output_grid.addWidget(item, 1, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.mtonTO_Label:
+			output_grid.addWidget(item, 2, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in self.ounceTO_Label:
+			output_grid.addWidget(item, 3, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+			
+		i = 0
+		for item in self.poundTO_Label:
+			output_grid.addWidget(item, 4, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+			
+		i = 0
+		for item in self.shorttonTO_Label:
+			output_grid.addWidget(item, 5, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+			
+		i = 0
+		for item in self.longtonTO_Label:
+			output_grid.addWidget(item, 6, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
 		output_group.setLayout(output_grid)
 
@@ -3288,8 +3215,6 @@ class Massfrac_Win(QtWidgets.QWidget):
 
 		input_group.setLayout(input_grid)
 
-		# self.m2i_LinEd.returnPressed.connect(self.m2TO_fun)
-
 		return input_group
 
 	def createGroup_output(self):
@@ -3450,10 +3375,13 @@ class Massfrac_Win(QtWidgets.QWidget):
 		self.show()
 
 
+
 class Powheatfl_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
 		super().__init__()
 		self.setWindowTitle("Powheatfl_Win")
+
+
 
 class Pressstres_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
@@ -3554,15 +3482,186 @@ class Pressstres_Win(QtWidgets.QWidget):
 		self.setLayout(main_layout)
 		self.show()
 
+
+
 class Pressabsg_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
 		super().__init__()
 		self.setWindowTitle("Pressabsg_Win")
 
+
+
 class Pressdrl_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
 		super().__init__()
-		self.setWindowTitle("Pressdrl_Win")
+
+		self.setWindowTitle("Pressure Drop per Length Converter")
+		self.main_window()
+
+	def createGroup_input(self):
+		input_group = QtWidgets.QGroupBox("Input", self)
+		input_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+
+		input_grid = QtWidgets.QGridLayout()
+		input_grid.setColumnMinimumWidth(0, 130)
+
+		blanklabel           = QtWidgets.QLabel()
+		self.Pami_LinEd      = QtWidgets.QLineEdit()
+		self.kPa100mi_LinEd  = QtWidgets.QLineEdit()
+		self.psifti_LinEd    = QtWidgets.QLineEdit()
+		self.psi100fti_LinEd = QtWidgets.QLineEdit()
+
+		Label_list = ["Pa/m", "kPa/100m", "psi/ft", "psi/100ft"]
+		i = 1
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			input_grid.addWidget(Label_name, i, 1)
+			i = i + 1
+
+		input_grid.addWidget(blanklabel,          0, 0)
+		input_grid.addWidget(self.Pami_LinEd,     1, 0)
+		input_grid.addWidget(self.kPa100mi_LinEd, 2, 0)
+		input_grid.addWidget(self.psifti_LinEd,   3, 0)
+		input_grid.addWidget(self.psi100ft_LinEd, 4, 0)
+
+		input_group.setLayout(input_grid)
+
+		return input_group
+
+	def createGroup_output(self):
+		output_group = QtWidgets.QGroupBox("Output", self)
+		output_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+
+		output_grid = QtWidgets.QGridLayout()
+
+		Label_list = ["Pa/m", "kPa/100m", "psi/ft", "psi/100ft"]
+		i = 0
+
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			output_grid.addWidget(Label_name, 0, i)
+			i = i + 1
+
+		self.PamTOPam_res      = QtWidgets.QLabel("0", self)
+		self.PamTOkPa100m_res  = QtWidgets.QLabel("0", self)
+		self.PamTOpsift_res    = QtWidgets.QLabel("0", self)
+		self.PamTOpsi100ft_res = QtWidgets.QLabel("0", self)
+
+		output_grid.addWidget(self.decimalTOdecimal_res, 1, 0)
+		output_grid.addWidget(self.decimalTOpercent_res, 1, 1)
+		output_grid.addWidget(self.decimalTOpromile_res, 1, 2)
+		output_grid.addWidget(self.decimalTOppm_res,     1, 3)
+		output_grid.addWidget(self.decimalTOppb_res,     1, 4)
+
+		output_grid.addWidget(self.percentTOdecimal_res, 2, 0)
+		output_grid.addWidget(self.percentTOpercent_res, 2, 1)
+		output_grid.addWidget(self.percentTOpromile_res, 2, 2)
+		output_grid.addWidget(self.percentTOppm_res,     2, 3)
+		output_grid.addWidget(self.percentTOppb_res,     2, 4)
+
+		output_grid.addWidget(self.promileTOdecimal_res, 3, 0)
+		output_grid.addWidget(self.promileTOpercent_res, 3, 1)
+		output_grid.addWidget(self.promileTOpromile_res, 3, 2)
+		output_grid.addWidget(self.promileTOppm_res,     3, 3)
+		output_grid.addWidget(self.promileTOppb_res,     3, 4)
+
+		output_grid.addWidget(self.ppmTOdecimal_res, 4, 0)
+		output_grid.addWidget(self.ppmTOpercent_res, 4, 1)
+		output_grid.addWidget(self.ppmTOpromile_res, 4, 2)
+		output_grid.addWidget(self.ppmTOppm_res,     4, 3)
+		output_grid.addWidget(self.ppmTOppb_res,     4, 4)
+
+		output_grid.addWidget(self.ppbTOdecimal_res, 5, 0)
+		output_grid.addWidget(self.ppbTOpercent_res, 5, 1)
+		output_grid.addWidget(self.ppbTOpromile_res, 5, 2)
+		output_grid.addWidget(self.ppbTOppm_res,     5, 3)
+		output_grid.addWidget(self.ppbTOppb_res,     5, 4)
+
+		output_group.setLayout(output_grid)
+
+		self.decimali_LinEd.returnPressed.connect(self.decimalTO_fun)
+		self.percenti_LinEd.returnPressed.connect(self.percentTO_fun)
+		self.promilei_LinEd.returnPressed.connect(self.promileTO_fun)
+		self.ppmi_LinEd.returnPressed.connect(self.ppmTO_fun)
+		self.ppbi_LinEd.returnPressed.connect(self.ppbTO_fun)
+
+		return output_group
+
+	def decimalTO_fun(self):
+		decimalTOdecimal_proc = float(self.decimali_LinEd.text()) * 1
+		decimalTOpercent_proc = float(self.decimali_LinEd.text()) * 1e-02
+		decimalTOpromile_proc = float(self.decimali_LinEd.text()) * 1e-03
+		decimalTOppm_proc     = float(self.decimali_LinEd.text()) * 1e-06
+		decimalTOppb_proc     = float(self.decimali_LinEd.text()) * 1e-09
+
+		self.decimalTOdecimal_res.setText(str(round(decimalTOdecimal_proc, 8)))
+		self.decimalTOpercent_res.setText(str(round(decimalTOpercent_proc, 8)))
+		self.decimalTOpromile_res.setText(str(round(decimalTOpromile_proc, 8)))
+		self.decimalTOppm_res.setText(str(decimalTOppm_proc                  ))
+		self.decimalTOppb_res.setText(str(decimalTOppb_proc                  ))
+
+	def percentTO_fun(self):
+		percentTOdecimal_proc = float(self.percenti_LinEd.text()) * 1e+02
+		percentTOpercent_proc = float(self.percenti_LinEd.text()) * 1
+		percentTOpromile_proc = float(self.percenti_LinEd.text()) * 1e-01
+		percentTOppm_proc     = float(self.percenti_LinEd.text()) * 1e-04
+		percentTOppb_proc     = float(self.percenti_LinEd.text()) * 1e-07
+
+		self.percentTOdecimal_res.setText(str(round(percentTOdecimal_proc, 8)))
+		self.percentTOpercent_res.setText(str(round(percentTOpercent_proc, 8)))
+		self.percentTOpromile_res.setText(str(round(percentTOpromile_proc, 8)))
+		self.percentTOppm_res.setText(str(percentTOppm_proc                  ))
+		self.percentTOppb_res.setText(str(percentTOppb_proc                  ))
+
+	def promileTO_fun(self):
+		promileTOdecimal_proc = float(self.promilei_LinEd.text()) * 1e+03
+		promileTOpercent_proc = float(self.promilei_LinEd.text()) * 1e+01
+		promileTOpromile_proc = float(self.promilei_LinEd.text()) * 1
+		promileTOppm_proc     = float(self.promilei_LinEd.text()) * 1e-03
+		promileTOppb_proc     = float(self.promilei_LinEd.text()) * 1e-06
+
+		self.promileTOdecimal_res.setText(str(round(promileTOdecimal_proc, 8)))
+		self.promileTOpercent_res.setText(str(round(promileTOpercent_proc, 8)))
+		self.promileTOpromile_res.setText(str(round(promileTOpromile_proc, 8)))
+		self.promileTOppm_res.setText(str(round(promileTOppm_proc,         8)))
+		self.promileTOppb_res.setText(str(round(promileTOppb_proc,         8)))
+
+	def ppmTO_fun(self):
+		ppmTOdecimal_proc = float(self.ppmi_LinEd.text()) * 1e+06
+		ppmTOpercent_proc = float(self.ppmi_LinEd.text()) * 1e+04
+		ppmTOpromile_proc = float(self.ppmi_LinEd.text()) * 1e+03
+		ppmTOppm_proc     = float(self.ppmi_LinEd.text()) * 1
+		ppmTOppb_proc     = float(self.ppmi_LinEd.text()) * 1e-03
+
+		self.ppmTOdecimal_res.setText(str(round(ppmTOdecimal_proc, 8)))
+		self.ppmTOpercent_res.setText(str(round(ppmTOpercent_proc, 8)))
+		self.ppmTOpromile_res.setText(str(round(ppmTOpromile_proc, 8)))
+		self.ppmTOppm_res.setText(str(round(ppmTOppm_proc,         8)))
+		self.ppmTOppb_res.setText(str(round(ppmTOppb_proc,         8)))
+
+	def ppbTO_fun(self):
+		ppbTOdecimal_proc = float(self.ppbi_LinEd.text()) * 1e+09
+		ppbTOpercent_proc = float(self.ppbi_LinEd.text()) * 1e+07
+		ppbTOpromile_proc = float(self.ppbi_LinEd.text()) * 1e+06
+		ppbTOppm_proc     = float(self.ppbi_LinEd.text()) * 1e+03
+		ppbTOppb_proc     = float(self.ppbi_LinEd.text()) * 1
+
+		self.ppbTOdecimal_res.setText(str(round(ppbTOdecimal_proc, 8)))
+		self.ppbTOpercent_res.setText(str(round(ppbTOpercent_proc, 8)))
+		self.ppbTOpromile_res.setText(str(round(ppbTOpromile_proc, 8)))
+		self.ppbTOppm_res.setText(str(round(ppbTOppm_proc,         8)))
+		self.ppbTOppb_res.setText(str(round(ppbTOppb_proc,         8)))
+
+	def main_window(self):
+		main_layout = QtWidgets.QHBoxLayout()
+		main_layout.addWidget(self.createGroup_input())
+		main_layout.addWidget(self.createGroup_output())
+
+		self.setLayout(main_layout)
+		self.show()
+
+
 
 class Specener_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
