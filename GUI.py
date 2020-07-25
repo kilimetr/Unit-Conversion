@@ -75,8 +75,8 @@ class MainWindow(QtWidgets.QWidget):
 		groupBox_2 = QtWidgets.QGroupBox()
 
 		self.massfrac_pb    = QtWidgets.QPushButton("Mass Fraction",                     self)
-		self.powheatfl_pb   = QtWidgets.QPushButton("Power & Heat Flow Rate",            self)
-		self.pressstres_pb  = QtWidgets.QPushButton("Pressure & Stress",                 self)
+		self.powheatfl_pb   = QtWidgets.QPushButton("Power and Heat Flow Rate",            self)
+		self.pressstres_pb  = QtWidgets.QPushButton("Pressure and Stress",                 self)
 		self.pressabsg_pb   = QtWidgets.QPushButton("Pressure Conversion abs-gauge",     self)
 		self.pressdrl_pb    = QtWidgets.QPushButton("Pressure Drop per Length",          self)
 		self.specener_pb    = QtWidgets.QPushButton("Specific Energy",                   self)
@@ -437,80 +437,89 @@ class Area_Win(QtWidgets.QWidget):
 		self.mi2STTOacr_res   = QtWidgets.QLabel("0", self)
 		self.mi2STTOmi2ST_res = QtWidgets.QLabel("0", self)
 
-		self.m2TO_Label = [self.m2TOm2_res, self.m2TOcm2_res, self.m2TOmm2_res, self.m2TOa_res, self.m2TOha_res, self.m2TOin2_res, self.m2TOft2_res, self.m2TOyd2_res,
+		m2TO_Label = [self.m2TOm2_res, self.m2TOcm2_res, self.m2TOmm2_res, self.m2TOa_res, self.m2TOha_res, self.m2TOin2_res, self.m2TOft2_res, self.m2TOyd2_res,
 					  self.m2TOacr_res, self.m2TOmi2ST_res]
+
+		cm2TO_Label = [self.cm2TOm2_res, self.cm2TOcm2_res, self.cm2TOmm2_res, self.cm2TOa_res, self.cm2TOha_res, self.cm2TOin2_res, self.cm2TOft2_res, self.cm2TOyd2_res,
+					   self.cm2TOacr_res, self.cm2TOmi2ST_res]
+
+		mm2TO_Label = [self.mm2TOm2_res, self.mm2TOcm2_res, self.mm2TOmm2_res, self.mm2TOa_res, self.mm2TOha_res, self.mm2TOin2_res, self.mm2TOft2_res, self.mm2TOyd2_res,
+					   self.mm2TOacr_res, self.mm2TOmi2ST_res]
+
+		aTO_Label = [self.aTOm2_res, self.aTOcm2_res, self.aTOmm2_res, self.aTOa_res, self.aTOha_res, self.aTOin2_res, self.aTOft2_res, self.aTOyd2_res,
+					 self.aTOacr_res, self.aTOmi2ST_res]
+
+		haTO_Label = [self.haTOm2_res, self.haTOcm2_res, self.haTOmm2_res, self.haTOa_res, self.haTOha_res, self.haTOin2_res, self.haTOft2_res, self.haTOyd2_res,
+					  self.haTOacr_res, self.haTOmi2ST_res]
+
+		in2TO_Label = [self.in2TOm2_res, self.in2TOcm2_res, self.in2TOmm2_res, self.in2TOa_res, self.in2TOha_res, self.in2TOin2_res, self.in2TOft2_res, self.in2TOyd2_res,
+					   self.in2TOacr_res, self.in2TOmi2ST_res]
+		ft2TO_Label = [self.ft2TOm2_res, self.ft2TOcm2_res, self.ft2TOmm2_res, self.ft2TOa_res, self.ft2TOha_res, self.ft2TOin2_res, self.ft2TOft2_res, self.ft2TOyd2_res,
+					   self.ft2TOacr_res, self.ft2TOmi2ST_res]
+
+		yd2TO_Label = [self.yd2TOm2_res, self.yd2TOcm2_res, self.yd2TOmm2_res, self.yd2TOa_res, self.yd2TOha_res, self.yd2TOin2_res, self.yd2TOft2_res, self.yd2TOyd2_res,
+					   self.yd2TOacr_res, self.yd2TOmi2ST_res]
+
+		acrTO_Label = [self.acrTOm2_res, self.acrTOcm2_res, self.acrTOmm2_res, self.acrTOa_res, self.acrTOha_res, self.acrTOin2_res, self.acrTOft2_res, self.acrTOyd2_res,
+					   self.acrTOacr_res, self.acrTOmi2ST_res]
+
+		mi2STTO_Label = [self.mi2STTOm2_res, self.mi2STTOcm2_res, self.mi2STTOmm2_res, self.mi2STTOa_res, self.mi2STTOha_res, self.mi2STTOin2_res, self.mi2STTOft2_res, 
+						 self.mi2STTOyd2_res, self.mi2STTOacr_res, self.mi2STTOmi2ST_res]
+
 		i = 0
-		for item in self.m2TO_Label:
+		for item in m2TO_Label:
 			output_grid.addWidget(item, 1, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		cm2TO_Label = [self.cm2TOm2_res, self.cm2TOcm2_res, self.cm2TOmm2_res, self.cm2TOa_res, self.cm2TOha_res, self.cm2TOin2_res, self.cm2TOft2_res, self.cm2TOyd2_res,
-					   self.cm2TOacr_res, self.cm2TOmi2ST_res]
 		i = 0
 		for item in cm2TO_Label:
 			output_grid.addWidget(item, 2, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		mm2TO_Label = [self.mm2TOm2_res, self.mm2TOcm2_res, self.mm2TOmm2_res, self.mm2TOa_res, self.mm2TOha_res, self.mm2TOin2_res, self.mm2TOft2_res, self.mm2TOyd2_res,
-					   self.mm2TOacr_res, self.mm2TOmi2ST_res]
 		i = 0
 		for item in mm2TO_Label:
 			output_grid.addWidget(item, 3, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		aTO_Label = [self.aTOm2_res, self.aTOcm2_res, self.aTOmm2_res, self.aTOa_res, self.aTOha_res, self.aTOin2_res, self.aTOft2_res, self.aTOyd2_res,
-					   self.aTOacr_res, self.aTOmi2ST_res]
 		i = 0
 		for item in aTO_Label:
 			output_grid.addWidget(item, 4, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		haTO_Label = [self.haTOm2_res, self.haTOcm2_res, self.haTOmm2_res, self.haTOa_res, self.haTOha_res, self.haTOin2_res, self.haTOft2_res, self.haTOyd2_res,
-					  self.haTOacr_res, self.haTOmi2ST_res]
 		i = 0
 		for item in haTO_Label:
 			output_grid.addWidget(item, 5, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		in2TO_Label = [self.in2TOm2_res, self.in2TOcm2_res, self.in2TOmm2_res, self.in2TOa_res, self.in2TOha_res, self.in2TOin2_res, self.in2TOft2_res, self.in2TOyd2_res,
-					   self.in2TOacr_res, self.in2TOmi2ST_res]
 		i = 0
 		for item in in2TO_Label:
 			output_grid.addWidget(item, 6, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		ft2TO_Label = [self.ft2TOm2_res, self.ft2TOcm2_res, self.ft2TOmm2_res, self.ft2TOa_res, self.ft2TOha_res, self.ft2TOin2_res, self.ft2TOft2_res, self.ft2TOyd2_res,
-					   self.ft2TOacr_res, self.ft2TOmi2ST_res]
 		i = 0
 		for item in ft2TO_Label:
 			output_grid.addWidget(item, 7, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		yd2TO_Label = [self.yd2TOm2_res, self.yd2TOcm2_res, self.yd2TOmm2_res, self.yd2TOa_res, self.yd2TOha_res, self.yd2TOin2_res, self.yd2TOft2_res, self.yd2TOyd2_res,
-					   self.yd2TOacr_res, self.yd2TOmi2ST_res]
 		i = 0
 		for item in yd2TO_Label:
 			output_grid.addWidget(item, 8, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		acrTO_Label = [self.acrTOm2_res, self.acrTOcm2_res, self.acrTOmm2_res, self.acrTOa_res, self.acrTOha_res, self.acrTOin2_res, self.acrTOft2_res, self.acrTOyd2_res,
-					   self.acrTOacr_res, self.acrTOmi2ST_res]
 		i = 0
 		for item in acrTO_Label:
 			output_grid.addWidget(item, 9, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		mi2STTO_Label = [self.mi2STTOm2_res, self.mi2STTOcm2_res, self.mi2STTOmm2_res, self.mi2STTOa_res, self.mi2STTOha_res, self.mi2STTOin2_res, self.mi2STTOft2_res, 
-						 self.mi2STTOyd2_res, self.mi2STTOacr_res, self.mi2STTOmi2ST_res]
 		i = 0
 		for item in mi2STTO_Label:
 			output_grid.addWidget(item, 10, i)
@@ -874,51 +883,58 @@ class Heatval_Win(QtWidgets.QWidget):
 		self.MJm3_kJdm3TOkWhm3_res      = QtWidgets.QLabel("0", self)
 		self.MJm3_kJdm3TOMJm3_kJdm3_res = QtWidgets.QLabel("0", self)
 
-		self.BTUft3TO_Label = [self.BTUft3TOBTUft3_res, self.BTUft3TOBTUgalUK_res, self.BTUft3TOBTUgalUS_res, self.BTUft3TOkJm3_res, self.BTUft3TOkWhm3_res, 
-							   self.BTUft3TOMJm3_kJdm3_res]
+		BTUft3TO_Label = [self.BTUft3TOBTUft3_res, self.BTUft3TOBTUgalUK_res, self.BTUft3TOBTUgalUS_res, self.BTUft3TOkJm3_res, self.BTUft3TOkWhm3_res, 
+						  self.BTUft3TOMJm3_kJdm3_res]
+
+		BTUgalUKTO_Label = [self.BTUgalUKTOBTUft3_res, self.BTUgalUKTOBTUgalUK_res, self.BTUgalUKTOBTUgalUS_res, self.BTUgalUKTOkJm3_res, self.BTUgalUKTOkWhm3_res, 
+							self.BTUgalUKTOMJm3_kJdm3_res]
+
+		BTUgalUSTO_Label = [self.BTUgalUSTOBTUft3_res, self.BTUgalUSTOBTUgalUK_res, self.BTUgalUSTOBTUgalUS_res, self.BTUgalUSTOkJm3_res, self.BTUgalUSTOkWhm3_res, 
+							self.BTUgalUSTOMJm3_kJdm3_res]
+
+		kJm3TO_Label = [self.kJm3TOBTUft3_res, self.kJm3TOBTUgalUK_res, self.kJm3TOBTUgalUS_res, self.kJm3TOkJm3_res, self.kJm3TOkWhm3_res, 
+						self.kJm3TOMJm3_kJdm3_res]
+
+		kWhm3TO_Label = [self.kWhm3TOBTUft3_res, self.kWhm3TOBTUgalUK_res, self.kWhm3TOBTUgalUS_res, self.kWhm3TOkJm3_res, self.kWhm3TOkWhm3_res, 
+						 self.kWhm3TOMJm3_kJdm3_res]
+
+		kWhm3TO_Label = [self.kWhm3TOBTUft3_res, self.kWhm3TOBTUgalUK_res, self.kWhm3TOBTUgalUS_res, self.kWhm3TOkJm3_res, self.kWhm3TOkWhm3_res, 
+						 self.kWhm3TOMJm3_kJdm3_res]
+
+		MJm3_kJdm3TO_Label = [self.MJm3_kJdm3TOBTUft3_res, self.MJm3_kJdm3TOBTUgalUK_res, self.MJm3_kJdm3TOBTUgalUS_res, self.MJm3_kJdm3TOkJm3_res, 
+							  self.MJm3_kJdm3TOkWhm3_res, self.MJm3_kJdm3TOMJm3_kJdm3_res]						 
 		i = 0
-		for item in self.BTUft3TO_Label:
+		for item in BTUft3TO_Label:
 			output_grid.addWidget(item, 1, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		self.BTUgalUKTO_Label = [self.BTUgalUKTOBTUft3_res, self.BTUgalUKTOBTUgalUK_res, self.BTUgalUKTOBTUgalUS_res, self.BTUgalUKTOkJm3_res, self.BTUgalUKTOkWhm3_res, 
-							   self.BTUgalUKTOMJm3_kJdm3_res]
 		i = 0
-		for item in self.BTUgalUKTO_Label:
+		for item in BTUgalUKTO_Label:
 			output_grid.addWidget(item, 2, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
-
-		self.BTUgalUSTO_Label = [self.BTUgalUSTOBTUft3_res, self.BTUgalUSTOBTUgalUK_res, self.BTUgalUSTOBTUgalUS_res, self.BTUgalUSTOkJm3_res, self.BTUgalUSTOkWhm3_res, 
-							   self.BTUgalUSTOMJm3_kJdm3_res]
+		
 		i = 0
-		for item in self.BTUgalUSTO_Label:
+		for item in BTUgalUSTO_Label:
 			output_grid.addWidget(item, 3, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		self.kJm3TO_Label = [self.kJm3TOBTUft3_res, self.kJm3TOBTUgalUK_res, self.kJm3TOBTUgalUS_res, self.kJm3TOkJm3_res, self.kJm3TOkWhm3_res, 
-							  self.kJm3TOMJm3_kJdm3_res]
 		i = 0
-		for item in self.kJm3TO_Label:
+		for item in kJm3TO_Label:
 			output_grid.addWidget(item, 4, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-
-		self.kWhm3TO_Label = [self.kWhm3TOBTUft3_res, self.kWhm3TOBTUgalUK_res, self.kWhm3TOBTUgalUS_res, self.kWhm3TOkJm3_res, self.kWhm3TOkWhm3_res, 
-							   self.kWhm3TOMJm3_kJdm3_res]
 		i = 0
-		for item in self.kWhm3TO_Label:
+		for item in kWhm3TO_Label:
 			output_grid.addWidget(item, 5, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
-		self.MJm3_kJdm3TO_Label = [self.MJm3_kJdm3TOBTUft3_res, self.MJm3_kJdm3TOBTUgalUK_res, self.MJm3_kJdm3TOBTUgalUS_res, self.MJm3_kJdm3TOkJm3_res, 
-								   self.MJm3_kJdm3TOkWhm3_res, self.MJm3_kJdm3TOMJm3_kJdm3_res]
 		i = 0
-		for item in self.MJm3_kJdm3TO_Label:
+		for item in MJm3_kJdm3TO_Label:
 			output_grid.addWidget(item, 6, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
@@ -1228,92 +1244,92 @@ class Energy_Win(QtWidgets.QWidget):
 		self.ftpdlTOftlbf_res   = QtWidgets.QLabel("0", self)
 		self.ftpdlTOftpdl_res   = QtWidgets.QLabel("0", self)
 
-		self.JTO_Label = [self.JTOJ_res, self.JTOkJ_res, self.JTOkWh_res, self.JTOBTUIT_res, self.JTOBTUmean_res, self.JTOcalIT_res, self.JTOcalTH_res,
+		JTO_Label = [self.JTOJ_res, self.JTOkJ_res, self.JTOkWh_res, self.JTOBTUIT_res, self.JTOBTUmean_res, self.JTOcalIT_res, self.JTOcalTH_res,
 						  self.JTOhphr_res, self.JTOftlbf_res, self.JTOftpdl_res]
 
-		self.kJTO_Label = [self.kJTOJ_res, self.kJTOkJ_res, self.kJTOkWh_res, self.kJTOBTUIT_res, self.kJTOBTUmean_res, self.kJTOcalIT_res, self.kJTOcalTH_res,
+		kJTO_Label = [self.kJTOJ_res, self.kJTOkJ_res, self.kJTOkWh_res, self.kJTOBTUIT_res, self.kJTOBTUmean_res, self.kJTOcalIT_res, self.kJTOcalTH_res,
 						   self.kJTOhphr_res, self.kJTOftlbf_res, self.kJTOftpdl_res]
 
-		self.kWhTO_Label = [self.kWhTOJ_res, self.kWhTOkJ_res, self.kWhTOkWh_res, self.kWhTOBTUIT_res, self.kWhTOBTUmean_res, self.kWhTOcalIT_res, self.kWhTOcalTH_res,
+		kWhTO_Label = [self.kWhTOJ_res, self.kWhTOkJ_res, self.kWhTOkWh_res, self.kWhTOBTUIT_res, self.kWhTOBTUmean_res, self.kWhTOcalIT_res, self.kWhTOcalTH_res,
 						    self.kWhTOhphr_res, self.kWhTOftlbf_res, self.kWhTOftpdl_res]
 
-		self.BTUITTO_Label = [self.BTUITTOJ_res, self.BTUITTOkJ_res, self.BTUITTOkWh_res, self.BTUITTOBTUIT_res, self.BTUITTOBTUmean_res, self.BTUITTOcalIT_res, 
+		BTUITTO_Label = [self.BTUITTOJ_res, self.BTUITTOkJ_res, self.BTUITTOkWh_res, self.BTUITTOBTUIT_res, self.BTUITTOBTUmean_res, self.BTUITTOcalIT_res, 
 							  self.BTUITTOcalTH_res, self.BTUITTOhphr_res, self.BTUITTOftlbf_res, self.BTUITTOftpdl_res]
 
-		self.BTUmeanTO_Label = [self.BTUmeanTOJ_res, self.BTUmeanTOkJ_res, self.BTUmeanTOkWh_res, self.BTUmeanTOBTUIT_res, self.BTUmeanTOBTUmean_res, 
+		BTUmeanTO_Label = [self.BTUmeanTOJ_res, self.BTUmeanTOkJ_res, self.BTUmeanTOkWh_res, self.BTUmeanTOBTUIT_res, self.BTUmeanTOBTUmean_res, 
 								self.BTUmeanTOcalIT_res, self.BTUmeanTOcalTH_res, self.BTUmeanTOhphr_res, self.BTUmeanTOftlbf_res, self.BTUmeanTOftpdl_res]
 
-		self.calITTO_Label = [self.calITTOJ_res, self.calITTOkJ_res, self.calITTOkWh_res, self.calITTOBTUIT_res, self.calITTOBTUmean_res, self.calITTOcalIT_res, 
+		calITTO_Label = [self.calITTOJ_res, self.calITTOkJ_res, self.calITTOkWh_res, self.calITTOBTUIT_res, self.calITTOBTUmean_res, self.calITTOcalIT_res, 
 							  self.calITTOcalTH_res, self.calITTOhphr_res, self.calITTOftlbf_res, self.calITTOftpdl_res]
 
-		self.calTHTO_Label = [self.calTHTOJ_res, self.calTHTOkJ_res, self.calTHTOkWh_res, self.calTHTOBTUIT_res, self.calTHTOBTUmean_res, self.calTHTOcalIT_res, 
+		calTHTO_Label = [self.calTHTOJ_res, self.calTHTOkJ_res, self.calTHTOkWh_res, self.calTHTOBTUIT_res, self.calTHTOBTUmean_res, self.calTHTOcalIT_res, 
 							  self.calTHTOcalTH_res, self.calTHTOhphr_res, self.calTHTOftlbf_res, self.calTHTOftpdl_res]
 
-		self.hphrTO_Label = [self.hphrTOJ_res, self.hphrTOkJ_res, self.hphrTOkWh_res, self.hphrTOBTUIT_res, self.hphrTOBTUmean_res, self.hphrTOcalIT_res, 
+		hphrTO_Label = [self.hphrTOJ_res, self.hphrTOkJ_res, self.hphrTOkWh_res, self.hphrTOBTUIT_res, self.hphrTOBTUmean_res, self.hphrTOcalIT_res, 
 							 self.hphrTOcalTH_res, self.hphrTOhphr_res, self.hphrTOftlbf_res, self.hphrTOftpdl_res]
 
-		self.ftlbfTO_Label = [self.ftlbfTOJ_res, self.ftlbfTOkJ_res, self.ftlbfTOkWh_res, self.ftlbfTOBTUIT_res, self.ftlbfTOBTUmean_res, self.ftlbfTOcalIT_res, 
+		ftlbfTO_Label = [self.ftlbfTOJ_res, self.ftlbfTOkJ_res, self.ftlbfTOkWh_res, self.ftlbfTOBTUIT_res, self.ftlbfTOBTUmean_res, self.ftlbfTOcalIT_res, 
 							  self.ftlbfTOcalTH_res, self.ftlbfTOhphr_res, self.ftlbfTOftlbf_res, self.ftlbfTOftpdl_res]
 
-		self.ftpdlTO_Label = [self.ftpdlTOJ_res, self.ftpdlTOkJ_res, self.ftpdlTOkWh_res, self.ftpdlTOBTUIT_res, self.ftpdlTOBTUmean_res, self.ftpdlTOcalIT_res, 
+		ftpdlTO_Label = [self.ftpdlTOJ_res, self.ftpdlTOkJ_res, self.ftpdlTOkWh_res, self.ftpdlTOBTUIT_res, self.ftpdlTOBTUmean_res, self.ftpdlTOcalIT_res, 
 							  self.ftpdlTOcalTH_res, self.ftpdlTOhphr_res, self.ftpdlTOftlbf_res, self.ftpdlTOftpdl_res]
 
 		i = 0
-		for item in self.JTO_Label:
+		for item in JTO_Label:
 			output_grid.addWidget(item, 1, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.kJTO_Label:
+		for item in kJTO_Label:
 			output_grid.addWidget(item, 2, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.kWhTO_Label:
+		for item in kWhTO_Label:
 			output_grid.addWidget(item, 3, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.BTUITTO_Label:
+		for item in BTUITTO_Label:
 			output_grid.addWidget(item, 4, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.BTUmeanTO_Label:
+		for item in BTUmeanTO_Label:
 			output_grid.addWidget(item, 5, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.calITTO_Label:
+		for item in calITTO_Label:
 			output_grid.addWidget(item, 6, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.calTHTO_Label:
+		for item in calTHTO_Label:
 			output_grid.addWidget(item, 7, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.hphrTO_Label:
+		for item in hphrTO_Label:
 			output_grid.addWidget(item, 8, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.ftlbfTO_Label:
+		for item in ftlbfTO_Label:
 			output_grid.addWidget(item, 9, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.ftpdlTO_Label:
+		for item in ftpdlTO_Label:
 			output_grid.addWidget(item, 10, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
@@ -1821,110 +1837,110 @@ class Length_Win(QtWidgets.QWidget):
 		self.miNVTOmiST_res = QtWidgets.QLabel("0", self)
 		self.miNVTOmiNV_res = QtWidgets.QLabel("0", self)
 
-		self.mTO_Label = [self.mTOm_res, self.mTOcm_res, self.mTOmm_res, self.mTOum_res, self.mTOangs_res, self.mTOnm_res, self.mTOkm_res, self.mTOin_res, self.mTOft_res,
+		mTO_Label = [self.mTOm_res, self.mTOcm_res, self.mTOmm_res, self.mTOum_res, self.mTOangs_res, self.mTOnm_res, self.mTOkm_res, self.mTOin_res, self.mTOft_res,
 						  self.mTOyd_res, self.mTOmiST_res, self.mTOmiNV_res]
 
-		self.cmTO_Label = [self.cmTOm_res, self.cmTOcm_res, self.cmTOmm_res, self.cmTOum_res, self.cmTOangs_res, self.cmTOnm_res, self.cmTOkm_res, self.cmTOin_res, 
+		cmTO_Label = [self.cmTOm_res, self.cmTOcm_res, self.cmTOmm_res, self.cmTOum_res, self.cmTOangs_res, self.cmTOnm_res, self.cmTOkm_res, self.cmTOin_res, 
 						   self.cmTOft_res, self.cmTOyd_res, self.cmTOmiST_res, self.cmTOmiNV_res]
 
-		self.mmTO_Label = [self.mmTOm_res, self.mmTOcm_res, self.mmTOmm_res, self.mmTOum_res, self.mmTOangs_res, self.mmTOnm_res, self.mmTOkm_res, self.mmTOin_res, 
+		mmTO_Label = [self.mmTOm_res, self.mmTOcm_res, self.mmTOmm_res, self.mmTOum_res, self.mmTOangs_res, self.mmTOnm_res, self.mmTOkm_res, self.mmTOin_res, 
 						   self.mmTOft_res, self.mmTOyd_res, self.mmTOmiST_res, self.mmTOmiNV_res]
 
-		self.umTO_Label = [self.umTOm_res, self.umTOcm_res, self.umTOmm_res, self.umTOum_res, self.umTOangs_res, self.umTOnm_res, self.umTOkm_res, self.umTOin_res, 
+		umTO_Label = [self.umTOm_res, self.umTOcm_res, self.umTOmm_res, self.umTOum_res, self.umTOangs_res, self.umTOnm_res, self.umTOkm_res, self.umTOin_res, 
 						   self.umTOft_res, self.umTOyd_res, self.umTOmiST_res, self.umTOmiNV_res]
 
-		self.angsTO_Label = [self.angsTOm_res, self.angsTOcm_res, self.angsTOmm_res, self.angsTOum_res, self.angsTOangs_res, self.angsTOnm_res, self.angsTOkm_res, 
+		angsTO_Label = [self.angsTOm_res, self.angsTOcm_res, self.angsTOmm_res, self.angsTOum_res, self.angsTOangs_res, self.angsTOnm_res, self.angsTOkm_res, 
 							 self.angsTOin_res, self.angsTOft_res, self.angsTOyd_res, self.angsTOmiST_res, self.angsTOmiNV_res]
 
-		self.nmTO_Label = [self.nmTOm_res, self.nmTOcm_res, self.nmTOmm_res, self.nmTOum_res, self.nmTOangs_res, self.nmTOnm_res, self.nmTOkm_res, self.nmTOin_res, 
+		nmTO_Label = [self.nmTOm_res, self.nmTOcm_res, self.nmTOmm_res, self.nmTOum_res, self.nmTOangs_res, self.nmTOnm_res, self.nmTOkm_res, self.nmTOin_res, 
 						   self.nmTOft_res, self.nmTOyd_res, self.nmTOmiST_res, self.nmTOmiNV_res]
 
-		self.kmTO_Label = [self.kmTOm_res, self.kmTOcm_res, self.kmTOmm_res, self.kmTOum_res, self.kmTOangs_res, self.kmTOnm_res, self.kmTOkm_res, self.kmTOin_res, 
+		kmTO_Label = [self.kmTOm_res, self.kmTOcm_res, self.kmTOmm_res, self.kmTOum_res, self.kmTOangs_res, self.kmTOnm_res, self.kmTOkm_res, self.kmTOin_res, 
 						   self.kmTOft_res, self.kmTOyd_res, self.kmTOmiST_res, self.kmTOmiNV_res]
 
-		self.inTO_Label = [self.inTOm_res, self.inTOcm_res, self.inTOmm_res, self.inTOum_res, self.inTOangs_res, self.inTOnm_res, self.inTOkm_res, self.inTOin_res, 
+		inTO_Label = [self.inTOm_res, self.inTOcm_res, self.inTOmm_res, self.inTOum_res, self.inTOangs_res, self.inTOnm_res, self.inTOkm_res, self.inTOin_res, 
 						   self.inTOft_res, self.inTOyd_res, self.inTOmiST_res, self.inTOmiNV_res]
 
-		self.ftTO_Label = [self.ftTOm_res, self.ftTOcm_res, self.ftTOmm_res, self.ftTOum_res, self.ftTOangs_res, self.ftTOnm_res, self.ftTOkm_res, self.ftTOin_res, 
+		ftTO_Label = [self.ftTOm_res, self.ftTOcm_res, self.ftTOmm_res, self.ftTOum_res, self.ftTOangs_res, self.ftTOnm_res, self.ftTOkm_res, self.ftTOin_res, 
 						   self.ftTOft_res, self.ftTOyd_res, self.ftTOmiST_res, self.ftTOmiNV_res]
 
-		self.ydTO_Label = [self.ydTOm_res, self.ydTOcm_res, self.ydTOmm_res, self.ydTOum_res, self.ydTOangs_res, self.ydTOnm_res, self.ydTOkm_res, self.ydTOin_res, 
+		ydTO_Label = [self.ydTOm_res, self.ydTOcm_res, self.ydTOmm_res, self.ydTOum_res, self.ydTOangs_res, self.ydTOnm_res, self.ydTOkm_res, self.ydTOin_res, 
 						   self.ydTOft_res, self.ydTOyd_res, self.ydTOmiST_res, self.ydTOmiNV_res]
 
-		self.miSTTO_Label = [self.miSTTOm_res, self.miSTTOcm_res, self.miSTTOmm_res, self.miSTTOum_res, self.miSTTOangs_res, self.miSTTOnm_res, self.miSTTOkm_res, 
+		miSTTO_Label = [self.miSTTOm_res, self.miSTTOcm_res, self.miSTTOmm_res, self.miSTTOum_res, self.miSTTOangs_res, self.miSTTOnm_res, self.miSTTOkm_res, 
 							 self.miSTTOin_res, self.miSTTOft_res, self.miSTTOyd_res, self.miSTTOmiST_res, self.miSTTOmiNV_res]
 
-		self.miNVTO_Label = [self.miNVTOm_res, self.miNVTOcm_res, self.miNVTOmm_res, self.miNVTOum_res, self.miNVTOangs_res, self.miNVTOnm_res, self.miNVTOkm_res, 
+		miNVTO_Label = [self.miNVTOm_res, self.miNVTOcm_res, self.miNVTOmm_res, self.miNVTOum_res, self.miNVTOangs_res, self.miNVTOnm_res, self.miNVTOkm_res, 
 							 self.miNVTOin_res, self.miNVTOft_res, self.miNVTOyd_res, self.miNVTOmiST_res, self.miNVTOmiNV_res]
 
 		i = 0
-		for item in self.mTO_Label:
+		for item in mTO_Label:
 			output_grid.addWidget(item, 1, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.cmTO_Label:
+		for item in cmTO_Label:
 			output_grid.addWidget(item, 2, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.mmTO_Label:
+		for item in mmTO_Label:
 			output_grid.addWidget(item, 3, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.umTO_Label:
+		for item in umTO_Label:
 			output_grid.addWidget(item, 4, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.angsTO_Label:
+		for item in angsTO_Label:
 			output_grid.addWidget(item, 5, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.nmTO_Label:
+		for item in nmTO_Label:
 			output_grid.addWidget(item, 6, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.kmTO_Label:
+		for item in kmTO_Label:
 			output_grid.addWidget(item, 7, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.inTO_Label:
+		for item in inTO_Label:
 			output_grid.addWidget(item, 8, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.ftTO_Label:
+		for item in ftTO_Label:
 			output_grid.addWidget(item, 9, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.ydTO_Label:
+		for item in ydTO_Label:
 			output_grid.addWidget(item, 10, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.miSTTO_Label:
+		for item in miSTTO_Label:
 			output_grid.addWidget(item, 11, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.miNVTO_Label:
+		for item in miNVTO_Label:
 			output_grid.addWidget(item, 12, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
@@ -2390,52 +2406,52 @@ class Mass_Win(QtWidgets.QWidget):
 		self.longtonTOshortton_res = QtWidgets.QLabel("0", self)
 		self.longtonTOlongton_res  = QtWidgets.QLabel("0", self)
 
-		self.kgTO_Label       = [self.kgTOkg_res, self.kgTOmton_res, self.kgTOounce_res, self.kgTOpound_res, self.kgTOshortton_res, self.kgTOlongton_res]
+		kgTO_Label       = [self.kgTOkg_res, self.kgTOmton_res, self.kgTOounce_res, self.kgTOpound_res, self.kgTOshortton_res, self.kgTOlongton_res]
 
-		self.mtonTO_Label     = [self.mtonTOkg_res, self.mtonTOmton_res, self.mtonTOounce_res, self.mtonTOpound_res, self.mtonTOshortton_res, self.mtonTOlongton_res]
+		mtonTO_Label     = [self.mtonTOkg_res, self.mtonTOmton_res, self.mtonTOounce_res, self.mtonTOpound_res, self.mtonTOshortton_res, self.mtonTOlongton_res]
 
-		self.ounceTO_Label    = [self.ounceTOkg_res, self.ounceTOmton_res, self.ounceTOounce_res, self.ounceTOpound_res, self.ounceTOshortton_res, self.ounceTOlongton_res]
+		ounceTO_Label    = [self.ounceTOkg_res, self.ounceTOmton_res, self.ounceTOounce_res, self.ounceTOpound_res, self.ounceTOshortton_res, self.ounceTOlongton_res]
 
-		self.poundTO_Label    = [self.poundTOkg_res, self.poundTOmton_res, self.poundTOounce_res, self.poundTOpound_res, self.poundTOshortton_res, self.poundTOlongton_res]
+		poundTO_Label    = [self.poundTOkg_res, self.poundTOmton_res, self.poundTOounce_res, self.poundTOpound_res, self.poundTOshortton_res, self.poundTOlongton_res]
 
-		self.shorttonTO_Label = [self.shorttonTOkg_res, self.shorttonTOmton_res, self.shorttonTOounce_res, self.shorttonTOpound_res, self.shorttonTOshortton_res, 
+		shorttonTO_Label = [self.shorttonTOkg_res, self.shorttonTOmton_res, self.shorttonTOounce_res, self.shorttonTOpound_res, self.shorttonTOshortton_res, 
 								 self.shorttonTOlongton_res]
 
-		self.longtonTO_Label  = [self.longtonTOkg_res, self.longtonTOmton_res, self.longtonTOounce_res, self.longtonTOpound_res, self.longtonTOshortton_res, 
+		longtonTO_Label  = [self.longtonTOkg_res, self.longtonTOmton_res, self.longtonTOounce_res, self.longtonTOpound_res, self.longtonTOshortton_res, 
 							 	 self.longtonTOlongton_res]
 
 		i = 0
-		for item in self.kgTO_Label:
+		for item in kgTO_Label:
 			output_grid.addWidget(item, 1, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.mtonTO_Label:
+		for item in mtonTO_Label:
 			output_grid.addWidget(item, 2, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
 
 		i = 0
-		for item in self.ounceTO_Label:
+		for item in ounceTO_Label:
 			output_grid.addWidget(item, 3, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
-			
+
 		i = 0
-		for item in self.poundTO_Label:
+		for item in poundTO_Label:
 			output_grid.addWidget(item, 4, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
-			
+
 		i = 0
-		for item in self.shorttonTO_Label:
+		for item in shorttonTO_Label:
 			output_grid.addWidget(item, 5, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
-			
+
 		i = 0
-		for item in self.longtonTO_Label:
+		for item in longtonTO_Label:
 			output_grid.addWidget(item, 6, i)
 			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
 			i = i + 1
@@ -2558,14 +2574,6 @@ class Massflow_Win(QtWidgets.QWidget):
 		input_grid = QtWidgets.QGridLayout()
 		input_grid.setColumnMinimumWidth(0, 130)
 
-		Label_list = ["g/sec", "g/min", "kg/sec", "kg/hour", "kg/day", "ton/sec", "ton/hour", "ton/day", "lb/sec", "lb/hour", "lb/day"]
-		i = 1
-
-		for item in Label_list:
-			Label_name = QtWidgets.QLabel(item)
-			input_grid.addWidget(Label_name, i, 1)
-			i = i + 1
-
 		blanklabel       = QtWidgets.QLabel()
 		self.gsi_LinEd   = QtWidgets.QLineEdit()
 		self.gmini_LinEd = QtWidgets.QLineEdit()
@@ -2579,18 +2587,21 @@ class Massflow_Win(QtWidgets.QWidget):
 		self.lbhi_LinEd  = QtWidgets.QLineEdit()
 		self.lbdi_LinEd  = QtWidgets.QLineEdit()
 
-		input_grid.addWidget(blanklabel,   0, 0)
-		input_grid.addWidget(self.gsi_LinEd,    1, 0)
-		input_grid.addWidget(self.gmini_LinEd,  2, 0)
-		input_grid.addWidget(self.kgsi_LinEd,   3, 0)
-		input_grid.addWidget(self.kghi_LinEd,   4, 0)
-		input_grid.addWidget(self.kgdi_LinEd,   5, 0)
-		input_grid.addWidget(self.tonsi_LinEd,  6, 0)
-		input_grid.addWidget(self.tonhi_LinEd,  7, 0)
-		input_grid.addWidget(self.tondi_LinEd,  8, 0)
-		input_grid.addWidget(self.lbsi_LinEd,   9, 0)
-		input_grid.addWidget(self.lbhi_LinEd,  10, 0)
-		input_grid.addWidget(self.lbdi_LinEd,  11, 0)
+		LinEd_list = [self.gsi_LinEd, self.gmini_LinEd, self.kgsi_LinEd, self.kghi_LinEd, self.kgdi_LinEd, self.tonsi_LinEd, self.tonhi_LinEd, self.tondi_LinEd, 
+					  self.lbsi_LinEd, self.lbhi_LinEd, self.lbdi_LinEd]
+
+		Label_list = [blanklabel, "g/sec", "g/min", "kg/sec", "kg/hour", "kg/day", "ton/sec", "ton/hour", "ton/day", "lb/sec", "lb/hour", "lb/day"]
+		
+		i = 0
+		for item in Label_list:
+			Label_name = QtWidgets.QLabel(item)
+			input_grid.addWidget(Label_name, i, 1)
+			i = i + 1
+
+		i = 1
+		for item in LinEd_list:
+			input_grid.addWidget(item, i, 0)
+			i = i + 1
 
 		input_group.setLayout(input_grid)
 
@@ -2754,137 +2765,97 @@ class Massflow_Win(QtWidgets.QWidget):
 		self.lbdTOlbh_res  = QtWidgets.QLabel("0", self)
 		self.lbdTOlbd_res  = QtWidgets.QLabel("0", self)
 
-		output_grid.addWidget(self.gsTOgs_res,   1, 0)
-		output_grid.addWidget(self.gsTOgmin_res, 1, 1)
-		output_grid.addWidget(self.gsTOkgs_res,  1, 2)
-		output_grid.addWidget(self.gsTOkgh_res,  1, 3)
-		output_grid.addWidget(self.gsTOkgd_res,  1, 4)
-		output_grid.addWidget(self.gsTOtons_res, 1, 5)
-		output_grid.addWidget(self.gsTOtonh_res, 1, 6)
-		output_grid.addWidget(self.gsTOtond_res, 1, 7)
-		output_grid.addWidget(self.gsTOlbs_res,  1, 8)
-		output_grid.addWidget(self.gsTOlbh_res,  1, 9)
-		output_grid.addWidget(self.gsTOlbd_res,  1, 10)
+		gsTO_Label = [self.gsTOgs_res, self.gsTOgmin_res, self.gsTOkgs_res, self.gsTOkgh_res, self.gsTOkgd_res, self.gsTOtons_res, self.gsTOtonh_res, 
+						   self.gsTOtond_res, self.gsTOlbs_res, self.gsTOlbh_res, self.gsTOlbd_res]
 
-		output_grid.addWidget(self.gminTOgs_res,   2, 0)
-		output_grid.addWidget(self.gminTOgmin_res, 2, 1)
-		output_grid.addWidget(self.gminTOkgs_res,  2, 2)
-		output_grid.addWidget(self.gminTOkgh_res,  2, 3)
-		output_grid.addWidget(self.gminTOkgd_res,  2, 4)
-		output_grid.addWidget(self.gminTOtons_res, 2, 5)
-		output_grid.addWidget(self.gminTOtonh_res, 2, 6)
-		output_grid.addWidget(self.gminTOtond_res, 2, 7)
-		output_grid.addWidget(self.gminTOlbs_res,  2, 8)
-		output_grid.addWidget(self.gminTOlbh_res,  2, 9)
-		output_grid.addWidget(self.gminTOlbd_res,  2, 10)
+		gminTO_Label = [self.gminTOgs_res, self.gminTOgmin_res, self.gminTOkgs_res, self.gminTOkgh_res, self.gminTOkgd_res, self.gminTOtons_res, self.gminTOtonh_res, 
+						   self.gminTOtond_res, self.gminTOlbs_res, self.gminTOlbh_res, self.gminTOlbd_res]
 
-		output_grid.addWidget(self.kgsTOgs_res,   3, 0)
-		output_grid.addWidget(self.kgsTOgmin_res, 3, 1)
-		output_grid.addWidget(self.kgsTOkgs_res,  3, 2)
-		output_grid.addWidget(self.kgsTOkgh_res,  3, 3)
-		output_grid.addWidget(self.kgsTOkgd_res,  3, 4)
-		output_grid.addWidget(self.kgsTOtons_res, 3, 5)
-		output_grid.addWidget(self.kgsTOtonh_res, 3, 6)
-		output_grid.addWidget(self.kgsTOtond_res, 3, 7)
-		output_grid.addWidget(self.kgsTOlbs_res,  3, 8)
-		output_grid.addWidget(self.kgsTOlbh_res,  3, 9)
-		output_grid.addWidget(self.kgsTOlbd_res,  3, 10)
+		kgsTO_Label = [self.kgsTOgs_res, self.kgsTOgmin_res, self.kgsTOkgs_res, self.kgsTOkgh_res, self.kgsTOkgd_res, self.kgsTOtons_res, self.kgsTOtonh_res, 
+						   self.kgsTOtond_res, self.kgsTOlbs_res, self.kgsTOlbh_res, self.kgsTOlbd_res]
 
-		output_grid.addWidget(self.kghTOgs_res,   4, 0)
-		output_grid.addWidget(self.kghTOgmin_res, 4, 1)
-		output_grid.addWidget(self.kghTOkgs_res,  4, 2)
-		output_grid.addWidget(self.kghTOkgh_res,  4, 3)
-		output_grid.addWidget(self.kghTOkgd_res,  4, 4)
-		output_grid.addWidget(self.kghTOtons_res, 4, 5)
-		output_grid.addWidget(self.kghTOtonh_res, 4, 6)
-		output_grid.addWidget(self.kghTOtond_res, 4, 7)
-		output_grid.addWidget(self.kghTOlbs_res,  4, 8)
-		output_grid.addWidget(self.kghTOlbh_res,  4, 9)
-		output_grid.addWidget(self.kghTOlbd_res,  4, 10)
+		kghTO_Label = [self.kghTOgs_res, self.kghTOgmin_res, self.kghTOkgs_res, self.kghTOkgh_res, self.kghTOkgd_res, self.kghTOtons_res, self.kghTOtonh_res, 
+						   self.kghTOtond_res, self.kghTOlbs_res, self.kghTOlbh_res, self.kghTOlbd_res]
 
-		output_grid.addWidget(self.kgdTOgs_res,   5, 0)
-		output_grid.addWidget(self.kgdTOgmin_res, 5, 1)
-		output_grid.addWidget(self.kgdTOkgs_res,  5, 2)
-		output_grid.addWidget(self.kgdTOkgh_res,  5, 3)
-		output_grid.addWidget(self.kgdTOkgd_res,  5, 4)
-		output_grid.addWidget(self.kgdTOtons_res, 5, 5)
-		output_grid.addWidget(self.kgdTOtonh_res, 5, 6)
-		output_grid.addWidget(self.kgdTOtond_res, 5, 7)
-		output_grid.addWidget(self.kgdTOlbs_res,  5, 8)
-		output_grid.addWidget(self.kgdTOlbh_res,  5, 9)
-		output_grid.addWidget(self.kgdTOlbd_res,  5, 10)
+		kgdTO_Label = [self.kgdTOgs_res, self.kgdTOgmin_res, self.kgdTOkgs_res, self.kgdTOkgh_res, self.kgdTOkgd_res, self.kgdTOtons_res, self.kgdTOtonh_res, 
+						   self.kgdTOtond_res, self.kgdTOlbs_res, self.kgdTOlbh_res, self.kgdTOlbd_res]
 
-		output_grid.addWidget(self.tonsTOgs_res,   6, 0)
-		output_grid.addWidget(self.tonsTOgmin_res, 6, 1)
-		output_grid.addWidget(self.tonsTOkgs_res,  6, 2)
-		output_grid.addWidget(self.tonsTOkgh_res,  6, 3)
-		output_grid.addWidget(self.tonsTOkgd_res,  6, 4)
-		output_grid.addWidget(self.tonsTOtons_res, 6, 5)
-		output_grid.addWidget(self.tonsTOtonh_res, 6, 6)
-		output_grid.addWidget(self.tonsTOtond_res, 6, 7)
-		output_grid.addWidget(self.tonsTOlbs_res,  6, 8)
-		output_grid.addWidget(self.tonsTOlbh_res,  6, 9)
-		output_grid.addWidget(self.tonsTOlbd_res,  6, 10)
+		tonsTO_Label = [self.tonsTOgs_res, self.tonsTOgmin_res, self.tonsTOkgs_res, self.tonsTOkgh_res, self.tonsTOkgd_res, self.tonsTOtons_res, self.tonsTOtonh_res, 
+						   self.tonsTOtond_res, self.tonsTOlbs_res, self.tonsTOlbh_res, self.tonsTOlbd_res]
 
-		output_grid.addWidget(self.tonhTOgs_res,   7, 0)
-		output_grid.addWidget(self.tonhTOgmin_res, 7, 1)
-		output_grid.addWidget(self.tonhTOkgs_res,  7, 2)
-		output_grid.addWidget(self.tonhTOkgh_res,  7, 3)
-		output_grid.addWidget(self.tonhTOkgd_res,  7, 4)
-		output_grid.addWidget(self.tonhTOtons_res, 7, 5)
-		output_grid.addWidget(self.tonhTOtonh_res, 7, 6)
-		output_grid.addWidget(self.tonhTOtond_res, 7, 7)
-		output_grid.addWidget(self.tonhTOlbs_res,  7, 8)
-		output_grid.addWidget(self.tonhTOlbh_res,  7, 9)
-		output_grid.addWidget(self.tonhTOlbd_res,  7, 10)
+		tonhTO_Label = [self.tonhTOgs_res, self.tonhTOgmin_res, self.tonhTOkgs_res, self.tonhTOkgh_res, self.tonhTOkgd_res, self.tonhTOtons_res, self.tonhTOtonh_res, 
+						   self.tonhTOtond_res, self.tonhTOlbs_res, self.tonhTOlbh_res, self.tonhTOlbd_res]
 
-		output_grid.addWidget(self.tondTOgs_res,   8, 0)
-		output_grid.addWidget(self.tondTOgmin_res, 8, 1)
-		output_grid.addWidget(self.tondTOkgs_res,  8, 2)
-		output_grid.addWidget(self.tondTOkgh_res,  8, 3)
-		output_grid.addWidget(self.tondTOkgd_res,  8, 4)
-		output_grid.addWidget(self.tondTOtons_res, 8, 5)
-		output_grid.addWidget(self.tondTOtonh_res, 8, 6)
-		output_grid.addWidget(self.tondTOtond_res, 8, 7)
-		output_grid.addWidget(self.tondTOlbs_res,  8, 8)
-		output_grid.addWidget(self.tondTOlbh_res,  8, 9)
-		output_grid.addWidget(self.tondTOlbd_res,  8, 10)
+		tondTO_Label = [self.tondTOgs_res, self.tondTOgmin_res, self.tondTOkgs_res, self.tondTOkgh_res, self.tondTOkgd_res, self.tondTOtons_res, self.tondTOtonh_res, 
+						   self.tondTOtond_res, self.tondTOlbs_res, self.tondTOlbh_res, self.tondTOlbd_res]
 
-		output_grid.addWidget(self.lbsTOgs_res,   9, 0)
-		output_grid.addWidget(self.lbsTOgmin_res, 9, 1)
-		output_grid.addWidget(self.lbsTOkgs_res,  9, 2)
-		output_grid.addWidget(self.lbsTOkgh_res,  9, 3)
-		output_grid.addWidget(self.lbsTOkgd_res,  9, 4)
-		output_grid.addWidget(self.lbsTOtons_res, 9, 5)
-		output_grid.addWidget(self.lbsTOtonh_res, 9, 6)
-		output_grid.addWidget(self.lbsTOtond_res, 9, 7)
-		output_grid.addWidget(self.lbsTOlbs_res,  9, 8)
-		output_grid.addWidget(self.lbsTOlbh_res,  9, 9)
-		output_grid.addWidget(self.lbsTOlbd_res,  9, 10)
+		lbsTO_Label = [self.lbsTOgs_res, self.lbsTOgmin_res, self.lbsTOkgs_res, self.lbsTOkgh_res, self.lbsTOkgd_res, self.lbsTOtons_res, self.lbsTOtonh_res, 
+						   self.lbsTOtond_res, self.lbsTOlbs_res, self.lbsTOlbh_res, self.lbsTOlbd_res]
 
-		output_grid.addWidget(self.lbhTOgs_res,   10, 0)
-		output_grid.addWidget(self.lbhTOgmin_res, 10, 1)
-		output_grid.addWidget(self.lbhTOkgs_res,  10, 2)
-		output_grid.addWidget(self.lbhTOkgh_res,  10, 3)
-		output_grid.addWidget(self.lbhTOkgd_res,  10, 4)
-		output_grid.addWidget(self.lbhTOtons_res, 10, 5)
-		output_grid.addWidget(self.lbhTOtonh_res, 10, 6)
-		output_grid.addWidget(self.lbhTOtond_res, 10, 7)
-		output_grid.addWidget(self.lbhTOlbs_res,  10, 8)
-		output_grid.addWidget(self.lbhTOlbh_res,  10, 9)
-		output_grid.addWidget(self.lbhTOlbd_res,  10, 10)
+		lbhTO_Label = [self.lbhTOgs_res, self.lbhTOgmin_res, self.lbhTOkgs_res, self.lbhTOkgh_res, self.lbhTOkgd_res, self.lbhTOtons_res, self.lbhTOtonh_res, 
+						   self.lbhTOtond_res, self.lbhTOlbs_res, self.lbhTOlbh_res, self.lbhTOlbd_res]
 
-		output_grid.addWidget(self.lbdTOgs_res,   11, 0)
-		output_grid.addWidget(self.lbdTOgmin_res, 11, 1)
-		output_grid.addWidget(self.lbdTOkgs_res,  11, 2)
-		output_grid.addWidget(self.lbdTOkgh_res,  11, 3)
-		output_grid.addWidget(self.lbdTOkgd_res,  11, 4)
-		output_grid.addWidget(self.lbdTOtons_res, 11, 5)
-		output_grid.addWidget(self.lbdTOtonh_res, 11, 6)
-		output_grid.addWidget(self.lbdTOtond_res, 11, 7)
-		output_grid.addWidget(self.lbdTOlbs_res,  11, 8)
-		output_grid.addWidget(self.lbdTOlbh_res,  11, 9)
-		output_grid.addWidget(self.lbdTOlbd_res,  11, 10)
+		lbdTO_Label = [self.lbdTOgs_res, self.lbdTOgmin_res, self.lbdTOkgs_res, self.lbdTOkgh_res, self.lbdTOkgd_res, self.lbdTOtons_res, self.lbdTOtonh_res, 
+						   self.lbdTOtond_res, self.lbdTOlbs_res, self.lbdTOlbh_res, self.lbdTOlbd_res]
+
+		i = 0
+		for item in gsTO_Label:
+			output_grid.addWidget(item, 1, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in gminTO_Label:
+			output_grid.addWidget(item, 2, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in kgsTO_Label:
+			output_grid.addWidget(item, 3, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in kghTO_Label:
+			output_grid.addWidget(item, 4, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+		i = 0
+		for item in kgdTO_Label:
+			output_grid.addWidget(item, 5, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+		i = 0
+		for item in tonsTO_Label:
+			output_grid.addWidget(item, 6, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+		i = 0
+		for item in tonhTO_Label:
+			output_grid.addWidget(item, 7, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+		i = 0
+		for item in tondTO_Label:
+			output_grid.addWidget(item, 8, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+		i = 0
+		for item in lbsTO_Label:
+			output_grid.addWidget(item, 9, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+		i = 0
+		for item in lbhTO_Label:
+			output_grid.addWidget(item, 10, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+		i = 0
+		for item in lbdTO_Label:
+			output_grid.addWidget(item, 11, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
 		output_group.setLayout(output_grid)
 
@@ -3198,22 +3169,28 @@ class Massfrac_Win(QtWidgets.QWidget):
 		self.ppmi_LinEd     = QtWidgets.QLineEdit()
 		self.ppbi_LinEd     = QtWidgets.QLineEdit()
 
-		Label_list = ["decimal (1)", "%", "‰", "ppm", "ppb"]
-		i = 1
+		LinEd_list = [self.decimali_LinEd, self.percenti_LinEd, self.promilei_LinEd, self.ppmi_LinEd, self.ppbi_LinEd]
 
+		Label_list = [blanklabel, "decimal (1)", "%", "‰", "ppm", "ppb"]
+		
+		i = 0
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			input_grid.addWidget(Label_name, i, 1)
 			i = i + 1
 
-		input_grid.addWidget(blanklabel,          0, 0)
-		input_grid.addWidget(self.decimali_LinEd, 1, 0)
-		input_grid.addWidget(self.percenti_LinEd, 2, 0)
-		input_grid.addWidget(self.promilei_LinEd, 3, 0)
-		input_grid.addWidget(self.ppmi_LinEd,     4, 0)
-		input_grid.addWidget(self.ppbi_LinEd,     5, 0)
+		i = 1
+		for item in LinEd_list:
+			input_grid.addWidget(item, i, 0)
+			i = i + 1
 
 		input_group.setLayout(input_grid)
+
+		self.decimali_LinEd.returnPressed.connect(self.decimalTO_fun)
+		self.percenti_LinEd.returnPressed.connect(self.percentTO_fun)
+		self.promilei_LinEd.returnPressed.connect(self.promileTO_fun)
+		self.ppmi_LinEd.returnPressed.connect(self.ppmTO_fun)
+		self.ppbi_LinEd.returnPressed.connect(self.ppbTO_fun)
 
 		return input_group
 
@@ -3224,8 +3201,8 @@ class Massfrac_Win(QtWidgets.QWidget):
 		output_grid = QtWidgets.QGridLayout()
 
 		Label_list = ["decimal (1)", "%", "‰", "ppm", "ppb"]
+		
 		i = 0
-
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			output_grid.addWidget(Label_name, 0, i)
@@ -3261,43 +3238,47 @@ class Massfrac_Win(QtWidgets.QWidget):
 		self.ppbTOppm_res     = QtWidgets.QLabel("0", self)
 		self.ppbTOppb_res     = QtWidgets.QLabel("0", self)
 
-		output_grid.addWidget(self.decimalTOdecimal_res, 1, 0)
-		output_grid.addWidget(self.decimalTOpercent_res, 1, 1)
-		output_grid.addWidget(self.decimalTOpromile_res, 1, 2)
-		output_grid.addWidget(self.decimalTOppm_res,     1, 3)
-		output_grid.addWidget(self.decimalTOppb_res,     1, 4)
+		decimalTO_Label = [self.decimalTOdecimal_res, self.decimalTOpercent_res, self.decimalTOpromile_res, self.decimalTOppm_res, self.decimalTOppb_res]
 
-		output_grid.addWidget(self.percentTOdecimal_res, 2, 0)
-		output_grid.addWidget(self.percentTOpercent_res, 2, 1)
-		output_grid.addWidget(self.percentTOpromile_res, 2, 2)
-		output_grid.addWidget(self.percentTOppm_res,     2, 3)
-		output_grid.addWidget(self.percentTOppb_res,     2, 4)
+		percentTO_Label = [self.percentTOdecimal_res, self.percentTOpercent_res, self.percentTOpromile_res, self.percentTOppm_res, self.percentTOppb_res]
 
-		output_grid.addWidget(self.promileTOdecimal_res, 3, 0)
-		output_grid.addWidget(self.promileTOpercent_res, 3, 1)
-		output_grid.addWidget(self.promileTOpromile_res, 3, 2)
-		output_grid.addWidget(self.promileTOppm_res,     3, 3)
-		output_grid.addWidget(self.promileTOppb_res,     3, 4)
+		promileTO_Label = [self.promileTOdecimal_res, self.promileTOpercent_res, self.promileTOpromile_res, self.promileTOppm_res, self.promileTOppb_res]
 
-		output_grid.addWidget(self.ppmTOdecimal_res, 4, 0)
-		output_grid.addWidget(self.ppmTOpercent_res, 4, 1)
-		output_grid.addWidget(self.ppmTOpromile_res, 4, 2)
-		output_grid.addWidget(self.ppmTOppm_res,     4, 3)
-		output_grid.addWidget(self.ppmTOppb_res,     4, 4)
+		ppmTO_Label = [self.ppmTOdecimal_res, self.ppmTOpercent_res, self.ppmTOpromile_res, self.ppmTOppm_res, self.ppmTOppb_res]
 
-		output_grid.addWidget(self.ppbTOdecimal_res, 5, 0)
-		output_grid.addWidget(self.ppbTOpercent_res, 5, 1)
-		output_grid.addWidget(self.ppbTOpromile_res, 5, 2)
-		output_grid.addWidget(self.ppbTOppm_res,     5, 3)
-		output_grid.addWidget(self.ppbTOppb_res,     5, 4)
+		ppbTO_Label = [self.ppbTOdecimal_res, self.ppbTOpercent_res, self.ppbTOpromile_res, self.ppbTOppm_res, self.ppbTOppb_res]
+
+		i = 0
+		for item in decimalTO_Label:
+			output_grid.addWidget(item, 1, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in percentTO_Label:
+			output_grid.addWidget(item, 2, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in promileTO_Label:
+			output_grid.addWidget(item, 3, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in ppmTO_Label:
+			output_grid.addWidget(item, 4, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 0
+		for item in ppbTO_Label:
+			output_grid.addWidget(item, 5, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
 
 		output_group.setLayout(output_grid)
-
-		self.decimali_LinEd.returnPressed.connect(self.decimalTO_fun)
-		self.percenti_LinEd.returnPressed.connect(self.percentTO_fun)
-		self.promilei_LinEd.returnPressed.connect(self.promileTO_fun)
-		self.ppmi_LinEd.returnPressed.connect(self.ppmTO_fun)
-		self.ppbi_LinEd.returnPressed.connect(self.ppbTO_fun)
 
 		return output_group
 
@@ -3417,43 +3398,46 @@ class Pressstres_Win(QtWidgets.QWidget):
 		self.inH2Oi_LinEd   = QtWidgets.QLineEdit()
 		self.inHgi_LinEd    = QtWidgets.QLineEdit()
 
-		Label_list = ["Pa", "kPa", "MPa", "mbar", "bar", "atm", "psi", "kg/cm\u00B2", "kg/m\u00B2", "N/m\u00B2", "lb/in\u00B2", "lb/ft\u00B2", "Torr", "dyne/cm\u00B2",
-					  "mm H<sub>2</sub>O", "mm Hg", "in H<sub>2</sub>O", "in Hg"]
-		i = 1
+		LinEd_list = [self.Pai_LinEd, self.kPai_LinEd, self.MPai_LinEd, self.mbari_LinEd, self.bari_LinEd, self.atmi_LinEd, self.psii_LinEd, self.kgcm2i_LinEd,
+					  self.kgm2i_LinEd, self.Nm2i_LinEd, self.lbin2i_LinEd, self.lbft2i_LinEd, self.Torri_LinEd, self.dynecm2i_LinEd, self.mmH2Oi_LinEd,
+					  self.mmHgi_LinEd, self.inH2Oi_LinEd, self.inHgi_LinEd]
 
+		Label_list = [blanklabel, "Pa", "kPa", "MPa", "mbar", "bar", "atm", "psi", "kg/cm\u00B2", "kg/m\u00B2", "N/m\u00B2", "lb/in\u00B2", "lb/ft\u00B2", "Torr", 
+					  "dyne/cm\u00B2", "mm H<sub>2</sub>O", "mm Hg", "in H<sub>2</sub>O", "in Hg"]
+		
+		i = 0
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			input_grid.addWidget(Label_name, i, 1)
 			i = i + 1
 
-		input_grid.addWidget(blanklabel,           0, 0)
-		input_grid.addWidget(self.Pai_LinEd,       1, 0)
-		input_grid.addWidget(self.kPai_LinEd,      2, 0)
-		input_grid.addWidget(self.MPai_LinEd,      3, 0)
-		input_grid.addWidget(self.mbari_LinEd,     4, 0)
-		input_grid.addWidget(self.bari_LinEd,      5, 0)
-		input_grid.addWidget(self.atmi_LinEd,      6, 0)
-		input_grid.addWidget(self.psii_LinEd,      7, 0)
-		input_grid.addWidget(self.kgcm2i_LinEd,    8, 0)
-		input_grid.addWidget(self.kgm2i_LinEd,     9, 0)
-		input_grid.addWidget(self.Nm2i_LinEd,     10, 0)
-		input_grid.addWidget(self.lbin2i_LinEd,   11, 0)
-		input_grid.addWidget(self.lbft2i_LinEd,   12, 0)
-		input_grid.addWidget(self.Torri_LinEd,    13, 0)
-		input_grid.addWidget(self.dynecm2i_LinEd, 14, 0)
-		input_grid.addWidget(self.mmH2Oi_LinEd,   15, 0)
-		input_grid.addWidget(self.mmHgi_LinEd,    16, 0)
-		input_grid.addWidget(self.inH2Oi_LinEd,   17, 0)
-		input_grid.addWidget(self.inHgi_LinEd,    18, 0)
+		i = 1
+		for item in LinEd_list:
+			input_grid.addWidget(item, i, 0)
+			i = i + 1
 
 		input_group.setLayout(input_grid)
 
 		self.Pai_LinEd.returnPressed.connect(self.PaTO_fun)
+		self.kPai_LinEd.returnPressed.connect(self.kPaTO_fun)
+		self.MPai_LinEd.returnPressed.connect(self.MPaTO_fun)
+		self.mbari_LinEd.returnPressed.connect(self.mbarTO_fun)
+		self.bari_LinEd.returnPressed.connect(self.barTO_fun)
+		self.atmi_LinEd.returnPressed.connect(self.atmTO_fun)
+		self.psii_LinEd.returnPressed.connect(self.psiTO_fun)
+		self.kgcm2i_LinEd.returnPressed.connect(self.kgcm2TO_fun)
+		self.kgm2i_LinEd.returnPressed.connect(self.kgm2TO_fun)
+		self.Nm2i_LinEd.returnPressed.connect(self.Nm2TO_fun)
+		self.lbin2i_LinEd.returnPressed.connect(self.lbin2TO_fun)
+		self.lbft2i_LinEd.returnPressed.connect(self.lbft2TO_fun)
+		self.Torri_LinEd.returnPressed.connect(self.TorrTO_fun)
+		self.dynecm2i_LinEd.returnPressed.connect(self.dynecm2TO_fun)
+		self.mmH2Oi_LinEd.returnPressed.connect(self.mmH2OTO_fun)
+		self.mmHgi_LinEd.returnPressed.connect(self.mmHgTO_fun)
+		self.inH2Oi_LinEd.returnPressed.connect(self.inH2OTO_fun)
+		self.inHgi_LinEd.returnPressed.connect(self.inHgTO_fun)
 
 		return input_group
-
-	def PaTO_fun(self):
-		pass
 
 	def createGroup_output(self):
 		output_group = QtWidgets.QGroupBox("Output", self)
@@ -3463,16 +3447,594 @@ class Pressstres_Win(QtWidgets.QWidget):
 
 		Label_list = ["Pa", "kPa", "MPa", "mbar", "bar", "atm", "psi", "kg/cm\u00B2", "kg/m\u00B2", "N/m\u00B2", "lb/in\u00B2", "lb/ft\u00B2", "Torr", "dyne/cm\u00B2",
 					  "mm H<sub>2</sub>O", "mm Hg", "in H<sub>2</sub>O", "in Hg"]
+		
 		i = 0
-
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			output_grid.addWidget(Label_name, 0, i)
 			i = i + 1
 
+		self.PaTOPa_res      = QtWidgets.QLabel("0", self)
+		self.PaTOkPa_res     = QtWidgets.QLabel("0", self)
+		self.PaTOMPa_res     = QtWidgets.QLabel("0", self)
+		self.PaTOmbar_res    = QtWidgets.QLabel("0", self)
+		self.PaTObar_res     = QtWidgets.QLabel("0", self)
+		self.PaTOatm_res     = QtWidgets.QLabel("0", self)
+		self.PaTOpsi_res     = QtWidgets.QLabel("0", self)
+		self.PaTOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.PaTOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.PaTONm2_res     = QtWidgets.QLabel("0", self)
+		self.PaTOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.PaTOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.PaTOTorr_res    = QtWidgets.QLabel("0", self)
+		self.PaTOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.PaTOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.PaTOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.PaTOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.PaTOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.kPaTOPa_res      = QtWidgets.QLabel("0", self)
+		self.kPaTOkPa_res     = QtWidgets.QLabel("0", self)
+		self.kPaTOMPa_res     = QtWidgets.QLabel("0", self)
+		self.kPaTOmbar_res    = QtWidgets.QLabel("0", self)
+		self.kPaTObar_res     = QtWidgets.QLabel("0", self)
+		self.kPaTOatm_res     = QtWidgets.QLabel("0", self)
+		self.kPaTOpsi_res     = QtWidgets.QLabel("0", self)
+		self.kPaTOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.kPaTOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.kPaTONm2_res     = QtWidgets.QLabel("0", self)
+		self.kPaTOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.kPaTOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.kPaTOTorr_res    = QtWidgets.QLabel("0", self)
+		self.kPaTOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.kPaTOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.kPaTOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.kPaTOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.kPaTOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.MPaTOPa_res      = QtWidgets.QLabel("0", self)
+		self.MPaTOkPa_res     = QtWidgets.QLabel("0", self)
+		self.MPaTOMPa_res     = QtWidgets.QLabel("0", self)
+		self.MPaTOmbar_res    = QtWidgets.QLabel("0", self)
+		self.MPaTObar_res     = QtWidgets.QLabel("0", self)
+		self.MPaTOatm_res     = QtWidgets.QLabel("0", self)
+		self.MPaTOpsi_res     = QtWidgets.QLabel("0", self)
+		self.MPaTOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.MPaTOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.MPaTONm2_res     = QtWidgets.QLabel("0", self)
+		self.MPaTOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.MPaTOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.MPaTOTorr_res    = QtWidgets.QLabel("0", self)
+		self.MPaTOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.MPaTOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.MPaTOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.MPaTOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.MPaTOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.mbarTOPa_res      = QtWidgets.QLabel("0", self)
+		self.mbarTOkPa_res     = QtWidgets.QLabel("0", self)
+		self.mbarTOMPa_res     = QtWidgets.QLabel("0", self)
+		self.mbarTOmbar_res    = QtWidgets.QLabel("0", self)
+		self.mbarTObar_res     = QtWidgets.QLabel("0", self)
+		self.mbarTOatm_res     = QtWidgets.QLabel("0", self)
+		self.mbarTOpsi_res     = QtWidgets.QLabel("0", self)
+		self.mbarTOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.mbarTOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.mbarTONm2_res     = QtWidgets.QLabel("0", self)
+		self.mbarTOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.mbarTOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.mbarTOTorr_res    = QtWidgets.QLabel("0", self)
+		self.mbarTOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.mbarTOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.mbarTOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.mbarTOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.mbarTOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.barTOPa_res      = QtWidgets.QLabel("0", self)
+		self.barTOkPa_res     = QtWidgets.QLabel("0", self)
+		self.barTOMPa_res     = QtWidgets.QLabel("0", self)
+		self.barTOmbar_res    = QtWidgets.QLabel("0", self)
+		self.barTObar_res     = QtWidgets.QLabel("0", self)
+		self.barTOatm_res     = QtWidgets.QLabel("0", self)
+		self.barTOpsi_res     = QtWidgets.QLabel("0", self)
+		self.barTOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.barTOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.barTONm2_res     = QtWidgets.QLabel("0", self)
+		self.barTOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.barTOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.barTOTorr_res    = QtWidgets.QLabel("0", self)
+		self.barTOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.barTOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.barTOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.barTOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.barTOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.atmTOPa_res      = QtWidgets.QLabel("0", self)
+		self.atmTOkPa_res     = QtWidgets.QLabel("0", self)
+		self.atmTOMPa_res     = QtWidgets.QLabel("0", self)
+		self.atmTOmbar_res    = QtWidgets.QLabel("0", self)
+		self.atmTObar_res     = QtWidgets.QLabel("0", self)
+		self.atmTOatm_res     = QtWidgets.QLabel("0", self)
+		self.atmTOpsi_res     = QtWidgets.QLabel("0", self)
+		self.atmTOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.atmTOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.atmTONm2_res     = QtWidgets.QLabel("0", self)
+		self.atmTOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.atmTOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.atmTOTorr_res    = QtWidgets.QLabel("0", self)
+		self.atmTOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.atmTOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.atmTOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.atmTOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.atmTOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.psiTOPa_res      = QtWidgets.QLabel("0", self)
+		self.psiTOkPa_res     = QtWidgets.QLabel("0", self)
+		self.psiTOMPa_res     = QtWidgets.QLabel("0", self)
+		self.psiTOmbar_res    = QtWidgets.QLabel("0", self)
+		self.psiTObar_res     = QtWidgets.QLabel("0", self)
+		self.psiTOatm_res     = QtWidgets.QLabel("0", self)
+		self.psiTOpsi_res     = QtWidgets.QLabel("0", self)
+		self.psiTOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.psiTOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.psiTONm2_res     = QtWidgets.QLabel("0", self)
+		self.psiTOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.psiTOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.psiTOTorr_res    = QtWidgets.QLabel("0", self)
+		self.psiTOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.psiTOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.psiTOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.psiTOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.psiTOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.kgcm2TOPa_res      = QtWidgets.QLabel("0", self)
+		self.kgcm2TOkPa_res     = QtWidgets.QLabel("0", self)
+		self.kgcm2TOMPa_res     = QtWidgets.QLabel("0", self)
+		self.kgcm2TOmbar_res    = QtWidgets.QLabel("0", self)
+		self.kgcm2TObar_res     = QtWidgets.QLabel("0", self)
+		self.kgcm2TOatm_res     = QtWidgets.QLabel("0", self)
+		self.kgcm2TOpsi_res     = QtWidgets.QLabel("0", self)
+		self.kgcm2TOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.kgcm2TOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.kgcm2TONm2_res     = QtWidgets.QLabel("0", self)
+		self.kgcm2TOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.kgcm2TOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.kgcm2TOTorr_res    = QtWidgets.QLabel("0", self)
+		self.kgcm2TOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.kgcm2TOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.kgcm2TOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.kgcm2TOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.kgcm2TOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.kgm2TOPa_res      = QtWidgets.QLabel("0", self)
+		self.kgm2TOkPa_res     = QtWidgets.QLabel("0", self)
+		self.kgm2TOMPa_res     = QtWidgets.QLabel("0", self)
+		self.kgm2TOmbar_res    = QtWidgets.QLabel("0", self)
+		self.kgm2TObar_res     = QtWidgets.QLabel("0", self)
+		self.kgm2TOatm_res     = QtWidgets.QLabel("0", self)
+		self.kgm2TOpsi_res     = QtWidgets.QLabel("0", self)
+		self.kgm2TOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.kgm2TOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.kgm2TONm2_res     = QtWidgets.QLabel("0", self)
+		self.kgm2TOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.kgm2TOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.kgm2TOTorr_res    = QtWidgets.QLabel("0", self)
+		self.kgm2TOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.kgm2TOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.kgm2TOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.kgm2TOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.kgm2TOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.Nm2TOPa_res      = QtWidgets.QLabel("0", self)
+		self.Nm2TOkPa_res     = QtWidgets.QLabel("0", self)
+		self.Nm2TOMPa_res     = QtWidgets.QLabel("0", self)
+		self.Nm2TOmbar_res    = QtWidgets.QLabel("0", self)
+		self.Nm2TObar_res     = QtWidgets.QLabel("0", self)
+		self.Nm2TOatm_res     = QtWidgets.QLabel("0", self)
+		self.Nm2TOpsi_res     = QtWidgets.QLabel("0", self)
+		self.Nm2TOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.Nm2TOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.Nm2TONm2_res     = QtWidgets.QLabel("0", self)
+		self.Nm2TOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.Nm2TOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.Nm2TOTorr_res    = QtWidgets.QLabel("0", self)
+		self.Nm2TOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.Nm2TOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.Nm2TOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.Nm2TOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.Nm2TOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.lbin2TOPa_res      = QtWidgets.QLabel("0", self)
+		self.lbin2TOkPa_res     = QtWidgets.QLabel("0", self)
+		self.lbin2TOMPa_res     = QtWidgets.QLabel("0", self)
+		self.lbin2TOmbar_res    = QtWidgets.QLabel("0", self)
+		self.lbin2TObar_res     = QtWidgets.QLabel("0", self)
+		self.lbin2TOatm_res     = QtWidgets.QLabel("0", self)
+		self.lbin2TOpsi_res     = QtWidgets.QLabel("0", self)
+		self.lbin2TOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.lbin2TOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.lbin2TONm2_res     = QtWidgets.QLabel("0", self)
+		self.lbin2TOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.lbin2TOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.lbin2TOTorr_res    = QtWidgets.QLabel("0", self)
+		self.lbin2TOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.lbin2TOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.lbin2TOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.lbin2TOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.lbin2TOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.lbft2TOPa_res      = QtWidgets.QLabel("0", self)
+		self.lbft2TOkPa_res     = QtWidgets.QLabel("0", self)
+		self.lbft2TOMPa_res     = QtWidgets.QLabel("0", self)
+		self.lbft2TOmbar_res    = QtWidgets.QLabel("0", self)
+		self.lbft2TObar_res     = QtWidgets.QLabel("0", self)
+		self.lbft2TOatm_res     = QtWidgets.QLabel("0", self)
+		self.lbft2TOpsi_res     = QtWidgets.QLabel("0", self)
+		self.lbft2TOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.lbft2TOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.lbft2TONm2_res     = QtWidgets.QLabel("0", self)
+		self.lbft2TOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.lbft2TOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.lbft2TOTorr_res    = QtWidgets.QLabel("0", self)
+		self.lbft2TOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.lbft2TOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.lbft2TOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.lbft2TOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.lbft2TOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.TorrTOPa_res      = QtWidgets.QLabel("0", self)
+		self.TorrTOkPa_res     = QtWidgets.QLabel("0", self)
+		self.TorrTOMPa_res     = QtWidgets.QLabel("0", self)
+		self.TorrTOmbar_res    = QtWidgets.QLabel("0", self)
+		self.TorrTObar_res     = QtWidgets.QLabel("0", self)
+		self.TorrTOatm_res     = QtWidgets.QLabel("0", self)
+		self.TorrTOpsi_res     = QtWidgets.QLabel("0", self)
+		self.TorrTOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.TorrTOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.TorrTONm2_res     = QtWidgets.QLabel("0", self)
+		self.TorrTOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.TorrTOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.TorrTOTorr_res    = QtWidgets.QLabel("0", self)
+		self.TorrTOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.TorrTOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.TorrTOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.TorrTOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.TorrTOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.dynecm2TOPa_res      = QtWidgets.QLabel("0", self)
+		self.dynecm2TOkPa_res     = QtWidgets.QLabel("0", self)
+		self.dynecm2TOMPa_res     = QtWidgets.QLabel("0", self)
+		self.dynecm2TOmbar_res    = QtWidgets.QLabel("0", self)
+		self.dynecm2TObar_res     = QtWidgets.QLabel("0", self)
+		self.dynecm2TOatm_res     = QtWidgets.QLabel("0", self)
+		self.dynecm2TOpsi_res     = QtWidgets.QLabel("0", self)
+		self.dynecm2TOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.dynecm2TOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.dynecm2TONm2_res     = QtWidgets.QLabel("0", self)
+		self.dynecm2TOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.dynecm2TOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.dynecm2TOTorr_res    = QtWidgets.QLabel("0", self)
+		self.dynecm2TOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.dynecm2TOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.dynecm2TOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.dynecm2TOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.dynecm2TOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.mmH2OTOPa_res      = QtWidgets.QLabel("0", self)
+		self.mmH2OTOkPa_res     = QtWidgets.QLabel("0", self)
+		self.mmH2OTOMPa_res     = QtWidgets.QLabel("0", self)
+		self.mmH2OTOmbar_res    = QtWidgets.QLabel("0", self)
+		self.mmH2OTObar_res     = QtWidgets.QLabel("0", self)
+		self.mmH2OTOatm_res     = QtWidgets.QLabel("0", self)
+		self.mmH2OTOpsi_res     = QtWidgets.QLabel("0", self)
+		self.mmH2OTOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.mmH2OTOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.mmH2OTONm2_res     = QtWidgets.QLabel("0", self)
+		self.mmH2OTOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.mmH2OTOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.mmH2OTOTorr_res    = QtWidgets.QLabel("0", self)
+		self.mmH2OTOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.mmH2OTOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.mmH2OTOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.mmH2OTOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.mmH2OTOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.mmHgTOPa_res      = QtWidgets.QLabel("0", self)
+		self.mmHgTOkPa_res     = QtWidgets.QLabel("0", self)
+		self.mmHgTOMPa_res     = QtWidgets.QLabel("0", self)
+		self.mmHgTOmbar_res    = QtWidgets.QLabel("0", self)
+		self.mmHgTObar_res     = QtWidgets.QLabel("0", self)
+		self.mmHgTOatm_res     = QtWidgets.QLabel("0", self)
+		self.mmHgTOpsi_res     = QtWidgets.QLabel("0", self)
+		self.mmHgTOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.mmHgTOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.mmHgTONm2_res     = QtWidgets.QLabel("0", self)
+		self.mmHgTOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.mmHgTOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.mmHgTOTorr_res    = QtWidgets.QLabel("0", self)
+		self.mmHgTOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.mmHgTOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.mmHgTOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.mmHgTOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.mmHgTOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.inH2OTOPa_res      = QtWidgets.QLabel("0", self)
+		self.inH2OTOkPa_res     = QtWidgets.QLabel("0", self)
+		self.inH2OTOMPa_res     = QtWidgets.QLabel("0", self)
+		self.inH2OTOmbar_res    = QtWidgets.QLabel("0", self)
+		self.inH2OTObar_res     = QtWidgets.QLabel("0", self)
+		self.inH2OTOatm_res     = QtWidgets.QLabel("0", self)
+		self.inH2OTOpsi_res     = QtWidgets.QLabel("0", self)
+		self.inH2OTOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.inH2OTOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.inH2OTONm2_res     = QtWidgets.QLabel("0", self)
+		self.inH2OTOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.inH2OTOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.inH2OTOTorr_res    = QtWidgets.QLabel("0", self)
+		self.inH2OTOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.inH2OTOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.inH2OTOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.inH2OTOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.inH2OTOinHg_res    = QtWidgets.QLabel("0", self)
+
+		self.inHgTOPa_res      = QtWidgets.QLabel("0", self)
+		self.inHgTOkPa_res     = QtWidgets.QLabel("0", self)
+		self.inHgTOMPa_res     = QtWidgets.QLabel("0", self)
+		self.inHgTOmbar_res    = QtWidgets.QLabel("0", self)
+		self.inHgTObar_res     = QtWidgets.QLabel("0", self)
+		self.inHgTOatm_res     = QtWidgets.QLabel("0", self)
+		self.inHgTOpsi_res     = QtWidgets.QLabel("0", self)
+		self.inHgTOkgcm2_res   = QtWidgets.QLabel("0", self)
+		self.inHgTOkgm2_res    = QtWidgets.QLabel("0", self)
+		self.inHgTONm2_res     = QtWidgets.QLabel("0", self)
+		self.inHgTOlbin2_res   = QtWidgets.QLabel("0", self)
+		self.inHgTOlbft2_res   = QtWidgets.QLabel("0", self)
+		self.inHgTOTorr_res    = QtWidgets.QLabel("0", self)
+		self.inHgTOdynecm2_res = QtWidgets.QLabel("0", self)
+		self.inHgTOmmH2O_res   = QtWidgets.QLabel("0", self)
+		self.inHgTOmmHg_res    = QtWidgets.QLabel("0", self)
+		self.inHgTOinH2O_res   = QtWidgets.QLabel("0", self)
+		self.inHgTOinHg_res    = QtWidgets.QLabel("0", self)
+
+		PaTO_Label = [self.PaTOPa_res, self.PaTOkPa_res, self.PaTOMPa_res, self.PaTOmbar_res, self.PaTObar_res, self.PaTOatm_res, self.PaTOpsi_res, self.PaTOkgcm2_res,
+					  self.PaTOkgm2_res, self.PaTONm2_res, self.PaTOlbin2_res, self.PaTOlbft2_res, self.PaTOTorr_res, self.PaTOdynecm2_res, self.PaTOmmH2O_res,
+					  self.PaTOmmHg_res, self.PaTOinH2O_res, self.PaTOinHg_res]
+
+		kPaTO_Label = [self.kPaTOPa_res, self.kPaTOkPa_res, self.kPaTOMPa_res, self.kPaTOmbar_res, self.kPaTObar_res, self.kPaTOatm_res, self.kPaTOpsi_res, 
+					   self.kPaTOkgcm2_res, self.kPaTOkgm2_res, self.kPaTONm2_res, self.kPaTOlbin2_res, self.kPaTOlbft2_res, self.kPaTOTorr_res, self.kPaTOdynecm2_res, 
+					   self.kPaTOmmH2O_res, self.kPaTOmmHg_res, self.kPaTOinH2O_res, self.kPaTOinHg_res]
+
+		MPaTO_Label = [self.MPaTOPa_res, self.MPaTOkPa_res, self.MPaTOMPa_res, self.MPaTOmbar_res, self.MPaTObar_res, self.MPaTOatm_res, self.MPaTOpsi_res, 
+					   self.MPaTOkgcm2_res, self.MPaTOkgm2_res, self.MPaTONm2_res, self.MPaTOlbin2_res, self.MPaTOlbft2_res, self.MPaTOTorr_res, self.MPaTOdynecm2_res, 
+					   self.MPaTOmmH2O_res, self.MPaTOmmHg_res, self.MPaTOinH2O_res, self.MPaTOinHg_res]
+
+		mbarTO_Label = [self.mbarTOPa_res, self.mbarTOkPa_res, self.mbarTOMPa_res, self.mbarTOmbar_res, self.mbarTObar_res, self.mbarTOatm_res, self.mbarTOpsi_res, 
+						self.mbarTOkgcm2_res, self.mbarTOkgm2_res, self.mbarTONm2_res, self.mbarTOlbin2_res, self.mbarTOlbft2_res, self.mbarTOTorr_res, 
+						self.mbarTOdynecm2_res, self.mbarTOmmH2O_res, self.mbarTOmmHg_res, self.mbarTOinH2O_res, self.mbarTOinHg_res]
+
+		barTO_Label = [self.barTOPa_res, self.barTOkPa_res, self.barTOMPa_res, self.barTOmbar_res, self.barTObar_res, self.barTOatm_res, self.barTOpsi_res, 
+					   self.barTOkgcm2_res, self.barTOkgm2_res, self.barTONm2_res, self.barTOlbin2_res, self.barTOlbft2_res, self.barTOTorr_res, 
+					   self.barTOdynecm2_res, self.barTOmmH2O_res, self.barTOmmHg_res, self.barTOinH2O_res, self.barTOinHg_res]
+
+		atmTO_Label = [self.atmTOPa_res, self.atmTOkPa_res, self.atmTOMPa_res, self.atmTOmbar_res, self.atmTObar_res, self.atmTOatm_res, self.atmTOpsi_res, 
+					   self.atmTOkgcm2_res, self.atmTOkgm2_res, self.atmTONm2_res, self.atmTOlbin2_res, self.atmTOlbft2_res, self.atmTOTorr_res, 
+					   self.atmTOdynecm2_res, self.atmTOmmH2O_res, self.atmTOmmHg_res, self.atmTOinH2O_res, self.atmTOinHg_res]
+
+		psiTO_Label = [self.psiTOPa_res, self.psiTOkPa_res, self.psiTOMPa_res, self.psiTOmbar_res, self.psiTObar_res, self.psiTOatm_res, self.psiTOpsi_res, 
+					   self.psiTOkgcm2_res, self.psiTOkgm2_res, self.psiTONm2_res, self.psiTOlbin2_res, self.psiTOlbft2_res, self.psiTOTorr_res, 
+					   self.psiTOdynecm2_res, self.psiTOmmH2O_res, self.psiTOmmHg_res, self.psiTOinH2O_res, self.psiTOinHg_res]
+
+		kgcm2TO_Label = [self.kgcm2TOPa_res, self.kgcm2TOkPa_res, self.kgcm2TOMPa_res, self.kgcm2TOmbar_res, self.kgcm2TObar_res, self.kgcm2TOatm_res, 
+						 self.kgcm2TOpsi_res, self.kgcm2TOkgcm2_res, self.kgcm2TOkgm2_res, self.kgcm2TONm2_res, self.kgcm2TOlbin2_res, self.kgcm2TOlbft2_res, 
+						 self.kgcm2TOTorr_res, self.kgcm2TOdynecm2_res, self.kgcm2TOmmH2O_res, self.kgcm2TOmmHg_res, self.kgcm2TOinH2O_res, self.kgcm2TOinHg_res]
+
+		kgm2TO_Label = [self.kgm2TOPa_res, self.kgm2TOkPa_res, self.kgm2TOMPa_res, self.kgm2TOmbar_res, self.kgm2TObar_res, self.kgm2TOatm_res, 
+						self.kgm2TOpsi_res, self.kgm2TOkgcm2_res, self.kgm2TOkgm2_res, self.kgm2TONm2_res, self.kgm2TOlbin2_res, self.kgm2TOlbft2_res, 
+						self.kgm2TOTorr_res, self.kgm2TOdynecm2_res, self.kgm2TOmmH2O_res, self.kgm2TOmmHg_res, self.kgm2TOinH2O_res, self.kgm2TOinHg_res]
+
+		Nm2TO_Label = [self.Nm2TOPa_res, self.Nm2TOkPa_res, self.Nm2TOMPa_res, self.Nm2TOmbar_res, self.Nm2TObar_res, self.Nm2TOatm_res, self.Nm2TOpsi_res, 
+					   self.Nm2TOkgcm2_res, self.Nm2TOkgm2_res, self.Nm2TONm2_res, self.Nm2TOlbin2_res, self.Nm2TOlbft2_res, self.Nm2TOTorr_res, 
+					   self.Nm2TOdynecm2_res, self.Nm2TOmmH2O_res, self.Nm2TOmmHg_res, self.Nm2TOinH2O_res, self.Nm2TOinHg_res]
+
+		lbin2TO_Label = [self.lbin2TOPa_res, self.lbin2TOkPa_res, self.lbin2TOMPa_res, self.lbin2TOmbar_res, self.lbin2TObar_res, self.lbin2TOatm_res, 
+						 self.lbin2TOpsi_res, self.lbin2TOkgcm2_res, self.lbin2TOkgm2_res, self.lbin2TONm2_res, self.lbin2TOlbin2_res, self.lbin2TOlbft2_res, 
+						 self.lbin2TOTorr_res, self.lbin2TOdynecm2_res, self.lbin2TOmmH2O_res, self.lbin2TOmmHg_res, self.lbin2TOinH2O_res, self.lbin2TOinHg_res]
+
+		lbft2TO_Label = [self.lbft2TOPa_res, self.lbft2TOkPa_res, self.lbft2TOMPa_res, self.lbft2TOmbar_res, self.lbft2TObar_res, self.lbft2TOatm_res, 
+						 self.lbft2TOpsi_res, self.lbft2TOkgcm2_res, self.lbft2TOkgm2_res, self.lbft2TONm2_res, self.lbft2TOlbin2_res, self.lbft2TOlbft2_res, 
+						 self.lbft2TOTorr_res, self.lbft2TOdynecm2_res, self.lbft2TOmmH2O_res, self.lbft2TOmmHg_res, self.lbft2TOinH2O_res, self.lbft2TOinHg_res]
+
+		TorrTO_Label = [self.TorrTOPa_res, self.TorrTOkPa_res, self.TorrTOMPa_res, self.TorrTOmbar_res, self.TorrTObar_res, self.TorrTOatm_res, 
+						self.TorrTOpsi_res, self.TorrTOkgcm2_res, self.TorrTOkgm2_res, self.TorrTONm2_res, self.TorrTOlbin2_res, self.TorrTOlbft2_res, 
+						self.TorrTOTorr_res, self.TorrTOdynecm2_res, self.TorrTOmmH2O_res, self.TorrTOmmHg_res, self.TorrTOinH2O_res, self.TorrTOinHg_res]
+
+		dynecm2TO_Label = [self.dynecm2TOPa_res, self.dynecm2TOkPa_res, self.dynecm2TOMPa_res, self.dynecm2TOmbar_res, self.dynecm2TObar_res, self.dynecm2TOatm_res, 
+						   self.dynecm2TOpsi_res, self.dynecm2TOkgcm2_res, self.dynecm2TOkgm2_res, self.dynecm2TONm2_res, self.dynecm2TOlbin2_res, 
+						   self.dynecm2TOlbft2_res, self.dynecm2TOTorr_res, self.dynecm2TOdynecm2_res, self.dynecm2TOmmH2O_res, self.dynecm2TOmmHg_res, 
+						   self.dynecm2TOinH2O_res, self.dynecm2TOinHg_res]
+
+		mmH2OTO_Label = [self.mmH2OTOPa_res, self.mmH2OTOkPa_res, self.mmH2OTOMPa_res, self.mmH2OTOmbar_res, self.mmH2OTObar_res, self.mmH2OTOatm_res, 
+						 self.mmH2OTOpsi_res, self.mmH2OTOkgcm2_res, self.mmH2OTOkgm2_res, self.mmH2OTONm2_res, self.mmH2OTOlbin2_res, self.mmH2OTOlbft2_res, 
+						 self.mmH2OTOTorr_res, self.mmH2OTOdynecm2_res, self.mmH2OTOmmH2O_res, self.mmH2OTOmmHg_res, self.mmH2OTOinH2O_res, self.mmH2OTOinHg_res]
+
+		mmHgTO_Label = [self.mmHgTOPa_res, self.mmHgTOkPa_res, self.mmHgTOMPa_res, self.mmHgTOmbar_res, self.mmHgTObar_res, self.mmHgTOatm_res, 
+						self.mmHgTOpsi_res, self.mmHgTOkgcm2_res, self.mmHgTOkgm2_res, self.mmHgTONm2_res, self.mmHgTOlbin2_res, self.mmHgTOlbft2_res, 
+						self.mmHgTOTorr_res, self.mmHgTOdynecm2_res, self.mmHgTOmmH2O_res, self.mmHgTOmmHg_res, self.mmHgTOinH2O_res, self.mmHgTOinHg_res]
+
+		inH2OTO_Label = [self.inH2OTOPa_res, self.inH2OTOkPa_res, self.inH2OTOMPa_res, self.inH2OTOmbar_res, self.inH2OTObar_res, self.inH2OTOatm_res, 
+						 self.inH2OTOpsi_res, self.inH2OTOkgcm2_res, self.inH2OTOkgm2_res, self.inH2OTONm2_res, self.inH2OTOlbin2_res, self.inH2OTOlbft2_res, 
+						 self.inH2OTOTorr_res, self.inH2OTOdynecm2_res, self.inH2OTOmmH2O_res, self.inH2OTOmmHg_res, self.inH2OTOinH2O_res, self.inH2OTOinHg_res]
+
+		inHgTO_Label = [self.inHgTOPa_res, self.inHgTOkPa_res, self.inHgTOMPa_res, self.inHgTOmbar_res, self.inHgTObar_res, self.inHgTOatm_res, 
+						self.inHgTOpsi_res, self.inHgTOkgcm2_res, self.inHgTOkgm2_res, self.inHgTONm2_res, self.inHgTOlbin2_res, self.inHgTOlbft2_res, 
+						self.inHgTOTorr_res, self.inHgTOdynecm2_res, self.inHgTOmmH2O_res, self.inHgTOmmHg_res, self.inHgTOinH2O_res, self.inHgTOinHg_res]
+
+		i = 1
+		for item in PaTO_Label:
+			output_grid.addWidget(item, 1, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in kPaTO_Label:
+			output_grid.addWidget(item, 2, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in MPaTO_Label:
+			output_grid.addWidget(item, 3, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in mbarTO_Label:
+			output_grid.addWidget(item, 4, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in barTO_Label:
+			output_grid.addWidget(item, 5, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in atmTO_Label:
+			output_grid.addWidget(item, 6, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in psiTO_Label:
+			output_grid.addWidget(item, 7, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in kgcm2TO_Label:
+			output_grid.addWidget(item, 8, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in kgm2TO_Label:
+			output_grid.addWidget(item, 9, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in Nm2TO_Label:
+			output_grid.addWidget(item, 10, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in lbin2TO_Label:
+			output_grid.addWidget(item, 11, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in lbft2TO_Label:
+			output_grid.addWidget(item, 12, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in TorrTO_Label:
+			output_grid.addWidget(item, 13, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in dynecm2TO_Label:
+			output_grid.addWidget(item, 14, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in mmH2OTO_Label:
+			output_grid.addWidget(item, 15, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in mmHgTO_Label:
+			output_grid.addWidget(item, 16, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in inH2OTO_Label:
+			output_grid.addWidget(item, 17, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
+		i = 1
+		for item in inHgTO_Label:
+			output_grid.addWidget(item, 18, i)
+			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
+			i = i + 1
+
 		output_group.setLayout(output_grid)
 
 		return output_group
+
+	def PaTO_fun(self):
+		pass
+
+	def kPaTO_fun(self):
+		pass
+
+	def MPaTO_fun(self):
+		pass
+
+	def mbarTO_fun(self):
+		pass
+
+	def barTO_fun(self):
+		pass
+
+	def atmTO_fun(self):
+		pass
+
+	def psiTO_fun(self):
+		pass
+
+	def kgcm2TO_fun(self):
+		pass
+
+	def kgm2TO_fun(self):
+		pass
+
+	def Nm2TO_fun(self):
+		pass
+
+	def lbin2TO_fun(self):
+		pass
+
+	def lbft2TO_fun(self):
+		pass
+
+	def TorrTO_fun(self):
+		pass
+
+	def dynecm2TO_fun(self):
+		pass
+
+	def mmH2OTO_fun(self):
+		pass
+
+	def mmHgTO_fun(self):
+		pass
+
+	def inH2OTO_fun(self):
+		pass
+
+	def inHgTO_fun(self):
+		pass
+
 
 	def main_window(self):
 		main_layout = QtWidgets.QHBoxLayout()
@@ -3511,19 +4073,20 @@ class Pressdrl_Win(QtWidgets.QWidget):
 		self.psifti_LinEd    = QtWidgets.QLineEdit()
 		self.psi100fti_LinEd = QtWidgets.QLineEdit()
 
-		Label_list = ["Pa/m", "kPa/100m", "psi/ft", "psi/100ft"]
-		i = 1
+		LinEd_list = [self.Pami_LinEd, self.kPa100mi_LinEd, self.psifti_LinEd, self.psi100fti_LinEd]
 
+		Label_list = [blanklabel, "Pa/m", "kPa/100m", "psi/ft", "psi/100ft"]
+		
+		i = 0
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			input_grid.addWidget(Label_name, i, 1)
 			i = i + 1
 
-		input_grid.addWidget(blanklabel,          0, 0)
-		input_grid.addWidget(self.Pami_LinEd,     1, 0)
-		input_grid.addWidget(self.kPa100mi_LinEd, 2, 0)
-		input_grid.addWidget(self.psifti_LinEd,   3, 0)
-		input_grid.addWidget(self.psi100ft_LinEd, 4, 0)
+		i = 1
+		for item in LinEd_list:
+			input_grid.addWidget(item, i, 0)
+			i = i + 1
 
 		input_group.setLayout(input_grid)
 
