@@ -3,18 +3,22 @@
 # GitHub: https://github.com/kilimetr
 
 from PyQt5 import QtWidgets, QtGui, QtCore
+import sys
 
 
 
 class Energy_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
 		super().__init__()
+		
 		self.setWindowTitle("Energy Converter")
+		self.setWindowIcon(QtGui.QIcon("logo.jpg"))
+		
 		self.main_window()
 
 	def createGroup_input(self):
 		input_group = QtWidgets.QGroupBox("Input", self)
-		input_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+		input_group.setFont(QtGui.QFont("Arial", 10))
 
 		input_grid = QtWidgets.QGridLayout()
 		input_grid.setColumnMinimumWidth(0, 130)
@@ -65,7 +69,7 @@ class Energy_Win(QtWidgets.QWidget):
 
 	def createGroup_output(self):
 		output_group = QtWidgets.QGroupBox("Output", self)
-		output_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+		output_group.setFont(QtGui.QFont("Arial", 10))
 
 		output_grid = QtWidgets.QGridLayout()
 
@@ -282,234 +286,344 @@ class Energy_Win(QtWidgets.QWidget):
 		return output_group
 
 	def JTO_fun(self):
-		JTOJ_proc       = float(self.Ji_LinEd.text()) * 1
-		JTOkJ_proc      = float(self.Ji_LinEd.text()) * 1e-03
-		JTOkWh_proc     = float(self.Ji_LinEd.text()) * 2.777778e-07
-		JTOBTUIT_proc   = float(self.Ji_LinEd.text()) * 9.478171e-04
-		JTOBTUmean_proc = float(self.Ji_LinEd.text()) * 9.470860e-04
-		JTOcalIT_proc   = float(self.Ji_LinEd.text()) * 2.388459e-01
-		JTOcalTH_proc   = float(self.Ji_LinEd.text()) * 2.390060e-01
-		JTOhphr_proc    = float(self.Ji_LinEd.text()) * 3.725061e-07
-		JTOftlbf_proc   = float(self.Ji_LinEd.text()) * 7.375621e-01
-		JTOftpdl_proc   = float(self.Ji_LinEd.text()) * 2.373035e+01
+		try:
+			JTOJ_proc       = float(self.Ji_LinEd.text()) * 1
+			JTOkJ_proc      = float(self.Ji_LinEd.text()) * 1e-03
+			JTOkWh_proc     = float(self.Ji_LinEd.text()) * 2.777778e-07
+			JTOBTUIT_proc   = float(self.Ji_LinEd.text()) * 9.478171e-04
+			JTOBTUmean_proc = float(self.Ji_LinEd.text()) * 9.470860e-04
+			JTOcalIT_proc   = float(self.Ji_LinEd.text()) * 2.388459e-01
+			JTOcalTH_proc   = float(self.Ji_LinEd.text()) * 2.390060e-01
+			JTOhphr_proc    = float(self.Ji_LinEd.text()) * 3.725061e-07
+			JTOftlbf_proc   = float(self.Ji_LinEd.text()) * 7.375621e-01
+			JTOftpdl_proc   = float(self.Ji_LinEd.text()) * 2.373035e+01
 
-		self.JTOJ_res.setText(str(round(JTOJ_proc,             8)))
-		self.JTOkJ_res.setText(str(round(JTOkJ_proc,           8)))
-		self.JTOkWh_res.setText(str(round(JTOkWh_proc,         8)))
-		self.JTOBTUIT_res.setText(str(round(JTOBTUIT_proc,     8)))
-		self.JTOBTUmean_res.setText(str(round(JTOBTUmean_proc, 8)))
-		self.JTOcalIT_res.setText(str(round(JTOcalIT_proc,     8)))
-		self.JTOcalTH_res.setText(str(round(JTOcalTH_proc,     8)))
-		self.JTOhphr_res.setText(str(round(JTOhphr_proc,       8)))
-		self.JTOftlbf_res.setText(str(round(JTOftlbf_proc,     8)))
-		self.JTOftpdl_res.setText(str(round(JTOftpdl_proc,     8)))
+			self.JTOJ_res.setText(str(round(JTOJ_proc,             8)))
+			self.JTOkJ_res.setText(str(round(JTOkJ_proc,           8)))
+			self.JTOkWh_res.setText(str(round(JTOkWh_proc,         8)))
+			self.JTOBTUIT_res.setText(str(round(JTOBTUIT_proc,     8)))
+			self.JTOBTUmean_res.setText(str(round(JTOBTUmean_proc, 8)))
+			self.JTOcalIT_res.setText(str(round(JTOcalIT_proc,     8)))
+			self.JTOcalTH_res.setText(str(round(JTOcalTH_proc,     8)))
+			self.JTOhphr_res.setText(str(round(JTOhphr_proc,       8)))
+			self.JTOftlbf_res.setText(str(round(JTOftlbf_proc,     8)))
+			self.JTOftpdl_res.setText(str(round(JTOftpdl_proc,     8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def kJTO_fun(self):
-		kJTOJ_proc       = float(self.kJi_LinEd.text()) * 1e+03
-		kJTOkJ_proc      = float(self.kJi_LinEd.text()) * 1
-		kJTOkWh_proc     = float(self.kJi_LinEd.text()) * 2.777778e-04
-		kJTOBTUIT_proc   = float(self.kJi_LinEd.text()) * 9.478171e-01
-		kJTOBTUmean_proc = float(self.kJi_LinEd.text()) * 9.470860e-01
-		kJTOcalIT_proc   = float(self.kJi_LinEd.text()) * 2.388459e+02
-		kJTOcalTH_proc   = float(self.kJi_LinEd.text()) * 2.390060e+02
-		kJTOhphr_proc    = float(self.kJi_LinEd.text()) * 3.725061e-04
-		kJTOftlbf_proc   = float(self.kJi_LinEd.text()) * 7.375621e+02
-		kJTOftpdl_proc   = float(self.kJi_LinEd.text()) * 2.373035e+04
+		try:
+			kJTOJ_proc       = float(self.kJi_LinEd.text()) * 1e+03
+			kJTOkJ_proc      = float(self.kJi_LinEd.text()) * 1
+			kJTOkWh_proc     = float(self.kJi_LinEd.text()) * 2.777778e-04
+			kJTOBTUIT_proc   = float(self.kJi_LinEd.text()) * 9.478171e-01
+			kJTOBTUmean_proc = float(self.kJi_LinEd.text()) * 9.470860e-01
+			kJTOcalIT_proc   = float(self.kJi_LinEd.text()) * 2.388459e+02
+			kJTOcalTH_proc   = float(self.kJi_LinEd.text()) * 2.390060e+02
+			kJTOhphr_proc    = float(self.kJi_LinEd.text()) * 3.725061e-04
+			kJTOftlbf_proc   = float(self.kJi_LinEd.text()) * 7.375621e+02
+			kJTOftpdl_proc   = float(self.kJi_LinEd.text()) * 2.373035e+04
 
-		self.kJTOJ_res.setText(str(round(kJTOJ_proc,             8)))
-		self.kJTOkJ_res.setText(str(round(kJTOkJ_proc,           8)))
-		self.kJTOkWh_res.setText(str(round(kJTOkWh_proc,         8)))
-		self.kJTOBTUIT_res.setText(str(round(kJTOBTUIT_proc,     8)))
-		self.kJTOBTUmean_res.setText(str(round(kJTOBTUmean_proc, 8)))
-		self.kJTOcalIT_res.setText(str(round(kJTOcalIT_proc,     8)))
-		self.kJTOcalTH_res.setText(str(round(kJTOcalTH_proc,     8)))
-		self.kJTOhphr_res.setText(str(round(kJTOhphr_proc,       8)))
-		self.kJTOftlbf_res.setText(str(round(kJTOftlbf_proc,     8)))
-		self.kJTOftpdl_res.setText(str(round(kJTOftpdl_proc,     8)))
+			self.kJTOJ_res.setText(str(round(kJTOJ_proc,             8)))
+			self.kJTOkJ_res.setText(str(round(kJTOkJ_proc,           8)))
+			self.kJTOkWh_res.setText(str(round(kJTOkWh_proc,         8)))
+			self.kJTOBTUIT_res.setText(str(round(kJTOBTUIT_proc,     8)))
+			self.kJTOBTUmean_res.setText(str(round(kJTOBTUmean_proc, 8)))
+			self.kJTOcalIT_res.setText(str(round(kJTOcalIT_proc,     8)))
+			self.kJTOcalTH_res.setText(str(round(kJTOcalTH_proc,     8)))
+			self.kJTOhphr_res.setText(str(round(kJTOhphr_proc,       8)))
+			self.kJTOftlbf_res.setText(str(round(kJTOftlbf_proc,     8)))
+			self.kJTOftpdl_res.setText(str(round(kJTOftpdl_proc,     8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def kWhTO_fun(self):
-		kWhTOJ_proc       = float(self.kWhi_LinEd.text()) * 3.6e+6
-		kWhTOkJ_proc      = float(self.kWhi_LinEd.text()) * 3.6e+03
-		kWhTOkWh_proc     = float(self.kWhi_LinEd.text()) * 1
-		kWhTOBTUIT_proc   = float(self.kWhi_LinEd.text()) * 3.412142e+03
-		kWhTOBTUmean_proc = float(self.kWhi_LinEd.text()) * 3.409511e+03
-		kWhTOcalIT_proc   = float(self.kWhi_LinEd.text()) * 8.598452e+5
-		kWhTOcalTH_proc   = float(self.kWhi_LinEd.text()) * 8.598452e+5 * 1.0006692160611856
-		kWhTOhphr_proc    = float(self.kWhi_LinEd.text()) * 1.341022
-		kWhTOftlbf_proc   = float(self.kWhi_LinEd.text()) * 2.65522373748e+06
-		kWhTOftpdl_proc   = float(self.kWhi_LinEd.text()) * 8.542929764555995e+07
+		try:
+			kWhTOJ_proc       = float(self.kWhi_LinEd.text()) * 3.6e+6
+			kWhTOkJ_proc      = float(self.kWhi_LinEd.text()) * 3.6e+03
+			kWhTOkWh_proc     = float(self.kWhi_LinEd.text()) * 1
+			kWhTOBTUIT_proc   = float(self.kWhi_LinEd.text()) * 3.412142e+03
+			kWhTOBTUmean_proc = float(self.kWhi_LinEd.text()) * 3.409511e+03
+			kWhTOcalIT_proc   = float(self.kWhi_LinEd.text()) * 8.598452e+5
+			kWhTOcalTH_proc   = float(self.kWhi_LinEd.text()) * 8.598452e+5 * 1.0006692160611856
+			kWhTOhphr_proc    = float(self.kWhi_LinEd.text()) * 1.341022
+			kWhTOftlbf_proc   = float(self.kWhi_LinEd.text()) * 2.65522373748e+06
+			kWhTOftpdl_proc   = float(self.kWhi_LinEd.text()) * 8.542929764555995e+07
 
-		self.kWhTOJ_res.setText(str(round(kWhTOJ_proc,             8)))
-		self.kWhTOkJ_res.setText(str(round(kWhTOkJ_proc,           8)))
-		self.kWhTOkWh_res.setText(str(round(kWhTOkWh_proc,         8)))
-		self.kWhTOBTUIT_res.setText(str(round(kWhTOBTUIT_proc,     8)))
-		self.kWhTOBTUmean_res.setText(str(round(kWhTOBTUmean_proc, 8)))
-		self.kWhTOcalIT_res.setText(str(round(kWhTOcalIT_proc,     8)))
-		self.kWhTOcalTH_res.setText(str(round(kWhTOcalTH_proc,     8)))
-		self.kWhTOhphr_res.setText(str(round(kWhTOhphr_proc,       8)))
-		self.kWhTOftlbf_res.setText(str(round(kWhTOftlbf_proc,     8)))
-		self.kWhTOftpdl_res.setText(str(round(kWhTOftpdl_proc,     8)))
+			self.kWhTOJ_res.setText(str(round(kWhTOJ_proc,             8)))
+			self.kWhTOkJ_res.setText(str(round(kWhTOkJ_proc,           8)))
+			self.kWhTOkWh_res.setText(str(round(kWhTOkWh_proc,         8)))
+			self.kWhTOBTUIT_res.setText(str(round(kWhTOBTUIT_proc,     8)))
+			self.kWhTOBTUmean_res.setText(str(round(kWhTOBTUmean_proc, 8)))
+			self.kWhTOcalIT_res.setText(str(round(kWhTOcalIT_proc,     8)))
+			self.kWhTOcalTH_res.setText(str(round(kWhTOcalTH_proc,     8)))
+			self.kWhTOhphr_res.setText(str(round(kWhTOhphr_proc,       8)))
+			self.kWhTOftlbf_res.setText(str(round(kWhTOftlbf_proc,     8)))
+			self.kWhTOftpdl_res.setText(str(round(kWhTOftpdl_proc,     8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def BTUITTO_fun(self):
-		BTUITTOJ_proc       = float(self.BTUITi_LinEd.text()) * 1.055056e+03
-		BTUITTOkJ_proc      = float(self.BTUITi_LinEd.text()) * 1.055056
-		BTUITTOkWh_proc     = float(self.BTUITi_LinEd.text()) * 2.930711e-04
-		BTUITTOBTUIT_proc   = float(self.BTUITi_LinEd.text()) * 1
-		BTUITTOBTUmean_proc = float(self.BTUITi_LinEd.text()) * 0.999229072
-		BTUITTOcalIT_proc   = float(self.BTUITi_LinEd.text()) * 2.519958e+02
-		BTUITTOcalTH_proc   = float(self.BTUITi_LinEd.text()) * 2.519958e+02 * 1.0006692160611856
-		BTUITTOhphr_proc    = float(self.BTUITi_LinEd.text()) * 3.930148e-04
-		BTUITTOftlbf_proc   = float(self.BTUITi_LinEd.text()) * 7.781692e+02
-		BTUITTOftpdl_proc   = float(self.BTUITi_LinEd.text()) * 2.5036855685e+04
+		try:
+			BTUITTOJ_proc       = float(self.BTUITi_LinEd.text()) * 1.055056e+03
+			BTUITTOkJ_proc      = float(self.BTUITi_LinEd.text()) * 1.055056
+			BTUITTOkWh_proc     = float(self.BTUITi_LinEd.text()) * 2.930711e-04
+			BTUITTOBTUIT_proc   = float(self.BTUITi_LinEd.text()) * 1
+			BTUITTOBTUmean_proc = float(self.BTUITi_LinEd.text()) * 0.999229072
+			BTUITTOcalIT_proc   = float(self.BTUITi_LinEd.text()) * 2.519958e+02
+			BTUITTOcalTH_proc   = float(self.BTUITi_LinEd.text()) * 2.519958e+02 * 1.0006692160611856
+			BTUITTOhphr_proc    = float(self.BTUITi_LinEd.text()) * 3.930148e-04
+			BTUITTOftlbf_proc   = float(self.BTUITi_LinEd.text()) * 7.781692e+02
+			BTUITTOftpdl_proc   = float(self.BTUITi_LinEd.text()) * 2.5036855685e+04
 
-		self.BTUITTOJ_res.setText(str(round(BTUITTOJ_proc,             8)))
-		self.BTUITTOkJ_res.setText(str(round(BTUITTOkJ_proc,           8)))
-		self.BTUITTOkWh_res.setText(str(round(BTUITTOkWh_proc,         8)))
-		self.BTUITTOBTUIT_res.setText(str(round(BTUITTOBTUIT_proc,     8)))
-		self.BTUITTOBTUmean_res.setText(str(round(BTUITTOBTUmean_proc, 8)))
-		self.BTUITTOcalIT_res.setText(str(round(BTUITTOcalIT_proc,     8)))
-		self.BTUITTOcalTH_res.setText(str(round(BTUITTOcalTH_proc,     8)))
-		self.BTUITTOhphr_res.setText(str(round(BTUITTOhphr_proc,       8)))
-		self.BTUITTOftlbf_res.setText(str(round(BTUITTOftlbf_proc,     8)))
-		self.BTUITTOftpdl_res.setText(str(round(BTUITTOftpdl_proc,     8)))
+			self.BTUITTOJ_res.setText(str(round(BTUITTOJ_proc,             8)))
+			self.BTUITTOkJ_res.setText(str(round(BTUITTOkJ_proc,           8)))
+			self.BTUITTOkWh_res.setText(str(round(BTUITTOkWh_proc,         8)))
+			self.BTUITTOBTUIT_res.setText(str(round(BTUITTOBTUIT_proc,     8)))
+			self.BTUITTOBTUmean_res.setText(str(round(BTUITTOBTUmean_proc, 8)))
+			self.BTUITTOcalIT_res.setText(str(round(BTUITTOcalIT_proc,     8)))
+			self.BTUITTOcalTH_res.setText(str(round(BTUITTOcalTH_proc,     8)))
+			self.BTUITTOhphr_res.setText(str(round(BTUITTOhphr_proc,       8)))
+			self.BTUITTOftlbf_res.setText(str(round(BTUITTOftlbf_proc,     8)))
+			self.BTUITTOftpdl_res.setText(str(round(BTUITTOftpdl_proc,     8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def BTUmeanTO_fun(self):
-		BTUmeanTOJ_proc       = float(self.BTUmeani_LinEd.text()) * 1.05587e+03
-		BTUmeanTOkJ_proc      = float(self.BTUmeani_LinEd.text()) * 1.05587
-		BTUmeanTOkWh_proc     = float(self.BTUmeani_LinEd.text()) * 1055.87 / 3600000
-		BTUmeanTOBTUIT_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 1005.056
-		BTUmeanTOBTUmean_proc = float(self.BTUmeani_LinEd.text()) * 1
-		BTUmeanTOcalIT_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 4.1868
-		BTUmeanTOcalTH_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 4.184
-		BTUmeanTOhphr_proc    = float(self.BTUmeani_LinEd.text()) * 1055.87 / (745.6999*3600)
-		BTUmeanTOftlbf_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 1005.056 * 7.781692e+02
-		BTUmeanTOftpdl_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 1005.056 * 2.5036855685e+04
+		try:
+			BTUmeanTOJ_proc       = float(self.BTUmeani_LinEd.text()) * 1.05587e+03
+			BTUmeanTOkJ_proc      = float(self.BTUmeani_LinEd.text()) * 1.05587
+			BTUmeanTOkWh_proc     = float(self.BTUmeani_LinEd.text()) * 1055.87 / 3600000
+			BTUmeanTOBTUIT_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 1005.056
+			BTUmeanTOBTUmean_proc = float(self.BTUmeani_LinEd.text()) * 1
+			BTUmeanTOcalIT_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 4.1868
+			BTUmeanTOcalTH_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 4.184
+			BTUmeanTOhphr_proc    = float(self.BTUmeani_LinEd.text()) * 1055.87 / (745.6999*3600)
+			BTUmeanTOftlbf_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 1005.056 * 7.781692e+02
+			BTUmeanTOftpdl_proc   = float(self.BTUmeani_LinEd.text()) * 1055.87 / 1005.056 * 2.5036855685e+04
 
-		self.BTUmeanTOJ_res.setText(str(round(BTUmeanTOJ_proc,             8)))
-		self.BTUmeanTOkJ_res.setText(str(round(BTUmeanTOkJ_proc,           8)))
-		self.BTUmeanTOkWh_res.setText(str(round(BTUmeanTOkWh_proc,         8)))
-		self.BTUmeanTOBTUIT_res.setText(str(round(BTUmeanTOBTUIT_proc,     8)))
-		self.BTUmeanTOBTUmean_res.setText(str(round(BTUmeanTOBTUmean_proc, 8)))
-		self.BTUmeanTOcalIT_res.setText(str(round(BTUmeanTOcalIT_proc,     8)))
-		self.BTUmeanTOcalTH_res.setText(str(round(BTUmeanTOcalTH_proc,     8)))
-		self.BTUmeanTOhphr_res.setText(str(round(BTUmeanTOhphr_proc,       8)))
-		self.BTUmeanTOftlbf_res.setText(str(round(BTUmeanTOftlbf_proc,     8)))
-		self.BTUmeanTOftpdl_res.setText(str(round(BTUmeanTOftpdl_proc,     8)))
+			self.BTUmeanTOJ_res.setText(str(round(BTUmeanTOJ_proc,             8)))
+			self.BTUmeanTOkJ_res.setText(str(round(BTUmeanTOkJ_proc,           8)))
+			self.BTUmeanTOkWh_res.setText(str(round(BTUmeanTOkWh_proc,         8)))
+			self.BTUmeanTOBTUIT_res.setText(str(round(BTUmeanTOBTUIT_proc,     8)))
+			self.BTUmeanTOBTUmean_res.setText(str(round(BTUmeanTOBTUmean_proc, 8)))
+			self.BTUmeanTOcalIT_res.setText(str(round(BTUmeanTOcalIT_proc,     8)))
+			self.BTUmeanTOcalTH_res.setText(str(round(BTUmeanTOcalTH_proc,     8)))
+			self.BTUmeanTOhphr_res.setText(str(round(BTUmeanTOhphr_proc,       8)))
+			self.BTUmeanTOftlbf_res.setText(str(round(BTUmeanTOftlbf_proc,     8)))
+			self.BTUmeanTOftpdl_res.setText(str(round(BTUmeanTOftpdl_proc,     8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def calITTO_fun(self):
-		calITTOJ_proc       = float(self.calITi_LinEd.text()) * 4.1868
-		calITTOkJ_proc      = float(self.calITi_LinEd.text()) * 4.1868e-03
-		calITTOkWh_proc     = float(self.calITi_LinEd.text()) * 1.163e-06
-		calITTOBTUIT_proc   = float(self.calITi_LinEd.text()) * 3.968321e-03
-		calITTOBTUmean_proc = float(self.calITi_LinEd.text()) * 1055.87 / 4.1868
-		calITTOcalIT_proc   = float(self.calITi_LinEd.text()) * 1
-		calITTOcalTH_proc   = float(self.calITi_LinEd.text()) * 1.0006692160611856
-		calITTOhphr_proc    = float(self.calITi_LinEd.text()) * 1.559609e-06
-		calITTOftlbf_proc   = float(self.calITi_LinEd.text()) * 3.0880252066892404
-		calITTOftpdl_proc   = float(self.calITi_LinEd.text()) * 99.35427316178622
+		try:
+			calITTOJ_proc       = float(self.calITi_LinEd.text()) * 4.1868
+			calITTOkJ_proc      = float(self.calITi_LinEd.text()) * 4.1868e-03
+			calITTOkWh_proc     = float(self.calITi_LinEd.text()) * 1.163e-06
+			calITTOBTUIT_proc   = float(self.calITi_LinEd.text()) * 3.968321e-03
+			calITTOBTUmean_proc = float(self.calITi_LinEd.text()) * 1055.87 / 4.1868
+			calITTOcalIT_proc   = float(self.calITi_LinEd.text()) * 1
+			calITTOcalTH_proc   = float(self.calITi_LinEd.text()) * 1.0006692160611856
+			calITTOhphr_proc    = float(self.calITi_LinEd.text()) * 1.559609e-06
+			calITTOftlbf_proc   = float(self.calITi_LinEd.text()) * 3.0880252066892404
+			calITTOftpdl_proc   = float(self.calITi_LinEd.text()) * 99.35427316178622
 
-		self.calITTOJ_res.setText(str(round(calITTOJ_proc,             8)))
-		self.calITTOkJ_res.setText(str(round(calITTOkJ_proc,           8)))
-		self.calITTOkWh_res.setText(str(round(calITTOkWh_proc,         8)))
-		self.calITTOBTUIT_res.setText(str(round(calITTOBTUIT_proc,     8)))
-		self.calITTOBTUmean_res.setText(str(round(calITTOBTUmean_proc, 8)))
-		self.calITTOcalIT_res.setText(str(round(calITTOcalIT_proc,     8)))
-		self.calITTOcalTH_res.setText(str(round(calITTOcalTH_proc,     8)))
-		self.calITTOhphr_res.setText(str(round(calITTOhphr_proc,       8)))
-		self.calITTOftlbf_res.setText(str(round(calITTOftlbf_proc,     8)))
-		self.calITTOftpdl_res.setText(str(round(calITTOftpdl_proc,     8)))
+			self.calITTOJ_res.setText(str(round(calITTOJ_proc,             8)))
+			self.calITTOkJ_res.setText(str(round(calITTOkJ_proc,           8)))
+			self.calITTOkWh_res.setText(str(round(calITTOkWh_proc,         8)))
+			self.calITTOBTUIT_res.setText(str(round(calITTOBTUIT_proc,     8)))
+			self.calITTOBTUmean_res.setText(str(round(calITTOBTUmean_proc, 8)))
+			self.calITTOcalIT_res.setText(str(round(calITTOcalIT_proc,     8)))
+			self.calITTOcalTH_res.setText(str(round(calITTOcalTH_proc,     8)))
+			self.calITTOhphr_res.setText(str(round(calITTOhphr_proc,       8)))
+			self.calITTOftlbf_res.setText(str(round(calITTOftlbf_proc,     8)))
+			self.calITTOftpdl_res.setText(str(round(calITTOftpdl_proc,     8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def calTHTO_fun(self):
-		calTHTOJ_proc       = float(self.calTHi_LinEd.text()) * 4.184
-		calTHTOkJ_proc      = float(self.calTHi_LinEd.text()) * 4.184e-03
-		calTHTOkWh_proc     = float(self.calTHi_LinEd.text()) * 0.0000011622222222
-		calTHTOBTUIT_proc   = float(self.calTHi_LinEd.text()) * 0.0039656668313
-		calTHTOBTUmean_proc = float(self.calTHi_LinEd.text()) * 4.184 / 1055.87
-		calTHTOcalIT_proc   = float(self.calTHi_LinEd.text()) * 0.9993312314894429
-		calTHTOcalTH_proc   = float(self.calTHi_LinEd.text()) * 1
-		calTHTOhphr_proc    = float(self.calTHi_LinEd.text()) * 0.0000015585656734888427
-		calTHTOftlbf_proc   = float(self.calTHi_LinEd.text()) * 3.0859600326712
-		calTHTOftpdl_proc   = float(self.calTHi_LinEd.text()) * 99.28782815250634
+		try:
+			calTHTOJ_proc       = float(self.calTHi_LinEd.text()) * 4.184
+			calTHTOkJ_proc      = float(self.calTHi_LinEd.text()) * 4.184e-03
+			calTHTOkWh_proc     = float(self.calTHi_LinEd.text()) * 0.0000011622222222
+			calTHTOBTUIT_proc   = float(self.calTHi_LinEd.text()) * 0.0039656668313
+			calTHTOBTUmean_proc = float(self.calTHi_LinEd.text()) * 4.184 / 1055.87
+			calTHTOcalIT_proc   = float(self.calTHi_LinEd.text()) * 0.9993312314894429
+			calTHTOcalTH_proc   = float(self.calTHi_LinEd.text()) * 1
+			calTHTOhphr_proc    = float(self.calTHi_LinEd.text()) * 0.0000015585656734888427
+			calTHTOftlbf_proc   = float(self.calTHi_LinEd.text()) * 3.0859600326712
+			calTHTOftpdl_proc   = float(self.calTHi_LinEd.text()) * 99.28782815250634
 
-		self.calTHTOJ_res.setText(str(round(calTHTOJ_proc,             8)))
-		self.calTHTOkJ_res.setText(str(round(calTHTOkJ_proc,           8)))
-		self.calTHTOkWh_res.setText(str(round(calTHTOkWh_proc,         8)))
-		self.calTHTOBTUIT_res.setText(str(round(calTHTOBTUIT_proc,     8)))
-		self.calTHTOBTUmean_res.setText(str(round(calTHTOBTUmean_proc, 8)))
-		self.calTHTOcalIT_res.setText(str(round(calTHTOcalIT_proc,     8)))
-		self.calTHTOcalTH_res.setText(str(round(calTHTOcalTH_proc,     8)))
-		self.calTHTOhphr_res.setText(str(round(calTHTOhphr_proc,       8)))
-		self.calTHTOftlbf_res.setText(str(round(calTHTOftlbf_proc,     8)))
-		self.calTHTOftpdl_res.setText(str(round(calTHTOftpdl_proc,     8)))
+			self.calTHTOJ_res.setText(str(round(calTHTOJ_proc,             8)))
+			self.calTHTOkJ_res.setText(str(round(calTHTOkJ_proc,           8)))
+			self.calTHTOkWh_res.setText(str(round(calTHTOkWh_proc,         8)))
+			self.calTHTOBTUIT_res.setText(str(round(calTHTOBTUIT_proc,     8)))
+			self.calTHTOBTUmean_res.setText(str(round(calTHTOBTUmean_proc, 8)))
+			self.calTHTOcalIT_res.setText(str(round(calTHTOcalIT_proc,     8)))
+			self.calTHTOcalTH_res.setText(str(round(calTHTOcalTH_proc,     8)))
+			self.calTHTOhphr_res.setText(str(round(calTHTOhphr_proc,       8)))
+			self.calTHTOftlbf_res.setText(str(round(calTHTOftlbf_proc,     8)))
+			self.calTHTOftpdl_res.setText(str(round(calTHTOftpdl_proc,     8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def hphrTO_fun(self):
-		hphrTOJ_proc       = float(self.hphri_LinEd.text()) * 2.68452e+06
-		hphrTOkJ_proc      = float(self.hphri_LinEd.text()) * 2.68452e+03
-		hphrTOkWh_proc     = float(self.hphri_LinEd.text()) * 0.7456999
-		hphrTOBTUIT_proc   = float(self.hphri_LinEd.text()) * 2.544434e+03
-		hphrTOBTUmean_proc = float(self.hphri_LinEd.text()) * 745.6999 * 3600 / 1055.87
-		hphrTOcalIT_proc   = float(self.hphri_LinEd.text()) * 6.411865e+05
-		hphrTOcalTH_proc   = float(self.hphri_LinEd.text()) * 6.416155680892831e+05
-		hphrTOhphr_proc    = float(self.hphri_LinEd.text()) * 1
-		hphrTOftlbf_proc   = float(self.hphri_LinEd.text()) * 1.9799999994631547e+06
-		hphrTOftpdl_proc   = float(self.hphri_LinEd.text()) * 6.3704616264e+07
+		try:
+			hphrTOJ_proc       = float(self.hphri_LinEd.text()) * 2.68452e+06
+			hphrTOkJ_proc      = float(self.hphri_LinEd.text()) * 2.68452e+03
+			hphrTOkWh_proc     = float(self.hphri_LinEd.text()) * 0.7456999
+			hphrTOBTUIT_proc   = float(self.hphri_LinEd.text()) * 2.544434e+03
+			hphrTOBTUmean_proc = float(self.hphri_LinEd.text()) * 745.6999 * 3600 / 1055.87
+			hphrTOcalIT_proc   = float(self.hphri_LinEd.text()) * 6.411865e+05
+			hphrTOcalTH_proc   = float(self.hphri_LinEd.text()) * 6.416155680892831e+05
+			hphrTOhphr_proc    = float(self.hphri_LinEd.text()) * 1
+			hphrTOftlbf_proc   = float(self.hphri_LinEd.text()) * 1.9799999994631547e+06
+			hphrTOftpdl_proc   = float(self.hphri_LinEd.text()) * 6.3704616264e+07
 
-		self.hphrTOJ_res.setText(str(round(hphrTOJ_proc,             8)))
-		self.hphrTOkJ_res.setText(str(round(hphrTOkJ_proc,           8)))
-		self.hphrTOkWh_res.setText(str(round(hphrTOkWh_proc,         8)))
-		self.hphrTOBTUIT_res.setText(str(round(hphrTOBTUIT_proc,     8)))
-		self.hphrTOBTUmean_res.setText(str(round(hphrTOBTUmean_proc, 8)))
-		self.hphrTOcalIT_res.setText(str(round(hphrTOcalIT_proc,     8)))
-		self.hphrTOcalTH_res.setText(str(round(hphrTOcalTH_proc,     8)))
-		self.hphrTOhphr_res.setText(str(round(hphrTOhphr_proc,       8)))
-		self.hphrTOftlbf_res.setText(str(round(hphrTOftlbf_proc,     8)))
-		self.hphrTOftpdl_res.setText(str(round(hphrTOftpdl_proc,     8)))
+			self.hphrTOJ_res.setText(str(round(hphrTOJ_proc,             8)))
+			self.hphrTOkJ_res.setText(str(round(hphrTOkJ_proc,           8)))
+			self.hphrTOkWh_res.setText(str(round(hphrTOkWh_proc,         8)))
+			self.hphrTOBTUIT_res.setText(str(round(hphrTOBTUIT_proc,     8)))
+			self.hphrTOBTUmean_res.setText(str(round(hphrTOBTUmean_proc, 8)))
+			self.hphrTOcalIT_res.setText(str(round(hphrTOcalIT_proc,     8)))
+			self.hphrTOcalTH_res.setText(str(round(hphrTOcalTH_proc,     8)))
+			self.hphrTOhphr_res.setText(str(round(hphrTOhphr_proc,       8)))
+			self.hphrTOftlbf_res.setText(str(round(hphrTOftlbf_proc,     8)))
+			self.hphrTOftpdl_res.setText(str(round(hphrTOftpdl_proc,     8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def ftlbfTO_fun(self):
-		ftlbfTOJ_proc       = float(self.ftlbfi_LinEd.text()) * 1.355818
-		ftlbfTOkJ_proc      = float(self.ftlbfi_LinEd.text()) * 1.355818e-03
-		ftlbfTOkWh_proc     = float(self.ftlbfi_LinEd.text()) * 3.766161e-07
-		ftlbfTOBTUIT_proc   = float(self.ftlbfi_LinEd.text()) * 1.285068e-03
-		ftlbfTOBTUmean_proc = float(self.ftlbfi_LinEd.text()) * 0.3048 * 4.448222 / 1055.87
-		ftlbfTOcalIT_proc   = float(self.ftlbfi_LinEd.text()) * 3.238316e-01
-		ftlbfTOcalTH_proc   = float(self.ftlbfi_LinEd.text()) * 0.3240482667996196
-		ftlbfTOhphr_proc    = float(self.ftlbfi_LinEd.text()) * 5.050505e-07
-		ftlbfTOftlbf_proc   = float(self.ftlbfi_LinEd.text()) * 1
-		ftlbfTOftpdl_proc   = float(self.ftlbfi_LinEd.text()) * 32.174048627
+		try:
+			ftlbfTOJ_proc       = float(self.ftlbfi_LinEd.text()) * 1.355818
+			ftlbfTOkJ_proc      = float(self.ftlbfi_LinEd.text()) * 1.355818e-03
+			ftlbfTOkWh_proc     = float(self.ftlbfi_LinEd.text()) * 3.766161e-07
+			ftlbfTOBTUIT_proc   = float(self.ftlbfi_LinEd.text()) * 1.285068e-03
+			ftlbfTOBTUmean_proc = float(self.ftlbfi_LinEd.text()) * 0.3048 * 4.448222 / 1055.87
+			ftlbfTOcalIT_proc   = float(self.ftlbfi_LinEd.text()) * 3.238316e-01
+			ftlbfTOcalTH_proc   = float(self.ftlbfi_LinEd.text()) * 0.3240482667996196
+			ftlbfTOhphr_proc    = float(self.ftlbfi_LinEd.text()) * 5.050505e-07
+			ftlbfTOftlbf_proc   = float(self.ftlbfi_LinEd.text()) * 1
+			ftlbfTOftpdl_proc   = float(self.ftlbfi_LinEd.text()) * 32.174048627
 
-		self.ftlbfTOJ_res.setText(str(round(ftlbfTOJ_proc,             8)))
-		self.ftlbfTOkJ_res.setText(str(round(ftlbfTOkJ_proc,           8)))
-		self.ftlbfTOkWh_res.setText(str(round(ftlbfTOkWh_proc,         8)))
-		self.ftlbfTOBTUIT_res.setText(str(round(ftlbfTOBTUIT_proc,     8)))
-		self.ftlbfTOBTUmean_res.setText(str(round(ftlbfTOBTUmean_proc, 8)))
-		self.ftlbfTOcalIT_res.setText(str(round(ftlbfTOcalIT_proc,     8)))
-		self.ftlbfTOcalTH_res.setText(str(round(ftlbfTOcalTH_proc,     8)))
-		self.ftlbfTOhphr_res.setText(str(round(ftlbfTOhphr_proc,       8)))
-		self.ftlbfTOftlbf_res.setText(str(round(ftlbfTOftlbf_proc,     8)))
-		self.ftlbfTOftpdl_res.setText(str(round(ftlbfTOftpdl_proc,     8)))
+			self.ftlbfTOJ_res.setText(str(round(ftlbfTOJ_proc,             8)))
+			self.ftlbfTOkJ_res.setText(str(round(ftlbfTOkJ_proc,           8)))
+			self.ftlbfTOkWh_res.setText(str(round(ftlbfTOkWh_proc,         8)))
+			self.ftlbfTOBTUIT_res.setText(str(round(ftlbfTOBTUIT_proc,     8)))
+			self.ftlbfTOBTUmean_res.setText(str(round(ftlbfTOBTUmean_proc, 8)))
+			self.ftlbfTOcalIT_res.setText(str(round(ftlbfTOcalIT_proc,     8)))
+			self.ftlbfTOcalTH_res.setText(str(round(ftlbfTOcalTH_proc,     8)))
+			self.ftlbfTOhphr_res.setText(str(round(ftlbfTOhphr_proc,       8)))
+			self.ftlbfTOftlbf_res.setText(str(round(ftlbfTOftlbf_proc,     8)))
+			self.ftlbfTOftpdl_res.setText(str(round(ftlbfTOftpdl_proc,     8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def ftpdlTO_fun(self):
-		ftpdlTOJ_proc       = float(self.ftpdli_LinEd.text()) * 0.0421401099999223
-		ftpdlTOkJ_proc      = float(self.ftpdli_LinEd.text()) * 0.0421401099999223e+03
-		ftpdlTOkWh_proc     = float(self.ftpdli_LinEd.text()) * 1.1705586111e-08
-		ftpdlTOBTUIT_proc   = float(self.ftpdli_LinEd.text()) * 3.9941117709812745e-05
-		ftpdlTOBTUmean_proc = float(self.ftpdli_LinEd.text()) * 0.3048 * 0.138255 / 1055.87
-		ftpdlTOcalIT_proc   = float(self.ftpdli_LinEd.text()) * 1.0064992356912751e-02
-		ftpdlTOcalTH_proc   = float(self.ftpdli_LinEd.text()) * 1.0071728011e-02
-		ftpdlTOhphr_proc    = float(self.ftpdli_LinEd.text()) * 1.5697449551e-08
-		ftpdlTOftlbf_proc   = float(self.ftpdli_LinEd.text()) * 3.1080950103e-02
-		ftpdlTOftpdl_proc   = float(self.ftpdli_LinEd.text()) * 1
+		try:
+			ftpdlTOJ_proc       = float(self.ftpdli_LinEd.text()) * 0.0421401099999223
+			ftpdlTOkJ_proc      = float(self.ftpdli_LinEd.text()) * 0.0421401099999223e+03
+			ftpdlTOkWh_proc     = float(self.ftpdli_LinEd.text()) * 1.1705586111e-08
+			ftpdlTOBTUIT_proc   = float(self.ftpdli_LinEd.text()) * 3.9941117709812745e-05
+			ftpdlTOBTUmean_proc = float(self.ftpdli_LinEd.text()) * 0.3048 * 0.138255 / 1055.87
+			ftpdlTOcalIT_proc   = float(self.ftpdli_LinEd.text()) * 1.0064992356912751e-02
+			ftpdlTOcalTH_proc   = float(self.ftpdli_LinEd.text()) * 1.0071728011e-02
+			ftpdlTOhphr_proc    = float(self.ftpdli_LinEd.text()) * 1.5697449551e-08
+			ftpdlTOftlbf_proc   = float(self.ftpdli_LinEd.text()) * 3.1080950103e-02
+			ftpdlTOftpdl_proc   = float(self.ftpdli_LinEd.text()) * 1
 
-		self.ftpdlTOJ_res.setText(str(round(ftpdlTOJ_proc,             8)))
-		self.ftpdlTOkJ_res.setText(str(round(ftpdlTOkJ_proc,           8)))
-		self.ftpdlTOkWh_res.setText(str(round(ftpdlTOkWh_proc,         8)))
-		self.ftpdlTOBTUIT_res.setText(str(round(ftpdlTOBTUIT_proc,     8)))
-		self.ftpdlTOBTUmean_res.setText(str(round(ftpdlTOBTUmean_proc, 8)))
-		self.ftpdlTOcalIT_res.setText(str(round(ftpdlTOcalIT_proc,     8)))
-		self.ftpdlTOcalTH_res.setText(str(round(ftpdlTOcalTH_proc,     8)))
-		self.ftpdlTOhphr_res.setText(str(round(ftpdlTOhphr_proc,       8)))
-		self.ftpdlTOftlbf_res.setText(str(round(ftpdlTOftlbf_proc,     8)))
-		self.ftpdlTOftpdl_res.setText(str(round(ftpdlTOftpdl_proc,     8)))
+			self.ftpdlTOJ_res.setText(str(round(ftpdlTOJ_proc,             8)))
+			self.ftpdlTOkJ_res.setText(str(round(ftpdlTOkJ_proc,           8)))
+			self.ftpdlTOkWh_res.setText(str(round(ftpdlTOkWh_proc,         8)))
+			self.ftpdlTOBTUIT_res.setText(str(round(ftpdlTOBTUIT_proc,     8)))
+			self.ftpdlTOBTUmean_res.setText(str(round(ftpdlTOBTUmean_proc, 8)))
+			self.ftpdlTOcalIT_res.setText(str(round(ftpdlTOcalIT_proc,     8)))
+			self.ftpdlTOcalTH_res.setText(str(round(ftpdlTOcalTH_proc,     8)))
+			self.ftpdlTOhphr_res.setText(str(round(ftpdlTOhphr_proc,       8)))
+			self.ftpdlTOftlbf_res.setText(str(round(ftpdlTOftlbf_proc,     8)))
+			self.ftpdlTOftpdl_res.setText(str(round(ftpdlTOftpdl_proc,     8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def main_window(self):
 		main_layout = QtWidgets.QHBoxLayout()
@@ -519,5 +633,6 @@ class Energy_Win(QtWidgets.QWidget):
 		self.setLayout(main_layout)
 		self.show()
 		
-
+aplikace = QtWidgets.QApplication(sys.argv)
+aplikace.setStyle("Fusion")	
 		

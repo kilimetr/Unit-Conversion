@@ -3,6 +3,7 @@
 # GitHub: https://github.com/kilimetr
 
 from PyQt5 import QtWidgets, QtGui, QtCore
+import sys
 
 
 
@@ -11,11 +12,13 @@ class Mass_Win(QtWidgets.QWidget):
 		super().__init__()
 
 		self.setWindowTitle("Mass Converter")
+		self.setWindowIcon(QtGui.QIcon("logo.jpg"))
+		
 		self.main_window()
 
 	def createGroup_input(self):
 		input_group = QtWidgets.QGroupBox("Input", self)
-		input_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+		input_group.setFont(QtGui.QFont("Arial", 10))
 
 		input_grid = QtWidgets.QGridLayout()
 		input_grid.setColumnMinimumWidth(0, 130)
@@ -56,7 +59,7 @@ class Mass_Win(QtWidgets.QWidget):
 
 	def createGroup_output(self):
 		output_group = QtWidgets.QGroupBox("Output", self)
-		output_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+		output_group.setFont(QtGui.QFont("Arial", 10))
 
 		output_grid = QtWidgets.QGridLayout()
 
@@ -165,94 +168,160 @@ class Mass_Win(QtWidgets.QWidget):
 		return output_group
 
 	def kgTO_fun(self):
-		kgTOkg_proc       = float(self.kgi_LinEd.text()) * 1
-		kgTOmton_proc     = float(self.kgi_LinEd.text()) * 1e-03
-		kgTOounce_proc    = float(self.kgi_LinEd.text()) * 35.27396
-		kgTOpound_proc    = float(self.kgi_LinEd.text()) * 2.204623
-		kgTOshortton_proc = float(self.kgi_LinEd.text()) * 1.102311e-03
-		kgTOlongton_proc  = float(self.kgi_LinEd.text()) * 9.842065e-04
+		try:
+			kgTOkg_proc       = float(self.kgi_LinEd.text()) * 1
+			kgTOmton_proc     = float(self.kgi_LinEd.text()) * 1e-03
+			kgTOounce_proc    = float(self.kgi_LinEd.text()) * 35.27396
+			kgTOpound_proc    = float(self.kgi_LinEd.text()) * 2.204623
+			kgTOshortton_proc = float(self.kgi_LinEd.text()) * 1.102311e-03
+			kgTOlongton_proc  = float(self.kgi_LinEd.text()) * 9.842065e-04
 
-		self.kgTOkg_res.setText(str(round(kgTOkg_proc,             8)))
-		self.kgTOmton_res.setText(str(round(kgTOmton_proc,         8)))
-		self.kgTOounce_res.setText(str(round(kgTOounce_proc,       8)))
-		self.kgTOpound_res.setText(str(round(kgTOpound_proc,       8)))
-		self.kgTOshortton_res.setText(str(round(kgTOshortton_proc, 8)))
-		self.kgTOlongton_res.setText(str(round(kgTOlongton_proc,   8)))
+			self.kgTOkg_res.setText(str(round(kgTOkg_proc,             8)))
+			self.kgTOmton_res.setText(str(round(kgTOmton_proc,         8)))
+			self.kgTOounce_res.setText(str(round(kgTOounce_proc,       8)))
+			self.kgTOpound_res.setText(str(round(kgTOpound_proc,       8)))
+			self.kgTOshortton_res.setText(str(round(kgTOshortton_proc, 8)))
+			self.kgTOlongton_res.setText(str(round(kgTOlongton_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def mtonTO_fun(self):
-		mtonTOkg_proc       = float(self.mtoni_LinEd.text()) * 1e+03
-		mtonTOmton_proc     = float(self.mtoni_LinEd.text()) * 1
-		mtonTOounce_proc    = float(self.mtoni_LinEd.text()) * 3.527396e+04
-		mtonTOpound_proc    = float(self.mtoni_LinEd.text()) * 2.204623e+03
-		mtonTOshortton_proc = float(self.mtoni_LinEd.text()) * 1.102311
-		mtonTOlongton_proc  = float(self.mtoni_LinEd.text()) * 0.9842065
+		try:
+			mtonTOkg_proc       = float(self.mtoni_LinEd.text()) * 1e+03
+			mtonTOmton_proc     = float(self.mtoni_LinEd.text()) * 1
+			mtonTOounce_proc    = float(self.mtoni_LinEd.text()) * 3.527396e+04
+			mtonTOpound_proc    = float(self.mtoni_LinEd.text()) * 2.204623e+03
+			mtonTOshortton_proc = float(self.mtoni_LinEd.text()) * 1.102311
+			mtonTOlongton_proc  = float(self.mtoni_LinEd.text()) * 0.9842065
 
-		self.mtonTOkg_res.setText(str(round(mtonTOkg_proc,             8)))
-		self.mtonTOmton_res.setText(str(round(mtonTOmton_proc,         8)))
-		self.mtonTOounce_res.setText(str(round(mtonTOounce_proc,       8)))
-		self.mtonTOpound_res.setText(str(round(mtonTOpound_proc,       8)))
-		self.mtonTOshortton_res.setText(str(round(mtonTOshortton_proc, 8)))
-		self.mtonTOlongton_res.setText(str(round(mtonTOlongton_proc,   8)))
+			self.mtonTOkg_res.setText(str(round(mtonTOkg_proc,             8)))
+			self.mtonTOmton_res.setText(str(round(mtonTOmton_proc,         8)))
+			self.mtonTOounce_res.setText(str(round(mtonTOounce_proc,       8)))
+			self.mtonTOpound_res.setText(str(round(mtonTOpound_proc,       8)))
+			self.mtonTOshortton_res.setText(str(round(mtonTOshortton_proc, 8)))
+			self.mtonTOlongton_res.setText(str(round(mtonTOlongton_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def ounceTO_fun(self):
-		ounceTOkg_proc       = float(self.ouncei_LinEd.text()) * 2.834952e-02
-		ounceTOmton_proc     = float(self.ouncei_LinEd.text()) * 2.834950e-05
-		ounceTOounce_proc    = float(self.ouncei_LinEd.text()) * 1
-		ounceTOpound_proc    = float(self.ouncei_LinEd.text()) * 6.25e-02
-		ounceTOshortton_proc = float(self.ouncei_LinEd.text()) * 3.125e-05
-		ounceTOlongton_proc  = float(self.ouncei_LinEd.text()) * 2.790179e-05
+		try:
+			ounceTOkg_proc       = float(self.ouncei_LinEd.text()) * 2.834952e-02
+			ounceTOmton_proc     = float(self.ouncei_LinEd.text()) * 2.834950e-05
+			ounceTOounce_proc    = float(self.ouncei_LinEd.text()) * 1
+			ounceTOpound_proc    = float(self.ouncei_LinEd.text()) * 6.25e-02
+			ounceTOshortton_proc = float(self.ouncei_LinEd.text()) * 3.125e-05
+			ounceTOlongton_proc  = float(self.ouncei_LinEd.text()) * 2.790179e-05
 
-		self.ounceTOkg_res.setText(str(round(ounceTOkg_proc,             8)))
-		self.ounceTOmton_res.setText(str(round(ounceTOmton_proc,         8)))
-		self.ounceTOounce_res.setText(str(round(ounceTOounce_proc,       8)))
-		self.ounceTOpound_res.setText(str(round(ounceTOpound_proc,       8)))
-		self.ounceTOshortton_res.setText(str(round(ounceTOshortton_proc, 8)))
-		self.ounceTOlongton_res.setText(str(round(ounceTOlongton_proc,   8)))
+			self.ounceTOkg_res.setText(str(round(ounceTOkg_proc,             8)))
+			self.ounceTOmton_res.setText(str(round(ounceTOmton_proc,         8)))
+			self.ounceTOounce_res.setText(str(round(ounceTOounce_proc,       8)))
+			self.ounceTOpound_res.setText(str(round(ounceTOpound_proc,       8)))
+			self.ounceTOshortton_res.setText(str(round(ounceTOshortton_proc, 8)))
+			self.ounceTOlongton_res.setText(str(round(ounceTOlongton_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def poundTO_fun(self):
-		poundTOkg_proc       = float(self.poundi_LinEd.text()) * 0.4535924
-		poundTOmton_proc     = float(self.poundi_LinEd.text()) * 4.535924e-04
-		poundTOounce_proc    = float(self.poundi_LinEd.text()) * 16
-		poundTOpound_proc    = float(self.poundi_LinEd.text()) * 1
-		poundTOshortton_proc = float(self.poundi_LinEd.text()) * 5e-04
-		poundTOlongton_proc  = float(self.poundi_LinEd.text()) * 4.464286e-04
+		try:
+			poundTOkg_proc       = float(self.poundi_LinEd.text()) * 0.4535924
+			poundTOmton_proc     = float(self.poundi_LinEd.text()) * 4.535924e-04
+			poundTOounce_proc    = float(self.poundi_LinEd.text()) * 16
+			poundTOpound_proc    = float(self.poundi_LinEd.text()) * 1
+			poundTOshortton_proc = float(self.poundi_LinEd.text()) * 5e-04
+			poundTOlongton_proc  = float(self.poundi_LinEd.text()) * 4.464286e-04
 
-		self.poundTOkg_res.setText(str(round(poundTOkg_proc,             8)))
-		self.poundTOmton_res.setText(str(round(poundTOmton_proc,         8)))
-		self.poundTOounce_res.setText(str(round(poundTOounce_proc,       8)))
-		self.poundTOpound_res.setText(str(round(poundTOpound_proc,       8)))
-		self.poundTOshortton_res.setText(str(round(poundTOshortton_proc, 8)))
-		self.poundTOlongton_res.setText(str(round(poundTOlongton_proc,   8)))
+			self.poundTOkg_res.setText(str(round(poundTOkg_proc,             8)))
+			self.poundTOmton_res.setText(str(round(poundTOmton_proc,         8)))
+			self.poundTOounce_res.setText(str(round(poundTOounce_proc,       8)))
+			self.poundTOpound_res.setText(str(round(poundTOpound_proc,       8)))
+			self.poundTOshortton_res.setText(str(round(poundTOshortton_proc, 8)))
+			self.poundTOlongton_res.setText(str(round(poundTOlongton_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def shorttonTO_fun(self):
-		shorttonTOkg_proc       = float(self.shorttoni_LinEd.text()) * 9.071847e+02
-		shorttonTOmton_proc     = float(self.shorttoni_LinEd.text()) * 0.9071847
-		shorttonTOounce_proc    = float(self.shorttoni_LinEd.text()) * 3.2e+04
-		shorttonTOpound_proc    = float(self.shorttoni_LinEd.text()) * 2e+03
-		shorttonTOshortton_proc = float(self.shorttoni_LinEd.text()) * 1
-		shorttonTOlongton_proc  = float(self.shorttoni_LinEd.text()) * 0.8928571
+		try:
+			shorttonTOkg_proc       = float(self.shorttoni_LinEd.text()) * 9.071847e+02
+			shorttonTOmton_proc     = float(self.shorttoni_LinEd.text()) * 0.9071847
+			shorttonTOounce_proc    = float(self.shorttoni_LinEd.text()) * 3.2e+04
+			shorttonTOpound_proc    = float(self.shorttoni_LinEd.text()) * 2e+03
+			shorttonTOshortton_proc = float(self.shorttoni_LinEd.text()) * 1
+			shorttonTOlongton_proc  = float(self.shorttoni_LinEd.text()) * 0.8928571
 
-		self.shorttonTOkg_res.setText(str(round(shorttonTOkg_proc,             8)))
-		self.shorttonTOmton_res.setText(str(round(shorttonTOmton_proc,         8)))
-		self.shorttonTOounce_res.setText(str(round(shorttonTOounce_proc,       8)))
-		self.shorttonTOpound_res.setText(str(round(shorttonTOpound_proc,       8)))
-		self.shorttonTOshortton_res.setText(str(round(shorttonTOshortton_proc, 8)))
-		self.shorttonTOlongton_res.setText(str(round(shorttonTOlongton_proc,   8)))
+			self.shorttonTOkg_res.setText(str(round(shorttonTOkg_proc,             8)))
+			self.shorttonTOmton_res.setText(str(round(shorttonTOmton_proc,         8)))
+			self.shorttonTOounce_res.setText(str(round(shorttonTOounce_proc,       8)))
+			self.shorttonTOpound_res.setText(str(round(shorttonTOpound_proc,       8)))
+			self.shorttonTOshortton_res.setText(str(round(shorttonTOshortton_proc, 8)))
+			self.shorttonTOlongton_res.setText(str(round(shorttonTOlongton_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def longtonTO_fun(self):
-		longtonTOkg_proc       = float(self.longtoni_LinEd.text()) * 1.016047e+03
-		longtonTOmton_proc     = float(self.longtoni_LinEd.text()) * 1.016047
-		longtonTOounce_proc    = float(self.longtoni_LinEd.text()) * 3.584e+04
-		longtonTOpound_proc    = float(self.longtoni_LinEd.text()) * 2.24e+03
-		longtonTOshortton_proc = float(self.longtoni_LinEd.text()) * 1.12
-		longtonTOlongton_proc  = float(self.longtoni_LinEd.text()) * 1
+		try:
+			longtonTOkg_proc       = float(self.longtoni_LinEd.text()) * 1.016047e+03
+			longtonTOmton_proc     = float(self.longtoni_LinEd.text()) * 1.016047
+			longtonTOounce_proc    = float(self.longtoni_LinEd.text()) * 3.584e+04
+			longtonTOpound_proc    = float(self.longtoni_LinEd.text()) * 2.24e+03
+			longtonTOshortton_proc = float(self.longtoni_LinEd.text()) * 1.12
+			longtonTOlongton_proc  = float(self.longtoni_LinEd.text()) * 1
 
-		self.longtonTOkg_res.setText(str(round(longtonTOkg_proc,             8)))
-		self.longtonTOmton_res.setText(str(round(longtonTOmton_proc,         8)))
-		self.longtonTOounce_res.setText(str(round(longtonTOounce_proc,       8)))
-		self.longtonTOpound_res.setText(str(round(longtonTOpound_proc,       8)))
-		self.longtonTOshortton_res.setText(str(round(longtonTOshortton_proc, 8)))
-		self.longtonTOlongton_res.setText(str(round(longtonTOlongton_proc,   8)))
+			self.longtonTOkg_res.setText(str(round(longtonTOkg_proc,             8)))
+			self.longtonTOmton_res.setText(str(round(longtonTOmton_proc,         8)))
+			self.longtonTOounce_res.setText(str(round(longtonTOounce_proc,       8)))
+			self.longtonTOpound_res.setText(str(round(longtonTOpound_proc,       8)))
+			self.longtonTOshortton_res.setText(str(round(longtonTOshortton_proc, 8)))
+			self.longtonTOlongton_res.setText(str(round(longtonTOlongton_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def main_window(self):
 		main_layout = QtWidgets.QHBoxLayout()
@@ -262,5 +331,6 @@ class Mass_Win(QtWidgets.QWidget):
 		self.setLayout(main_layout)
 		self.show()
 
-
+aplikace = QtWidgets.QApplication(sys.argv)
+aplikace.setStyle("Fusion")	
 	

@@ -3,6 +3,7 @@
 # GitHub: https://github.com/kilimetr
 
 from PyQt5 import QtWidgets, QtGui, QtCore
+import sys
 
 
 
@@ -11,11 +12,13 @@ class Length_Win(QtWidgets.QWidget):
 		super().__init__()
 
 		self.setWindowTitle("Length Converter")
+		self.setWindowIcon(QtGui.QIcon("logo.jpg"))
+		
 		self.main_window()
 
 	def createGroup_input(self):
 		input_group = QtWidgets.QGroupBox("Input", self)
-		input_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+		input_group.setFont(QtGui.QFont("Arial", 10))
 		
 		input_grid = QtWidgets.QGridLayout()
 		input_grid.setColumnMinimumWidth(0, 130)
@@ -69,7 +72,7 @@ class Length_Win(QtWidgets.QWidget):
 
 	def createGroup_output(self):
 		output_group = QtWidgets.QGroupBox("Output", self)
-		output_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+		output_group.setFont(QtGui.QFont("Arial", 10))
 
 		output_grid = QtWidgets.QGridLayout()
 		
@@ -350,329 +353,461 @@ class Length_Win(QtWidgets.QWidget):
 		return output_group
 
 	def mTO_fun(self):
-		mTOm_proc    = float(self.mi_LinEd.text()) * 1
-		mTOcm_proc   = float(self.mi_LinEd.text()) * 1e+02
-		mTOmm_proc   = float(self.mi_LinEd.text()) * 1e+03
-		mTOum_proc   = float(self.mi_LinEd.text()) * 1e+06
-		# mTOangs_proc = float(self.mi_LinEd.text()) * 1e+08
-		# mTOnm_proc   = float(self.mi_LinEd.text()) * 1e+09
-		mTOkm_proc   = float(self.mi_LinEd.text()) * 1e-03
-		mTOin_proc   = float(self.mi_LinEd.text()) * 3.937008e+01
-		mTOft_proc   = float(self.mi_LinEd.text()) * 3.280840
-		mTOyd_proc   = float(self.mi_LinEd.text()) * 1.093613
-		mTOmiST_proc = float(self.mi_LinEd.text()) * 6.213712e-04
-		mTOmiNV_proc = float(self.mi_LinEd.text()) * 5.399568e-04
+		try:
+			mTOm_proc    = float(self.mi_LinEd.text()) * 1
+			mTOcm_proc   = float(self.mi_LinEd.text()) * 1e+02
+			mTOmm_proc   = float(self.mi_LinEd.text()) * 1e+03
+			mTOum_proc   = float(self.mi_LinEd.text()) * 1e+06
+			# mTOangs_proc = float(self.mi_LinEd.text()) * 1e+08
+			# mTOnm_proc   = float(self.mi_LinEd.text()) * 1e+09
+			mTOkm_proc   = float(self.mi_LinEd.text()) * 1e-03
+			mTOin_proc   = float(self.mi_LinEd.text()) * 3.937008e+01
+			mTOft_proc   = float(self.mi_LinEd.text()) * 3.280840
+			mTOyd_proc   = float(self.mi_LinEd.text()) * 1.093613
+			mTOmiST_proc = float(self.mi_LinEd.text()) * 6.213712e-04
+			mTOmiNV_proc = float(self.mi_LinEd.text()) * 5.399568e-04
 
-		self.mTOm_res.setText(str(round(mTOm_proc,       8)))
-		self.mTOcm_res.setText(str(round(mTOcm_proc,     8)))
-		self.mTOmm_res.setText(str(round(mTOmm_proc,     8)))
-		self.mTOum_res.setText(str(round(mTOum_proc,     8)))
-		self.mTOangs_res.setText("-")
-		self.mTOnm_res.setText("-")
-		self.mTOkm_res.setText(str(round(mTOkm_proc,     8)))
-		self.mTOin_res.setText(str(round(mTOin_proc,     8)))
-		self.mTOft_res.setText(str(round(mTOft_proc,     8)))
-		self.mTOyd_res.setText(str(round(mTOyd_proc,     8)))
-		self.mTOmiST_res.setText(str(round(mTOmiST_proc, 8)))
-		self.mTOmiNV_res.setText(str(round(mTOmiNV_proc, 8)))
+			self.mTOm_res.setText(str(round(mTOm_proc,       8)))
+			self.mTOcm_res.setText(str(round(mTOcm_proc,     8)))
+			self.mTOmm_res.setText(str(round(mTOmm_proc,     8)))
+			self.mTOum_res.setText(str(round(mTOum_proc,     8)))
+			self.mTOangs_res.setText("-")
+			self.mTOnm_res.setText("-")
+			self.mTOkm_res.setText(str(round(mTOkm_proc,     8)))
+			self.mTOin_res.setText(str(round(mTOin_proc,     8)))
+			self.mTOft_res.setText(str(round(mTOft_proc,     8)))
+			self.mTOyd_res.setText(str(round(mTOyd_proc,     8)))
+			self.mTOmiST_res.setText(str(round(mTOmiST_proc, 8)))
+			self.mTOmiNV_res.setText(str(round(mTOmiNV_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def cmTO_fun(self):
-		cmTOm_proc    = float(self.cmi_LinEd.text()) * 1e-02
-		cmTOcm_proc   = float(self.cmi_LinEd.text()) * 1
-		cmTOmm_proc   = float(self.cmi_LinEd.text()) * 1e+01
-		cmTOum_proc   = float(self.cmi_LinEd.text()) * 1e+04
-		cmTOangs_proc = float(self.cmi_LinEd.text()) * 1e+06
-		# cmTOnm_proc   = float(self.cmi_LinEd.text()) * 1e+07
-		cmTOkm_proc   = float(self.cmi_LinEd.text()) * 1e-05
-		cmTOin_proc   = float(self.cmi_LinEd.text()) * 3.937008e-01
-		cmTOft_proc   = float(self.cmi_LinEd.text()) * 3.280840e-02
-		cmTOyd_proc   = float(self.cmi_LinEd.text()) * 1.093613e-02
-		cmTOmiST_proc = float(self.cmi_LinEd.text()) * 6.213712e-06
-		cmTOmiNV_proc = float(self.cmi_LinEd.text()) * 5.399568e-06
+		try:
+			cmTOm_proc    = float(self.cmi_LinEd.text()) * 1e-02
+			cmTOcm_proc   = float(self.cmi_LinEd.text()) * 1
+			cmTOmm_proc   = float(self.cmi_LinEd.text()) * 1e+01
+			cmTOum_proc   = float(self.cmi_LinEd.text()) * 1e+04
+			cmTOangs_proc = float(self.cmi_LinEd.text()) * 1e+06
+			# cmTOnm_proc   = float(self.cmi_LinEd.text()) * 1e+07
+			cmTOkm_proc   = float(self.cmi_LinEd.text()) * 1e-05
+			cmTOin_proc   = float(self.cmi_LinEd.text()) * 3.937008e-01
+			cmTOft_proc   = float(self.cmi_LinEd.text()) * 3.280840e-02
+			cmTOyd_proc   = float(self.cmi_LinEd.text()) * 1.093613e-02
+			cmTOmiST_proc = float(self.cmi_LinEd.text()) * 6.213712e-06
+			cmTOmiNV_proc = float(self.cmi_LinEd.text()) * 5.399568e-06
 
-		self.cmTOm_res.setText(str(round(cmTOm_proc,       8)))
-		self.cmTOcm_res.setText(str(round(cmTOcm_proc,     8)))
-		self.cmTOmm_res.setText(str(round(cmTOmm_proc,     8)))
-		self.cmTOum_res.setText(str(round(cmTOum_proc,     8)))
-		self.cmTOangs_res.setText(str(round(cmTOangs_proc, 8)))
-		self.cmTOnm_res.setText("-")
-		self.cmTOkm_res.setText(str(round(cmTOkm_proc,     8)))
-		self.cmTOin_res.setText(str(round(cmTOin_proc,     8)))
-		self.cmTOft_res.setText(str(round(cmTOft_proc,     8)))
-		self.cmTOyd_res.setText(str(round(cmTOyd_proc,     8)))
-		self.cmTOmiST_res.setText(str(round(cmTOmiST_proc, 8)))
-		self.cmTOmiNV_res.setText(str(round(cmTOmiNV_proc, 8)))
+			self.cmTOm_res.setText(str(round(cmTOm_proc,       8)))
+			self.cmTOcm_res.setText(str(round(cmTOcm_proc,     8)))
+			self.cmTOmm_res.setText(str(round(cmTOmm_proc,     8)))
+			self.cmTOum_res.setText(str(round(cmTOum_proc,     8)))
+			self.cmTOangs_res.setText(str(round(cmTOangs_proc, 8)))
+			self.cmTOnm_res.setText("-")
+			self.cmTOkm_res.setText(str(round(cmTOkm_proc,     8)))
+			self.cmTOin_res.setText(str(round(cmTOin_proc,     8)))
+			self.cmTOft_res.setText(str(round(cmTOft_proc,     8)))
+			self.cmTOyd_res.setText(str(round(cmTOyd_proc,     8)))
+			self.cmTOmiST_res.setText(str(round(cmTOmiST_proc, 8)))
+			self.cmTOmiNV_res.setText(str(round(cmTOmiNV_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def mmTO_fun(self):
-		mmTOm_proc    = float(self.mmi_LinEd.text()) * 1e-03
-		mmTOcm_proc   = float(self.mmi_LinEd.text()) * 1e+01
-		mmTOmm_proc   = float(self.mmi_LinEd.text()) * 1
-		mmTOum_proc   = float(self.mmi_LinEd.text()) * 1e+03
-		mmTOangs_proc = float(self.mmi_LinEd.text()) * 1e+05
-		mmTOnm_proc   = float(self.mmi_LinEd.text()) * 1e+06
-		mmTOkm_proc   = float(self.mmi_LinEd.text()) * 1e-06
-		mmTOin_proc   = float(self.mmi_LinEd.text()) * 3.937008e-02
-		mmTOft_proc   = float(self.mmi_LinEd.text()) * 3.280840e-03
-		mmTOyd_proc   = float(self.mmi_LinEd.text()) * 1.093613e-03
-		# mmTOmiST_proc = float(self.mmi_LinEd.text()) * 6.213712e-07
-		# mmTOmiNV_proc = float(self.mmi_LinEd.text()) * 5.399568e-07
+		try:
+			mmTOm_proc    = float(self.mmi_LinEd.text()) * 1e-03
+			mmTOcm_proc   = float(self.mmi_LinEd.text()) * 1e+01
+			mmTOmm_proc   = float(self.mmi_LinEd.text()) * 1
+			mmTOum_proc   = float(self.mmi_LinEd.text()) * 1e+03
+			mmTOangs_proc = float(self.mmi_LinEd.text()) * 1e+05
+			mmTOnm_proc   = float(self.mmi_LinEd.text()) * 1e+06
+			mmTOkm_proc   = float(self.mmi_LinEd.text()) * 1e-06
+			mmTOin_proc   = float(self.mmi_LinEd.text()) * 3.937008e-02
+			mmTOft_proc   = float(self.mmi_LinEd.text()) * 3.280840e-03
+			mmTOyd_proc   = float(self.mmi_LinEd.text()) * 1.093613e-03
+			# mmTOmiST_proc = float(self.mmi_LinEd.text()) * 6.213712e-07
+			# mmTOmiNV_proc = float(self.mmi_LinEd.text()) * 5.399568e-07
 
-		self.mmTOm_res.setText(str(round(mmTOm_proc,       8)))
-		self.mmTOcm_res.setText(str(round(mmTOcm_proc,     8)))
-		self.mmTOmm_res.setText(str(round(mmTOmm_proc,     8)))
-		self.mmTOum_res.setText(str(round(mmTOum_proc,     8)))
-		self.mmTOangs_res.setText(str(round(mmTOangs_proc, 8)))
-		self.mmTOnm_res.setText(str(round(mmTOnm_proc,     8)))
-		self.mmTOkm_res.setText(str(round(mmTOkm_proc,     8)))
-		self.mmTOin_res.setText(str(round(mmTOin_proc,     8)))
-		self.mmTOft_res.setText(str(round(mmTOft_proc,     8)))
-		self.mmTOyd_res.setText(str(round(mmTOyd_proc,     8)))
-		self.mmTOmiST_res.setText("-")
-		self.mmTOmiNV_res.setText("-")
+			self.mmTOm_res.setText(str(round(mmTOm_proc,       8)))
+			self.mmTOcm_res.setText(str(round(mmTOcm_proc,     8)))
+			self.mmTOmm_res.setText(str(round(mmTOmm_proc,     8)))
+			self.mmTOum_res.setText(str(round(mmTOum_proc,     8)))
+			self.mmTOangs_res.setText(str(round(mmTOangs_proc, 8)))
+			self.mmTOnm_res.setText(str(round(mmTOnm_proc,     8)))
+			self.mmTOkm_res.setText(str(round(mmTOkm_proc,     8)))
+			self.mmTOin_res.setText(str(round(mmTOin_proc,     8)))
+			self.mmTOft_res.setText(str(round(mmTOft_proc,     8)))
+			self.mmTOyd_res.setText(str(round(mmTOyd_proc,     8)))
+			self.mmTOmiST_res.setText("-")
+			self.mmTOmiNV_res.setText("-")
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 
 	def umTO_fun(self):
-		umTOm_proc    = float(self.umi_LinEd.text()) * 1e-06
-		umTOcm_proc   = float(self.umi_LinEd.text()) * 1e-05
-		umTOmm_proc   = float(self.umi_LinEd.text()) * 1e-03
-		umTOum_proc   = float(self.umi_LinEd.text()) * 1
-		umTOangs_proc = float(self.umi_LinEd.text()) * 1e-02
-		umTOnm_proc   = float(self.umi_LinEd.text()) * 1e+03
-		# umTOkm_proc   = float(self.umi_LinEd.text()) * 1e-09
-		umTOin_proc   = float(self.umi_LinEd.text()) * 3.937008e-05
-		umTOft_proc   = float(self.umi_LinEd.text()) * 3.280840e-06
-		umTOyd_proc   = float(self.umi_LinEd.text()) * 1.093613e-06
-		# umTOmiST_proc = float(self.umi_LinEd.text()) * 6.213712e-10
-		# umTOmiNV_proc = float(self.umi_LinEd.text()) * 5.399568e-10
+		try:
+			umTOm_proc    = float(self.umi_LinEd.text()) * 1e-06
+			umTOcm_proc   = float(self.umi_LinEd.text()) * 1e-05
+			umTOmm_proc   = float(self.umi_LinEd.text()) * 1e-03
+			umTOum_proc   = float(self.umi_LinEd.text()) * 1
+			umTOangs_proc = float(self.umi_LinEd.text()) * 1e-02
+			umTOnm_proc   = float(self.umi_LinEd.text()) * 1e+03
+			# umTOkm_proc   = float(self.umi_LinEd.text()) * 1e-09
+			umTOin_proc   = float(self.umi_LinEd.text()) * 3.937008e-05
+			umTOft_proc   = float(self.umi_LinEd.text()) * 3.280840e-06
+			umTOyd_proc   = float(self.umi_LinEd.text()) * 1.093613e-06
+			# umTOmiST_proc = float(self.umi_LinEd.text()) * 6.213712e-10
+			# umTOmiNV_proc = float(self.umi_LinEd.text()) * 5.399568e-10
 
-		self.umTOm_res.setText(str(round(umTOm_proc,       8)))
-		self.umTOcm_res.setText(str(round(umTOcm_proc,     8)))
-		self.umTOmm_res.setText(str(round(umTOmm_proc,     8)))
-		self.umTOum_res.setText(str(round(umTOum_proc,     8)))
-		self.umTOangs_res.setText(str(round(umTOangs_proc, 8)))
-		self.umTOnm_res.setText(str(round(umTOnm_proc,     8)))
-		self.umTOkm_res.setText("-")
-		self.umTOin_res.setText(str(round(umTOin_proc,     8)))
-		self.umTOft_res.setText(str(round(umTOft_proc,     8)))
-		self.umTOyd_res.setText(str(round(umTOyd_proc,     8)))
-		self.umTOmiST_res.setText("-")
-		self.umTOmiNV_res.setText("-")
+			self.umTOm_res.setText(str(round(umTOm_proc,       8)))
+			self.umTOcm_res.setText(str(round(umTOcm_proc,     8)))
+			self.umTOmm_res.setText(str(round(umTOmm_proc,     8)))
+			self.umTOum_res.setText(str(round(umTOum_proc,     8)))
+			self.umTOangs_res.setText(str(round(umTOangs_proc, 8)))
+			self.umTOnm_res.setText(str(round(umTOnm_proc,     8)))
+			self.umTOkm_res.setText("-")
+			self.umTOin_res.setText(str(round(umTOin_proc,     8)))
+			self.umTOft_res.setText(str(round(umTOft_proc,     8)))
+			self.umTOyd_res.setText(str(round(umTOyd_proc,     8)))
+			self.umTOmiST_res.setText("-")
+			self.umTOmiNV_res.setText("-")
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def angsTO_fun(self):
-		# angsTOm_proc    = float(self.angsi_LinEd.text()) * 1e-08
-		# angsTOcm_proc   = float(self.angsi_LinEd.text()) * 1e-06
-		angsTOmm_proc   = float(self.angsi_LinEd.text()) * 1e-05
-		angsTOum_proc   = float(self.angsi_LinEd.text()) * 1e-02
-		angsTOangs_proc = float(self.angsi_LinEd.text()) * 1
-		angsTOnm_proc   = float(self.angsi_LinEd.text()) * 1e+01
-		# angsTOkm_proc   = float(self.angsi_LinEd.text()) * 1e-11
-		# angsTOin_proc   = float(self.angsi_LinEd.text()) * 3.937008e-07
-		# angsTOft_proc   = float(self.angsi_LinEd.text()) * 3.280840e-08
-		# angsTOyd_proc   = float(self.angsi_LinEd.text()) * 1.093613e-08
-		# angsTOmiST_proc = float(self.angsi_LinEd.text()) * 6.213712e-12
-		# angsTOmiNV_proc = float(self.angsi_LinEd.text()) * 5.399568e-12
+		try:
+			# angsTOm_proc    = float(self.angsi_LinEd.text()) * 1e-08
+			# angsTOcm_proc   = float(self.angsi_LinEd.text()) * 1e-06
+			angsTOmm_proc   = float(self.angsi_LinEd.text()) * 1e-05
+			angsTOum_proc   = float(self.angsi_LinEd.text()) * 1e-02
+			angsTOangs_proc = float(self.angsi_LinEd.text()) * 1
+			angsTOnm_proc   = float(self.angsi_LinEd.text()) * 1e+01
+			# angsTOkm_proc   = float(self.angsi_LinEd.text()) * 1e-11
+			# angsTOin_proc   = float(self.angsi_LinEd.text()) * 3.937008e-07
+			# angsTOft_proc   = float(self.angsi_LinEd.text()) * 3.280840e-08
+			# angsTOyd_proc   = float(self.angsi_LinEd.text()) * 1.093613e-08
+			# angsTOmiST_proc = float(self.angsi_LinEd.text()) * 6.213712e-12
+			# angsTOmiNV_proc = float(self.angsi_LinEd.text()) * 5.399568e-12
 
-		self.angsTOm_res.setText("-")
-		self.angsTOcm_res.setText("-")
-		self.angsTOmm_res.setText(str(round(angsTOmm_proc,     8)))
-		self.angsTOum_res.setText(str(round(angsTOum_proc,     8)))
-		self.angsTOangs_res.setText(str(round(angsTOangs_proc, 8)))
-		self.angsTOnm_res.setText(str(round(angsTOnm_proc,     8)))
-		self.angsTOkm_res.setText("-")
-		self.angsTOin_res.setText("-")
-		self.angsTOft_res.setText("-")
-		self.angsTOyd_res.setText("-")
-		self.angsTOmiST_res.setText("-")
-		self.angsTOmiNV_res.setText("-")
+			self.angsTOm_res.setText("-")
+			self.angsTOcm_res.setText("-")
+			self.angsTOmm_res.setText(str(round(angsTOmm_proc,     8)))
+			self.angsTOum_res.setText(str(round(angsTOum_proc,     8)))
+			self.angsTOangs_res.setText(str(round(angsTOangs_proc, 8)))
+			self.angsTOnm_res.setText(str(round(angsTOnm_proc,     8)))
+			self.angsTOkm_res.setText("-")
+			self.angsTOin_res.setText("-")
+			self.angsTOft_res.setText("-")
+			self.angsTOyd_res.setText("-")
+			self.angsTOmiST_res.setText("-")
+			self.angsTOmiNV_res.setText("-")
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def nmTO_fun(self):
-		# nmTOm_proc    = float(self.nmi_LinEd.text()) * 1e-09
-		# nmTOcm_proc   = float(self.nmi_LinEd.text()) * 1e-07
-		nmTOmm_proc   = float(self.nmi_LinEd.text()) * 1e-06
-		nmTOum_proc   = float(self.nmi_LinEd.text()) * 1e-03
-		nmTOangs_proc = float(self.nmi_LinEd.text()) * 1e+01
-		nmTOnm_proc   = float(self.nmi_LinEd.text()) * 1
-		# nmTOkm_proc   = float(self.nmi_LinEd.text()) * 1e-12
-		# nmTOin_proc   = float(self.nmi_LinEd.text()) * 3.937008e-08
-		# nmTOft_proc   = float(self.nmi_LinEd.text()) * 3.280840e-09
-		# nmTOyd_proc   = float(self.nmi_LinEd.text()) * 1.093613e-10
-		# nmTOmiST_proc = float(self.nmi_LinEd.text()) * 6.213712e-13
-		# nmTOmiNV_proc = float(self.nmi_LinEd.text()) * 5.399568e-13
+		try:
+			# nmTOm_proc    = float(self.nmi_LinEd.text()) * 1e-09
+			# nmTOcm_proc   = float(self.nmi_LinEd.text()) * 1e-07
+			nmTOmm_proc   = float(self.nmi_LinEd.text()) * 1e-06
+			nmTOum_proc   = float(self.nmi_LinEd.text()) * 1e-03
+			nmTOangs_proc = float(self.nmi_LinEd.text()) * 1e+01
+			nmTOnm_proc   = float(self.nmi_LinEd.text()) * 1
+			# nmTOkm_proc   = float(self.nmi_LinEd.text()) * 1e-12
+			# nmTOin_proc   = float(self.nmi_LinEd.text()) * 3.937008e-08
+			# nmTOft_proc   = float(self.nmi_LinEd.text()) * 3.280840e-09
+			# nmTOyd_proc   = float(self.nmi_LinEd.text()) * 1.093613e-10
+			# nmTOmiST_proc = float(self.nmi_LinEd.text()) * 6.213712e-13
+			# nmTOmiNV_proc = float(self.nmi_LinEd.text()) * 5.399568e-13
 
-		self.nmTOm_res.setText("-")
-		self.nmTOcm_res.setText("-")
-		self.nmTOmm_res.setText(str(round(nmTOmm_proc,     8)))
-		self.nmTOum_res.setText(str(round(nmTOum_proc,     8)))
-		self.nmTOangs_res.setText(str(round(nmTOangs_proc, 8)))
-		self.nmTOnm_res.setText(str(round(nmTOnm_proc,     8)))
-		self.nmTOkm_res.setText("-")
-		self.nmTOin_res.setText("-")
-		self.nmTOft_res.setText("-")
-		self.nmTOyd_res.setText("-")
-		self.nmTOmiST_res.setText("-")
-		self.nmTOmiNV_res.setText("-")
+			self.nmTOm_res.setText("-")
+			self.nmTOcm_res.setText("-")
+			self.nmTOmm_res.setText(str(round(nmTOmm_proc,     8)))
+			self.nmTOum_res.setText(str(round(nmTOum_proc,     8)))
+			self.nmTOangs_res.setText(str(round(nmTOangs_proc, 8)))
+			self.nmTOnm_res.setText(str(round(nmTOnm_proc,     8)))
+			self.nmTOkm_res.setText("-")
+			self.nmTOin_res.setText("-")
+			self.nmTOft_res.setText("-")
+			self.nmTOyd_res.setText("-")
+			self.nmTOmiST_res.setText("-")
+			self.nmTOmiNV_res.setText("-")
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def kmTO_fun(self):
-		kmTOm_proc    = float(self.kmi_LinEd.text()) * 1e-03
-		kmTOcm_proc   = float(self.kmi_LinEd.text()) * 1e-05
-		kmTOmm_proc   = float(self.kmi_LinEd.text()) * 1e-06
-		# kmTOum_proc   = float(self.kmi_LinEd.text()) * 1e-09
-		# kmTOangs_proc = float(self.kmi_LinEd.text()) * 1e-011
-		# kmTOnm_proc   = float(self.kmi_LinEd.text()) * 1e-012
-		kmTOkm_proc   = float(self.kmi_LinEd.text()) * 1
-		kmTOin_proc   = float(self.kmi_LinEd.text()) * 3.937008e-02
-		kmTOft_proc   = float(self.kmi_LinEd.text()) * 3.280840e-03
-		kmTOyd_proc   = float(self.kmi_LinEd.text()) * 1.093613e-03
-		kmTOmiST_proc = float(self.kmi_LinEd.text()) * 6.213712e-01
-		kmTOmiNV_proc = float(self.kmi_LinEd.text()) * 5.399568e-01
+		try:
+			kmTOm_proc    = float(self.kmi_LinEd.text()) * 1e-03
+			kmTOcm_proc   = float(self.kmi_LinEd.text()) * 1e-05
+			kmTOmm_proc   = float(self.kmi_LinEd.text()) * 1e-06
+			# kmTOum_proc   = float(self.kmi_LinEd.text()) * 1e-09
+			# kmTOangs_proc = float(self.kmi_LinEd.text()) * 1e-011
+			# kmTOnm_proc   = float(self.kmi_LinEd.text()) * 1e-012
+			kmTOkm_proc   = float(self.kmi_LinEd.text()) * 1
+			kmTOin_proc   = float(self.kmi_LinEd.text()) * 3.937008e-02
+			kmTOft_proc   = float(self.kmi_LinEd.text()) * 3.280840e-03
+			kmTOyd_proc   = float(self.kmi_LinEd.text()) * 1.093613e-03
+			kmTOmiST_proc = float(self.kmi_LinEd.text()) * 6.213712e-01
+			kmTOmiNV_proc = float(self.kmi_LinEd.text()) * 5.399568e-01
 
-		self.kmTOm_res.setText(str(round(kmTOm_proc,       8)))
-		self.kmTOcm_res.setText(str(round(kmTOcm_proc,     8)))
-		self.kmTOmm_res.setText(str(round(kmTOmm_proc,     8)))
-		self.kmTOum_res.setText("-")
-		self.kmTOangs_res.setText("-")
-		self.kmTOnm_res.setText("-")
-		self.kmTOkm_res.setText(str(round(kmTOkm_proc,     8)))
-		self.kmTOin_res.setText(str(round(kmTOin_proc,     8)))
-		self.kmTOft_res.setText(str(round(kmTOft_proc,     8)))
-		self.kmTOyd_res.setText(str(round(kmTOyd_proc,     8)))
-		self.kmTOmiST_res.setText(str(round(kmTOmiST_proc, 8)))
-		self.kmTOmiNV_res.setText(str(round(kmTOmiNV_proc, 8)))
+			self.kmTOm_res.setText(str(round(kmTOm_proc,       8)))
+			self.kmTOcm_res.setText(str(round(kmTOcm_proc,     8)))
+			self.kmTOmm_res.setText(str(round(kmTOmm_proc,     8)))
+			self.kmTOum_res.setText("-")
+			self.kmTOangs_res.setText("-")
+			self.kmTOnm_res.setText("-")
+			self.kmTOkm_res.setText(str(round(kmTOkm_proc,     8)))
+			self.kmTOin_res.setText(str(round(kmTOin_proc,     8)))
+			self.kmTOft_res.setText(str(round(kmTOft_proc,     8)))
+			self.kmTOyd_res.setText(str(round(kmTOyd_proc,     8)))
+			self.kmTOmiST_res.setText(str(round(kmTOmiST_proc, 8)))
+			self.kmTOmiNV_res.setText(str(round(kmTOmiNV_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def inTO_fun(self):
-		inTOm_proc    = float(self.ini_LinEd.text()) * 2.54e-02
-		inTOcm_proc   = float(self.ini_LinEd.text()) * 2.54
-		inTOmm_proc   = float(self.ini_LinEd.text()) * 2.54e+01
-		inTOum_proc   = float(self.ini_LinEd.text()) * 2.54e+04
-		inTOangs_proc = float(self.ini_LinEd.text()) * 2.54e+06
-		# inTOnm_proc   = float(self.ini_LinEd.text()) * 2.54e+07
-		inTOkm_proc   = float(self.ini_LinEd.text()) * 2.54e-05
-		inTOin_proc   = float(self.ini_LinEd.text()) * 1
-		inTOft_proc   = float(self.ini_LinEd.text()) * 8.3333333e-02
-		inTOyd_proc   = float(self.ini_LinEd.text()) * 2.7777780e-02
-		inTOmiST_proc = float(self.ini_LinEd.text()) * 1.5782830e-05
-		inTOmiNV_proc = float(self.ini_LinEd.text()) * 1.3714903e-05
+		try:
+			inTOm_proc    = float(self.ini_LinEd.text()) * 2.54e-02
+			inTOcm_proc   = float(self.ini_LinEd.text()) * 2.54
+			inTOmm_proc   = float(self.ini_LinEd.text()) * 2.54e+01
+			inTOum_proc   = float(self.ini_LinEd.text()) * 2.54e+04
+			inTOangs_proc = float(self.ini_LinEd.text()) * 2.54e+06
+			# inTOnm_proc   = float(self.ini_LinEd.text()) * 2.54e+07
+			inTOkm_proc   = float(self.ini_LinEd.text()) * 2.54e-05
+			inTOin_proc   = float(self.ini_LinEd.text()) * 1
+			inTOft_proc   = float(self.ini_LinEd.text()) * 8.3333333e-02
+			inTOyd_proc   = float(self.ini_LinEd.text()) * 2.7777780e-02
+			inTOmiST_proc = float(self.ini_LinEd.text()) * 1.5782830e-05
+			inTOmiNV_proc = float(self.ini_LinEd.text()) * 1.3714903e-05
 
-		self.inTOm_res.setText(str(round(inTOm_proc,       8)))
-		self.inTOcm_res.setText(str(round(inTOcm_proc,     8)))
-		self.inTOmm_res.setText(str(round(inTOmm_proc,     8)))
-		self.inTOum_res.setText(str(round(inTOum_proc,     8)))
-		self.inTOangs_res.setText(str(round(inTOangs_proc, 8)))
-		self.inTOnm_res.setText("-")
-		self.inTOkm_res.setText(str(round(inTOkm_proc,     8)))
-		self.inTOin_res.setText(str(round(inTOin_proc,     8)))
-		self.inTOft_res.setText(str(round(inTOft_proc,     8)))
-		self.inTOyd_res.setText(str(round(inTOyd_proc,     8)))
-		self.inTOmiST_res.setText(str(round(inTOmiST_proc, 8)))
-		self.inTOmiNV_res.setText(str(round(inTOmiNV_proc, 8)))
+			self.inTOm_res.setText(str(round(inTOm_proc,       8)))
+			self.inTOcm_res.setText(str(round(inTOcm_proc,     8)))
+			self.inTOmm_res.setText(str(round(inTOmm_proc,     8)))
+			self.inTOum_res.setText(str(round(inTOum_proc,     8)))
+			self.inTOangs_res.setText(str(round(inTOangs_proc, 8)))
+			self.inTOnm_res.setText("-")
+			self.inTOkm_res.setText(str(round(inTOkm_proc,     8)))
+			self.inTOin_res.setText(str(round(inTOin_proc,     8)))
+			self.inTOft_res.setText(str(round(inTOft_proc,     8)))
+			self.inTOyd_res.setText(str(round(inTOyd_proc,     8)))
+			self.inTOmiST_res.setText(str(round(inTOmiST_proc, 8)))
+			self.inTOmiNV_res.setText(str(round(inTOmiNV_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def ftTO_fun(self):
-		ftTOm_proc    = float(self.fti_LinEd.text()) * 3.048e-01
-		ftTOcm_proc   = float(self.fti_LinEd.text()) * 3.048e+01
-		ftTOmm_proc   = float(self.fti_LinEd.text()) * 3.048e+02
-		ftTOum_proc   = float(self.fti_LinEd.text()) * 3.048e+05
-		# ftTOangs_proc = float(self.fti_LinEd.text()) * 3.048e+07
-		# ftTOnm_proc   = float(self.fti_LinEd.text()) * 3.048e+08
-		ftTOkm_proc   = float(self.fti_LinEd.text()) * 3.048e-04
-		ftTOin_proc   = float(self.fti_LinEd.text()) * 12
-		ftTOft_proc   = float(self.fti_LinEd.text()) * 1
-		ftTOyd_proc   = float(self.fti_LinEd.text()) * 3.333333e-01
-		ftTOmiST_proc = float(self.fti_LinEd.text()) * 1.893939e-04
-		ftTOmiNV_proc = float(self.fti_LinEd.text()) * 1.645788e-04
+		try:
+			ftTOm_proc    = float(self.fti_LinEd.text()) * 3.048e-01
+			ftTOcm_proc   = float(self.fti_LinEd.text()) * 3.048e+01
+			ftTOmm_proc   = float(self.fti_LinEd.text()) * 3.048e+02
+			ftTOum_proc   = float(self.fti_LinEd.text()) * 3.048e+05
+			# ftTOangs_proc = float(self.fti_LinEd.text()) * 3.048e+07
+			# ftTOnm_proc   = float(self.fti_LinEd.text()) * 3.048e+08
+			ftTOkm_proc   = float(self.fti_LinEd.text()) * 3.048e-04
+			ftTOin_proc   = float(self.fti_LinEd.text()) * 12
+			ftTOft_proc   = float(self.fti_LinEd.text()) * 1
+			ftTOyd_proc   = float(self.fti_LinEd.text()) * 3.333333e-01
+			ftTOmiST_proc = float(self.fti_LinEd.text()) * 1.893939e-04
+			ftTOmiNV_proc = float(self.fti_LinEd.text()) * 1.645788e-04
 
-		self.ftTOm_res.setText(str(round(ftTOm_proc,       8)))
-		self.ftTOcm_res.setText(str(round(ftTOcm_proc,     8)))
-		self.ftTOmm_res.setText(str(round(ftTOmm_proc,     8)))
-		self.ftTOum_res.setText(str(round(ftTOum_proc,     8)))
-		self.ftTOangs_res.setText("-")
-		self.ftTOnm_res.setText("-")
-		self.ftTOkm_res.setText(str(round(ftTOkm_proc,     8)))
-		self.ftTOin_res.setText(str(round(ftTOin_proc,     8)))
-		self.ftTOft_res.setText(str(round(ftTOft_proc,     8)))
-		self.ftTOyd_res.setText(str(round(ftTOyd_proc,     8)))
-		self.ftTOmiST_res.setText(str(round(ftTOmiST_proc, 8)))
-		self.ftTOmiNV_res.setText(str(round(ftTOmiNV_proc, 8)))
+			self.ftTOm_res.setText(str(round(ftTOm_proc,       8)))
+			self.ftTOcm_res.setText(str(round(ftTOcm_proc,     8)))
+			self.ftTOmm_res.setText(str(round(ftTOmm_proc,     8)))
+			self.ftTOum_res.setText(str(round(ftTOum_proc,     8)))
+			self.ftTOangs_res.setText("-")
+			self.ftTOnm_res.setText("-")
+			self.ftTOkm_res.setText(str(round(ftTOkm_proc,     8)))
+			self.ftTOin_res.setText(str(round(ftTOin_proc,     8)))
+			self.ftTOft_res.setText(str(round(ftTOft_proc,     8)))
+			self.ftTOyd_res.setText(str(round(ftTOyd_proc,     8)))
+			self.ftTOmiST_res.setText(str(round(ftTOmiST_proc, 8)))
+			self.ftTOmiNV_res.setText(str(round(ftTOmiNV_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def ydTO_fun(self):
-		ydTOm_proc    = float(self.ydi_LinEd.text()) * 9.144e-01
-		ydTOcm_proc   = float(self.ydi_LinEd.text()) * 9.144e+01
-		ydTOmm_proc   = float(self.ydi_LinEd.text()) * 9.144e+02
-		ydTOum_proc   = float(self.ydi_LinEd.text()) * 9.144e+05
-		# ydTOangs_proc = float(self.ydi_LinEd.text()) * 9.144e+07
-		# ydTOnm_proc   = float(self.ydi_LinEd.text()) * 9.144e+08
-		ydTOkm_proc   = float(self.ydi_LinEd.text()) * 9.144e-04
-		ydTOin_proc   = float(self.ydi_LinEd.text()) * 36
-		ydTOft_proc   = float(self.ydi_LinEd.text()) * 3
-		ydTOyd_proc   = float(self.ydi_LinEd.text()) * 1
-		ydTOmiST_proc = float(self.ydi_LinEd.text()) * 5.681818e-04
-		ydTOmiNV_proc = float(self.ydi_LinEd.text()) * 4.937365e-04
+		try:
+			ydTOm_proc    = float(self.ydi_LinEd.text()) * 9.144e-01
+			ydTOcm_proc   = float(self.ydi_LinEd.text()) * 9.144e+01
+			ydTOmm_proc   = float(self.ydi_LinEd.text()) * 9.144e+02
+			ydTOum_proc   = float(self.ydi_LinEd.text()) * 9.144e+05
+			# ydTOangs_proc = float(self.ydi_LinEd.text()) * 9.144e+07
+			# ydTOnm_proc   = float(self.ydi_LinEd.text()) * 9.144e+08
+			ydTOkm_proc   = float(self.ydi_LinEd.text()) * 9.144e-04
+			ydTOin_proc   = float(self.ydi_LinEd.text()) * 36
+			ydTOft_proc   = float(self.ydi_LinEd.text()) * 3
+			ydTOyd_proc   = float(self.ydi_LinEd.text()) * 1
+			ydTOmiST_proc = float(self.ydi_LinEd.text()) * 5.681818e-04
+			ydTOmiNV_proc = float(self.ydi_LinEd.text()) * 4.937365e-04
 
-		self.ydTOm_res.setText(str(round(ydTOm_proc,       8)))
-		self.ydTOcm_res.setText(str(round(ydTOcm_proc,     8)))
-		self.ydTOmm_res.setText(str(round(ydTOmm_proc,     8)))
-		self.ydTOum_res.setText(str(round(ydTOum_proc,     8)))
-		self.ydTOangs_res.setText("-")
-		self.ydTOnm_res.setText("-")
-		self.ydTOkm_res.setText(str(round(ydTOkm_proc,     8)))
-		self.ydTOin_res.setText(str(round(ydTOin_proc,     8)))
-		self.ydTOft_res.setText(str(round(ydTOft_proc,     8)))
-		self.ydTOyd_res.setText(str(round(ydTOyd_proc,     8)))
-		self.ydTOmiST_res.setText(str(round(ydTOmiST_proc, 8)))
-		self.ydTOmiNV_res.setText(str(round(ydTOmiNV_proc, 8)))
+			self.ydTOm_res.setText(str(round(ydTOm_proc,       8)))
+			self.ydTOcm_res.setText(str(round(ydTOcm_proc,     8)))
+			self.ydTOmm_res.setText(str(round(ydTOmm_proc,     8)))
+			self.ydTOum_res.setText(str(round(ydTOum_proc,     8)))
+			self.ydTOangs_res.setText("-")
+			self.ydTOnm_res.setText("-")
+			self.ydTOkm_res.setText(str(round(ydTOkm_proc,     8)))
+			self.ydTOin_res.setText(str(round(ydTOin_proc,     8)))
+			self.ydTOft_res.setText(str(round(ydTOft_proc,     8)))
+			self.ydTOyd_res.setText(str(round(ydTOyd_proc,     8)))
+			self.ydTOmiST_res.setText(str(round(ydTOmiST_proc, 8)))
+			self.ydTOmiNV_res.setText(str(round(ydTOmiNV_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def miSTTO_fun(self):
-		miSTTOm_proc    = float(self.miSTi_LinEd.text()) * 1.609344e+03
-		miSTTOcm_proc   = float(self.miSTi_LinEd.text()) * 1.609344e+05
-		miSTTOmm_proc   = float(self.miSTi_LinEd.text()) * 1.609344e+06
-		# miSTTOum_proc   = float(self.miSTi_LinEd.text()) * 1.609344e+09
-		# miSTTOangs_proc = float(self.miSTi_LinEd.text()) * 1.609344e+11
-		# miSTTOnm_proc   = float(self.miSTi_LinEd.text()) * 1.609344e+12
-		miSTTOkm_proc   = float(self.miSTi_LinEd.text()) * 1.609344
-		miSTTOin_proc   = float(self.miSTi_LinEd.text()) * 6.336e+04
-		miSTTOft_proc   = float(self.miSTi_LinEd.text()) * 5.280e+03
-		miSTTOyd_proc   = float(self.miSTi_LinEd.text()) * 1.760e+03
-		miSTTOmiST_proc = float(self.miSTi_LinEd.text()) * 1
-		miSTTOmiNV_proc = float(self.miSTi_LinEd.text()) * 8.689762e-01
+		try:
+			miSTTOm_proc    = float(self.miSTi_LinEd.text()) * 1.609344e+03
+			miSTTOcm_proc   = float(self.miSTi_LinEd.text()) * 1.609344e+05
+			miSTTOmm_proc   = float(self.miSTi_LinEd.text()) * 1.609344e+06
+			# miSTTOum_proc   = float(self.miSTi_LinEd.text()) * 1.609344e+09
+			# miSTTOangs_proc = float(self.miSTi_LinEd.text()) * 1.609344e+11
+			# miSTTOnm_proc   = float(self.miSTi_LinEd.text()) * 1.609344e+12
+			miSTTOkm_proc   = float(self.miSTi_LinEd.text()) * 1.609344
+			miSTTOin_proc   = float(self.miSTi_LinEd.text()) * 6.336e+04
+			miSTTOft_proc   = float(self.miSTi_LinEd.text()) * 5.280e+03
+			miSTTOyd_proc   = float(self.miSTi_LinEd.text()) * 1.760e+03
+			miSTTOmiST_proc = float(self.miSTi_LinEd.text()) * 1
+			miSTTOmiNV_proc = float(self.miSTi_LinEd.text()) * 8.689762e-01
 
-		self.miSTTOm_res.setText(str(round(miSTTOm_proc,       8)))
-		self.miSTTOcm_res.setText(str(round(miSTTOcm_proc,     8)))
-		self.miSTTOmm_res.setText(str(round(miSTTOmm_proc,     8)))
-		self.miSTTOum_res.setText("-")
-		self.miSTTOangs_res.setText("-")
-		self.miSTTOnm_res.setText("-")
-		self.miSTTOkm_res.setText(str(round(miSTTOkm_proc,     8)))
-		self.miSTTOin_res.setText(str(round(miSTTOin_proc,     8)))
-		self.miSTTOft_res.setText(str(round(miSTTOft_proc,     8)))
-		self.miSTTOyd_res.setText(str(round(miSTTOyd_proc,     8)))
-		self.miSTTOmiST_res.setText(str(round(miSTTOmiST_proc, 8)))
-		self.miSTTOmiNV_res.setText(str(round(miSTTOmiNV_proc, 8)))
+			self.miSTTOm_res.setText(str(round(miSTTOm_proc,       8)))
+			self.miSTTOcm_res.setText(str(round(miSTTOcm_proc,     8)))
+			self.miSTTOmm_res.setText(str(round(miSTTOmm_proc,     8)))
+			self.miSTTOum_res.setText("-")
+			self.miSTTOangs_res.setText("-")
+			self.miSTTOnm_res.setText("-")
+			self.miSTTOkm_res.setText(str(round(miSTTOkm_proc,     8)))
+			self.miSTTOin_res.setText(str(round(miSTTOin_proc,     8)))
+			self.miSTTOft_res.setText(str(round(miSTTOft_proc,     8)))
+			self.miSTTOyd_res.setText(str(round(miSTTOyd_proc,     8)))
+			self.miSTTOmiST_res.setText(str(round(miSTTOmiST_proc, 8)))
+			self.miSTTOmiNV_res.setText(str(round(miSTTOmiNV_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def miNVTO_fun(self):
-		miNVTOm_proc    = float(self.miNVi_LinEd.text()) * 1.852e+03
-		miNVTOcm_proc   = float(self.miNVi_LinEd.text()) * 1.852e+05
-		miNVTOmm_proc   = float(self.miNVi_LinEd.text()) * 1.852e+06
-		# miNVTOum_proc   = float(self.miNVi_LinEd.text()) * 1.852e+09
-		# miNVTOangs_proc = float(self.miNVi_LinEd.text()) * 1.852e+11
-		# miNVTOnm_proc   = float(self.miNVi_LinEd.text()) * 1.852e+12
-		miNVTOkm_proc   = float(self.miNVi_LinEd.text()) * 1.852
-		miNVTOin_proc   = float(self.miNVi_LinEd.text()) * 7.29133858e+04
-		miNVTOft_proc   = float(self.miNVi_LinEd.text()) * 6.07611549e+03
-		miNVTOyd_proc   = float(self.miNVi_LinEd.text()) * 2.02537183e+03
-		miNVTOmiST_proc = float(self.miNVi_LinEd.text()) * 1.15077945
-		miNVTOmiNV_proc = float(self.miNVi_LinEd.text()) * 1
+		try:
+			miNVTOm_proc    = float(self.miNVi_LinEd.text()) * 1.852e+03
+			miNVTOcm_proc   = float(self.miNVi_LinEd.text()) * 1.852e+05
+			miNVTOmm_proc   = float(self.miNVi_LinEd.text()) * 1.852e+06
+			# miNVTOum_proc   = float(self.miNVi_LinEd.text()) * 1.852e+09
+			# miNVTOangs_proc = float(self.miNVi_LinEd.text()) * 1.852e+11
+			# miNVTOnm_proc   = float(self.miNVi_LinEd.text()) * 1.852e+12
+			miNVTOkm_proc   = float(self.miNVi_LinEd.text()) * 1.852
+			miNVTOin_proc   = float(self.miNVi_LinEd.text()) * 7.29133858e+04
+			miNVTOft_proc   = float(self.miNVi_LinEd.text()) * 6.07611549e+03
+			miNVTOyd_proc   = float(self.miNVi_LinEd.text()) * 2.02537183e+03
+			miNVTOmiST_proc = float(self.miNVi_LinEd.text()) * 1.15077945
+			miNVTOmiNV_proc = float(self.miNVi_LinEd.text()) * 1
 
-		self.miNVTOm_res.setText(str(round(miNVTOm_proc,       8)))
-		self.miNVTOcm_res.setText(str(round(miNVTOcm_proc,     8)))
-		self.miNVTOmm_res.setText(str(round(miNVTOmm_proc,     8)))
-		self.miNVTOum_res.setText("-")
-		self.miNVTOangs_res.setText("-")
-		self.miNVTOnm_res.setText("-")
-		self.miNVTOkm_res.setText(str(round(miNVTOkm_proc,     8)))
-		self.miNVTOin_res.setText(str(round(miNVTOin_proc,     8)))
-		self.miNVTOft_res.setText(str(round(miNVTOft_proc,     8)))
-		self.miNVTOyd_res.setText(str(round(miNVTOyd_proc,     8)))
-		self.miNVTOmiST_res.setText(str(round(miNVTOmiST_proc, 8)))
-		self.miNVTOmiNV_res.setText(str(round(miNVTOmiNV_proc, 8)))
+			self.miNVTOm_res.setText(str(round(miNVTOm_proc,       8)))
+			self.miNVTOcm_res.setText(str(round(miNVTOcm_proc,     8)))
+			self.miNVTOmm_res.setText(str(round(miNVTOmm_proc,     8)))
+			self.miNVTOum_res.setText("-")
+			self.miNVTOangs_res.setText("-")
+			self.miNVTOnm_res.setText("-")
+			self.miNVTOkm_res.setText(str(round(miNVTOkm_proc,     8)))
+			self.miNVTOin_res.setText(str(round(miNVTOin_proc,     8)))
+			self.miNVTOft_res.setText(str(round(miNVTOft_proc,     8)))
+			self.miNVTOyd_res.setText(str(round(miNVTOyd_proc,     8)))
+			self.miNVTOmiST_res.setText(str(round(miNVTOmiST_proc, 8)))
+			self.miNVTOmiNV_res.setText(str(round(miNVTOmiNV_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def main_window(self):
 		main_layout = QtWidgets.QHBoxLayout()
@@ -689,5 +824,6 @@ class Length_Win(QtWidgets.QWidget):
 		self.setLayout(main_layout)
 		self.show()
 		
-
+aplikace = QtWidgets.QApplication(sys.argv)
+aplikace.setStyle("Fusion")	
 		

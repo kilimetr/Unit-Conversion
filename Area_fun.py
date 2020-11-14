@@ -3,6 +3,7 @@
 # GitHub: https://github.com/kilimetr
 
 from PyQt5 import QtWidgets, QtGui, QtCore
+import sys
 
 
 
@@ -11,11 +12,13 @@ class Area_Win(QtWidgets.QWidget):
 		super().__init__()
 
 		self.setWindowTitle("Area Converter")
+		self.setWindowIcon(QtGui.QIcon("logo.jpg"))
+		
 		self.main_window()
-
+		
 	def createGroup_input(self):
 		input_group = QtWidgets.QGroupBox("Input", self)
-		input_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+		input_group.setFont(QtGui.QFont("Arial", 10))
 		
 		input_grid = QtWidgets.QGridLayout()
 		input_grid.setColumnMinimumWidth(0, 130)
@@ -65,7 +68,7 @@ class Area_Win(QtWidgets.QWidget):
 
 	def createGroup_output(self):
 		output_group = QtWidgets.QGroupBox("Output", self)
-		output_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+		output_group.setFont(QtGui.QFont("Arial", 10))
 
 		output_grid = QtWidgets.QGridLayout()
 
@@ -282,236 +285,345 @@ class Area_Win(QtWidgets.QWidget):
 		return output_group
 
 	def m2TO_fun(self):
-		m2TOm2_proc    = float(self.m2i_LinEd.text()) * 1
-		m2TOcm2_proc   = float(self.m2i_LinEd.text()) * 1e+04
-		m2TOmm2_proc   = float(self.m2i_LinEd.text()) * 1e+06
-		m2TOa_proc     = float(self.m2i_LinEd.text()) * 1e-02
-		m2TOha_proc    = float(self.m2i_LinEd.text()) * 1e-04
-		m2TOin2_proc   = float(self.m2i_LinEd.text()) * 1.5500031e+03
-		m2TOft2_proc   = float(self.m2i_LinEd.text()) * 1.0763910e+01
-		m2TOyd2_proc   = float(self.m2i_LinEd.text()) * 1.19599
-		m2TOacr_proc   = float(self.m2i_LinEd.text()) * 2.471054e-04
-		m2TOmi2ST_proc = float(self.m2i_LinEd.text()) * 3.861022e-07
+		try:
+			m2TOm2_proc    = float(self.m2i_LinEd.text()) * 1
+			m2TOcm2_proc   = float(self.m2i_LinEd.text()) * 1e+04
+			m2TOmm2_proc   = float(self.m2i_LinEd.text()) * 1e+06
+			m2TOa_proc     = float(self.m2i_LinEd.text()) * 1e-02
+			m2TOha_proc    = float(self.m2i_LinEd.text()) * 1e-04
+			m2TOin2_proc   = float(self.m2i_LinEd.text()) * 1.5500031e+03
+			m2TOft2_proc   = float(self.m2i_LinEd.text()) * 1.0763910e+01
+			m2TOyd2_proc   = float(self.m2i_LinEd.text()) * 1.19599
+			m2TOacr_proc   = float(self.m2i_LinEd.text()) * 2.471054e-04
+			m2TOmi2ST_proc = float(self.m2i_LinEd.text()) * 3.861022e-07
 
-		# for item in self.m2TO_Label:
-		# 	item.setText(str(m2TOm2_proc))
-		self.m2TOm2_res.setText(str(round(m2TOm2_proc,       8)))
-		self.m2TOcm2_res.setText(str(round(m2TOcm2_proc,     8)))
-		self.m2TOmm2_res.setText(str(round(m2TOmm2_proc,     8)))
-		self.m2TOa_res.setText(str(round(m2TOa_proc,         8)))
-		self.m2TOha_res.setText(str(round(m2TOha_proc,       8)))
-		self.m2TOin2_res.setText(str(round(m2TOin2_proc,     8)))
-		self.m2TOft2_res.setText(str(round(m2TOft2_proc,     8)))
-		self.m2TOyd2_res.setText(str(round(m2TOyd2_proc,     8)))
-		self.m2TOacr_res.setText(str(round(m2TOacr_proc,     8)))
-		self.m2TOmi2ST_res.setText(str(round(m2TOmi2ST_proc, 8)))
+			self.m2TOm2_res.setText(str(round(m2TOm2_proc,       8)))
+			self.m2TOcm2_res.setText(str(round(m2TOcm2_proc,     8)))
+			self.m2TOmm2_res.setText(str(round(m2TOmm2_proc,     8)))
+			self.m2TOa_res.setText(str(round(m2TOa_proc,         8)))
+			self.m2TOha_res.setText(str(round(m2TOha_proc,       8)))
+			self.m2TOin2_res.setText(str(round(m2TOin2_proc,     8)))
+			self.m2TOft2_res.setText(str(round(m2TOft2_proc,     8)))
+			self.m2TOyd2_res.setText(str(round(m2TOyd2_proc,     8)))
+			self.m2TOacr_res.setText(str(round(m2TOacr_proc,     8)))
+			self.m2TOmi2ST_res.setText(str(round(m2TOmi2ST_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+			
 
 	def cm2TO_fun(self):
-		cm2TOm2_proc    = float(self.cm2i_LinEd.text()) * 1e-04
-		cm2TOcm2_proc   = float(self.cm2i_LinEd.text()) * 1
-		cm2TOmm2_proc   = float(self.cm2i_LinEd.text()) * 1e+02
-		cm2TOa_proc     = float(self.cm2i_LinEd.text()) * 1e-06
-		# cm2TOha_proc    = float(self.cm2i_LinEd.text()) * 1e-08
-		cm2TOin2_proc   = float(self.cm2i_LinEd.text()) * 1.5500031e-01
-		cm2TOft2_proc   = float(self.cm2i_LinEd.text()) * 1.0763910e-03
-		cm2TOyd2_proc   = float(self.cm2i_LinEd.text()) * 1.19599e-04
-		# cm2TOacr_proc  = float(self.cm2i_LinEd.text()) * 2.471054e-08
-		# cm2TOmi2ST_proc = float(self.cm2i_LinEd.text()) * 3.861022e-11
+		try:
+			cm2TOm2_proc    = float(self.cm2i_LinEd.text()) * 1e-04
+			cm2TOcm2_proc   = float(self.cm2i_LinEd.text()) * 1
+			cm2TOmm2_proc   = float(self.cm2i_LinEd.text()) * 1e+02
+			cm2TOa_proc     = float(self.cm2i_LinEd.text()) * 1e-06
+			# cm2TOha_proc    = float(self.cm2i_LinEd.text()) * 1e-08
+			cm2TOin2_proc   = float(self.cm2i_LinEd.text()) * 1.5500031e-01
+			cm2TOft2_proc   = float(self.cm2i_LinEd.text()) * 1.0763910e-03
+			cm2TOyd2_proc   = float(self.cm2i_LinEd.text()) * 1.19599e-04
+			# cm2TOacr_proc  = float(self.cm2i_LinEd.text()) * 2.471054e-08
+			# cm2TOmi2ST_proc = float(self.cm2i_LinEd.text()) * 3.861022e-11
 
-		self.cm2TOm2_res.setText(str(cm2TOm2_proc))
-		self.cm2TOcm2_res.setText(str(cm2TOcm2_proc))
-		self.cm2TOmm2_res.setText(str(cm2TOmm2_proc))
-		self.cm2TOa_res.setText(str(round(cm2TOa_proc,     8)))
-		self.cm2TOha_res.setText("-")
-		self.cm2TOin2_res.setText(str(round(cm2TOin2_proc, 8)))
-		self.cm2TOft2_res.setText(str(round(cm2TOft2_proc, 8)))
-		self.cm2TOyd2_res.setText(str(round(cm2TOyd2_proc, 8)))
-		self.cm2TOacr_res.setText("-")
-		self.cm2TOmi2ST_res.setText("-")
+			self.cm2TOm2_res.setText(str(cm2TOm2_proc))
+			self.cm2TOcm2_res.setText(str(cm2TOcm2_proc))
+			self.cm2TOmm2_res.setText(str(cm2TOmm2_proc))
+			self.cm2TOa_res.setText(str(round(cm2TOa_proc,     8)))
+			self.cm2TOha_res.setText("-")
+			self.cm2TOin2_res.setText(str(round(cm2TOin2_proc, 8)))
+			self.cm2TOft2_res.setText(str(round(cm2TOft2_proc, 8)))
+			self.cm2TOyd2_res.setText(str(round(cm2TOyd2_proc, 8)))
+			self.cm2TOacr_res.setText("-")
+			self.cm2TOmi2ST_res.setText("-")
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+			
+
 
 	def mm2TO_fun(self):
-		mm2TOm2_proc    = float(self.mm2i_LinEd.text()) * 1e-06
-		mm2TOcm2_proc   = float(self.mm2i_LinEd.text()) * 1e-02
-		mm2TOmm2_proc   = float(self.mm2i_LinEd.text()) * 1
-		# mm2TOa_proc     = float(self.mm2i_LinEd.text()) * 1e-08
-		# mm2TOha_proc    = float(self.mm2i_LinEd.text()) * 1e-10
-		mm2TOin2_proc   = float(self.mm2i_LinEd.text()) * 1.5500031e-03
-		mm2TOft2_proc   = float(self.mm2i_LinEd.text()) * 1.0763910e-05
-		mm2TOyd2_proc   = float(self.mm2i_LinEd.text()) * 1.1959900e-06
-		# mm2TOacr_proc  = float(self.mm2i_LinEd.text()) * 2.47054e-10
-		# mm2TOmi2ST_proc = float(self.mm2i_LinEd.text()) * 3.861022e-13
+		try:
+			mm2TOm2_proc    = float(self.mm2i_LinEd.text()) * 1e-06
+			mm2TOcm2_proc   = float(self.mm2i_LinEd.text()) * 1e-02
+			mm2TOmm2_proc   = float(self.mm2i_LinEd.text()) * 1
+			# mm2TOa_proc     = float(self.mm2i_LinEd.text()) * 1e-08
+			# mm2TOha_proc    = float(self.mm2i_LinEd.text()) * 1e-10
+			mm2TOin2_proc   = float(self.mm2i_LinEd.text()) * 1.5500031e-03
+			mm2TOft2_proc   = float(self.mm2i_LinEd.text()) * 1.0763910e-05
+			mm2TOyd2_proc   = float(self.mm2i_LinEd.text()) * 1.1959900e-06
+			# mm2TOacr_proc  = float(self.mm2i_LinEd.text()) * 2.47054e-10
+			# mm2TOmi2ST_proc = float(self.mm2i_LinEd.text()) * 3.861022e-13
 
-		self.mm2TOm2_res.setText(str(round(mm2TOm2_proc,   8)))
-		self.mm2TOcm2_res.setText(str(round(mm2TOcm2_proc, 8)))
-		self.mm2TOmm2_res.setText(str(round(mm2TOmm2_proc, 8)))
-		self.mm2TOa_res.setText("-")
-		self.mm2TOha_res.setText("-")
-		self.mm2TOin2_res.setText(str(round(mm2TOin2_proc, 8)))
-		self.mm2TOft2_res.setText(str(round(mm2TOft2_proc, 8)))
-		self.mm2TOyd2_res.setText(str(round(mm2TOyd2_proc, 8)))
-		self.mm2TOacr_res.setText("-")
-		self.mm2TOmi2ST_res.setText("-")
+			self.mm2TOm2_res.setText(str(round(mm2TOm2_proc,   8)))
+			self.mm2TOcm2_res.setText(str(round(mm2TOcm2_proc, 8)))
+			self.mm2TOmm2_res.setText(str(round(mm2TOmm2_proc, 8)))
+			self.mm2TOa_res.setText("-")
+			self.mm2TOha_res.setText("-")
+			self.mm2TOin2_res.setText(str(round(mm2TOin2_proc, 8)))
+			self.mm2TOft2_res.setText(str(round(mm2TOft2_proc, 8)))
+			self.mm2TOyd2_res.setText(str(round(mm2TOyd2_proc, 8)))
+			self.mm2TOacr_res.setText("-")
+			self.mm2TOmi2ST_res.setText("-")
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def aTO_fun(self):
-		aTOm2_proc    = float(self.ai_LinEd.text()) * 1e+02
-		# aTOcm2_proc   = float(self.ai_LinEd.text()) * 1e+06
-		# aTOmm2_proc   = float(self.ai_LinEd.text()) * 1e+08
-		aTOa_proc     = float(self.ai_LinEd.text()) * 1
-		aTOha_proc    = float(self.ai_LinEd.text()) * 1e-02
-		aTOin2_proc   = float(self.ai_LinEd.text()) * 1.5500032e+05
-		aTOft2_proc   = float(self.ai_LinEd.text()) * 1.0763910e+03
-		aTOyd2_proc   = float(self.ai_LinEd.text()) * 1.1959900e+02
-		aTOacr_proc   = float(self.ai_LinEd.text()) * 2.4710540e-02
-		aTOmi2ST_proc = float(self.ai_LinEd.text()) * 3.8610220e-05
+		try:
+			aTOm2_proc    = float(self.ai_LinEd.text()) * 1e+02
+			# aTOcm2_proc   = float(self.ai_LinEd.text()) * 1e+06
+			# aTOmm2_proc   = float(self.ai_LinEd.text()) * 1e+08
+			aTOa_proc     = float(self.ai_LinEd.text()) * 1
+			aTOha_proc    = float(self.ai_LinEd.text()) * 1e-02
+			aTOin2_proc   = float(self.ai_LinEd.text()) * 1.5500032e+05
+			aTOft2_proc   = float(self.ai_LinEd.text()) * 1.0763910e+03
+			aTOyd2_proc   = float(self.ai_LinEd.text()) * 1.1959900e+02
+			aTOacr_proc   = float(self.ai_LinEd.text()) * 2.4710540e-02
+			aTOmi2ST_proc = float(self.ai_LinEd.text()) * 3.8610220e-05
 
-		self.aTOm2_res.setText(str(round(aTOm2_proc,   8)))
-		self.aTOcm2_res.setText("-")
-		self.aTOmm2_res.setText("-")
-		self.aTOa_res.setText(str(round(aTOa_proc,     8)))
-		self.aTOha_res.setText(str(round(aTOha_proc,   8)))
-		self.aTOin2_res.setText(str(round(aTOin2_proc, 8)))
-		self.aTOft2_res.setText(str(round(aTOft2_proc, 8)))
-		self.aTOyd2_res.setText(str(round(aTOyd2_proc, 8)))
-		self.aTOacr_res.setText(str(round(aTOacr_proc, 8)))
-		self.aTOmi2ST_res.setText(str(round(aTOmi2ST_proc, 8)))
+			self.aTOm2_res.setText(str(round(aTOm2_proc,   8)))
+			self.aTOcm2_res.setText("-")
+			self.aTOmm2_res.setText("-")
+			self.aTOa_res.setText(str(round(aTOa_proc,     8)))
+			self.aTOha_res.setText(str(round(aTOha_proc,   8)))
+			self.aTOin2_res.setText(str(round(aTOin2_proc, 8)))
+			self.aTOft2_res.setText(str(round(aTOft2_proc, 8)))
+			self.aTOyd2_res.setText(str(round(aTOyd2_proc, 8)))
+			self.aTOacr_res.setText(str(round(aTOacr_proc, 8)))
+			self.aTOmi2ST_res.setText(str(round(aTOmi2ST_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def haTO_fun(self):
-		haTOm2_proc    = float(self.hai_LinEd.text()) * 1e+04
-		# haTOcm2_proc   = float(self.hai_LinEd.text()) * 1e+08
-		# haTOmm2_proc   = float(self.hai_LinEd.text()) * 1e+10
-		haTOa_proc     = float(self.hai_LinEd.text()) * 1e+02
-		haTOha_proc    = float(self.hai_LinEd.text()) * 1
-		# haTOin2_proc   = float(self.hai_LinEd.text()) * 1.5500031e+07
-		haTOft2_proc   = float(self.hai_LinEd.text()) * 1.076391e+05
-		haTOyd2_proc   = float(self.hai_LinEd.text()) * 1.195990e+04
-		haTOacr_proc   = float(self.hai_LinEd.text()) * 2.471054
-		haTOmi2ST_proc = float(self.hai_LinEd.text()) * 3.861022e-03
+		try:
+			haTOm2_proc    = float(self.hai_LinEd.text()) * 1e+04
+			# haTOcm2_proc   = float(self.hai_LinEd.text()) * 1e+08
+			# haTOmm2_proc   = float(self.hai_LinEd.text()) * 1e+10
+			haTOa_proc     = float(self.hai_LinEd.text()) * 1e+02
+			haTOha_proc    = float(self.hai_LinEd.text()) * 1
+			# haTOin2_proc   = float(self.hai_LinEd.text()) * 1.5500031e+07
+			haTOft2_proc   = float(self.hai_LinEd.text()) * 1.076391e+05
+			haTOyd2_proc   = float(self.hai_LinEd.text()) * 1.195990e+04
+			haTOacr_proc   = float(self.hai_LinEd.text()) * 2.471054
+			haTOmi2ST_proc = float(self.hai_LinEd.text()) * 3.861022e-03
 
-		self.haTOm2_res.setText(str(round(haTOm2_proc,       8)))
-		self.haTOcm2_res.setText("-")
-		self.haTOmm2_res.setText("-")
-		self.haTOa_res.setText(str(round(haTOa_proc,         8)))
-		self.haTOha_res.setText(str(round(haTOha_proc,       8)))
-		self.haTOin2_res.setText("-")
-		self.haTOft2_res.setText(str(round(haTOft2_proc,     8)))
-		self.haTOyd2_res.setText(str(round(haTOyd2_proc,     8)))
-		self.haTOacr_res.setText(str(round(haTOacr_proc,     8)))
-		self.haTOmi2ST_res.setText(str(round(haTOmi2ST_proc, 8)))
+			self.haTOm2_res.setText(str(round(haTOm2_proc,       8)))
+			self.haTOcm2_res.setText("-")
+			self.haTOmm2_res.setText("-")
+			self.haTOa_res.setText(str(round(haTOa_proc,         8)))
+			self.haTOha_res.setText(str(round(haTOha_proc,       8)))
+			self.haTOin2_res.setText("-")
+			self.haTOft2_res.setText(str(round(haTOft2_proc,     8)))
+			self.haTOyd2_res.setText(str(round(haTOyd2_proc,     8)))
+			self.haTOacr_res.setText(str(round(haTOacr_proc,     8)))
+			self.haTOmi2ST_res.setText(str(round(haTOmi2ST_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def in2TO_fun(self):
-		in2TOm2_proc    = float(self.in2i_LinEd.text()) * 6.4516e-04
-		in2TOcm2_proc   = float(self.in2i_LinEd.text()) * 6.4516
-		in2TOmm2_proc   = float(self.in2i_LinEd.text()) * 6.4516e+02
-		in2TOa_proc     = float(self.in2i_LinEd.text()) * 6.4516e-06
-		# in2TOha_proc    = float(self.in2i_LinEd.text()) * 6.4616e-08
-		in2TOin2_proc   = float(self.in2i_LinEd.text()) * 1
-		in2TOft2_proc   = float(self.in2i_LinEd.text()) * 6.944444e-03
-		in2TOyd2_proc   = float(self.in2i_LinEd.text()) * 7.716049e-04
-		# in2TOacr_proc   = float(self.in2i_LinEd.text()) * 1.594225e-07
-		# in2TOmi2ST_proc = float(self.in2i_LinEd.text()) * 2.490977e-10
+		try:
+			in2TOm2_proc    = float(self.in2i_LinEd.text()) * 6.4516e-04
+			in2TOcm2_proc   = float(self.in2i_LinEd.text()) * 6.4516
+			in2TOmm2_proc   = float(self.in2i_LinEd.text()) * 6.4516e+02
+			in2TOa_proc     = float(self.in2i_LinEd.text()) * 6.4516e-06
+			# in2TOha_proc    = float(self.in2i_LinEd.text()) * 6.4616e-08
+			in2TOin2_proc   = float(self.in2i_LinEd.text()) * 1
+			in2TOft2_proc   = float(self.in2i_LinEd.text()) * 6.944444e-03
+			in2TOyd2_proc   = float(self.in2i_LinEd.text()) * 7.716049e-04
+			# in2TOacr_proc   = float(self.in2i_LinEd.text()) * 1.594225e-07
+			# in2TOmi2ST_proc = float(self.in2i_LinEd.text()) * 2.490977e-10
 
-		self.in2TOm2_res.setText(str(round(in2TOm2_proc,   8)))
-		self.in2TOcm2_res.setText(str(round(in2TOcm2_proc, 8)))
-		self.in2TOmm2_res.setText(str(round(in2TOmm2_proc, 8)))
-		self.in2TOa_res.setText(str(round(in2TOa_proc,     8)))
-		self.in2TOha_res.setText("-")
-		self.in2TOin2_res.setText(str(round(in2TOin2_proc, 8)))
-		self.in2TOft2_res.setText(str(round(in2TOft2_proc, 8)))
-		self.in2TOyd2_res.setText(str(round(in2TOyd2_proc, 8)))
-		self.in2TOacr_res.setText("-")
-		self.in2TOmi2ST_res.setText("-")
+			self.in2TOm2_res.setText(str(round(in2TOm2_proc,   8)))
+			self.in2TOcm2_res.setText(str(round(in2TOcm2_proc, 8)))
+			self.in2TOmm2_res.setText(str(round(in2TOmm2_proc, 8)))
+			self.in2TOa_res.setText(str(round(in2TOa_proc,     8)))
+			self.in2TOha_res.setText("-")
+			self.in2TOin2_res.setText(str(round(in2TOin2_proc, 8)))
+			self.in2TOft2_res.setText(str(round(in2TOft2_proc, 8)))
+			self.in2TOyd2_res.setText(str(round(in2TOyd2_proc, 8)))
+			self.in2TOacr_res.setText("-")
+			self.in2TOmi2ST_res.setText("-")
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def ft2TO_fun(self):
-		ft2TOm2_proc    = float(self.ft2i_LinEd.text()) * 9.290304e-02
-		ft2TOcm2_proc   = float(self.ft2i_LinEd.text()) * 9.290304e+02
-		ft2TOmm2_proc   = float(self.ft2i_LinEd.text()) * 9.290304e+04
-		ft2TOa_proc     = float(self.ft2i_LinEd.text()) * 9.290304e-04
-		ft2TOha_proc    = float(self.ft2i_LinEd.text()) * 9.290304e-06
-		ft2TOin2_proc   = float(self.ft2i_LinEd.text()) * 144
-		ft2TOft2_proc   = float(self.ft2i_LinEd.text()) * 1
-		ft2TOyd2_proc   = float(self.ft2i_LinEd.text()) * 1.111111e-01
-		ft2TOacr_proc   = float(self.ft2i_LinEd.text()) * 2.295684e-05
-		# ft2TOmi2ST_proc = float(self.ft2i_LinEd.text()) * 3.587006e-08
+		try:
+			ft2TOm2_proc    = float(self.ft2i_LinEd.text()) * 9.290304e-02
+			ft2TOcm2_proc   = float(self.ft2i_LinEd.text()) * 9.290304e+02
+			ft2TOmm2_proc   = float(self.ft2i_LinEd.text()) * 9.290304e+04
+			ft2TOa_proc     = float(self.ft2i_LinEd.text()) * 9.290304e-04
+			ft2TOha_proc    = float(self.ft2i_LinEd.text()) * 9.290304e-06
+			ft2TOin2_proc   = float(self.ft2i_LinEd.text()) * 144
+			ft2TOft2_proc   = float(self.ft2i_LinEd.text()) * 1
+			ft2TOyd2_proc   = float(self.ft2i_LinEd.text()) * 1.111111e-01
+			ft2TOacr_proc   = float(self.ft2i_LinEd.text()) * 2.295684e-05
+			# ft2TOmi2ST_proc = float(self.ft2i_LinEd.text()) * 3.587006e-08
 
-		self.ft2TOm2_res.setText(str(round(ft2TOm2_proc,   8)))
-		self.ft2TOcm2_res.setText(str(round(ft2TOcm2_proc, 8)))
-		self.ft2TOmm2_res.setText(str(round(ft2TOmm2_proc, 8)))
-		self.ft2TOa_res.setText(str(round(ft2TOa_proc,     8)))
-		self.ft2TOha_res.setText(str(round(ft2TOha_proc,   8)))
-		self.ft2TOin2_res.setText(str(round(ft2TOin2_proc, 8)))
-		self.ft2TOft2_res.setText(str(round(ft2TOft2_proc, 8)))
-		self.ft2TOyd2_res.setText(str(round(ft2TOyd2_proc, 8)))
-		self.ft2TOacr_res.setText(str(round(ft2TOacr_proc, 8)))
-		self.ft2TOmi2ST_res.setText("-")
+			self.ft2TOm2_res.setText(str(round(ft2TOm2_proc,   8)))
+			self.ft2TOcm2_res.setText(str(round(ft2TOcm2_proc, 8)))
+			self.ft2TOmm2_res.setText(str(round(ft2TOmm2_proc, 8)))
+			self.ft2TOa_res.setText(str(round(ft2TOa_proc,     8)))
+			self.ft2TOha_res.setText(str(round(ft2TOha_proc,   8)))
+			self.ft2TOin2_res.setText(str(round(ft2TOin2_proc, 8)))
+			self.ft2TOft2_res.setText(str(round(ft2TOft2_proc, 8)))
+			self.ft2TOyd2_res.setText(str(round(ft2TOyd2_proc, 8)))
+			self.ft2TOacr_res.setText(str(round(ft2TOacr_proc, 8)))
+			self.ft2TOmi2ST_res.setText("-")
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def yd2TO_fun(self):
-		yd2TOm2_proc    = float(self.yd2i_LinEd.text()) * 8.361274e-01
-		yd2TOcm2_proc   = float(self.yd2i_LinEd.text()) * 8.361274e+03
-		yd2TOmm2_proc   = float(self.yd2i_LinEd.text()) * 8.361274e+05
-		yd2TOa_proc     = float(self.yd2i_LinEd.text()) * 8.361274e-03
-		yd2TOha_proc    = float(self.yd2i_LinEd.text()) * 8.361274e-05
-		yd2TOin2_proc   = float(self.yd2i_LinEd.text()) * 1.296e+03
-		yd2TOft2_proc   = float(self.yd2i_LinEd.text()) * 9
-		yd2TOyd2_proc   = float(self.yd2i_LinEd.text()) * 1
-		yd2TOacr_proc   = float(self.yd2i_LinEd.text()) * 2.066116e-04
-		# yd2TOmi2ST_proc = float(self.yd2i_LinEd.text()) * 3.228306e-07
+		try:
+			yd2TOm2_proc    = float(self.yd2i_LinEd.text()) * 8.361274e-01
+			yd2TOcm2_proc   = float(self.yd2i_LinEd.text()) * 8.361274e+03
+			yd2TOmm2_proc   = float(self.yd2i_LinEd.text()) * 8.361274e+05
+			yd2TOa_proc     = float(self.yd2i_LinEd.text()) * 8.361274e-03
+			yd2TOha_proc    = float(self.yd2i_LinEd.text()) * 8.361274e-05
+			yd2TOin2_proc   = float(self.yd2i_LinEd.text()) * 1.296e+03
+			yd2TOft2_proc   = float(self.yd2i_LinEd.text()) * 9
+			yd2TOyd2_proc   = float(self.yd2i_LinEd.text()) * 1
+			yd2TOacr_proc   = float(self.yd2i_LinEd.text()) * 2.066116e-04
+			# yd2TOmi2ST_proc = float(self.yd2i_LinEd.text()) * 3.228306e-07
 
-		self.yd2TOm2_res.setText(str(round(yd2TOm2_proc,   8)))
-		self.yd2TOcm2_res.setText(str(round(yd2TOcm2_proc, 8)))
-		self.ft2TOmm2_res.setText(str(round(yd2TOmm2_proc, 8)))
-		self.yd2TOa_res.setText(str(round(yd2TOa_proc,     8)))
-		self.yd2TOha_res.setText(str(round(yd2TOha_proc,   8)))
-		self.yd2TOin2_res.setText(str(round(yd2TOin2_proc, 8)))
-		self.yd2TOft2_res.setText(str(round(yd2TOft2_proc, 8)))
-		self.yd2TOyd2_res.setText(str(round(yd2TOyd2_proc, 8)))
-		self.yd2TOacr_res.setText(str(round(yd2TOacr_proc, 8)))
-		self.yd2TOmi2ST_res.setText("-")
+			self.yd2TOm2_res.setText(str(round(yd2TOm2_proc,   8)))
+			self.yd2TOcm2_res.setText(str(round(yd2TOcm2_proc, 8)))
+			self.ft2TOmm2_res.setText(str(round(yd2TOmm2_proc, 8)))
+			self.yd2TOa_res.setText(str(round(yd2TOa_proc,     8)))
+			self.yd2TOha_res.setText(str(round(yd2TOha_proc,   8)))
+			self.yd2TOin2_res.setText(str(round(yd2TOin2_proc, 8)))
+			self.yd2TOft2_res.setText(str(round(yd2TOft2_proc, 8)))
+			self.yd2TOyd2_res.setText(str(round(yd2TOyd2_proc, 8)))
+			self.yd2TOacr_res.setText(str(round(yd2TOacr_proc, 8)))
+			self.yd2TOmi2ST_res.setText("-")
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def acrTO_fun(self):
-		acrTOm2_proc    = float(self.acri_LinEd.text()) * 4.046856e+03
-		acrTOcm2_proc   = float(self.acri_LinEd.text()) * 4.046856e+07
-		acrTOmm2_proc   = float(self.acri_LinEd.text()) * 4.046856e+09
-		acrTOa_proc     = float(self.acri_LinEd.text()) * 4.046856e+01
-		acrTOha_proc    = float(self.acri_LinEd.text()) * 4.046856e-01
-		acrTOin2_proc   = float(self.acri_LinEd.text()) * 6.272640e+06
-		acrTOft2_proc   = float(self.acri_LinEd.text()) * 4.356000e+04
-		acrTOyd2_proc   = float(self.acri_LinEd.text()) * 4.830000e+03
-		acrTOacr_proc   = float(self.acri_LinEd.text()) * 1
-		acrTOmi2ST_proc = float(self.acri_LinEd.text()) * 1.562500e-03
+		try:
+			acrTOm2_proc    = float(self.acri_LinEd.text()) * 4.046856e+03
+			acrTOcm2_proc   = float(self.acri_LinEd.text()) * 4.046856e+07
+			acrTOmm2_proc   = float(self.acri_LinEd.text()) * 4.046856e+09
+			acrTOa_proc     = float(self.acri_LinEd.text()) * 4.046856e+01
+			acrTOha_proc    = float(self.acri_LinEd.text()) * 4.046856e-01
+			acrTOin2_proc   = float(self.acri_LinEd.text()) * 6.272640e+06
+			acrTOft2_proc   = float(self.acri_LinEd.text()) * 4.356000e+04
+			acrTOyd2_proc   = float(self.acri_LinEd.text()) * 4.830000e+03
+			acrTOacr_proc   = float(self.acri_LinEd.text()) * 1
+			acrTOmi2ST_proc = float(self.acri_LinEd.text()) * 1.562500e-03
 
-		self.acrTOm2_res.setText(str(round(acrTOm2_proc,       8)))
-		self.acrTOcm2_res.setText("-")
-		self.acrTOmm2_res.setText("-")
-		self.acrTOa_res.setText(str(round(acrTOa_proc,         8)))
-		self.acrTOha_res.setText(str(round(acrTOha_proc,       8)))
-		self.acrTOin2_res.setText(str(round(acrTOin2_proc,     8)))
-		self.acrTOft2_res.setText(str(round(acrTOft2_proc,     8)))
-		self.acrTOyd2_res.setText(str(round(acrTOyd2_proc,     8)))
-		self.acrTOacr_res.setText(str(round(acrTOacr_proc,     8)))
-		self.acrTOmi2ST_res.setText(str(round(acrTOmi2ST_proc, 8)))
+			self.acrTOm2_res.setText(str(round(acrTOm2_proc,       8)))
+			self.acrTOcm2_res.setText("-")
+			self.acrTOmm2_res.setText("-")
+			self.acrTOa_res.setText(str(round(acrTOa_proc,         8)))
+			self.acrTOha_res.setText(str(round(acrTOha_proc,       8)))
+			self.acrTOin2_res.setText(str(round(acrTOin2_proc,     8)))
+			self.acrTOft2_res.setText(str(round(acrTOft2_proc,     8)))
+			self.acrTOyd2_res.setText(str(round(acrTOyd2_proc,     8)))
+			self.acrTOacr_res.setText(str(round(acrTOacr_proc,     8)))
+			self.acrTOmi2ST_res.setText(str(round(acrTOmi2ST_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def mi2STTO_fun(self):
-		mi2STTOm2_proc    = float(self.mi2STi_LinEd.text()) * 2.589988e+06
-		# mi2STTOcm2_proc   = float(self.mi2STi_LinEd.text()) * 2.589988e+10
-		# mi2STTOmm2_proc   = float(self.mi2STi_LinEd.text()) * 2.589988e+12
-		mi2STTOa_proc     = float(self.mi2STi_LinEd.text()) * 2.589988e+04
-		mi2STTOha_proc    = float(self.mi2STi_LinEd.text()) * 2.589988e+02
-		# mi2STTOin2_proc   = float(self.mi2STi_LinEd.text()) * 4.0144896e+09
-		mi2STTOft2_proc   = float(self.mi2STi_LinEd.text()) * 2.7878400e+07
-		mi2STTOyd2_proc   = float(self.mi2STi_LinEd.text()) * 3.0976000e+06
-		mi2STTOacr_proc   = float(self.mi2STi_LinEd.text()) * 6.4e+02
-		mi2STTOmi2ST_proc = float(self.mi2STi_LinEd.text()) * 1
+		try:
+			mi2STTOm2_proc    = float(self.mi2STi_LinEd.text()) * 2.589988e+06
+			# mi2STTOcm2_proc   = float(self.mi2STi_LinEd.text()) * 2.589988e+10
+			# mi2STTOmm2_proc   = float(self.mi2STi_LinEd.text()) * 2.589988e+12
+			mi2STTOa_proc     = float(self.mi2STi_LinEd.text()) * 2.589988e+04
+			mi2STTOha_proc    = float(self.mi2STi_LinEd.text()) * 2.589988e+02
+			# mi2STTOin2_proc   = float(self.mi2STi_LinEd.text()) * 4.0144896e+09
+			mi2STTOft2_proc   = float(self.mi2STi_LinEd.text()) * 2.7878400e+07
+			mi2STTOyd2_proc   = float(self.mi2STi_LinEd.text()) * 3.0976000e+06
+			mi2STTOacr_proc   = float(self.mi2STi_LinEd.text()) * 6.4e+02
+			mi2STTOmi2ST_proc = float(self.mi2STi_LinEd.text()) * 1
 
-		self.mi2STTOm2_res.setText(str(round(mi2STTOm2_proc,       8)))
-		self.mi2STTOcm2_res.setText("-")
-		self.mi2STTOmm2_res.setText("-")
-		self.mi2STTOa_res.setText(str(round(mi2STTOa_proc,         8)))
-		self.mi2STTOha_res.setText(str(round(mi2STTOha_proc,       8)))
-		self.mi2STTOin2_res.setText("-")
-		self.mi2STTOft2_res.setText(str(round(mi2STTOft2_proc,     8)))
-		self.mi2STTOyd2_res.setText(str(round(mi2STTOyd2_proc,     8)))
-		self.mi2STTOacr_res.setText(str(round(mi2STTOacr_proc,     8)))
-		self.mi2STTOmi2ST_res.setText(str(round(mi2STTOmi2ST_proc, 8)))
+			self.mi2STTOm2_res.setText(str(round(mi2STTOm2_proc,       8)))
+			self.mi2STTOcm2_res.setText("-")
+			self.mi2STTOmm2_res.setText("-")
+			self.mi2STTOa_res.setText(str(round(mi2STTOa_proc,         8)))
+			self.mi2STTOha_res.setText(str(round(mi2STTOha_proc,       8)))
+			self.mi2STTOin2_res.setText("-")
+			self.mi2STTOft2_res.setText(str(round(mi2STTOft2_proc,     8)))
+			self.mi2STTOyd2_res.setText(str(round(mi2STTOyd2_proc,     8)))
+			self.mi2STTOacr_res.setText(str(round(mi2STTOacr_proc,     8)))
+			self.mi2STTOmi2ST_res.setText(str(round(mi2STTOmi2ST_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def main_window(self):
 		main_layout = QtWidgets.QHBoxLayout()
@@ -522,4 +634,6 @@ class Area_Win(QtWidgets.QWidget):
 		self.setLayout(main_layout)
 		self.show()
 
-		
+
+aplikace = QtWidgets.QApplication(sys.argv)
+aplikace.setStyle("Fusion")			
