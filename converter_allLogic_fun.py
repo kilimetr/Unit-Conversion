@@ -92,8 +92,6 @@ class Area_Win(QtWidgets.QWidget):
 		
 		
 	def m2TO_fun(self):
-		chyba = ""
-		
 		try:
 			m2TOm2_proc    = float(self.m2i_LinEd.text()) * 1
 			m2TOcm2_proc   = float(self.m2i_LinEd.text()) * 1e+04
@@ -105,20 +103,28 @@ class Area_Win(QtWidgets.QWidget):
 			zprava = QtWidgets.QMessageBox()
 			zprava.setIcon(QtWidgets.QMessageBox.Warning)
 			zprava.setWindowTitle("Error input")
-			zprava.setText("Please, check your input. Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
 			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
-			
-			chyba = "Number is unknown!"
-			print(chyba)
+
 			return zprava.exec()
 		
 
 	def cm2TO_fun(self):
-		cm2TOm2_proc    = float(self.cm2i_LinEd.text()) * 1e-04
-		cm2TOcm2_proc   = float(self.cm2i_LinEd.text()) * 1
+		try:
+			cm2TOm2_proc    = float(self.cm2i_LinEd.text()) * 1e-04
+			cm2TOcm2_proc   = float(self.cm2i_LinEd.text()) * 1
 
-		self.cm2TOm2_res.setText(str(cm2TOm2_proc))
-		self.cm2TOcm2_res.setText(str(cm2TOcm2_proc))
+			self.cm2TOm2_res.setText(str(cm2TOm2_proc))
+			self.cm2TOcm2_res.setText(str(cm2TOcm2_proc))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
 
 
 	def main_window(self):
