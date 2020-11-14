@@ -14,7 +14,6 @@ class Window(QtWidgets.QMainWindow):
 
 	def __init__(self, **kwargs):
 		super().__init__()
-		# super(Window, self).__init__(**kwargs)
 
 		self.setWindowTitle("Unit Conversion")
 		self.setWindowIcon(QtGui.QIcon("logo.jpg"))
@@ -116,5 +115,4 @@ class Window(QtWidgets.QMainWindow):
 aplikace = QtWidgets.QApplication(sys.argv)
 aplikace.setStyle("Fusion")
 okno = Window()
-# okno.show()
 sys.exit(aplikace.exec())
