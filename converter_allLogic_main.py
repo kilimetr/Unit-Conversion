@@ -17,7 +17,7 @@ class Window(QtWidgets.QMainWindow):
 		# super(Window, self).__init__(**kwargs)
 
 		self.setWindowTitle("Unit Conversion")
-		# self.setWindowIcon(QtGui.QIcon("xxx.png"))
+		self.setWindowIcon(QtGui.QIcon("logo.jpg"))
 		
 		self.main_window()
 		self.show()

@@ -12,6 +12,8 @@ class Area_Win(QtWidgets.QWidget):
 		super().__init__()
 
 		self.setWindowTitle("Area Converter")
+		self.setWindowIcon(QtGui.QIcon("logo.jpg"))
+		
 		self.main_window()
 
 	def createGroup_input(self):
