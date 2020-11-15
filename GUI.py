@@ -13,13 +13,13 @@ import Dens_fun
 import Energy_fun
 import Heatval_fun
 import Mass_fun
-# import Massflow_fun
-# import Massfrac_fun
+import Massflow_fun
+import Massfrac_fun
 import Length_fun
 # import Pressstres_fun
 # import Pressdrl_fun
-# import Velocity_fun
-# import Volume_fun
+import Velocity_fun
+import Volume_fun
 
 
 

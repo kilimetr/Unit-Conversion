@@ -3,6 +3,7 @@
 # GitHub: https://github.com/kilimetr
 
 from PyQt5 import QtWidgets, QtGui, QtCore
+import sys
 
 
 
@@ -11,11 +12,13 @@ class Veloc_Win(QtWidgets.QWidget):
 		super().__init__()
 		
 		self.setWindowTitle("Velocity Converter")
+		self.setWindowIcon(QtGui.QIcon("logo.jpg"))
+		
 		self.main_window()
 
 	def createGroup_input(self):
 		input_group = QtWidgets.QGroupBox("Input", self)
-		input_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+		input_group.setFont(QtGui.QFont("Arial", 10))
 		
 		input_grid = QtWidgets.QGridLayout()
 		input_grid.setColumnMinimumWidth(0, 130)
@@ -63,7 +66,7 @@ class Veloc_Win(QtWidgets.QWidget):
 
 	def createGroup_output(self):
 		output_group = QtWidgets.QGroupBox("Output", self)
-		output_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+		output_group.setFont(QtGui.QFont("Arial", 10))
 
 		output_grid = QtWidgets.QGridLayout()
 
@@ -224,156 +227,244 @@ class Veloc_Win(QtWidgets.QWidget):
 		return output_group
 
 	def msTO_fun(self):
-		msTOms_proc     = float(self.msi_LinEd.text()) * 1
-		msTOmmin_proc   = float(self.msi_LinEd.text()) * 60
-		msTOkmh_proc    = float(self.msi_LinEd.text()) * 3.6
-		msTOfts_proc    = float(self.msi_LinEd.text()) * 3.280840
-		msTOftmin_proc  = float(self.msi_LinEd.text()) * 196.8504
-		msTOmiSTh_proc  = float(self.msi_LinEd.text()) * 2.236936
-		msTOknotUK_proc = float(self.msi_LinEd.text()) * 1.942604
-		msTOknotIT_proc = float(self.msi_LinEd.text()) * 1.943844
+		try:
+			msTOms_proc     = float(self.msi_LinEd.text()) * 1
+			msTOmmin_proc   = float(self.msi_LinEd.text()) * 60
+			msTOkmh_proc    = float(self.msi_LinEd.text()) * 3.6
+			msTOfts_proc    = float(self.msi_LinEd.text()) * 3.280840
+			msTOftmin_proc  = float(self.msi_LinEd.text()) * 196.8504
+			msTOmiSTh_proc  = float(self.msi_LinEd.text()) * 2.236936
+			msTOknotUK_proc = float(self.msi_LinEd.text()) * 1.942604
+			msTOknotIT_proc = float(self.msi_LinEd.text()) * 1.943844
 
-		self.msTOms_res.setText(str(round(msTOms_proc,         8)))
-		self.msTOmmin_res.setText(str(round(msTOmmin_proc,     8)))
-		self.msTOkmh_res.setText(str(round(msTOkmh_proc,       8)))
-		self.msTOfts_res.setText(str(round(msTOfts_proc,       8)))
-		self.msTOftmin_res.setText(str(round(msTOftmin_proc,   8)))
-		self.msTOmiSTh_res.setText(str(round(msTOmiSTh_proc,   8)))
-		self.msTOknotUK_res.setText(str(round(msTOknotUK_proc, 8)))
-		self.msTOknotIT_res.setText(str(round(msTOknotIT_proc, 8)))
+			self.msTOms_res.setText(str(round(msTOms_proc,         8)))
+			self.msTOmmin_res.setText(str(round(msTOmmin_proc,     8)))
+			self.msTOkmh_res.setText(str(round(msTOkmh_proc,       8)))
+			self.msTOfts_res.setText(str(round(msTOfts_proc,       8)))
+			self.msTOftmin_res.setText(str(round(msTOftmin_proc,   8)))
+			self.msTOmiSTh_res.setText(str(round(msTOmiSTh_proc,   8)))
+			self.msTOknotUK_res.setText(str(round(msTOknotUK_proc, 8)))
+			self.msTOknotIT_res.setText(str(round(msTOknotIT_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def mminTO_fun(self):
-		mminTOms_proc     = float(self.mmini_LinEd.text()) / 60
-		mminTOmmin_proc   = float(self.mmini_LinEd.text()) * 1
-		mminTOkmh_proc    = float(self.mmini_LinEd.text()) * 0.06
-		mminTOfts_proc    = float(self.mmini_LinEd.text()) * 0.05468066
-		mminTOftmin_proc  = float(self.mmini_LinEd.text()) * 3.28084000
-		mminTOmiSTh_proc  = float(self.mmini_LinEd.text()) * 0.03728227
-		mminTOknotUK_proc = float(self.mmini_LinEd.text()) * 1.942604 / 60
-		mminTOknotIT_proc = float(self.mmini_LinEd.text()) * 1.943844 / 60
+		try:
+			mminTOms_proc     = float(self.mmini_LinEd.text()) / 60
+			mminTOmmin_proc   = float(self.mmini_LinEd.text()) * 1
+			mminTOkmh_proc    = float(self.mmini_LinEd.text()) * 0.06
+			mminTOfts_proc    = float(self.mmini_LinEd.text()) * 0.05468066
+			mminTOftmin_proc  = float(self.mmini_LinEd.text()) * 3.28084000
+			mminTOmiSTh_proc  = float(self.mmini_LinEd.text()) * 0.03728227
+			mminTOknotUK_proc = float(self.mmini_LinEd.text()) * 1.942604 / 60
+			mminTOknotIT_proc = float(self.mmini_LinEd.text()) * 1.943844 / 60
 
-		self.mminTOms_res.setText(str(round(mminTOms_proc,         8)))
-		self.mminTOmmin_res.setText(str(round(mminTOmmin_proc,     8)))
-		self.mminTOkmh_res.setText(str(round(mminTOkmh_proc,       8)))
-		self.mminTOfts_res.setText(str(round(mminTOfts_proc,       8)))
-		self.mminTOftmin_res.setText(str(round(mminTOftmin_proc,   8)))
-		self.mminTOmiSTh_res.setText(str(round(mminTOmiSTh_proc,   8)))
-		self.mminTOknotUK_res.setText(str(round(mminTOknotUK_proc, 8)))
-		self.mminTOknotIT_res.setText(str(round(mminTOknotIT_proc, 8)))
+			self.mminTOms_res.setText(str(round(mminTOms_proc,         8)))
+			self.mminTOmmin_res.setText(str(round(mminTOmmin_proc,     8)))
+			self.mminTOkmh_res.setText(str(round(mminTOkmh_proc,       8)))
+			self.mminTOfts_res.setText(str(round(mminTOfts_proc,       8)))
+			self.mminTOftmin_res.setText(str(round(mminTOftmin_proc,   8)))
+			self.mminTOmiSTh_res.setText(str(round(mminTOmiSTh_proc,   8)))
+			self.mminTOknotUK_res.setText(str(round(mminTOknotUK_proc, 8)))
+			self.mminTOknotIT_res.setText(str(round(mminTOknotIT_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def kmhTO_fun(self):
-		kmhTOms_proc     = float(self.kmhi_LinEd.text()) / 3.6
-		kmhTOmmin_proc   = float(self.kmhi_LinEd.text()) * 50 / 3
-		kmhTOkmh_proc    = float(self.kmhi_LinEd.text()) * 1
-		kmhTOfts_proc    = float(self.kmhi_LinEd.text()) * 0.9113444
-		kmhTOftmin_proc  = float(self.kmhi_LinEd.text()) * 54.68066
-		kmhTOmiSTh_proc  = float(self.kmhi_LinEd.text()) * 0.6213712
-		kmhTOknotUK_proc = float(self.kmhi_LinEd.text()) * 0.5396122
-		kmhTOknotIT_proc = float(self.kmhi_LinEd.text()) * 0.5399573
+		try:
+			kmhTOms_proc     = float(self.kmhi_LinEd.text()) / 3.6
+			kmhTOmmin_proc   = float(self.kmhi_LinEd.text()) * 50 / 3
+			kmhTOkmh_proc    = float(self.kmhi_LinEd.text()) * 1
+			kmhTOfts_proc    = float(self.kmhi_LinEd.text()) * 0.9113444
+			kmhTOftmin_proc  = float(self.kmhi_LinEd.text()) * 54.68066
+			kmhTOmiSTh_proc  = float(self.kmhi_LinEd.text()) * 0.6213712
+			kmhTOknotUK_proc = float(self.kmhi_LinEd.text()) * 0.5396122
+			kmhTOknotIT_proc = float(self.kmhi_LinEd.text()) * 0.5399573
 
-		self.kmhTOms_res.setText(str(round(kmhTOms_proc,         8)))
-		self.kmhTOmmin_res.setText(str(round(kmhTOmmin_proc,     8)))
-		self.kmhTOkmh_res.setText(str(round(kmhTOkmh_proc,       8)))
-		self.kmhTOfts_res.setText(str(round(kmhTOfts_proc,       8)))
-		self.kmhTOftmin_res.setText(str(round(kmhTOftmin_proc,   8)))
-		self.kmhTOmiSTh_res.setText(str(round(kmhTOmiSTh_proc,   8)))
-		self.kmhTOknotUK_res.setText(str(round(kmhTOknotUK_proc, 8)))
-		self.kmhTOknotIT_res.setText(str(round(kmhTOknotIT_proc, 8)))
+			self.kmhTOms_res.setText(str(round(kmhTOms_proc,         8)))
+			self.kmhTOmmin_res.setText(str(round(kmhTOmmin_proc,     8)))
+			self.kmhTOkmh_res.setText(str(round(kmhTOkmh_proc,       8)))
+			self.kmhTOfts_res.setText(str(round(kmhTOfts_proc,       8)))
+			self.kmhTOftmin_res.setText(str(round(kmhTOftmin_proc,   8)))
+			self.kmhTOmiSTh_res.setText(str(round(kmhTOmiSTh_proc,   8)))
+			self.kmhTOknotUK_res.setText(str(round(kmhTOknotUK_proc, 8)))
+			self.kmhTOknotIT_res.setText(str(round(kmhTOknotIT_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def ftsTO_fun(self):
-		ftsTOms_proc     = float(self.ftsi_LinEd.text()) * 0.3048
-		ftsTOmmin_proc   = float(self.ftsi_LinEd.text()) * 18.288
-		ftsTOkmh_proc    = float(self.ftsi_LinEd.text()) * 1.09728
-		ftsTOfts_proc    = float(self.ftsi_LinEd.text()) * 1
-		ftsTOftmin_proc  = float(self.ftsi_LinEd.text()) * 60
-		ftsTOmiSTh_proc  = float(self.ftsi_LinEd.text()) * 0.6818182
-		ftsTOknotUK_proc = float(self.ftsi_LinEd.text()) * 0.5921056
-		ftsTOknotIT_proc = float(self.ftsi_LinEd.text()) * 0.5924843
+		try:
+			ftsTOms_proc     = float(self.ftsi_LinEd.text()) * 0.3048
+			ftsTOmmin_proc   = float(self.ftsi_LinEd.text()) * 18.288
+			ftsTOkmh_proc    = float(self.ftsi_LinEd.text()) * 1.09728
+			ftsTOfts_proc    = float(self.ftsi_LinEd.text()) * 1
+			ftsTOftmin_proc  = float(self.ftsi_LinEd.text()) * 60
+			ftsTOmiSTh_proc  = float(self.ftsi_LinEd.text()) * 0.6818182
+			ftsTOknotUK_proc = float(self.ftsi_LinEd.text()) * 0.5921056
+			ftsTOknotIT_proc = float(self.ftsi_LinEd.text()) * 0.5924843
 
-		self.ftsTOms_res.setText(str(round(ftsTOms_proc,         8)))
-		self.ftsTOmmin_res.setText(str(round(ftsTOmmin_proc,     8)))
-		self.ftsTOkmh_res.setText(str(round(ftsTOkmh_proc,       8)))
-		self.ftsTOfts_res.setText(str(round(ftsTOfts_proc,       8)))
-		self.ftsTOftmin_res.setText(str(round(ftsTOftmin_proc,   8)))
-		self.ftsTOmiSTh_res.setText(str(round(ftsTOmiSTh_proc,   8)))
-		self.ftsTOknotUK_res.setText(str(round(ftsTOknotUK_proc, 8)))
-		self.ftsTOknotIT_res.setText(str(round(ftsTOknotIT_proc, 8)))
+			self.ftsTOms_res.setText(str(round(ftsTOms_proc,         8)))
+			self.ftsTOmmin_res.setText(str(round(ftsTOmmin_proc,     8)))
+			self.ftsTOkmh_res.setText(str(round(ftsTOkmh_proc,       8)))
+			self.ftsTOfts_res.setText(str(round(ftsTOfts_proc,       8)))
+			self.ftsTOftmin_res.setText(str(round(ftsTOftmin_proc,   8)))
+			self.ftsTOmiSTh_res.setText(str(round(ftsTOmiSTh_proc,   8)))
+			self.ftsTOknotUK_res.setText(str(round(ftsTOknotUK_proc, 8)))
+			self.ftsTOknotIT_res.setText(str(round(ftsTOknotIT_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def ftminTO_fun(self):
-		ftminTOms_proc     = float(self.ftmini_LinEd.text()) * 5.8e-03
-		ftminTOmmin_proc   = float(self.ftmini_LinEd.text()) * 0.3048
-		ftminTOkmh_proc    = float(self.ftmini_LinEd.text()) * 1.8288e-02
-		ftminTOfts_proc    = float(self.ftmini_LinEd.text()) / 60
-		ftminTOftmin_proc  = float(self.ftmini_LinEd.text()) * 1
-		ftminTOmiSTh_proc  = float(self.ftmini_LinEd.text()) * 1.136364e-02
-		ftminTOknotUK_proc = float(self.ftmini_LinEd.text()) * 0.5921056 / 60
-		ftminTOknotIT_proc = float(self.ftmini_LinEd.text()) * 0.5924843 / 60
+		try:
+			ftminTOms_proc     = float(self.ftmini_LinEd.text()) * 5.8e-03
+			ftminTOmmin_proc   = float(self.ftmini_LinEd.text()) * 0.3048
+			ftminTOkmh_proc    = float(self.ftmini_LinEd.text()) * 1.8288e-02
+			ftminTOfts_proc    = float(self.ftmini_LinEd.text()) / 60
+			ftminTOftmin_proc  = float(self.ftmini_LinEd.text()) * 1
+			ftminTOmiSTh_proc  = float(self.ftmini_LinEd.text()) * 1.136364e-02
+			ftminTOknotUK_proc = float(self.ftmini_LinEd.text()) * 0.5921056 / 60
+			ftminTOknotIT_proc = float(self.ftmini_LinEd.text()) * 0.5924843 / 60
 
-		self.ftminTOms_res.setText(str(round(ftminTOms_proc,         8)))
-		self.ftminTOmmin_res.setText(str(round(ftminTOmmin_proc,     8)))
-		self.ftminTOkmh_res.setText(str(round(ftminTOkmh_proc,       8)))
-		self.ftminTOfts_res.setText(str(round(ftminTOfts_proc,       8)))
-		self.ftminTOftmin_res.setText(str(round(ftminTOftmin_proc,   8)))
-		self.ftminTOmiSTh_res.setText(str(round(ftminTOmiSTh_proc,   8)))
-		self.ftminTOknotUK_res.setText(str(round(ftminTOknotUK_proc, 8)))
-		self.ftminTOknotIT_res.setText(str(round(ftminTOknotIT_proc, 8)))
+			self.ftminTOms_res.setText(str(round(ftminTOms_proc,         8)))
+			self.ftminTOmmin_res.setText(str(round(ftminTOmmin_proc,     8)))
+			self.ftminTOkmh_res.setText(str(round(ftminTOkmh_proc,       8)))
+			self.ftminTOfts_res.setText(str(round(ftminTOfts_proc,       8)))
+			self.ftminTOftmin_res.setText(str(round(ftminTOftmin_proc,   8)))
+			self.ftminTOmiSTh_res.setText(str(round(ftminTOmiSTh_proc,   8)))
+			self.ftminTOknotUK_res.setText(str(round(ftminTOknotUK_proc, 8)))
+			self.ftminTOknotIT_res.setText(str(round(ftminTOknotIT_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def miSThTO_fun(self):
-		miSThTOms_proc     = float(self.miSThi_LinEd.text()) * 0.44704
-		miSThTOmmin_proc   = float(self.miSThi_LinEd.text()) * 26.8224
-		miSThTOkmh_proc    = float(self.miSThi_LinEd.text()) * 1.609344
-		miSThTOfts_proc    = float(self.miSThi_LinEd.text()) * 1.466667
-		miSThTOftmin_proc  = float(self.miSThi_LinEd.text()) * 88
-		miSThTOmiSTh_proc  = float(self.miSThi_LinEd.text()) * 1
-		miSThTOknotUK_proc = float(self.miSThi_LinEd.text()) * 0.8684216
-		miSThTOknotIT_proc = float(self.miSThi_LinEd.text()) * 0.868977
+		try:
+			miSThTOms_proc     = float(self.miSThi_LinEd.text()) * 0.44704
+			miSThTOmmin_proc   = float(self.miSThi_LinEd.text()) * 26.8224
+			miSThTOkmh_proc    = float(self.miSThi_LinEd.text()) * 1.609344
+			miSThTOfts_proc    = float(self.miSThi_LinEd.text()) * 1.466667
+			miSThTOftmin_proc  = float(self.miSThi_LinEd.text()) * 88
+			miSThTOmiSTh_proc  = float(self.miSThi_LinEd.text()) * 1
+			miSThTOknotUK_proc = float(self.miSThi_LinEd.text()) * 0.8684216
+			miSThTOknotIT_proc = float(self.miSThi_LinEd.text()) * 0.868977
 
-		self.miSThTOms_res.setText(str(round(miSThTOms_proc,         8)))
-		self.miSThTOmmin_res.setText(str(round(miSThTOmmin_proc,     8)))
-		self.miSThTOkmh_res.setText(str(round(miSThTOkmh_proc,       8)))
-		self.miSThTOfts_res.setText(str(round(miSThTOfts_proc,       8)))
-		self.miSThTOftmin_res.setText(str(round(miSThTOftmin_proc,   8)))
-		self.miSThTOmiSTh_res.setText(str(round(miSThTOmiSTh_proc,   8)))
-		self.miSThTOknotUK_res.setText(str(round(miSThTOknotUK_proc, 8)))
-		self.miSThTOknotIT_res.setText(str(round(miSThTOknotIT_proc, 8)))
+			self.miSThTOms_res.setText(str(round(miSThTOms_proc,         8)))
+			self.miSThTOmmin_res.setText(str(round(miSThTOmmin_proc,     8)))
+			self.miSThTOkmh_res.setText(str(round(miSThTOkmh_proc,       8)))
+			self.miSThTOfts_res.setText(str(round(miSThTOfts_proc,       8)))
+			self.miSThTOftmin_res.setText(str(round(miSThTOftmin_proc,   8)))
+			self.miSThTOmiSTh_res.setText(str(round(miSThTOmiSTh_proc,   8)))
+			self.miSThTOknotUK_res.setText(str(round(miSThTOknotUK_proc, 8)))
+			self.miSThTOknotIT_res.setText(str(round(miSThTOknotIT_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def knotUKTO_fun(self):
-		knotUKTOms_proc     = float(self.knotUKi_LinEd.text()) * 0.5147730
-		knotUKTOmmin_proc   = float(self.knotUKi_LinEd.text()) * 0.5147730 * 60
-		knotUKTOkmh_proc    = float(self.knotUKi_LinEd.text()) * 0.5147730 * 3.6
-		knotUKTOfts_proc    = float(self.knotUKi_LinEd.text()) * 1.6888878
-		knotUKTOftmin_proc  = float(self.knotUKi_LinEd.text()) * 1.6888878 * 60
-		knotUKTOmiSTh_proc  = float(self.knotUKi_LinEd.text()) * 1.1515144
-		knotUKTOknotUK_proc = float(self.knotUKi_LinEd.text()) * 1
-		knotUKTOknotIT_proc = float(self.knotUKi_LinEd.text()) * 1.0006395
+		try:
+			knotUKTOms_proc     = float(self.knotUKi_LinEd.text()) * 0.5147730
+			knotUKTOmmin_proc   = float(self.knotUKi_LinEd.text()) * 0.5147730 * 60
+			knotUKTOkmh_proc    = float(self.knotUKi_LinEd.text()) * 0.5147730 * 3.6
+			knotUKTOfts_proc    = float(self.knotUKi_LinEd.text()) * 1.6888878
+			knotUKTOftmin_proc  = float(self.knotUKi_LinEd.text()) * 1.6888878 * 60
+			knotUKTOmiSTh_proc  = float(self.knotUKi_LinEd.text()) * 1.1515144
+			knotUKTOknotUK_proc = float(self.knotUKi_LinEd.text()) * 1
+			knotUKTOknotIT_proc = float(self.knotUKi_LinEd.text()) * 1.0006395
 
-		self.knotUKTOms_res.setText(str(round(knotUKTOms_proc,         8)))
-		self.knotUKTOmmin_res.setText(str(round(knotUKTOmmin_proc,     8)))
-		self.knotUKTOkmh_res.setText(str(round(knotUKTOkmh_proc,       8)))
-		self.knotUKTOfts_res.setText(str(round(knotUKTOfts_proc,       8)))
-		self.knotUKTOftmin_res.setText(str(round(knotUKTOftmin_proc,   8)))
-		self.knotUKTOmiSTh_res.setText(str(round(knotUKTOmiSTh_proc,   8)))
-		self.knotUKTOknotUK_res.setText(str(round(knotUKTOknotUK_proc, 8)))
-		self.knotUKTOknotIT_res.setText(str(round(knotUKTOknotIT_proc, 8)))
+			self.knotUKTOms_res.setText(str(round(knotUKTOms_proc,         8)))
+			self.knotUKTOmmin_res.setText(str(round(knotUKTOmmin_proc,     8)))
+			self.knotUKTOkmh_res.setText(str(round(knotUKTOkmh_proc,       8)))
+			self.knotUKTOfts_res.setText(str(round(knotUKTOfts_proc,       8)))
+			self.knotUKTOftmin_res.setText(str(round(knotUKTOftmin_proc,   8)))
+			self.knotUKTOmiSTh_res.setText(str(round(knotUKTOmiSTh_proc,   8)))
+			self.knotUKTOknotUK_res.setText(str(round(knotUKTOknotUK_proc, 8)))
+			self.knotUKTOknotIT_res.setText(str(round(knotUKTOknotIT_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def knotITTO_fun(self):
-		knotITTOms_proc     = float(self.knotITi_LinEd.text()) * 0.5144440
-		knotITTOmmin_proc   = float(self.knotITi_LinEd.text()) * 0.5144440 * 60
-		knotITTOkmh_proc    = float(self.knotITi_LinEd.text()) * 0.5144440 * 3.6
-		knotITTOfts_proc    = float(self.knotITi_LinEd.text()) * 1.6878084
-		knotITTOftmin_proc  = float(self.knotITi_LinEd.text()) * 1.6878084 * 60
-		knotITTOmiSTh_proc  = float(self.knotITi_LinEd.text()) * 1.1507785
-		knotITTOknotUK_proc = float(self.knotITi_LinEd.text()) * 0.9993609
-		knotITTOknotIT_proc = float(self.knotITi_LinEd.text()) * 1
+		try:
+			knotITTOms_proc     = float(self.knotITi_LinEd.text()) * 0.5144440
+			knotITTOmmin_proc   = float(self.knotITi_LinEd.text()) * 0.5144440 * 60
+			knotITTOkmh_proc    = float(self.knotITi_LinEd.text()) * 0.5144440 * 3.6
+			knotITTOfts_proc    = float(self.knotITi_LinEd.text()) * 1.6878084
+			knotITTOftmin_proc  = float(self.knotITi_LinEd.text()) * 1.6878084 * 60
+			knotITTOmiSTh_proc  = float(self.knotITi_LinEd.text()) * 1.1507785
+			knotITTOknotUK_proc = float(self.knotITi_LinEd.text()) * 0.9993609
+			knotITTOknotIT_proc = float(self.knotITi_LinEd.text()) * 1
 
-		self.knotITTOms_res.setText(str(round(knotITTOms_proc,         8)))
-		self.knotITTOmmin_res.setText(str(round(knotITTOmmin_proc,     8)))
-		self.knotITTOkmh_res.setText(str(round(knotITTOkmh_proc,       8)))
-		self.knotITTOfts_res.setText(str(round(knotITTOfts_proc,       8)))
-		self.knotITTOftmin_res.setText(str(round(knotITTOftmin_proc,   8)))
-		self.knotITTOmiSTh_res.setText(str(round(knotITTOmiSTh_proc,   8)))
-		self.knotITTOknotUK_res.setText(str(round(knotITTOknotUK_proc, 8)))
-		self.knotITTOknotIT_res.setText(str(round(knotITTOknotIT_proc, 8)))
+			self.knotITTOms_res.setText(str(round(knotITTOms_proc,         8)))
+			self.knotITTOmmin_res.setText(str(round(knotITTOmmin_proc,     8)))
+			self.knotITTOkmh_res.setText(str(round(knotITTOkmh_proc,       8)))
+			self.knotITTOfts_res.setText(str(round(knotITTOfts_proc,       8)))
+			self.knotITTOftmin_res.setText(str(round(knotITTOftmin_proc,   8)))
+			self.knotITTOmiSTh_res.setText(str(round(knotITTOmiSTh_proc,   8)))
+			self.knotITTOknotUK_res.setText(str(round(knotITTOknotUK_proc, 8)))
+			self.knotITTOknotIT_res.setText(str(round(knotITTOknotIT_proc, 8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def main_window(self):
 		main_layout = QtWidgets.QHBoxLayout()
@@ -383,5 +474,6 @@ class Veloc_Win(QtWidgets.QWidget):
 		self.setLayout(main_layout)
 		self.show()
 
-
+aplikace = QtWidgets.QApplication(sys.argv)
+aplikace.setStyle("Fusion")	
 		
