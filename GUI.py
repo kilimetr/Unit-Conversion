@@ -20,6 +20,7 @@ import Length_fun
 # import Pressdrl_fun
 import Velocity_fun
 import Volume_fun
+import Volflow_fun
 
 
 
@@ -283,7 +284,7 @@ class Window(QtWidgets.QMainWindow):
 		self.vol_win2.show()
 
 	def volflow_win(self):
-		self.volflow_win2 = Volflow_Win()
+		self.volflow_win2 = Volflow_fun.Volflow_Win()
 		self.volflow_win2.show()
 
 	def weight_win(self):
@@ -388,12 +389,6 @@ class Kinvis_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
 		super().__init__()
 		self.setWindowTitle("Kinvis_Win")
-
-
-class Volflow_Win(QtWidgets.QWidget):
-	def __init__(self, parent = None):
-		super().__init__()
-		self.setWindowTitle("Volflow_Win")
 
 class Weight_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
