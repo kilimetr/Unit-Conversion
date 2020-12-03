@@ -3,6 +3,7 @@
 # GitHub: https://github.com/kilimetr
 
 from PyQt5 import QtWidgets, QtGui, QtCore
+import sys
 
 
 
@@ -11,11 +12,13 @@ class Massflow_Win(QtWidgets.QWidget):
 		super().__init__()
 
 		self.setWindowTitle("Mass Flow Rate Converter")
+		self.setWindowIcon(QtGui.QIcon("logo.jpg"))
+		
 		self.main_window()
 
 	def createGroup_input(self):
 		input_group = QtWidgets.QGroupBox("Input", self)
-		input_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+		input_group.setFont(QtGui.QFont("Arial", 10))
 
 		input_grid = QtWidgets.QGridLayout()
 		input_grid.setColumnMinimumWidth(0, 130)
@@ -67,7 +70,7 @@ class Massflow_Win(QtWidgets.QWidget):
 
 	def createGroup_output(self):
 		output_group = QtWidgets.QGroupBox("Output", self)
-		output_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+		output_group.setFont(QtGui.QFont("Arial", 10))
 
 		output_grid = QtWidgets.QGridLayout()
 
@@ -308,280 +311,401 @@ class Massflow_Win(QtWidgets.QWidget):
 		return output_group
 
 	def gsTO_fun(self):
-		gsTOgs_proc   = float(self.gsi_LinEd.text()) * 1
-		gsTOgmin_proc = float(self.gsi_LinEd.text()) * 60
-		gsTOkgs_proc  = float(self.gsi_LinEd.text()) * 1e-03
-		gsTOkgh_proc  = float(self.gsi_LinEd.text()) * 1e-03 * 3600
-		gsTOkgd_proc  = float(self.gsi_LinEd.text()) * 1e-03 * 3600 * 24
-		gsTOtons_proc = float(self.gsi_LinEd.text()) * 1e-06
-		gsTOtonh_proc = float(self.gsi_LinEd.text()) * 1e-06 * 3600
-		gsTOtond_proc = float(self.gsi_LinEd.text()) * 1e-06 * 3600 * 24
-		gsTOlbs_proc  = float(self.gsi_LinEd.text()) * 2.2046226217e-03
-		gsTOlbh_proc  = float(self.gsi_LinEd.text()) * 2.2046226217e-03 * 3600
-		gsTOlbd_proc  = float(self.gsi_LinEd.text()) * 2.2046226217e-03 * 3600 * 24
+		try:
+			gsTOgs_proc   = float(self.gsi_LinEd.text()) * 1
+			gsTOgmin_proc = float(self.gsi_LinEd.text()) * 60
+			gsTOkgs_proc  = float(self.gsi_LinEd.text()) * 1e-03
+			gsTOkgh_proc  = float(self.gsi_LinEd.text()) * 1e-03 * 3600
+			gsTOkgd_proc  = float(self.gsi_LinEd.text()) * 1e-03 * 3600 * 24
+			gsTOtons_proc = float(self.gsi_LinEd.text()) * 1e-06
+			gsTOtonh_proc = float(self.gsi_LinEd.text()) * 1e-06 * 3600
+			gsTOtond_proc = float(self.gsi_LinEd.text()) * 1e-06 * 3600 * 24
+			gsTOlbs_proc  = float(self.gsi_LinEd.text()) * 2.2046226217e-03
+			gsTOlbh_proc  = float(self.gsi_LinEd.text()) * 2.2046226217e-03 * 3600
+			gsTOlbd_proc  = float(self.gsi_LinEd.text()) * 2.2046226217e-03 * 3600 * 24
 
-		self.gsTOgs_res.setText(str(round(gsTOgs_proc,     8)))
-		self.gsTOgmin_res.setText(str(round(gsTOgmin_proc, 8)))
-		self.gsTOkgs_res.setText(str(round(gsTOkgs_proc,   8)))
-		self.gsTOkgh_res.setText(str(round(gsTOkgh_proc,   8)))
-		self.gsTOkgd_res.setText(str(round(gsTOkgd_proc,   8)))
-		self.gsTOtons_res.setText(str(round(gsTOtons_proc, 8)))
-		self.gsTOtonh_res.setText(str(round(gsTOtonh_proc, 8)))
-		self.gsTOtond_res.setText(str(round(gsTOtond_proc, 8)))
-		self.gsTOlbs_res.setText(str(round(gsTOlbs_proc,   8)))
-		self.gsTOlbh_res.setText(str(round(gsTOlbh_proc,   8)))
-		self.gsTOlbd_res.setText(str(round(gsTOlbd_proc,   8)))
+			self.gsTOgs_res.setText(str(round(gsTOgs_proc,     8)))
+			self.gsTOgmin_res.setText(str(round(gsTOgmin_proc, 8)))
+			self.gsTOkgs_res.setText(str(round(gsTOkgs_proc,   8)))
+			self.gsTOkgh_res.setText(str(round(gsTOkgh_proc,   8)))
+			self.gsTOkgd_res.setText(str(round(gsTOkgd_proc,   8)))
+			self.gsTOtons_res.setText(str(round(gsTOtons_proc, 8)))
+			self.gsTOtonh_res.setText(str(round(gsTOtonh_proc, 8)))
+			self.gsTOtond_res.setText(str(round(gsTOtond_proc, 8)))
+			self.gsTOlbs_res.setText(str(round(gsTOlbs_proc,   8)))
+			self.gsTOlbh_res.setText(str(round(gsTOlbh_proc,   8)))
+			self.gsTOlbd_res.setText(str(round(gsTOlbd_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def gminTO_fun(self):
-		gminTOgs_proc   = float(self.gmini_LinEd.text()) * 1     / 60
-		gminTOgmin_proc = float(self.gmini_LinEd.text()) * 1
-		gminTOkgs_proc  = float(self.gmini_LinEd.text()) * 1e-03 / 60
-		gminTOkgh_proc  = float(self.gmini_LinEd.text()) * 1e-03 * 60
-		gminTOkgd_proc  = float(self.gmini_LinEd.text()) * 1e-03 * 60 * 24
-		gminTOtons_proc = float(self.gmini_LinEd.text()) * 1e-06 / 60
-		gminTOtonh_proc = float(self.gmini_LinEd.text()) * 1e-06 * 60
-		gminTOtond_proc = float(self.gmini_LinEd.text()) * 1e-06 * 60 * 24
-		gminTOlbs_proc  = float(self.gmini_LinEd.text()) * 2.2046226217e-03 / 60
-		gminTOlbh_proc  = float(self.gmini_LinEd.text()) * 2.2046226217e-03 * 60
-		gminTOlbd_proc  = float(self.gmini_LinEd.text()) * 2.2046226217e-03 * 60 * 24
+		try:
+			gminTOgs_proc   = float(self.gmini_LinEd.text()) * 1     / 60
+			gminTOgmin_proc = float(self.gmini_LinEd.text()) * 1
+			gminTOkgs_proc  = float(self.gmini_LinEd.text()) * 1e-03 / 60
+			gminTOkgh_proc  = float(self.gmini_LinEd.text()) * 1e-03 * 60
+			gminTOkgd_proc  = float(self.gmini_LinEd.text()) * 1e-03 * 60 * 24
+			gminTOtons_proc = float(self.gmini_LinEd.text()) * 1e-06 / 60
+			gminTOtonh_proc = float(self.gmini_LinEd.text()) * 1e-06 * 60
+			gminTOtond_proc = float(self.gmini_LinEd.text()) * 1e-06 * 60 * 24
+			gminTOlbs_proc  = float(self.gmini_LinEd.text()) * 2.2046226217e-03 / 60
+			gminTOlbh_proc  = float(self.gmini_LinEd.text()) * 2.2046226217e-03 * 60
+			gminTOlbd_proc  = float(self.gmini_LinEd.text()) * 2.2046226217e-03 * 60 * 24
 
-		self.gminTOgs_res.setText(str(round(gminTOgs_proc,     8)))
-		self.gminTOgmin_res.setText(str(round(gminTOgmin_proc, 8)))
-		self.gminTOkgs_res.setText(str(round(gminTOkgs_proc,   8)))
-		self.gminTOkgh_res.setText(str(round(gminTOkgh_proc,   8)))
-		self.gminTOkgd_res.setText(str(round(gminTOkgd_proc,   8)))
-		self.gminTOtons_res.setText(str(round(gminTOtons_proc, 8)))
-		self.gminTOtonh_res.setText(str(round(gminTOtonh_proc, 8)))
-		self.gminTOtond_res.setText(str(round(gminTOtond_proc, 8)))
-		self.gminTOlbs_res.setText(str(round(gminTOlbs_proc,   8)))
-		self.gminTOlbh_res.setText(str(round(gminTOlbh_proc,   8)))
-		self.gminTOlbd_res.setText(str(round(gminTOlbd_proc,   8)))
+			self.gminTOgs_res.setText(str(round(gminTOgs_proc,     8)))
+			self.gminTOgmin_res.setText(str(round(gminTOgmin_proc, 8)))
+			self.gminTOkgs_res.setText(str(round(gminTOkgs_proc,   8)))
+			self.gminTOkgh_res.setText(str(round(gminTOkgh_proc,   8)))
+			self.gminTOkgd_res.setText(str(round(gminTOkgd_proc,   8)))
+			self.gminTOtons_res.setText(str(round(gminTOtons_proc, 8)))
+			self.gminTOtonh_res.setText(str(round(gminTOtonh_proc, 8)))
+			self.gminTOtond_res.setText(str(round(gminTOtond_proc, 8)))
+			self.gminTOlbs_res.setText(str(round(gminTOlbs_proc,   8)))
+			self.gminTOlbh_res.setText(str(round(gminTOlbh_proc,   8)))
+			self.gminTOlbd_res.setText(str(round(gminTOlbd_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def kgsTO_fun(self):
-		kgsTOgs_proc   = float(self.kgsi_LinEd.text()) * 1e+03
-		kgsTOgmin_proc = float(self.kgsi_LinEd.text()) * 1e+03 * 60
-		kgsTOkgs_proc  = float(self.kgsi_LinEd.text()) * 1
-		kgsTOkgh_proc  = float(self.kgsi_LinEd.text()) * 1 * 3600
-		kgsTOkgd_proc  = float(self.kgsi_LinEd.text()) * 1 * 3600 * 24
-		kgsTOtons_proc = float(self.kgsi_LinEd.text()) * 1e-03
-		kgsTOtonh_proc = float(self.kgsi_LinEd.text()) * 1e-03 * 3600
-		kgsTOtond_proc = float(self.kgsi_LinEd.text()) * 1e-03 * 3600 * 24
-		kgsTOlbs_proc  = float(self.kgsi_LinEd.text()) * 2.2046226217
-		kgsTOlbh_proc  = float(self.kgsi_LinEd.text()) * 2.2046226217 * 3600
-		kgsTOlbd_proc  = float(self.kgsi_LinEd.text()) * 2.2046226217 * 3600 * 24
+		try:
+			kgsTOgs_proc   = float(self.kgsi_LinEd.text()) * 1e+03
+			kgsTOgmin_proc = float(self.kgsi_LinEd.text()) * 1e+03 * 60
+			kgsTOkgs_proc  = float(self.kgsi_LinEd.text()) * 1
+			kgsTOkgh_proc  = float(self.kgsi_LinEd.text()) * 1 * 3600
+			kgsTOkgd_proc  = float(self.kgsi_LinEd.text()) * 1 * 3600 * 24
+			kgsTOtons_proc = float(self.kgsi_LinEd.text()) * 1e-03
+			kgsTOtonh_proc = float(self.kgsi_LinEd.text()) * 1e-03 * 3600
+			kgsTOtond_proc = float(self.kgsi_LinEd.text()) * 1e-03 * 3600 * 24
+			kgsTOlbs_proc  = float(self.kgsi_LinEd.text()) * 2.2046226217
+			kgsTOlbh_proc  = float(self.kgsi_LinEd.text()) * 2.2046226217 * 3600
+			kgsTOlbd_proc  = float(self.kgsi_LinEd.text()) * 2.2046226217 * 3600 * 24
 
-		self.kgsTOgs_res.setText(str(round(kgsTOgs_proc,     8)))
-		self.kgsTOgmin_res.setText(str(round(kgsTOgmin_proc, 8)))
-		self.kgsTOkgs_res.setText(str(round(kgsTOkgs_proc,   8)))
-		self.kgsTOkgh_res.setText(str(round(kgsTOkgh_proc,   8)))
-		self.kgsTOkgd_res.setText(str(round(kgsTOkgd_proc,   8)))
-		self.kgsTOtons_res.setText(str(round(kgsTOtons_proc, 8)))
-		self.kgsTOtonh_res.setText(str(round(kgsTOtonh_proc, 8)))
-		self.kgsTOtond_res.setText(str(round(kgsTOtond_proc, 8)))
-		self.kgsTOlbs_res.setText(str(round(kgsTOlbs_proc,   8)))
-		self.kgsTOlbh_res.setText(str(round(kgsTOlbh_proc,   8)))
-		self.kgsTOlbd_res.setText("-")
+			self.kgsTOgs_res.setText(str(round(kgsTOgs_proc,     8)))
+			self.kgsTOgmin_res.setText(str(round(kgsTOgmin_proc, 8)))
+			self.kgsTOkgs_res.setText(str(round(kgsTOkgs_proc,   8)))
+			self.kgsTOkgh_res.setText(str(round(kgsTOkgh_proc,   8)))
+			self.kgsTOkgd_res.setText(str(round(kgsTOkgd_proc,   8)))
+			self.kgsTOtons_res.setText(str(round(kgsTOtons_proc, 8)))
+			self.kgsTOtonh_res.setText(str(round(kgsTOtonh_proc, 8)))
+			self.kgsTOtond_res.setText(str(round(kgsTOtond_proc, 8)))
+			self.kgsTOlbs_res.setText(str(round(kgsTOlbs_proc,   8)))
+			self.kgsTOlbh_res.setText(str(round(kgsTOlbh_proc,   8)))
+			self.kgsTOlbd_res.setText("-")
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def kghTO_fun(self):
-		kghTOgs_proc   = float(self.kghi_LinEd.text()) * 1e+03 / 3600
-		kghTOgmin_proc = float(self.kghi_LinEd.text()) * 1e+03 / 60
-		kghTOkgs_proc  = float(self.kghi_LinEd.text()) * 1     / 3600
-		kghTOkgh_proc  = float(self.kghi_LinEd.text()) * 1
-		kghTOkgd_proc  = float(self.kghi_LinEd.text()) * 1     * 24
-		kghTOtons_proc = float(self.kghi_LinEd.text()) * 1e-03 / 3600
-		kghTOtonh_proc = float(self.kghi_LinEd.text()) * 1e-03
-		kghTOtond_proc = float(self.kghi_LinEd.text()) * 1e-03 * 24
-		kghTOlbs_proc  = float(self.kghi_LinEd.text()) * 2.2046226217 / 3600
-		kghTOlbh_proc  = float(self.kghi_LinEd.text()) * 2.2046226217
-		kghTOlbd_proc  = float(self.kghi_LinEd.text()) * 2.2046226217 * 24
+		try:
+			kghTOgs_proc   = float(self.kghi_LinEd.text()) * 1e+03 / 3600
+			kghTOgmin_proc = float(self.kghi_LinEd.text()) * 1e+03 / 60
+			kghTOkgs_proc  = float(self.kghi_LinEd.text()) * 1     / 3600
+			kghTOkgh_proc  = float(self.kghi_LinEd.text()) * 1
+			kghTOkgd_proc  = float(self.kghi_LinEd.text()) * 1     * 24
+			kghTOtons_proc = float(self.kghi_LinEd.text()) * 1e-03 / 3600
+			kghTOtonh_proc = float(self.kghi_LinEd.text()) * 1e-03
+			kghTOtond_proc = float(self.kghi_LinEd.text()) * 1e-03 * 24
+			kghTOlbs_proc  = float(self.kghi_LinEd.text()) * 2.2046226217 / 3600
+			kghTOlbh_proc  = float(self.kghi_LinEd.text()) * 2.2046226217
+			kghTOlbd_proc  = float(self.kghi_LinEd.text()) * 2.2046226217 * 24
 
-		self.kghTOgs_res.setText(str(round(kghTOgs_proc,     8)))
-		self.kghTOgmin_res.setText(str(round(kghTOgmin_proc, 8)))
-		self.kghTOkgs_res.setText(str(round(kghTOkgs_proc,   8)))
-		self.kghTOkgh_res.setText(str(round(kghTOkgh_proc,   8)))
-		self.kghTOkgd_res.setText(str(round(kghTOkgd_proc,   8)))
-		self.kghTOtons_res.setText(str(round(kghTOtons_proc, 8)))
-		self.kghTOtonh_res.setText(str(round(kghTOtonh_proc, 8)))
-		self.kghTOtond_res.setText(str(round(kghTOtond_proc, 8)))
-		self.kghTOlbs_res.setText(str(round(kghTOlbs_proc,   8)))
-		self.kghTOlbh_res.setText(str(round(kghTOlbh_proc,   8)))
-		self.kghTOlbd_res.setText(str(round(kghTOlbd_proc,   8)))
+			self.kghTOgs_res.setText(str(round(kghTOgs_proc,     8)))
+			self.kghTOgmin_res.setText(str(round(kghTOgmin_proc, 8)))
+			self.kghTOkgs_res.setText(str(round(kghTOkgs_proc,   8)))
+			self.kghTOkgh_res.setText(str(round(kghTOkgh_proc,   8)))
+			self.kghTOkgd_res.setText(str(round(kghTOkgd_proc,   8)))
+			self.kghTOtons_res.setText(str(round(kghTOtons_proc, 8)))
+			self.kghTOtonh_res.setText(str(round(kghTOtonh_proc, 8)))
+			self.kghTOtond_res.setText(str(round(kghTOtond_proc, 8)))
+			self.kghTOlbs_res.setText(str(round(kghTOlbs_proc,   8)))
+			self.kghTOlbh_res.setText(str(round(kghTOlbh_proc,   8)))
+			self.kghTOlbd_res.setText(str(round(kghTOlbd_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def kgdTO_fun(self):
-		kgdTOgs_proc   = float(self.kgdi_LinEd.text()) * 1e+03 / 24 / 3600
-		kgdTOgmin_proc = float(self.kgdi_LinEd.text()) * 1e+03 / 24 / 60
-		kgdTOkgs_proc  = float(self.kgdi_LinEd.text()) * 1     / 24 / 3600
-		kgdTOkgh_proc  = float(self.kgdi_LinEd.text()) * 1     / 24
-		kgdTOkgd_proc  = float(self.kgdi_LinEd.text()) * 1
-		kgdTOtons_proc = float(self.kgdi_LinEd.text()) * 1e-03 / 24 / 3600
-		kgdTOtonh_proc = float(self.kgdi_LinEd.text()) * 1e-03 / 24
-		kgdTOtond_proc = float(self.kgdi_LinEd.text()) * 1e-03
-		kgdTOlbs_proc  = float(self.kgdi_LinEd.text()) * 2.2046226217 / 24 / 3600
-		kgdTOlbh_proc  = float(self.kgdi_LinEd.text()) * 2.2046226217 / 24
-		kgdTOlbd_proc  = float(self.kgdi_LinEd.text()) * 2.2046226217
+		try:
+			kgdTOgs_proc   = float(self.kgdi_LinEd.text()) * 1e+03 / 24 / 3600
+			kgdTOgmin_proc = float(self.kgdi_LinEd.text()) * 1e+03 / 24 / 60
+			kgdTOkgs_proc  = float(self.kgdi_LinEd.text()) * 1     / 24 / 3600
+			kgdTOkgh_proc  = float(self.kgdi_LinEd.text()) * 1     / 24
+			kgdTOkgd_proc  = float(self.kgdi_LinEd.text()) * 1
+			kgdTOtons_proc = float(self.kgdi_LinEd.text()) * 1e-03 / 24 / 3600
+			kgdTOtonh_proc = float(self.kgdi_LinEd.text()) * 1e-03 / 24
+			kgdTOtond_proc = float(self.kgdi_LinEd.text()) * 1e-03
+			kgdTOlbs_proc  = float(self.kgdi_LinEd.text()) * 2.2046226217 / 24 / 3600
+			kgdTOlbh_proc  = float(self.kgdi_LinEd.text()) * 2.2046226217 / 24
+			kgdTOlbd_proc  = float(self.kgdi_LinEd.text()) * 2.2046226217
 
-		self.kgdTOgs_res.setText(str(round(kgdTOgs_proc,     8)))
-		self.kgdTOgmin_res.setText(str(round(kgdTOgmin_proc, 8)))
-		self.kgdTOkgs_res.setText(str(round(kgdTOkgs_proc,   8)))
-		self.kgdTOkgh_res.setText(str(round(kgdTOkgh_proc,   8)))
-		self.kgdTOkgd_res.setText(str(round(kgdTOkgd_proc,   8)))
-		self.kgdTOtons_res.setText(str(round(kgdTOtons_proc, 8)))
-		self.kgdTOtonh_res.setText(str(round(kgdTOtonh_proc, 8)))
-		self.kgdTOtond_res.setText(str(round(kgdTOtond_proc, 8)))
-		self.kgdTOlbs_res.setText(str(round(kgdTOlbs_proc,   8)))
-		self.kgdTOlbh_res.setText(str(round(kgdTOlbh_proc,   8)))
-		self.kgdTOlbd_res.setText(str(round(kgdTOlbd_proc,   8)))
+			self.kgdTOgs_res.setText(str(round(kgdTOgs_proc,     8)))
+			self.kgdTOgmin_res.setText(str(round(kgdTOgmin_proc, 8)))
+			self.kgdTOkgs_res.setText(str(round(kgdTOkgs_proc,   8)))
+			self.kgdTOkgh_res.setText(str(round(kgdTOkgh_proc,   8)))
+			self.kgdTOkgd_res.setText(str(round(kgdTOkgd_proc,   8)))
+			self.kgdTOtons_res.setText(str(round(kgdTOtons_proc, 8)))
+			self.kgdTOtonh_res.setText(str(round(kgdTOtonh_proc, 8)))
+			self.kgdTOtond_res.setText(str(round(kgdTOtond_proc, 8)))
+			self.kgdTOlbs_res.setText(str(round(kgdTOlbs_proc,   8)))
+			self.kgdTOlbh_res.setText(str(round(kgdTOlbh_proc,   8)))
+			self.kgdTOlbd_res.setText(str(round(kgdTOlbd_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def tonsTO_fun(self):
-		tonsTOgs_proc   = float(self.tonsi_LinEd.text()) * 1e+06
-		tonsTOgmin_proc = float(self.tonsi_LinEd.text()) * 1e+06 * 60
-		tonsTOkgs_proc  = float(self.tonsi_LinEd.text()) * 1e+03
-		tonsTOkgh_proc  = float(self.tonsi_LinEd.text()) * 1e+03 * 3600
-		tonsTOkgd_proc  = float(self.tonsi_LinEd.text()) * 1e+03 * 3600 * 24
-		tonsTOtons_proc = float(self.tonsi_LinEd.text()) * 1
-		tonsTOtonh_proc = float(self.tonsi_LinEd.text()) * 1 * 3600
-		tonsTOtond_proc = float(self.tonsi_LinEd.text()) * 1 * 3600 * 24
-		tonsTOlbs_proc  = float(self.tonsi_LinEd.text()) * 2.2046226217e+03
-		tonsTOlbh_proc  = float(self.tonsi_LinEd.text()) * 2.2046226217e+03 * 3600
-		tonsTOlbd_proc  = float(self.tonsi_LinEd.text()) * 2.2046226217e+03 * 3600 * 24
+		try:
+			tonsTOgs_proc   = float(self.tonsi_LinEd.text()) * 1e+06
+			tonsTOgmin_proc = float(self.tonsi_LinEd.text()) * 1e+06 * 60
+			tonsTOkgs_proc  = float(self.tonsi_LinEd.text()) * 1e+03
+			tonsTOkgh_proc  = float(self.tonsi_LinEd.text()) * 1e+03 * 3600
+			tonsTOkgd_proc  = float(self.tonsi_LinEd.text()) * 1e+03 * 3600 * 24
+			tonsTOtons_proc = float(self.tonsi_LinEd.text()) * 1
+			tonsTOtonh_proc = float(self.tonsi_LinEd.text()) * 1 * 3600
+			tonsTOtond_proc = float(self.tonsi_LinEd.text()) * 1 * 3600 * 24
+			tonsTOlbs_proc  = float(self.tonsi_LinEd.text()) * 2.2046226217e+03
+			tonsTOlbh_proc  = float(self.tonsi_LinEd.text()) * 2.2046226217e+03 * 3600
+			tonsTOlbd_proc  = float(self.tonsi_LinEd.text()) * 2.2046226217e+03 * 3600 * 24
 
-		self.tonsTOgs_res.setText("-")
-		self.tonsTOgmin_res.setText("-")
-		self.tonsTOkgs_res.setText(str(round(tonsTOkgs_proc,   8)))
-		self.tonsTOkgh_res.setText("-")
-		self.tonsTOkgd_res.setText("-")
-		self.tonsTOtons_res.setText(str(round(tonsTOtons_proc, 8)))
-		self.tonsTOtonh_res.setText(str(round(tonsTOtonh_proc, 8)))
-		self.tonsTOtond_res.setText(str(round(tonsTOtond_proc, 8)))
-		self.tonsTOlbs_res.setText(str(round(tonsTOlbs_proc,   8)))
-		self.tonsTOlbh_res.setText("-")
-		self.tonsTOlbd_res.setText("-")
+			self.tonsTOgs_res.setText("-")
+			self.tonsTOgmin_res.setText("-")
+			self.tonsTOkgs_res.setText(str(round(tonsTOkgs_proc,   8)))
+			self.tonsTOkgh_res.setText("-")
+			self.tonsTOkgd_res.setText("-")
+			self.tonsTOtons_res.setText(str(round(tonsTOtons_proc, 8)))
+			self.tonsTOtonh_res.setText(str(round(tonsTOtonh_proc, 8)))
+			self.tonsTOtond_res.setText(str(round(tonsTOtond_proc, 8)))
+			self.tonsTOlbs_res.setText(str(round(tonsTOlbs_proc,   8)))
+			self.tonsTOlbh_res.setText("-")
+			self.tonsTOlbd_res.setText("-")
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def tonhTO_fun(self):
-		tonhTOgs_proc   = float(self.tonhi_LinEd.text()) * 1e+06 / 3600
-		tonhTOgmin_proc = float(self.tonhi_LinEd.text()) * 1e+06 / 60
-		tonhTOkgs_proc  = float(self.tonhi_LinEd.text()) * 1e+03 / 3600
-		tonhTOkgh_proc  = float(self.tonhi_LinEd.text()) * 1e+03
-		tonhTOkgd_proc  = float(self.tonhi_LinEd.text()) * 1e+03 * 24
-		tonhTOtons_proc = float(self.tonhi_LinEd.text()) * 1 / 3600
-		tonhTOtonh_proc = float(self.tonhi_LinEd.text()) * 1
-		tonhTOtond_proc = float(self.tonhi_LinEd.text()) * 1 * 24
-		tonhTOlbs_proc  = float(self.tonhi_LinEd.text()) * 2.2046226217e+03 / 3600
-		tonhTOlbh_proc  = float(self.tonhi_LinEd.text()) * 2.2046226217e+03
-		tonhTOlbd_proc  = float(self.tonhi_LinEd.text()) * 2.2046226217e+03 * 24
+		try:
+			tonhTOgs_proc   = float(self.tonhi_LinEd.text()) * 1e+06 / 3600
+			tonhTOgmin_proc = float(self.tonhi_LinEd.text()) * 1e+06 / 60
+			tonhTOkgs_proc  = float(self.tonhi_LinEd.text()) * 1e+03 / 3600
+			tonhTOkgh_proc  = float(self.tonhi_LinEd.text()) * 1e+03
+			tonhTOkgd_proc  = float(self.tonhi_LinEd.text()) * 1e+03 * 24
+			tonhTOtons_proc = float(self.tonhi_LinEd.text()) * 1 / 3600
+			tonhTOtonh_proc = float(self.tonhi_LinEd.text()) * 1
+			tonhTOtond_proc = float(self.tonhi_LinEd.text()) * 1 * 24
+			tonhTOlbs_proc  = float(self.tonhi_LinEd.text()) * 2.2046226217e+03 / 3600
+			tonhTOlbh_proc  = float(self.tonhi_LinEd.text()) * 2.2046226217e+03
+			tonhTOlbd_proc  = float(self.tonhi_LinEd.text()) * 2.2046226217e+03 * 24
 
-		self.tonhTOgs_res.setText(str(round(tonhTOgs_proc,     8)))
-		self.tonhTOgmin_res.setText(str(round(tonhTOgmin_proc, 8)))
-		self.tonhTOkgs_res.setText(str(round(tonhTOkgs_proc,   8)))
-		self.tonhTOkgh_res.setText(str(round(tonhTOkgh_proc,   8)))
-		self.tonhTOkgd_res.setText(str(round(tonhTOkgd_proc,   8)))
-		self.tonhTOtons_res.setText(str(round(tonhTOtons_proc, 8)))
-		self.tonhTOtonh_res.setText(str(round(tonhTOtonh_proc, 8)))
-		self.tonhTOtond_res.setText(str(round(tonhTOtond_proc, 8)))
-		self.tonhTOlbs_res.setText(str(round(tonhTOlbs_proc,   8)))
-		self.tonhTOlbh_res.setText(str(round(tonhTOlbh_proc,   8)))
-		self.tonhTOlbd_res.setText(str(round(tonhTOlbd_proc,   8)))
+			self.tonhTOgs_res.setText(str(round(tonhTOgs_proc,     8)))
+			self.tonhTOgmin_res.setText(str(round(tonhTOgmin_proc, 8)))
+			self.tonhTOkgs_res.setText(str(round(tonhTOkgs_proc,   8)))
+			self.tonhTOkgh_res.setText(str(round(tonhTOkgh_proc,   8)))
+			self.tonhTOkgd_res.setText(str(round(tonhTOkgd_proc,   8)))
+			self.tonhTOtons_res.setText(str(round(tonhTOtons_proc, 8)))
+			self.tonhTOtonh_res.setText(str(round(tonhTOtonh_proc, 8)))
+			self.tonhTOtond_res.setText(str(round(tonhTOtond_proc, 8)))
+			self.tonhTOlbs_res.setText(str(round(tonhTOlbs_proc,   8)))
+			self.tonhTOlbh_res.setText(str(round(tonhTOlbh_proc,   8)))
+			self.tonhTOlbd_res.setText(str(round(tonhTOlbd_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def tondTO_fun(self):
-		tondTOgs_proc   = float(self.tondi_LinEd.text()) * 1e+06 / 24 / 3600
-		tondTOgmin_proc = float(self.tondi_LinEd.text()) * 1e+06 / 24 / 60
-		tondTOkgs_proc  = float(self.tondi_LinEd.text()) * 1e+03 / 24 / 3600
-		tondTOkgh_proc  = float(self.tondi_LinEd.text()) * 1e+03 / 24
-		tondTOkgd_proc  = float(self.tondi_LinEd.text()) * 1e+03
-		tondTOtons_proc = float(self.tondi_LinEd.text()) * 1 / 24 / 2600
-		tondTOtonh_proc = float(self.tondi_LinEd.text()) * 1 / 24
-		tondTOtond_proc = float(self.tondi_LinEd.text()) * 1
-		tondTOlbs_proc  = float(self.tondi_LinEd.text()) * 2.2046226217e+03 / 24 / 3600
-		tondTOlbh_proc  = float(self.tondi_LinEd.text()) * 2.2046226217e+03 / 24
-		tondTOlbd_proc  = float(self.tondi_LinEd.text()) * 2.2046226217e+03
+		try:
+			tondTOgs_proc   = float(self.tondi_LinEd.text()) * 1e+06 / 24 / 3600
+			tondTOgmin_proc = float(self.tondi_LinEd.text()) * 1e+06 / 24 / 60
+			tondTOkgs_proc  = float(self.tondi_LinEd.text()) * 1e+03 / 24 / 3600
+			tondTOkgh_proc  = float(self.tondi_LinEd.text()) * 1e+03 / 24
+			tondTOkgd_proc  = float(self.tondi_LinEd.text()) * 1e+03
+			tondTOtons_proc = float(self.tondi_LinEd.text()) * 1 / 24 / 2600
+			tondTOtonh_proc = float(self.tondi_LinEd.text()) * 1 / 24
+			tondTOtond_proc = float(self.tondi_LinEd.text()) * 1
+			tondTOlbs_proc  = float(self.tondi_LinEd.text()) * 2.2046226217e+03 / 24 / 3600
+			tondTOlbh_proc  = float(self.tondi_LinEd.text()) * 2.2046226217e+03 / 24
+			tondTOlbd_proc  = float(self.tondi_LinEd.text()) * 2.2046226217e+03
 
-		self.tondTOgs_res.setText(str(round(tondTOgs_proc,     8)))
-		self.tondTOgmin_res.setText(str(round(tondTOgmin_proc, 8)))
-		self.tondTOkgs_res.setText(str(round(tondTOkgs_proc,   8)))
-		self.tondTOkgh_res.setText(str(round(tondTOkgh_proc,   8)))
-		self.tondTOkgd_res.setText(str(round(tondTOkgd_proc,   8)))
-		self.tondTOtons_res.setText(str(round(tondTOtons_proc, 8)))
-		self.tondTOtonh_res.setText(str(round(tondTOtonh_proc, 8)))
-		self.tondTOtond_res.setText(str(round(tondTOtond_proc, 8)))
-		self.tondTOlbs_res.setText(str(round(tondTOlbs_proc,   8)))
-		self.tondTOlbh_res.setText(str(round(tondTOlbh_proc,   8)))
-		self.tondTOlbd_res.setText(str(round(tondTOlbd_proc,   8)))
+			self.tondTOgs_res.setText(str(round(tondTOgs_proc,     8)))
+			self.tondTOgmin_res.setText(str(round(tondTOgmin_proc, 8)))
+			self.tondTOkgs_res.setText(str(round(tondTOkgs_proc,   8)))
+			self.tondTOkgh_res.setText(str(round(tondTOkgh_proc,   8)))
+			self.tondTOkgd_res.setText(str(round(tondTOkgd_proc,   8)))
+			self.tondTOtons_res.setText(str(round(tondTOtons_proc, 8)))
+			self.tondTOtonh_res.setText(str(round(tondTOtonh_proc, 8)))
+			self.tondTOtond_res.setText(str(round(tondTOtond_proc, 8)))
+			self.tondTOlbs_res.setText(str(round(tondTOlbs_proc,   8)))
+			self.tondTOlbh_res.setText(str(round(tondTOlbh_proc,   8)))
+			self.tondTOlbd_res.setText(str(round(tondTOlbd_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def lbsTO_fun(self):
-		lbsTOgs_proc   = float(self.lbsi_LinEd.text()) * 453.59237002
-		lbsTOgmin_proc = float(self.lbsi_LinEd.text()) * 453.59237002 * 60
-		lbsTOkgs_proc  = float(self.lbsi_LinEd.text()) * 453.59237002e-03
-		lbsTOkgh_proc  = float(self.lbsi_LinEd.text()) * 453.59237002e-03 * 3600
-		lbsTOkgd_proc  = float(self.lbsi_LinEd.text()) * 453.59237002e-03 * 3600 * 24
-		lbsTOtons_proc = float(self.lbsi_LinEd.text()) * 453.59237002e-06
-		lbsTOtonh_proc = float(self.lbsi_LinEd.text()) * 453.59237002e-06 * 3600
-		lbsTOtond_proc = float(self.lbsi_LinEd.text()) * 453.59237002e-06 * 3600 * 24
-		lbsTOlbs_proc  = float(self.lbsi_LinEd.text()) * 1
-		lbsTOlbh_proc  = float(self.lbsi_LinEd.text()) * 1 * 3600
-		lbsTOlbd_proc  = float(self.lbsi_LinEd.text()) * 1 * 3600 * 24
+		try:
+			lbsTOgs_proc   = float(self.lbsi_LinEd.text()) * 453.59237002
+			lbsTOgmin_proc = float(self.lbsi_LinEd.text()) * 453.59237002 * 60
+			lbsTOkgs_proc  = float(self.lbsi_LinEd.text()) * 453.59237002e-03
+			lbsTOkgh_proc  = float(self.lbsi_LinEd.text()) * 453.59237002e-03 * 3600
+			lbsTOkgd_proc  = float(self.lbsi_LinEd.text()) * 453.59237002e-03 * 3600 * 24
+			lbsTOtons_proc = float(self.lbsi_LinEd.text()) * 453.59237002e-06
+			lbsTOtonh_proc = float(self.lbsi_LinEd.text()) * 453.59237002e-06 * 3600
+			lbsTOtond_proc = float(self.lbsi_LinEd.text()) * 453.59237002e-06 * 3600 * 24
+			lbsTOlbs_proc  = float(self.lbsi_LinEd.text()) * 1
+			lbsTOlbh_proc  = float(self.lbsi_LinEd.text()) * 1 * 3600
+			lbsTOlbd_proc  = float(self.lbsi_LinEd.text()) * 1 * 3600 * 24
 
-		self.lbsTOgs_res.setText(str(round(lbsTOgs_proc,     8)))
-		self.lbsTOgmin_res.setText(str(round(lbsTOgmin_proc, 8)))
-		self.lbsTOkgs_res.setText(str(round(lbsTOkgs_proc,   8)))
-		self.lbsTOkgh_res.setText(str(round(lbsTOkgh_proc,   8)))
-		self.lbsTOkgd_res.setText(str(round(lbsTOkgd_proc,   8)))
-		self.lbsTOtons_res.setText(str(round(lbsTOtons_proc, 8)))
-		self.lbsTOtonh_res.setText(str(round(lbsTOtonh_proc, 8)))
-		self.lbsTOtond_res.setText(str(round(lbsTOtond_proc, 8)))
-		self.lbsTOlbs_res.setText(str(round(lbsTOlbs_proc,   8)))
-		self.lbsTOlbh_res.setText(str(round(lbsTOlbh_proc,   8)))
-		self.lbsTOlbd_res.setText(str(round(lbsTOlbd_proc,   8)))
+			self.lbsTOgs_res.setText(str(round(lbsTOgs_proc,     8)))
+			self.lbsTOgmin_res.setText(str(round(lbsTOgmin_proc, 8)))
+			self.lbsTOkgs_res.setText(str(round(lbsTOkgs_proc,   8)))
+			self.lbsTOkgh_res.setText(str(round(lbsTOkgh_proc,   8)))
+			self.lbsTOkgd_res.setText(str(round(lbsTOkgd_proc,   8)))
+			self.lbsTOtons_res.setText(str(round(lbsTOtons_proc, 8)))
+			self.lbsTOtonh_res.setText(str(round(lbsTOtonh_proc, 8)))
+			self.lbsTOtond_res.setText(str(round(lbsTOtond_proc, 8)))
+			self.lbsTOlbs_res.setText(str(round(lbsTOlbs_proc,   8)))
+			self.lbsTOlbh_res.setText(str(round(lbsTOlbh_proc,   8)))
+			self.lbsTOlbd_res.setText(str(round(lbsTOlbd_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 	def lbhTO_fun(self):
-		lbhTOgs_proc   = float(self.lbhi_LinEd.text()) * 453.59237002 / 3600
-		lbhTOgmin_proc = float(self.lbhi_LinEd.text()) * 453.59237002 / 60
-		lbhTOkgs_proc  = float(self.lbhi_LinEd.text()) * 453.59237002e-03 / 3600
-		lbhTOkgh_proc  = float(self.lbhi_LinEd.text()) * 453.59237002e-03
-		lbhTOkgd_proc  = float(self.lbhi_LinEd.text()) * 453.59237002e-03 * 24
-		lbhTOtons_proc = float(self.lbhi_LinEd.text()) * 453.59237002e-06 / 3600
-		lbhTOtonh_proc = float(self.lbhi_LinEd.text()) * 453.59237002e-06
-		lbhTOtond_proc = float(self.lbhi_LinEd.text()) * 453.59237002e-06 * 24
-		lbhTOlbs_proc  = float(self.lbhi_LinEd.text()) / 3600
-		lbhTOlbh_proc  = float(self.lbhi_LinEd.text()) * 1
-		lbhTOlbd_proc  = float(self.lbhi_LinEd.text()) * 24
+		try:
+			lbhTOgs_proc   = float(self.lbhi_LinEd.text()) * 453.59237002 / 3600
+			lbhTOgmin_proc = float(self.lbhi_LinEd.text()) * 453.59237002 / 60
+			lbhTOkgs_proc  = float(self.lbhi_LinEd.text()) * 453.59237002e-03 / 3600
+			lbhTOkgh_proc  = float(self.lbhi_LinEd.text()) * 453.59237002e-03
+			lbhTOkgd_proc  = float(self.lbhi_LinEd.text()) * 453.59237002e-03 * 24
+			lbhTOtons_proc = float(self.lbhi_LinEd.text()) * 453.59237002e-06 / 3600
+			lbhTOtonh_proc = float(self.lbhi_LinEd.text()) * 453.59237002e-06
+			lbhTOtond_proc = float(self.lbhi_LinEd.text()) * 453.59237002e-06 * 24
+			lbhTOlbs_proc  = float(self.lbhi_LinEd.text()) / 3600
+			lbhTOlbh_proc  = float(self.lbhi_LinEd.text()) * 1
+			lbhTOlbd_proc  = float(self.lbhi_LinEd.text()) * 24
 
-		self.lbhTOgs_res.setText(str(round(lbhTOgs_proc,     8)))
-		self.lbhTOgmin_res.setText(str(round(lbhTOgmin_proc, 8)))
-		self.lbhTOkgs_res.setText(str(round(lbhTOkgs_proc,   8)))
-		self.lbhTOkgh_res.setText(str(round(lbhTOkgh_proc,   8)))
-		self.lbhTOkgd_res.setText(str(round(lbhTOkgd_proc,   8)))
-		self.lbhTOtons_res.setText(str(round(lbhTOtons_proc, 8)))
-		self.lbhTOtonh_res.setText(str(round(lbhTOtonh_proc, 8)))
-		self.lbhTOtond_res.setText(str(round(lbhTOtond_proc, 8)))
-		self.lbhTOlbs_res.setText(str(round(lbhTOlbs_proc,   8)))
-		self.lbhTOlbh_res.setText(str(round(lbhTOlbh_proc,   8)))
-		self.lbhTOlbd_res.setText(str(round(lbhTOlbd_proc,   8)))
+			self.lbhTOgs_res.setText(str(round(lbhTOgs_proc,     8)))
+			self.lbhTOgmin_res.setText(str(round(lbhTOgmin_proc, 8)))
+			self.lbhTOkgs_res.setText(str(round(lbhTOkgs_proc,   8)))
+			self.lbhTOkgh_res.setText(str(round(lbhTOkgh_proc,   8)))
+			self.lbhTOkgd_res.setText(str(round(lbhTOkgd_proc,   8)))
+			self.lbhTOtons_res.setText(str(round(lbhTOtons_proc, 8)))
+			self.lbhTOtonh_res.setText(str(round(lbhTOtonh_proc, 8)))
+			self.lbhTOtond_res.setText(str(round(lbhTOtond_proc, 8)))
+			self.lbhTOlbs_res.setText(str(round(lbhTOlbs_proc,   8)))
+			self.lbhTOlbh_res.setText(str(round(lbhTOlbh_proc,   8)))
+			self.lbhTOlbd_res.setText(str(round(lbhTOlbd_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 
 	def lbdTO_fun(self):
-		lbdTOgs_proc   = float(self.lbdi_LinEd.text()) * 453.59237002     / 24 / 3600
-		lbdTOgmin_proc = float(self.lbdi_LinEd.text()) * 453.59237002     / 24 / 60
-		lbdTOkgs_proc  = float(self.lbdi_LinEd.text()) * 453.59237002e-03 / 24 / 3600
-		lbdTOkgh_proc  = float(self.lbdi_LinEd.text()) * 453.59237002e-03 / 24
-		lbdTOkgd_proc  = float(self.lbdi_LinEd.text()) * 453.59237002e-03
-		lbdTOtons_proc = float(self.lbdi_LinEd.text()) * 453.59237002e-06 / 24 / 3600
-		lbdTOtonh_proc = float(self.lbdi_LinEd.text()) * 453.59237002e-06 / 24
-		lbdTOtond_proc = float(self.lbdi_LinEd.text()) * 453.59237002e-06
-		lbdTOlbs_proc  = float(self.lbdi_LinEd.text()) / 24 / 3600
-		lbdTOlbh_proc  = float(self.lbdi_LinEd.text()) * 24
-		lbdTOlbd_proc  = float(self.lbdi_LinEd.text()) * 1
+		try:
+			lbdTOgs_proc   = float(self.lbdi_LinEd.text()) * 453.59237002     / 24 / 3600
+			lbdTOgmin_proc = float(self.lbdi_LinEd.text()) * 453.59237002     / 24 / 60
+			lbdTOkgs_proc  = float(self.lbdi_LinEd.text()) * 453.59237002e-03 / 24 / 3600
+			lbdTOkgh_proc  = float(self.lbdi_LinEd.text()) * 453.59237002e-03 / 24
+			lbdTOkgd_proc  = float(self.lbdi_LinEd.text()) * 453.59237002e-03
+			lbdTOtons_proc = float(self.lbdi_LinEd.text()) * 453.59237002e-06 / 24 / 3600
+			lbdTOtonh_proc = float(self.lbdi_LinEd.text()) * 453.59237002e-06 / 24
+			lbdTOtond_proc = float(self.lbdi_LinEd.text()) * 453.59237002e-06
+			lbdTOlbs_proc  = float(self.lbdi_LinEd.text()) / 24 / 3600
+			lbdTOlbh_proc  = float(self.lbdi_LinEd.text()) * 24
+			lbdTOlbd_proc  = float(self.lbdi_LinEd.text()) * 1
 
-		self.lbdTOgs_res.setText("-")
-		self.lbdTOgmin_res.setText("-")
-		self.lbdTOkgs_res.setText(str(round(lbdTOkgs_proc,   8)))
-		self.lbdTOkgh_res.setText(str(round(lbdTOkgh_proc,   8)))
-		self.lbdTOkgd_res.setText(str(round(lbdTOkgd_proc,   8)))
-		self.lbdTOtons_res.setText(str(round(lbdTOtons_proc, 8)))
-		self.lbdTOtonh_res.setText(str(round(lbdTOtonh_proc, 8)))
-		self.lbdTOtond_res.setText(str(round(lbdTOtond_proc, 8)))
-		self.lbdTOlbs_res.setText(str(round(lbdTOlbs_proc,   8)))
-		self.lbdTOlbh_res.setText(str(round(lbdTOlbh_proc,   8)))
-		self.lbdTOlbd_res.setText(str(round(lbdTOlbd_proc,   8)))
+			self.lbdTOgs_res.setText("-")
+			self.lbdTOgmin_res.setText("-")
+			self.lbdTOkgs_res.setText(str(round(lbdTOkgs_proc,   8)))
+			self.lbdTOkgh_res.setText(str(round(lbdTOkgh_proc,   8)))
+			self.lbdTOkgd_res.setText(str(round(lbdTOkgd_proc,   8)))
+			self.lbdTOtons_res.setText(str(round(lbdTOtons_proc, 8)))
+			self.lbdTOtonh_res.setText(str(round(lbdTOtonh_proc, 8)))
+			self.lbdTOtond_res.setText(str(round(lbdTOtond_proc, 8)))
+			self.lbdTOlbs_res.setText(str(round(lbdTOlbs_proc,   8)))
+			self.lbdTOlbh_res.setText(str(round(lbdTOlbh_proc,   8)))
+			self.lbdTOlbd_res.setText(str(round(lbdTOlbd_proc,   8)))
+		
+		except:
+			zprava = QtWidgets.QMessageBox()
+			zprava.setIcon(QtWidgets.QMessageBox.Warning)
+			zprava.setWindowTitle("Error input")
+			zprava.setText("Number is unknown. Please, check your input.\n" "Allowed variations are eg. 1.1e-2; 1.1E-2; 0.01")
+			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+			return zprava.exec()
+
 
 
 	def main_window(self):
@@ -592,5 +716,6 @@ class Massflow_Win(QtWidgets.QWidget):
 		self.setLayout(main_layout)
 		self.show()
 
-
+aplikace = QtWidgets.QApplication(sys.argv)
+aplikace.setStyle("Fusion")	
 	

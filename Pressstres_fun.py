@@ -3,6 +3,7 @@
 # GitHub: https://github.com/kilimetr
 
 from PyQt5 import QtWidgets, QtGui, QtCore
+import sys
 
 
 
@@ -11,11 +12,13 @@ class Pressstres_Win(QtWidgets.QWidget):
 		super().__init__()
 
 		self.setWindowTitle("Pressure Converter")
+		self.setWindowIcon(QtGui.QIcon("logo.jpg"))
+		
 		self.main_window()
 
 	def createGroup_input(self):
 		input_group = QtWidgets.QGroupBox("Input", self)
-		input_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+		input_group.setFont(QtGui.QFont("Arial", 10))
 
 		input_grid = QtWidgets.QGridLayout()
 		input_grid.setColumnMinimumWidth(0, 130)
@@ -83,7 +86,7 @@ class Pressstres_Win(QtWidgets.QWidget):
 
 	def createGroup_output(self):
 		output_group = QtWidgets.QGroupBox("Output", self)
-		output_group.setFont(QtGui.QFont("Arial", 13, QtGui.QFont.Black))
+		output_group.setFont(QtGui.QFont("Arial", 10))
 
 		output_grid = QtWidgets.QGridLayout()
 
@@ -687,3 +690,5 @@ class Pressstres_Win(QtWidgets.QWidget):
 		self.show()
 
 
+aplikace = QtWidgets.QApplication(sys.argv)
+aplikace.setStyle("Fusion")	

@@ -7,11 +7,11 @@ import sys
 
 
 
-class Massfrac_Win(QtWidgets.QWidget):
+class Weight_Win(QtWidgets.QWidget):
 	def __init__(self, parent = None):
 		super().__init__()
 
-		self.setWindowTitle("Mass Fraction Converter")
+		self.setWindowTitle("Weight Converter")
 		self.setWindowIcon(QtGui.QIcon("logo.jpg"))
 		
 		self.main_window()
@@ -23,16 +23,15 @@ class Massfrac_Win(QtWidgets.QWidget):
 		input_grid = QtWidgets.QGridLayout()
 		input_grid.setColumnMinimumWidth(0, 130)
 
-		blanklabel          = QtWidgets.QLabel()
-		self.decimali_LinEd = QtWidgets.QLineEdit()
-		self.percenti_LinEd = QtWidgets.QLineEdit()
-		self.promilei_LinEd = QtWidgets.QLineEdit()
-		self.ppmi_LinEd     = QtWidgets.QLineEdit()
-		self.ppbi_LinEd     = QtWidgets.QLineEdit()
+		blanklabel           = QtWidgets.QLabel()
+		self.Pami_LinEd      = QtWidgets.QLineEdit()
+		self.kPa100mi_LinEd  = QtWidgets.QLineEdit()
+		self.psifti_LinEd    = QtWidgets.QLineEdit()
+		self.psi100fti_LinEd = QtWidgets.QLineEdit()
 
-		LinEd_list = [self.decimali_LinEd, self.percenti_LinEd, self.promilei_LinEd, self.ppmi_LinEd, self.ppbi_LinEd]
+		LinEd_list = [self.Pami_LinEd, self.kPa100mi_LinEd, self.psifti_LinEd, self.psi100fti_LinEd]
 
-		Label_list = [blanklabel, "decimal (1)", "%", "‰", "ppm", "ppb"]
+		Label_list = [blanklabel, "Pa/m", "kPa/100m", "psi/ft", "psi/100ft"]
 		
 		i = 0
 		for item in Label_list:
@@ -47,12 +46,6 @@ class Massfrac_Win(QtWidgets.QWidget):
 
 		input_group.setLayout(input_grid)
 
-		self.decimali_LinEd.returnPressed.connect(self.decimalTO_fun)
-		self.percenti_LinEd.returnPressed.connect(self.percentTO_fun)
-		self.promilei_LinEd.returnPressed.connect(self.promileTO_fun)
-		self.ppmi_LinEd.returnPressed.connect(self.ppmTO_fun)
-		self.ppbi_LinEd.returnPressed.connect(self.ppbTO_fun)
-
 		return input_group
 
 	def createGroup_output(self):
@@ -61,85 +54,56 @@ class Massfrac_Win(QtWidgets.QWidget):
 
 		output_grid = QtWidgets.QGridLayout()
 
-		Label_list = ["decimal (1)", "%", "‰", "ppm", "ppb"]
-		
+		Label_list = ["Pa/m", "kPa/100m", "psi/ft", "psi/100ft"]
 		i = 0
+
 		for item in Label_list:
 			Label_name = QtWidgets.QLabel(item)
 			output_grid.addWidget(Label_name, 0, i)
 			i = i + 1
 
-		self.decimalTOdecimal_res = QtWidgets.QLabel("0", self)
-		self.decimalTOpercent_res = QtWidgets.QLabel("0", self)
-		self.decimalTOpromile_res = QtWidgets.QLabel("0", self)
-		self.decimalTOppm_res     = QtWidgets.QLabel("0", self)
-		self.decimalTOppb_res     = QtWidgets.QLabel("0", self)
+		self.PamTOPam_res      = QtWidgets.QLabel("0", self)
+		self.PamTOkPa100m_res  = QtWidgets.QLabel("0", self)
+		self.PamTOpsift_res    = QtWidgets.QLabel("0", self)
+		self.PamTOpsi100ft_res = QtWidgets.QLabel("0", self)
 
-		self.percentTOdecimal_res = QtWidgets.QLabel("0", self)
-		self.percentTOpercent_res = QtWidgets.QLabel("0", self)
-		self.percentTOpromile_res = QtWidgets.QLabel("0", self)
-		self.percentTOppm_res     = QtWidgets.QLabel("0", self)
-		self.percentTOppb_res     = QtWidgets.QLabel("0", self)
+		output_grid.addWidget(self.decimalTOdecimal_res, 1, 0)
+		output_grid.addWidget(self.decimalTOpercent_res, 1, 1)
+		output_grid.addWidget(self.decimalTOpromile_res, 1, 2)
+		output_grid.addWidget(self.decimalTOppm_res,     1, 3)
+		output_grid.addWidget(self.decimalTOppb_res,     1, 4)
 
-		self.promileTOdecimal_res = QtWidgets.QLabel("0", self)
-		self.promileTOpercent_res = QtWidgets.QLabel("0", self)
-		self.promileTOpromile_res = QtWidgets.QLabel("0", self)
-		self.promileTOppm_res     = QtWidgets.QLabel("0", self)
-		self.promileTOppb_res     = QtWidgets.QLabel("0", self)
+		output_grid.addWidget(self.percentTOdecimal_res, 2, 0)
+		output_grid.addWidget(self.percentTOpercent_res, 2, 1)
+		output_grid.addWidget(self.percentTOpromile_res, 2, 2)
+		output_grid.addWidget(self.percentTOppm_res,     2, 3)
+		output_grid.addWidget(self.percentTOppb_res,     2, 4)
 
-		self.ppmTOdecimal_res = QtWidgets.QLabel("0", self)
-		self.ppmTOpercent_res = QtWidgets.QLabel("0", self)
-		self.ppmTOpromile_res = QtWidgets.QLabel("0", self)
-		self.ppmTOppm_res     = QtWidgets.QLabel("0", self)
-		self.ppmTOppb_res     = QtWidgets.QLabel("0", self)
+		output_grid.addWidget(self.promileTOdecimal_res, 3, 0)
+		output_grid.addWidget(self.promileTOpercent_res, 3, 1)
+		output_grid.addWidget(self.promileTOpromile_res, 3, 2)
+		output_grid.addWidget(self.promileTOppm_res,     3, 3)
+		output_grid.addWidget(self.promileTOppb_res,     3, 4)
 
-		self.ppbTOdecimal_res = QtWidgets.QLabel("0", self)
-		self.ppbTOpercent_res = QtWidgets.QLabel("0", self)
-		self.ppbTOpromile_res = QtWidgets.QLabel("0", self)
-		self.ppbTOppm_res     = QtWidgets.QLabel("0", self)
-		self.ppbTOppb_res     = QtWidgets.QLabel("0", self)
+		output_grid.addWidget(self.ppmTOdecimal_res, 4, 0)
+		output_grid.addWidget(self.ppmTOpercent_res, 4, 1)
+		output_grid.addWidget(self.ppmTOpromile_res, 4, 2)
+		output_grid.addWidget(self.ppmTOppm_res,     4, 3)
+		output_grid.addWidget(self.ppmTOppb_res,     4, 4)
 
-		decimalTO_Label = [self.decimalTOdecimal_res, self.decimalTOpercent_res, self.decimalTOpromile_res, self.decimalTOppm_res, self.decimalTOppb_res]
-
-		percentTO_Label = [self.percentTOdecimal_res, self.percentTOpercent_res, self.percentTOpromile_res, self.percentTOppm_res, self.percentTOppb_res]
-
-		promileTO_Label = [self.promileTOdecimal_res, self.promileTOpercent_res, self.promileTOpromile_res, self.promileTOppm_res, self.promileTOppb_res]
-
-		ppmTO_Label = [self.ppmTOdecimal_res, self.ppmTOpercent_res, self.ppmTOpromile_res, self.ppmTOppm_res, self.ppmTOppb_res]
-
-		ppbTO_Label = [self.ppbTOdecimal_res, self.ppbTOpercent_res, self.ppbTOpromile_res, self.ppbTOppm_res, self.ppbTOppb_res]
-
-		i = 0
-		for item in decimalTO_Label:
-			output_grid.addWidget(item, 1, i)
-			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
-			i = i + 1
-
-		i = 0
-		for item in percentTO_Label:
-			output_grid.addWidget(item, 2, i)
-			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
-			i = i + 1
-
-		i = 0
-		for item in promileTO_Label:
-			output_grid.addWidget(item, 3, i)
-			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
-			i = i + 1
-
-		i = 0
-		for item in ppmTO_Label:
-			output_grid.addWidget(item, 4, i)
-			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
-			i = i + 1
-
-		i = 0
-		for item in ppbTO_Label:
-			output_grid.addWidget(item, 5, i)
-			item.setTextInteractionFlags(QtCore.Qt.TextSelectableByMouse)
-			i = i + 1
+		output_grid.addWidget(self.ppbTOdecimal_res, 5, 0)
+		output_grid.addWidget(self.ppbTOpercent_res, 5, 1)
+		output_grid.addWidget(self.ppbTOpromile_res, 5, 2)
+		output_grid.addWidget(self.ppbTOppm_res,     5, 3)
+		output_grid.addWidget(self.ppbTOppb_res,     5, 4)
 
 		output_group.setLayout(output_grid)
+
+		self.decimali_LinEd.returnPressed.connect(self.decimalTO_fun)
+		self.percenti_LinEd.returnPressed.connect(self.percentTO_fun)
+		self.promilei_LinEd.returnPressed.connect(self.promileTO_fun)
+		self.ppmi_LinEd.returnPressed.connect(self.ppmTO_fun)
+		self.ppbi_LinEd.returnPressed.connect(self.ppbTO_fun)
 
 		return output_group
 
@@ -189,7 +153,7 @@ class Massfrac_Win(QtWidgets.QWidget):
 			zprava.setStandardButtons(QtWidgets.QMessageBox.Ok)
 
 			return zprava.exec()
-
+	
 
 	def promileTO_fun(self):
 		try:
